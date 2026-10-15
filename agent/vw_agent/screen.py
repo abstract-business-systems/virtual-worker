@@ -9,7 +9,7 @@ from .config import CONFIG
 
 
 class ScreenWatcher:
-    def __init__(self, on_change, interval=None, diff_threshold=None):
+    def __init__(self, on_change=None, interval=None, diff_threshold=None):
         self.on_change = on_change          # fn(new_text) -> None
         self.interval = interval or CONFIG["screen_interval"]
         self.threshold = diff_threshold or CONFIG["screen_diff_threshold"]
@@ -38,7 +38,8 @@ class ScreenWatcher:
             return None
         changed = self._last_hash is not None
         self._last_hash = h
-        text = self.ocr(img)        if changed and text and text != self._last_ocr:
+        text = self.ocr(img)
+        if changed and text and text != self._last_ocr:
             self._last_ocr = text
             self.on_change(text)
             return text

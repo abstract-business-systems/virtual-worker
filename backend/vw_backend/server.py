@@ -18,7 +18,9 @@ from .brain import Brain
 from .kb import KnowledgeBase
 from .scheduler import ReminderScheduler
 
-SOCKET_PATH = os.environ.get("VW_SOCKET", "/run/virtual-worker/agent.sock")
+from vw_common import default_socket_path
+
+SOCKET_PATH = default_socket_path()
 
 
 class AgentLink:
@@ -114,7 +116,7 @@ class Backend:
                         self.agent.buf = buf
                     continue
                 if role == "agent":
-                    self._handle_agent_msg(msg)
+                    self._handle_agent_msg(conn, msg)
                 else:
                     self._handle_cli_msg(conn, msg)
         except (ConnectionError, OSError):
@@ -130,8 +132,9 @@ class Backend:
             except OSError:
                 pass
 
-    def _handle_agent_msg(self, msg):
-        if msg.get("type") == "result":
+    def _handle_agent_msg(self, conn, msg):
+        t = msg.get("type")
+        if t == "result":
             with self.agent.pending_lock:
                 entry = self.agent.pending.pop(msg.get("req_id"), None)
             if entry:
@@ -140,9 +143,25 @@ class Backend:
                            data=msg.get("data", {}),
                            error=msg.get("error"))
                 ev.set()
-        else:
-            print("[backend] ignoring agent message: %s" % msg.get("type"),
-                  flush=True)
+            return
+        # agent-sent request (ping, question, transcript.append, ...) — handle
+        # in a worker thread so slow brain calls never block the push stream
+        req_id = msg.get("req_id")
+
+        def run():
+            try:
+                data = self.dispatch(msg)
+                reply = {"type": "result", "req_id": req_id, "ok": True,
+                         "data": data}
+            except Exception as exc:
+                reply = {"type": "result", "req_id": req_id, "ok": False,
+                         "error": str(exc)}
+            try:
+                with self.agent.send_lock:
+                    send_msg(conn, reply)
+            except OSError:
+                pass
+        threading.Thread(target=run, daemon=True).start()
 
     def _push_to_agent(self, msg):
         if self.agent.sock is None:
@@ -230,7 +249,7 @@ class Backend:
         if self.agent.sock is None:
             raise RuntimeError("agent is not connected")
         fwd = {"type": "demo", "req_id": "fwd-%s" % msg.get("req_id", "x")}
-        return self.agent.forward_request(fwd, timeout=60)
+        return self.agent.forward_request(fwd, timeout=240)
 
     def h_agent_selftest(self, msg):
         if self.agent.sock is None:

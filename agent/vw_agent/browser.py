@@ -1,33 +1,8 @@
-"""Text-to-speech output through the virtual mic bus, and browser control
-(Playwright) for joining Google Meet."""
+"""Browser control (Playwright) for joining Google Meet."""
 import os
-import subprocess
-import tempfile
 import time
 
 from .config import CONFIG
-
-
-def tts_play(text):
-    """Speak `text` into the vw_tts sink (which feeds the virtual mic)."""
-    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
-        wav = f.name
-    try:
-        subprocess.run(["espeak-ng", "-v", "en-us", "-s", "155", "-p", "40",
-                        "-w", wav, text], check=True,
-                       capture_output=True, timeout=60)
-        subprocess.run(["paplay", "--device=%s" % CONFIG["tts_sink"], wav],
-                       check=True, capture_output=True, timeout=120)
-    finally:
-        try:
-            os.unlink(wav)
-        except OSError:
-            pass
-
-
-def tts_duration(text):
-    words = max(1, len(text.split()))
-    return 0.4 + words * 0.45
 
 
 class Browser:

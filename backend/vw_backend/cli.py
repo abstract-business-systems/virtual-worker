@@ -17,7 +17,9 @@ import socket
 import sys
 import threading
 
-SOCKET_PATH = os.environ.get("VW_SOCKET", "/run/virtual-worker/agent.sock")
+from vw_common import default_socket_path
+
+SOCKET_PATH = default_socket_path()
 
 
 def request(msg, timeout=120):

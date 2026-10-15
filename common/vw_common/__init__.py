@@ -5,8 +5,22 @@ Every message has a "type". Requests carry "req_id"; replies carry
 "type":"result" or "type":"error" with the same "req_id".
 """
 import json
+import os
 import socket
 import threading
+
+
+def default_socket_path():
+    """Socket path resolution order: $VW_SOCKET, system /run path, ~/run."""
+    env = os.environ.get("VW_SOCKET")
+    if env:
+        return env
+    candidates = ["/run/virtual-worker/agent.sock",
+                  os.path.expanduser("~/run/agent.sock")]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return candidates[-1]
 
 
 def send_msg(sock, obj):

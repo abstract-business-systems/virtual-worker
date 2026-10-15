@@ -28,7 +28,7 @@ def main(argv):
             print("asking worker to join %s ..." % msg["url"])
         elif cmd == "say":
             msg["text"] = " ".join(rest)
-        return admin_main([_encode(msg)])
+        return _encode(msg)
     return admin_main(argv)
 
 
@@ -39,7 +39,8 @@ def _encode(msg):
     import socket
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     sock.settimeout(320)
-    sock.connect(os.environ.get("VW_SOCKET", "/run/virtual-worker/agent.sock"))
+    from vw_common import default_socket_path
+    sock.connect(default_socket_path())
     sock.sendall((json.dumps(msg) + "\n").encode())
     data = b""
     while True:

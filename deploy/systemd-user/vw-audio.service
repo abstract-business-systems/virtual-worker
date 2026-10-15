@@ -3,7 +3,7 @@
 Description=Virtual worker per-user PulseAudio
 [Service]
 Environment=DISPLAY=:99
-ExecStart=/usr/bin/pulseaudio --exit-idiom-time=-1
+ExecStart=/usr/bin/pulseaudio --exit-idle-time=-1
 Restart=on-failure
 RestartSec=2
 [Install]

@@ -10,9 +10,11 @@ The PoC demo (vw demo) plays scripted utterances through the meeting bus with
 espeak so the full STT -> wake -> brain -> TTS loop runs end-to-end without a
 real Google account. The real flow uses the same path once joined via Meet.
 """
+import queue
 import threading
 import time
 import traceback
+from concurrent.futures import ThreadPoolExecutor
 
 from vw_common import send_msg, recv_msg
 
@@ -37,11 +39,16 @@ class AgentClient:
         self.pending = {}
         self.pending_lock = threading.Lock()
         self._counter = 0
+        self._queue = queue.Queue()
+        self._pool = ThreadPoolExecutor(max_workers=3,
+                                        thread_name_prefix="push")
         self.connected = threading.Event()
 
     def start(self):
         threading.Thread(target=self._loop, daemon=True,
                          name="backend-link").start()
+        threading.Thread(target=self._handler_loop, daemon=True,
+                         name="push-handler").start()
         for _ in range(120):
             if self.connected.is_set():
                 return True
@@ -63,7 +70,10 @@ class AgentClient:
                 msg = recv_msg(self.sock, buf)
                 if msg is None:
                     raise ConnectionError("backend closed")
-                self._dispatch(msg)
+                if msg.get("type") == "result":
+                    self._dispatch(msg)   # resolve inline, never queue results
+                else:
+                    self._queue.put(msg)  # pushes run on the handler thread
             except Exception:
                 self.connected.clear()
                 if self.sock:
@@ -82,12 +92,24 @@ class AgentClient:
                 ev, box = entry
                 box.update(msg)
                 ev.set()
-            return
-        # pushed message from backend -> handler runs in reader thread
+
+    def _handler_loop(self):
+        """Push messages run on a small pool (NOT the reader thread) so slow
+        handlers (TTS, selftest) never block other pushes or the link."""
+        while True:
+            msg = self._queue.get()
+            self._pool.submit(self._safe_handle, msg)
+
+    def _safe_handle(self, msg):
         try:
             self.push_handler(msg)
         except Exception:
             traceback.print_exc()
+
+    def send_push(self, msg):
+        """Send an arbitrary message to the backend (thread-safe)."""
+        with self.send_lock:
+            send_msg(self.sock, msg)
 
     def request(self, msg, timeout=120):
         req_id = "a%d" % (self._next_id(),)
@@ -125,6 +147,7 @@ class Worker:
         self.spoken = []            # every text the worker said aloud
         self.joined_url = None
         self.meeting_id = None
+        self._last_wake_ts = 0.0
 
     # ---- lifecycle -------------------------------------------------------------
     def start(self):
@@ -158,11 +181,11 @@ class Worker:
                 data = self.join_meeting(msg["url"])
             except Exception as exc:
                 data = {"error": str(exc)}
-            self.client.sock and send_msg(self.client.sock, {
+            self.client.send_push({
                 "type": "result", "req_id": msg.get("req_id"),
                 "ok": "error" not in data, "data": data})
         elif t == "status":
-            send_msg(self.client.sock, {
+            self.client.send_push({
                 "type": "result", "req_id": msg.get("req_id"), "ok": True,
                 "data": self.status()})
         elif t == "selftest":
@@ -171,7 +194,7 @@ class Worker:
                 data = self.selftest()
             except Exception as exc:
                 data = {"error": str(exc), "report": {}}
-            send_msg(self.client.sock, {
+            self.client.send_push({
                 "type": "result", "req_id": msg.get("req_id"),
                 "ok": "error" not in data, "data": data})
         elif t == "demo":
@@ -181,7 +204,7 @@ class Worker:
             except Exception as exc:
                 traceback.print_exc()
                 data = {"error": str(exc)}
-            send_msg(self.client.sock, {
+            self.client.send_push({
                 "type": "result", "req_id": msg.get("req_id"),
                 "ok": "error" not in data, "data": data})
 
@@ -236,9 +259,14 @@ class Worker:
         low = text.lower()
         wake = CONFIG["wake_name"].lower()
         if wake in low:
+            self._last_wake_ts = time.time()
             self._answer_question(text)
-        elif "remind" in low:
+        elif "remind" in low or (time.time() - self._last_wake_ts < 12 and
+                                  parse_mod.parse_reminder(text,
+                                          default_tz=CONFIG["default_tz"])):
             self._maybe_reminder(text)
+            if wake in low:
+                self._last_wake_ts = time.time()
 
     def _append_transcript(self, speaker, text):
         try:
@@ -405,9 +433,9 @@ class Worker:
 
     def demo(self):
         """End-to-end scripted meeting played through the real audio pipeline."""
-        self._append_transcript(speaker="system", text="demo meeting started")
         if self.meeting_id is None:
-            self.join_meeting("demo://local-meeting")
+            self.join_meeting("demo://local-meeting")   # registers team+meeting
+        self._append_transcript(speaker="system", text="demo meeting started")
         script = [
             ("participant", "We agreed to launch the product on the twentieth "
              "of October, and Bob will prepare the report."),
