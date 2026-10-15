@@ -1,0 +1,10 @@
+# ---- vw-display.service: Xvfb virtual display :99 ----
+[Unit]
+Description=Virtual worker virtual display (Xvfb :99)
+[Service]
+ExecStartPre=/bin/sh -c 'rm -f /tmp/.X99-lock /tmp/.X11-unix/X99 2>/dev/null; exit 0'
+ExecStart=/usr/bin/Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp
+Restart=always
+RestartSec=2
+[Install]
+WantedBy=default.target

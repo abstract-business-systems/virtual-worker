@@ -38,8 +38,7 @@ class ScreenWatcher:
             return None
         changed = self._last_hash is not None
         self._last_hash = h
-        text = self.ocr(img)
-        if changed and text and text != self._last_ocr:
+        text = self.ocr(img)        if changed and text and text != self._last_ocr:
             self._last_ocr = text
             self.on_change(text)
             return text
@@ -48,6 +47,7 @@ class ScreenWatcher:
 
     # ---- internals -------------------------------------------------------------
     def screenshot(self, mss=None):
+        """Full-resolution grayscale frame (hashing downscales internally)."""
         from PIL import Image
         if mss is None:
             import mss as _mss
@@ -55,10 +55,11 @@ class ScreenWatcher:
         with mss.mss() as sct:
             raw = sct.grab(sct.monitors[0])
         img = Image.frombytes("RGB", raw.size, raw.bgra, "raw", "BGRX")
-        return img.convert("L").resize((256, 144))
+        return img.convert("L")
 
     def ahash(self, img):
-        pixels = list(img.getdata())
+        small = img.resize((256, 144))
+        pixels = list(small.getdata())
         avg = sum(pixels) / len(pixels)
         bits = 0
         for p in pixels:
@@ -70,15 +71,26 @@ class ScreenWatcher:
         return (diff / 36864.0) < self.threshold
 
     def ocr(self, img_full=None):
+        """Extract text from the frame. RapidOCR (pip-only) first, pytesseract
+        as fallback — no root install required on the host."""
+        from PIL import Image
+        if img_full is None:
+            img_full = self.screenshot()
+        if img_full.size[0] < 400:
+            return None
+        try:
+            from rapidocr_onnxruntime import RapidOCR
+            ocr = RapidOCR()
+            rgb = img_full.convert("RGB")
+            result, _ = ocr(__import__("numpy").array(rgb))
+            if not result:
+                return None
+            return " ".join(str(item[1]) for item in result).strip() or None
+        except ImportError:
+            pass
         try:
             import pytesseract
-            from PIL import Image
-            if img_full is None:
-                img_full = self.screenshot()
-            big = img_full if img_full.size[0] >= 800 else None
-            if big is None:
-                return None
-            return pytesseract.image_to_string(big).strip() or None
+            return pytesseract.image_to_string(img_full).strip() or None
         except Exception:
             return None
 

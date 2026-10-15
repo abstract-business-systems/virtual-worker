@@ -1,0 +1,10 @@
+# ---- vw-audio.service: per-user PulseAudio (buses are created by the agent) ----
+[Unit]
+Description=Virtual worker per-user PulseAudio
+[Service]
+Environment=DISPLAY=:99
+ExecStart=/usr/bin/pulseaudio --exit-idiom-time=-1
+Restart=on-failure
+RestartSec=2
+[Install]
+WantedBy=default.target

@@ -9,37 +9,25 @@ exposes meeting information to authorized users.
 
 ## Quick start (isolated environment: `ssh abs-worker@localhost`)
 
-The worker runs as Linux user `abs-worker` inside the `abs-workspace`
-container (host port 2222). First-time setup from the repo root:
+The worker runs directly on this host as the separate Linux user `abs-worker`
+(its own home, credentials, display and audio server — never inside your
+session). Passwordless ssh from your account is already set up.
+
+First-time setup from the repo root:
 
 ```bash
-mkdir -p deploy/keys && ssh-keygen -t ed25519 -f deploy/keys/abs-worker_key -N ''
-cp deploy/keys/abs-worker_key.pub deploy/keys/authorized_keys
-# pass OPENROUTER_API_KEY into the container (optional, enables the brain)
-OPENROUTER_API_KEY=... docker compose -f docker/docker-compose.yml up -d --build
+deploy/sync.sh                                   # copy the tree to abs-worker
+ssh abs-worker@localhost 'bash -s' < deploy/bootstrap-abs-worker.sh
 ```
 
-Make `ssh abs-worker@localhost` work from your own account — add to
-`~/.ssh/config`:
+Bootstrap installs a venv + deps (pip only, no root needed), Chromium for
+Playwright, systemd **user** units (`vw-display`, `vw-audio`, `vw-backend`,
+`vw-agent`) and puts `vw` / `vw-admin` on PATH. Secrets live in
+`~abs-worker/worker.env` (mode 600, gitignored):
+`OPENROUTER_API_KEY` for the brain, `GOOGLE_EMAIL`/`GOOGLE_PASSWORD` for the
+Meet account.
 
-```
-Match host localhost user abs-worker
-    HostName 127.0.0.1
-    Port 2222
-    IdentityFile ~/Workspace/virtual-worker/deploy/keys/abs-worker_key
-    IdentitiesOnly yes
-    StrictHostKeyChecking accept-new
-```
-
-Then:
-
-```bash
-ssh abs-worker@localhost          # isolated shell as the worker user
-vw selftest                       # end-to-end environment self test
-vw demo                           # scripted meeting: listen -> answer -> reminder
-vw join https://meet.google.com/xxx-xxxx-xxx   # real meeting (req 1)
-vw-admin ask --user alice "What did we agree about the launch?"
-```
+Service status: `ssh abs-worker@localhost 'systemctl --user status vw-agent'`
 
 ## Commands (as abs-worker)
 
@@ -65,22 +53,22 @@ agent/vw_agent/         agent.py (orchestrator), audio.py (PulseAudio buses),
                         stt.py (faster-whisper), screen.py (5s diff + OCR),
                         browser.py (Playwright/Meet), parse.py (reminders),
                         config.py
-docker/                 abs-workspace image + compose + entrypoint
-deploy/                 systemd units (host), setup-user.sh, env template
+deploy/                 sync.sh, bootstrap-abs-worker.sh, systemd user units,
+                        vw-wrapper.sh, env template
+                        (root-owned system units: docs/design.md section 4)
 tests/                  ACL, reminder dedup, parsing, protocol tests
 ```
 
-## Host deployment (real separate Linux user, with root)
+## Host deployment with root (alternative)
 
-```bash
-sudo deploy/setup-user.sh
-# install units from deploy/systemd-units.md, secrets in /etc/virtual-worker/env
-sudo systemctl enable --now virtual-worker-backend.service virtual-worker.service
-```
+If you later want root-owned services instead of user units:
+`sudo deploy/setup-user.sh`, then install the system units described in
+[`docs/design.md`](docs/design.md) section 4 with secrets in
+`/etc/virtual-worker/env` (mode 640 root:abs-worker).`
 
 ## Tests
 
 ```bash
 python3 -m unittest discover -s tests -v   # pure-python: KB/ACL, parsing, protocol
-vw selftest                                # full environment (inside abs-workspace)
+vw selftest                                # full environment (as abs-worker)
 ```

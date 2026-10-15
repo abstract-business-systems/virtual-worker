@@ -21,7 +21,7 @@ CONFIG = {
     "wake_name": os.environ.get("VW_NAME", "Alex"),
     "operator_name": os.environ.get("VW_OPERATOR_NAME", "Operator"),
     "browser_profile": os.environ.get("VW_BROWSER_PROFILE",
-                                      "/home/abs-worker/.browser-profile"),
+                                      os.path.expanduser("~/.browser-profile")),
     # sockets / data
     "socket_path": os.environ.get("VW_SOCKET", "/run/virtual-worker/agent.sock"),
     "display": os.environ.get("DISPLAY", ":99"),
