@@ -19,14 +19,20 @@ class Browser:
             from playwright.sync_api import sync_playwright
             os.makedirs(CONFIG["browser_profile"], exist_ok=True)
             self.pw = sync_playwright().start()
-            self.ctx = self.pw.chromium.launch_persistent_context(
-                CONFIG["browser_profile"],
-                headless=False,                      # runs on Xvfb
-                args=["--use-fake-ui-for-media-stream",
-                      "--use-fake-device-for-media-stream",
-                      "--autoplay-policy=no-user-gesture-required",
-                      "--no-first-run", "--no-default-browser-check"],
-            )
+            args = ["--use-fake-ui-for-media-stream",
+                    "--autoplay-policy=no-user-gesture-required",
+                    "--no-first-run", "--no-default-browser-check",
+                    "--disable-blink-features=AutomationControlled"]
+            profile = CONFIG["browser_profile"]
+            try:
+                # Meet blocks outdated browsers: use the system Google Chrome
+                self.ctx = self.pw.chromium.launch_persistent_context(
+                    profile, channel="chrome", headless=False, args=args)
+                print("[browser] using system Google Chrome", flush=True)
+            except Exception:
+                self.ctx = self.pw.chromium.launch_persistent_context(
+                    profile, headless=False, args=args)
+                print("[browser] using bundled chromium", flush=True)
             self.page = self.ctx.pages[0] if self.ctx.pages else self.ctx.new_page()
 
     def close(self):
@@ -57,24 +63,34 @@ class Browser:
                       % exc, flush=True)
         page.goto(url, wait_until="domcontentloaded",
                   timeout=CONFIG["join_timeout"] * 1000)
-        time.sleep(3)
+        time.sleep(4)
+        # dismiss popups, enter the participant name so "Ask to join" enables
+        self._click_any(page, ['button:has-text("Got it")'], required=False)
+        self._click_any(page, ['button[aria-label="Dismiss"]'], required=False)
+        try:
+            page.locator('input[placeholder*="name" i], '
+                         'input[aria-label*="name" i]').first.fill(
+                CONFIG["wake_name"], timeout=5000)
+            print("[browser] name entered: %s" % CONFIG["wake_name"],
+                  flush=True)
+        except Exception as exc:
+            print("[browser] name input not found: %s" % exc, flush=True)
+        time.sleep(1)
         self._click_any(page, [
-            'button[aria-label*="Join now"]',
-            'button:has-text("Join now")',
             'button:has-text("Ask to join")',
-            'span:has-text("Ask to join")',
-            'span:has-text("Join now")',
+            'button:has-text("Join now")',
+            'button[aria-label*="Join now"]',
         ])
         # camera off / mic muted on entry (design: appears muted while listening)
         self._click_any(page, [
-            'button[aria-label*="camera"][aria-label*="off"]',
+            'button[aria-label*="camera" i][aria-label*="off" i]',
             'button[aria-label="Turn off camera"]',
         ], required=False)
         self._click_any(page, [
-            'button[aria-label*="microphone"][aria-label*="mute"]',
+            'button[aria-label*="microphone" i][aria-label*="mute" i]',
             'button[aria-label="Mute microphone"]',
         ], required=False)
-        time.sleep(4)
+        time.sleep(6)
         self.joined_url = url
         return {"joined": url, "page_title": page.title()}
 

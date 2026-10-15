@@ -218,6 +218,7 @@ class Worker:
             result = self.browser.join(url)
             self.joined_url = url
         # register the meeting on the backend so memory is tied to a team
+        # (always re-register: a previous demo meeting must not own this one)
         try:
             team = CONFIG.get("team") or "Product"
             data = self.client.request({"type": "meeting.start",
