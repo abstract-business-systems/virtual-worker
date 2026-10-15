@@ -22,7 +22,8 @@ class Browser:
             args = ["--use-fake-ui-for-media-stream",
                     "--autoplay-policy=no-user-gesture-required",
                     "--no-first-run", "--no-default-browser-check",
-                    "--disable-blink-features=AutomationControlled"]
+                    "--disable-blink-features=AutomationControlled",
+                    "--hide-crash-restore-bubble"]
             profile = CONFIG["browser_profile"]
             try:
                 # Meet blocks outdated browsers: use the system Google Chrome

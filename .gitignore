@@ -4,4 +4,4 @@ deploy/keys/
 *.log
 __pycache__/
 *.pyc
-.venv/
+.venv/.meet_now.png
