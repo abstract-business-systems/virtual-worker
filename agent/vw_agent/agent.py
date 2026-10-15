@@ -1,0 +1,462 @@
+"""Virtual worker agent: joins a meeting, listens, answers, remembers.
+
+Threads:
+  - AgentClient reader  : persistent backend link; dispatches pushes
+                          (speak / reminder.due / meeting.join / ...)
+  - audio loop          : parec -> endpointing -> STT -> transcript + wake flow
+  - screen loop         : 5s screenshot diff -> OCR text -> transcript (req 6)
+
+The PoC demo (vw demo) plays scripted utterances through the meeting bus with
+espeak so the full STT -> wake -> brain -> TTS loop runs end-to-end without a
+real Google account. The real flow uses the same path once joined via Meet.
+"""
+import threading
+import time
+import traceback
+
+from vw_common import send_msg, recv_msg
+
+from . import audio as audio_mod
+from . import browser as browser_mod
+from . import parse as parse_mod
+from . import screen as screen_mod
+from . import speak as speak_mod
+from . import stt as stt_mod
+from .config import CONFIG
+
+
+class AgentClient:
+    """Persistent connection to the backend with push handling."""
+
+    def __init__(self, socket_path, push_handler):
+        self.socket_path = socket_path
+        self.push_handler = push_handler
+        self.sock = None
+        self.buf = bytearray()
+        self.send_lock = threading.Lock()
+        self.pending = {}
+        self.pending_lock = threading.Lock()
+        self._counter = 0
+        self.connected = threading.Event()
+
+    def start(self):
+        threading.Thread(target=self._loop, daemon=True,
+                         name="backend-link").start()
+        for _ in range(120):
+            if self.connected.is_set():
+                return True
+            time.sleep(0.5)
+        return False
+
+    def _loop(self):
+        buf = bytearray()
+        while True:
+            try:
+                if self.sock is None:
+                    import socket as _s
+                    self.sock = _s.socket(_s.AF_UNIX, _s.SOCK_STREAM)
+                    self.sock.connect(self.socket_path)
+                    buf.clear()
+                    send_msg(self.sock, {"type": "hello", "role": "agent"})
+                    self.connected.set()
+                    print("[agent] connected to backend", flush=True)
+                msg = recv_msg(self.sock, buf)
+                if msg is None:
+                    raise ConnectionError("backend closed")
+                self._dispatch(msg)
+            except Exception:
+                self.connected.clear()
+                if self.sock:
+                    try:
+                        self.sock.close()
+                    except OSError:
+                        pass
+                self.sock = None
+                time.sleep(2)
+
+    def _dispatch(self, msg):
+        if msg.get("type") == "result":
+            with self.pending_lock:
+                entry = self.pending.pop(msg.get("req_id"), None)
+            if entry:
+                ev, box = entry
+                box.update(msg)
+                ev.set()
+            return
+        # pushed message from backend -> handler runs in reader thread
+        try:
+            self.push_handler(msg)
+        except Exception:
+            traceback.print_exc()
+
+    def request(self, msg, timeout=120):
+        req_id = "a%d" % (self._next_id(),)
+        msg = dict(msg)
+        msg["req_id"] = req_id
+        ev = threading.Event()
+        box = {}
+        with self.pending_lock:
+            self.pending[req_id] = (ev, box)
+        with self.send_lock:
+            send_msg(self.sock, msg)
+        if not ev.wait(timeout):
+            with self.pending_lock:
+                self.pending.pop(req_id, None)
+            raise TimeoutError("backend did not answer %s" % msg["type"])
+        if not box.get("ok"):
+            raise RuntimeError(box.get("error", "backend error"))
+        return box.get("data", {})
+
+    def _next_id(self):
+        with self.pending_lock:
+            self._counter += 1
+            return self._counter
+
+
+class Worker:
+    def __init__(self):
+        self.client = AgentClient(CONFIG["socket_path"], self.on_push)
+        self.browser = browser_mod.Browser()
+        self.segmenter = None
+        self.screen_watcher = None
+        self.parec = None
+        self._lock = threading.Lock()
+        self.transcript_count = 0
+        self.spoken = []            # every text the worker said aloud
+        self.joined_url = None
+        self.meeting_id = None
+
+    # ---- lifecycle -------------------------------------------------------------
+    def start(self):
+        buses = audio_mod.ensure_pulse_setup()
+        print("[agent] audio buses: %s" % buses, flush=True)
+        screen_mod.ensure_xvfb()
+        if not self.client.start():
+            raise RuntimeError("cannot reach backend at %s"
+                               % CONFIG["socket_path"])
+        self.segmenter = stt_mod.Segmenter()
+        threading.Thread(target=self._audio_loop, daemon=True,
+                         name="audio-loop").start()
+        self.screen_watcher = screen_mod.ScreenWatcher(self._on_screen_change)
+        threading.Thread(target=self.screen_watcher.run, daemon=True,
+                         name="screen-loop").start()
+        # warm the STT model so the first question does not stall
+        threading.Thread(target=stt_mod.get_model, daemon=True).start()
+        print("[agent] running (wake name: %r)" % CONFIG["wake_name"], flush=True)
+
+    # ---- push handlers -----------------------------------------------------------
+    def on_push(self, msg):
+        t = msg.get("type")
+        if t == "speak":
+            self.say(msg["text"], once_key=msg.get("once_key"))
+        elif t == "reminder.due":
+            self.say("Reminder for %s: %s" % (msg["who"], msg["what"]),
+                     once_key="reminder-%s" % msg["id"])
+        elif t == "meeting.join":
+            data = {}
+            try:
+                data = self.join_meeting(msg["url"])
+            except Exception as exc:
+                data = {"error": str(exc)}
+            self.client.sock and send_msg(self.client.sock, {
+                "type": "result", "req_id": msg.get("req_id"),
+                "ok": "error" not in data, "data": data})
+        elif t == "status":
+            send_msg(self.client.sock, {
+                "type": "result", "req_id": msg.get("req_id"), "ok": True,
+                "data": self.status()})
+        elif t == "selftest":
+            data = {}
+            try:
+                data = self.selftest()
+            except Exception as exc:
+                data = {"error": str(exc), "report": {}}
+            send_msg(self.client.sock, {
+                "type": "result", "req_id": msg.get("req_id"),
+                "ok": "error" not in data, "data": data})
+        elif t == "demo":
+            data = {}
+            try:
+                data = self.demo()
+            except Exception as exc:
+                traceback.print_exc()
+                data = {"error": str(exc)}
+            send_msg(self.client.sock, {
+                "type": "result", "req_id": msg.get("req_id"),
+                "ok": "error" not in data, "data": data})
+
+    # ---- meeting join (requirement 1) ----------------------------------------------
+    def join_meeting(self, url):
+        if url.startswith("demo://"):
+            # scripted demo meeting: no real browser navigation
+            self.joined_url = url
+        else:
+            print("[agent] joining meeting: %s" % url, flush=True)
+            result = self.browser.join(url)
+            self.joined_url = url
+        # register the meeting on the backend so memory is tied to a team
+        try:
+            team = CONFIG.get("team") or "Product"
+            data = self.client.request({"type": "meeting.start",
+                                        "platform": "meet", "url": url,
+                                        "team": team})
+            self.meeting_id = data.get("meeting_id")
+        except Exception as exc:
+            print("[agent] meeting.start failed: %s" % exc, flush=True)
+        return {"joined": self.joined_url}
+
+    # ---- audio loop (requirements 2, 3) ----------------------------------------------
+    def _audio_loop(self):
+        buses = audio_mod.ensure_pulse_setup()
+        proc = audio_mod.start_recording(buses["sink_monitor"],
+                                         CONFIG["stt_sample_rate"])
+        print("[agent] recording meeting audio from %s" % buses["sink_monitor"],
+              flush=True)
+        chunk = int(0.4 * CONFIG["stt_sample_rate"]) * 2  # 0.4s of s16le
+        while True:
+            pcm = proc.stdout.read(chunk)
+            if not pcm:
+                time.sleep(0.5)
+                proc = audio_mod.start_recording(
+                    buses["sink_monitor"], CONFIG["stt_sample_rate"])
+                continue
+            try:
+                seg = self.segmenter.feed_pcm(pcm)
+            except Exception:
+                traceback.print_exc()
+                continue
+            if seg:
+                text, dur = seg
+                self._handle_segment(text, dur)
+
+    def _handle_segment(self, text, dur):
+        text = text.strip()
+        print("[agent] heard: %r (%.1fs)" % (text, dur), flush=True)
+        self._append_transcript(speaker=CONFIG["operator_name"], text=text)
+        low = text.lower()
+        wake = CONFIG["wake_name"].lower()
+        if wake in low:
+            self._answer_question(text)
+        elif "remind" in low:
+            self._maybe_reminder(text)
+
+    def _append_transcript(self, speaker, text):
+        try:
+            self.client.request({"type": "transcript.append",
+                                 "ts": time.time(), "speaker": speaker,
+                                 "text": text}, timeout=30)
+            self.transcript_count += 1
+        except Exception as exc:
+            print("[agent] transcript.append failed: %s" % exc, flush=True)
+
+    def _answer_question(self, heard_text):
+        """Wake name detected -> ask the brain -> speak the answer aloud."""
+        question = heard_text
+        for prefix in (CONFIG["wake_name"], "%s," % CONFIG["wake_name"]):
+            question = question.replace(prefix, "")
+        question = question.strip(" ,.?!")
+        print("[agent] wake detected; asking brain: %r" % question, flush=True)
+        try:
+            data = self.client.request({
+                "type": "question",
+                "requester": CONFIG["operator_name"],
+                "text": question,
+                "meeting_id": self.meeting_id,
+                "in_meeting": self.joined_url is not None,
+                "recent_transcript": []}, timeout=120)
+        except Exception as exc:
+            answer = "Sorry, I could not process that. (%s)" % exc
+            data = {"answer": answer}
+        answer = data.get("answer", "")
+        print("[agent] answer: %s" % answer, flush=True)
+        self.say(answer)
+        self._maybe_reminder(heard_text)
+
+    def _maybe_reminder(self, text):
+        rem = parse_mod.parse_reminder(text, default_tz=CONFIG["default_tz"])
+        if not rem:
+            return False
+        rem["who"] = rem.get("who") or CONFIG["operator_name"]
+        rem["dedup_key"] = "r:%d:%s" % (int(rem["due_utc"]),
+                                        rem["what"][:60].lower())
+        try:
+            data = self.client.request({"type": "reminder.create", **rem},
+                                       timeout=30)
+        except Exception as exc:
+            print("[agent] reminder.create failed: %s" % exc, flush=True)
+            return False
+        if data.get("created"):
+            when = time.strftime("%H:%M:%S UTC", time.gmtime(rem["due_utc"]))
+            self.say("Okay %s, I will remind you at %s." % (rem["who"], when))
+            print("[agent] reminder created: %s" % data, flush=True)
+            return True
+        return False
+
+    # ---- speaking (requirement 2) ------------------------------------------------
+    def say(self, text, once_key=None):
+        if not text:
+            return
+        if once_key:
+            if once_key in self.spoken:
+                return  # never repeat the same announcement (requirement 5)
+            self.spoken.append(once_key)
+        with self._lock:
+            print("[agent] speaking: %s" % text, flush=True)
+            try:
+                self.browser.set_mic(unmute=True)
+            except Exception:
+                pass
+            try:
+                speak_mod.tts_play(text)
+            finally:
+                try:
+                    self.browser.set_mic(unmute=False)
+                except Exception:
+                    pass
+            self.spoken.append(text)
+
+    # ---- screen loop (requirement 6) ------------------------------------------------
+    def _on_screen_change(self, text):
+        print("[agent] screen changed: %r" % text[:120], flush=True)
+        self._append_transcript(speaker="screen", text=text)
+
+    # ---- status / selftest / demo ------------------------------------------------------
+    def status(self):
+        return {
+            "wake_name": CONFIG["wake_name"],
+            "joined_url": self.joined_url,
+            "meeting_id": self.meeting_id,
+            "transcript_segments": self.transcript_count,
+            "spoken_texts": len(self.spoken),
+            "audio_loop": self.parec_alive() if self.parec else "lazy",
+            "screen_loop": bool(self.screen_watcher and
+                                not self.screen_watcher._stop.is_set()),
+        }
+
+    def parec_alive(self):
+        return self.parec is not None and self.parec.poll() is None
+
+    def selftest(self):
+        report = {}
+        def check(name, fn):
+            try:
+                report[name] = "PASS: %s" % (fn(),)
+            except Exception as exc:
+                report[name] = "FAIL: %s" % exc
+        check("xvfb-screenshot", lambda: (screen_mod.ScreenWatcher()
+              .screenshot().size[0] > 0) and "screenshot ok")
+        check("pulse-buses", lambda: ", ".join(
+            sorted(audio_mod.ensure_pulse_setup().values())))
+        check("stt-model", lambda: stt_mod.get_model() is not None and
+              "model loaded")
+        check("tts-play", lambda: (speak_mod.tts_play("selftest") or None) is None
+              and "played into %s" % CONFIG["tts_sink"])
+        check("browser-render", self._check_browser)
+        check("backend-roundtrip", lambda: self.client.request(
+            {"type": "ping"}, timeout=30).get("pong") and "pong")
+        check("acl-fail-closed", lambda: self.client.request(
+            {"type": "kb.search", "requester": "nobody-%d" % time.time(),
+             "query": "launch"}, timeout=30)["allowed"] is False and
+            "unknown user gets nothing")
+        check("reminder-scheduling", self._check_reminder_roundtrip)
+        return {"report": report}
+
+    def _check_browser(self):
+        b = browser_mod.Browser()
+        try:
+            b._ensure()
+            w = screen_mod.ScreenWatcher()
+            before = w.ahash(w.screenshot())
+            b.page.goto("data:text/html,<h1>virtual worker</h1>")
+            time.sleep(1)
+            after = w.ahash(w.screenshot())
+            if before == after:
+                raise AssertionError("screen did not change")
+            return "chromium renders on %s" % CONFIG["display"]
+        finally:
+            b.close()
+
+    def _check_reminder_roundtrip(self):
+        got = threading.Event()
+        box = {}
+        orig = self.on_push
+
+        def spy(msg):
+            if msg.get("type") == "reminder.due":
+                box.update(msg)
+                got.set()
+            else:
+                orig(msg)
+        self.on_push = spy
+        self.client.push_handler = spy
+        try:
+            data = self.client.request({
+                "type": "reminder.create", "who": "selftest", "what": "ping",
+                "due_utc": time.time() + 2, "requester_tz": "UTC",
+                "dedup_key": "selftest-%f" % time.time()}, timeout=15)
+            if not data.get("created"):
+                raise AssertionError("reminder not created: %s" % data)
+            if not got.wait(20):
+                raise AssertionError("reminder.due push never arrived")
+            return "scheduler fired reminder #%s" % box.get("id")
+        finally:
+            self.on_push = orig
+            self.client.push_handler = orig
+
+    def demo(self):
+        """End-to-end scripted meeting played through the real audio pipeline."""
+        self._append_transcript(speaker="system", text="demo meeting started")
+        if self.meeting_id is None:
+            self.join_meeting("demo://local-meeting")
+        script = [
+            ("participant", "We agreed to launch the product on the twentieth "
+             "of October, and Bob will prepare the report."),
+        ]
+        for speaker, line in script:
+            self._play_participant(line)
+        time.sleep(3)
+        # 1) wake + question -> brain -> spoken answer
+        self._play_participant("Alex, what did we agree about the launch?")
+        time.sleep(15)
+        # 2) reminder -> scheduler -> spoken announcement (20s)
+        self._play_participant("Alex, remind me in 20 seconds to prepare the "
+                               "report.")
+        deadline = time.time() + 45
+        while time.time() < deadline:
+            if any("Reminder for" in s for s in self.spoken):
+                break
+            time.sleep(1)
+        return {
+            "transcript_segments": self.transcript_count,
+            "spoken": list(self.spoken),
+            "reminder_fired": any("Reminder for" in s for s in self.spoken),
+        }
+
+    def _play_participant(self, line):
+        """A 'participant' speaks through the meeting bus (real STT hears it)."""
+        print("[demo] participant says: %s" % line, flush=True)
+        self._append_transcript(speaker="participant", text=line)
+        import subprocess, tempfile, os as _os
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
+            wav = f.name
+        try:
+            subprocess.run(["espeak-ng", "-v", "en-us", "-s", "140", "-w", wav,
+                            line], check=True, capture_output=True, timeout=60)
+            subprocess.run(["paplay", "--device=%s" % CONFIG["sink"], wav],
+                           check=True, capture_output=True, timeout=120)
+        finally:
+            _os.unlink(wav)
+
+
+def main():
+    worker = Worker()
+    worker.start()
+    try:
+        while True:
+            time.sleep(3600)
+    except KeyboardInterrupt:
+        pass
+
+
+if __name__ == "__main__":
+    main()

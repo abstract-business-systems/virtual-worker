@@ -1,0 +1,8 @@
+# Python deps for agent + backend (host deployment; the Docker image
+# installs these into /opt/venv).
+faster-whisper==1.0.3
+playwright==1.45.0
+mss==9.0.1
+pillow==10.3.0
+pytesseract==0.3.13
+numpy

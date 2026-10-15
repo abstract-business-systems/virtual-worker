@@ -1,0 +1,8 @@
+# secrets / local env
+deploy/keys/
+.env
+docker/worker.env
+*.log
+__pycache__/
+*.pyc
+.venv/

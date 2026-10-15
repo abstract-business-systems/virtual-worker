@@ -1,0 +1,62 @@
+"""vw — operator CLI: control the worker through the backend.
+
+  vw join <meet-url>    join a Google Meet meeting (req 1)
+  vw status             what is the worker doing
+  vw say "text"         make the worker speak (debug)
+  vw selftest           end-to-end environment self test
+  vw demo               scripted end-to-end demo (no Google account needed)
+"""
+import sys
+
+from vw_backend.cli import main as admin_main  # noqa: E402
+
+AGENT_COMMANDS = {"join", "status", "say", "selftest", "demo"}
+MAP = {"join": "meeting.join", "status": "agent.status", "say": "agent.say",
+       "selftest": "agent.selftest", "demo": "agent.demo"}
+
+
+def main(argv):
+    if argv and argv[0] in AGENT_COMMANDS:
+        cmd = argv[0]
+        rest = argv[1:]
+        msg = {"type": MAP[cmd], "req_id": "vw"}
+        if cmd == "join":
+            if not rest:
+                print("usage: vw join <meet-url>")
+                return 1
+            msg["url"] = rest[0]
+            print("asking worker to join %s ..." % msg["url"])
+        elif cmd == "say":
+            msg["text"] = " ".join(rest)
+        return admin_main([_encode(msg)])
+    return admin_main(argv)
+
+
+def _encode(msg):
+    """Reuse admin request path by passing a pre-built message as argv."""
+    import json
+    import os
+    import socket
+    sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    sock.settimeout(320)
+    sock.connect(os.environ.get("VW_SOCKET", "/run/virtual-worker/agent.sock"))
+    sock.sendall((json.dumps(msg) + "\n").encode())
+    data = b""
+    while True:
+        chunk = sock.recv(65536)
+        if not chunk:
+            break
+        data += chunk
+        if b"\n" in data:
+            break
+    sock.close()
+    resp = json.loads(bytes(data).split(b"\n", 1)[0].decode())
+    if not resp.get("ok"):
+        print("ERROR: %s" % resp.get("error"))
+        return 2
+    print(json.dumps(resp.get("data", {}), indent=2, ensure_ascii=False))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
