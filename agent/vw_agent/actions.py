@@ -69,29 +69,43 @@ def screenshot(path="/tmp/vw_action.png"):
     return path if os.path.exists(path) else None
 
 
-def locate_text(target, screen_path=None):
-    """OCR the screen, return the center (x, y) of the first line that
-    contains the target text (case-insensitive), or None."""
+def locate_all(target, screen_path=None):
+    """OCR the screen; return [(x, y), ...] centers of every line that
+    contains the target text (case-insensitive), top to bottom."""
     import numpy as np
     path = screen_path or screenshot()
     if not path or not os.path.exists(path):
-        return None
+        return []
     try:
         from rapidocr_onnxruntime import RapidOCR
         from PIL import Image
         result, _ = RapidOCR()(np.array(Image.open(path).convert("RGB")))
     except Exception as exc:
         print("[actions] ocr failed: %s" % exc, flush=True)
-        return None
+        return []
     if not result:
-        return None
+        return []
     t = target.lower()
+    hits = []
     for box, text, _conf in result:
         if t in str(text).lower():
             xs = [p[0] for p in box]
             ys = [p[1] for p in box]
-            return (sum(xs) / len(xs), sum(ys) / len(ys))
-    return None
+            hits.append((sum(xs) / len(xs), sum(ys) / len(ys)))
+    return sorted(hits, key=lambda p: p[1])
+
+
+def locate_text(target, screen_path=None):
+    """First (topmost) match — kept for compatibility."""
+    hits = locate_all(target, screen_path)
+    return hits[0] if hits else None
+
+
+def locate_lowest(target, screen_path=None):
+    """Lowest match on screen — headings repeat the label of the field
+    below them (e.g. 'Your name'), so the field is the bottom match."""
+    hits = locate_all(target, screen_path)
+    return hits[-1] if hits else None
 
 
 def route_audio():
@@ -156,7 +170,7 @@ def rejoin_meeting(url, name="Alex"):
     if pos:
         click(*pos)
         time.sleep(2)
-    pos = locate_text("Your name") or locate_text("What's your name")
+    pos = locate_lowest("Your name") or locate_lowest("What's your name")
     if pos:
         click(*pos)
     else:
