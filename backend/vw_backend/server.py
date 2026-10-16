@@ -282,8 +282,16 @@ class Backend:
         if not allowed:
             return {"transcript": [], "kb_hits": [], "segment_hits": [],
                     "allowed": False}
+        summaries = []
+        if meeting_id:
+            with self.kb.lock, self.kb._conn() as c:
+                row = c.execute("SELECT text FROM summaries WHERE meeting_id=?",
+                                (meeting_id,)).fetchone()
+            if row and row["text"]:
+                summaries.append(row["text"])
         return {
             "transcript": self.kb.recent_transcript(meeting_id) if meeting_id else [],
+            "summaries": summaries,
             "kb_hits": self.kb.kb_search(question, allowed),
             "segment_hits": (self.kb.segments_search(question, meeting_id, allowed)
                              if meeting_id else []),

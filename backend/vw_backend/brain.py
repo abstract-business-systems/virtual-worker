@@ -153,7 +153,8 @@ class Brain:
             data = json.loads(resp.read())
         return data["choices"][0]["message"]["content"].strip()
 
-    def stream_answer(self, question, recent_transcript, kb_hits, segment_hits):
+    def stream_answer(self, question, recent_transcript, kb_hits, segment_hits,
+                      summaries=None):
         """Yield answer text deltas via OpenRouter streaming (low latency)."""
         key = os.environ.get("OPENROUTER_API_KEY")
         if not key:
@@ -170,6 +171,8 @@ class Brain:
             ctx.append("PAST MEETING EXCERPTS (authorized for this requester):\n" +
                        "\n".join("- %s: %s" % (h.get("speaker", "?"), h["text"])
                                  for h in segment_hits))
+        if summaries:
+            ctx.append("MEETING SUMMARY SO FAR:\n" + "\n".join(summaries))
         prompt = ("MEETING CONTEXT:\n%s\n\nQUESTION: %s\n\nAnswer out loud as Alex."
                   % ("\n\n".join(ctx) or "(no context yet)", question))
         body = json.dumps({
@@ -251,6 +254,8 @@ class Brain:
             ctx.append("PAST MEETING EXCERPTS (authorized for this requester):\n" +
                        "\n".join("- %s: %s" % (h.get("speaker", "?"), h["text"])
                                  for h in segment_hits))
+        if summaries:
+            ctx.append("MEETING SUMMARY SO FAR:\n" + "\n".join(summaries))
         prompt = ("MEETING CONTEXT:\n%s\n\nQUESTION: %s\n\nAnswer out loud as Alex."
                   % ("\n\n".join(ctx) or "(no context yet)", question))
         return self._ask(PERSONA, prompt)

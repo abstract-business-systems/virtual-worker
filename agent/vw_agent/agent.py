@@ -304,12 +304,21 @@ class Worker:
                 self._answer_question(question)
             else:
                 # bare wake name: arm for the question that follows
-                self._armed_until = now + 12
+                self._armed_until = now + 25
+                self._last_wake_ts = now
                 print("[agent] wake name alone - waiting for the question",
                       flush=True)
             return
         if now < self._armed_until and sum(c.isalpha() for c in text) >= 6:
             self._armed_until = 0.0
+            self._answer_question(text)
+            return
+        if now - self._last_wake_ts < 60 and (
+                "?" in text or low.startswith(("what", "can you", "tell me",
+                                               "how", "why", "when", "who",
+                                               "do you", "did you", "repeat",
+                                               "say again", "say that again"))):
+            # follow-up question shortly after addressing Alex
             self._answer_question(text)
             return
         if "remind" in low or (now - self._last_wake_ts < 12 and
@@ -371,7 +380,8 @@ class Worker:
         try:
             deltas = self.brain.stream_answer(
                 question, context.get("transcript", []),
-                context.get("kb_hits", []), context.get("segment_hits", []))
+                context.get("kb_hits", []), context.get("segment_hits", []),
+                context.get("summaries", []))
         except Exception as exc:
             print("[agent] streaming failed (%s), fallback" % exc, flush=True)
             try:
