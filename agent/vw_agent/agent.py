@@ -243,7 +243,7 @@ class Worker:
                 try:
                     if op == "screenshot":
                         import base64
-                        path = actions.screenshot()
+                        path = actions_mod.screenshot()
                         from PIL import Image
                         raw = open(path, "rb").read()
                         with Image.open(path) as im:
@@ -251,25 +251,25 @@ class Worker:
                         data = {"image": base64.b64encode(raw).decode(),
                                 "w": w, "h": h}
                     elif op == "locate":
-                        hits = actions.locate_all(str(msg.get("text", "")))
+                        hits = actions_mod.locate_all(str(msg.get("text", "")))
                         data = {"hits": [(int(x), int(y)) for x, y in hits][:8]}
                     elif op == "click":
-                        actions.click(int(msg["x"]), int(msg["y"]))
+                        actions_mod.click(int(msg["x"]), int(msg["y"]))
                     elif op == "double_click":
-                        actions.xdotool("mousemove", str(int(msg["x"])),
+                        actions_mod.xdotool("mousemove", str(int(msg["x"])),
                                         str(int(msg["y"])),
                                         "click", "--repeat", "2", "--delay", "80", "1")
                     elif op == "type":
-                        actions.type_text(str(msg.get("text", "")))
+                        actions_mod.type_text(str(msg.get("text", "")))
                     elif op == "key":
-                        actions.key(str(msg.get("keys", "")))
+                        actions_mod.key(str(msg.get("keys", "")))
                     elif op == "scroll":
                         amt = int(msg.get("amount", -3))
-                        actions.xdotool(
+                        actions_mod.xdotool(
                             "click", "--repeat", str(max(1, abs(amt))),
                             "--delay", "60", "4" if amt > 0 else "5")
                     elif op == "open_url":
-                        actions.open_url(str(msg.get("url", "")))
+                        actions_mod.open_url(str(msg.get("url", "")))
                     else:
                         ok, err = False, "unknown op %r" % op
                 except Exception as exc:
