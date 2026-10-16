@@ -54,4 +54,7 @@ CONFIG = {
     "default_tz": os.environ.get("VW_TZ", "UTC"),
     # demo
     "demo_mode": os.environ.get("VW_DEMO", "0") == "1",
+    "action_display": os.environ.get("VW_ACTION_DISPLAY", ""),
+    "xauthority": os.environ.get("VW_XAUTHORITY",
+                                 os.path.expanduser("~/.Xauthority")),
 }

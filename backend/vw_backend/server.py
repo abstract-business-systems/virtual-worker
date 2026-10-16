@@ -268,6 +268,12 @@ class Backend:
                                            msg["text"])
         return {"segment_id": seg_id, "meeting_id": mid}
 
+    def h_meeting_url(self, msg):
+        meeting = self.kb.active_meeting()
+        if not meeting:
+            return {"url": None}
+        return {"url": meeting["join_url"] or None}
+
     def h_context_get(self, msg):
         """Assembled, ACL-checked context for the streaming answer path:
         recent transcript + relevant past segments + KB hits for the question."""

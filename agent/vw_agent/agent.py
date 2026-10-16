@@ -20,6 +20,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from vw_common import send_msg, recv_msg
 
+from . import actions as actions_mod
 from . import audio as audio_mod
 from . import browser as browser_mod
 from . import parse as parse_mod
@@ -297,6 +298,9 @@ class Worker:
         self._append_transcript(speaker=CONFIG["operator_name"], text=text)
         low = text.lower()
         now = time.time()
+        if (self._contains_wake(low) or now < self._armed_until) and \
+                self._run_intent(low, text):
+            return
         if self._contains_wake(low):
             question = self._strip_wake(text).strip(" ,.?!")
             if sum(c.isalpha() for c in question) >= 3:
@@ -327,6 +331,57 @@ class Worker:
             self._maybe_reminder(text)
 
     _ALPHA_RE = None
+
+    def _run_intent(self, low, text):
+        """Detect meeting-control intents (leave/rejoin) and execute them as
+        a normal user would. Only runs when Alex was addressed (wake/armed)."""
+        import re as _re
+        wants_leave = bool(
+            _re.search(r"\b(drop|leave|hang up|exit|get out)\b", low)
+            and _re.search(r"\b(meeting|call)\b|this meeting", low))
+        wants_rejoin = bool(
+            _re.search(r"\b(rejoin|come back)\b", low)
+            or ("join" in low and "again" in low))
+        if not wants_leave and not wants_rejoin:
+            return False
+        if wants_rejoin:
+            url = self._active_meeting_url()
+            if not url:
+                self.say("I do not have a meeting link to rejoin yet.")
+                return True
+            self.say("Okay, rejoining the meeting now.")
+            threading.Thread(target=self._do_rejoin, args=(url,),
+                             daemon=True, name="intent-rejoin").start()
+        elif wants_leave:
+            self.say("Okay, I am leaving the meeting now.")
+            threading.Thread(target=self._do_leave, daemon=True,
+                             name="intent-leave").start()
+        return True
+
+    def _active_meeting_url(self):
+        try:
+            data = self.client.request({"type": "meeting.url"}, timeout=15)
+            return data.get("url") or None
+        except Exception:
+            return None
+
+    def _do_leave(self):
+        try:
+            with self._lock:
+                actions_mod.leave_meeting()
+            print("[agent] action: left the meeting", flush=True)
+        except Exception as exc:
+            print("[agent] leave failed: %s" % exc, flush=True)
+
+    def _do_rejoin(self, url):
+        try:
+            with self._lock:
+                actions_mod.rejoin_meeting(url, CONFIG["wake_name"])
+            print("[agent] action: rejoined the meeting", flush=True)
+            self.say("I have joined the meeting again. Can everyone hear me?")
+        except Exception as exc:
+            print("[agent] rejoin failed: %s" % exc, flush=True)
+            self.say("Sorry, I could not rejoin the meeting.")
 
     def _strip_wake(self, text):
         """Remove the wake name (and fuzzy variants) from the start/middle."""
