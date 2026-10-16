@@ -1,0 +1,1716 @@
+WEBVTT
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/6-0
+00:00:04.013 --> 00:00:07.168
+<v Viswanath Chidambaram>Like the individuals appuse him, right?
+Like it might have actually made some</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/6-1
+00:00:07.168 --> 00:00:07.533
+<v Viswanath Chidambaram>mistakes.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/7-0
+00:00:08.093 --> 00:00:08.373
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/10-0
+00:00:09.133 --> 00:00:11.194
+<v Viswanath Chidambaram>Okay,
+we will actually figure out first</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/10-1
+00:00:11.194 --> 00:00:15.368
+<v Viswanath Chidambaram>actually what I would actually recommend
+you to do is to measure the latency and</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/10-2
+00:00:15.368 --> 00:00:17.790
+<v Viswanath Chidambaram>then actually come up with the plan to
+fix it.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/8-0
+00:00:15.533 --> 00:00:15.853
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/10-3
+00:00:17.790 --> 00:00:21.912
+<v Viswanath Chidambaram>This bug thing like repeating the same
+thing and stuff actually that's not that</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/10-4
+00:00:21.912 --> 00:00:23.613
+<v Viswanath Chidambaram>big a concern initially at least.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/9-0
+00:00:24.093 --> 00:00:24.573
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/11-0
+00:00:25.373 --> 00:00:28.893
+<v Viswanath Chidambaram>Latency might be a harder problem to
+solve without actually spending much cost.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/12-0
+00:00:29.453 --> 00:00:29.773
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/16-0
+00:00:31.053 --> 00:00:36.314
+<v Viswanath Chidambaram>And one good thing is it is able to know
+that actually it has to speak. OK,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/16-1
+00:00:36.314 --> 00:00:41.299
+<v Viswanath Chidambaram>so the language actually does not
+actually sound like something that is</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/14-0
+00:00:38.093 --> 00:00:38.373
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/16-2
+00:00:41.299 --> 00:00:41.853
+<v Viswanath Chidambaram>written.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/15-0
+00:00:42.493 --> 00:00:42.813
+<v Sarooparam Chenaram Darji>Haan.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/19-0
+00:00:43.653 --> 00:00:46.373
+<v Viswanath Chidambaram>Which is good.
+So like we are in the right direction,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/19-1
+00:00:46.373 --> 00:00:49.345
+<v Viswanath Chidambaram>we will first actually like measure the
+latency, solve it,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/19-2
+00:00:49.345 --> 00:00:51.612
+<v Viswanath Chidambaram>and then actually look at the actual
+issues.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/19-3
+00:00:51.612 --> 00:00:55.491
+<v Viswanath Chidambaram>And there is one other thing I want to
+understand actually like what are the</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/17-0
+00:00:53.053 --> 00:00:53.453
+<v Sarooparam Chenaram Darji>Thanks.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/19-4
+00:00:55.491 --> 00:00:59.773
+<v Viswanath Chidambaram>capabilities it has as of now actually it
+is able to join teams meeting, am I right?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/18-0
+00:01:00.493 --> 00:01:00.813
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/20-0
+00:01:02.093 --> 00:01:04.352
+<v Viswanath Chidambaram>OK,
+we can even actually the other thing is</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/20-1
+00:01:04.352 --> 00:01:05.533
+<v Viswanath Chidambaram>we will ask it to like.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/23-0
+00:01:04.413 --> 00:01:09.413
+<v Sarooparam Chenaram Darji>I think it can search like it can
+basically it can get out of the meeting,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/22-0
+00:01:08.293 --> 00:01:09.133
+<v Viswanath Chidambaram>No, not even that.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/23-1
+00:01:09.413 --> 00:01:13.613
+<v Sarooparam Chenaram Darji>it can search the Internet right now
+already from the browser.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/24-0
+00:01:13.053 --> 00:01:17.373
+<v Viswanath Chidambaram>So not such ask it to lets say like send
+a message to somebody.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/25-0
+00:01:18.413 --> 00:01:18.653
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/30-0
+00:01:18.493 --> 00:01:24.403
+<v Viswanath Chidambaram>Caller asked to send a message to lets
+say some particular person just actually</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/26-0
+00:01:22.813 --> 00:01:23.133
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/30-1
+00:01:24.403 --> 00:01:30.535
+<v Viswanath Chidambaram>say like ask actually to send actually a
+message to confirm stating that I am your</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/27-0
+00:01:28.973 --> 00:01:29.453
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/30-2
+00:01:30.535 --> 00:01:35.928
+<v Viswanath Chidambaram>Luna, your new teams assistant,
+sending a message from sending a message</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/30-3
+00:01:35.928 --> 00:01:38.293
+<v Viswanath Chidambaram>to checkout something like that.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/28-0
+00:01:37.133 --> 00:01:37.533
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/31-0
+00:01:38.813 --> 00:01:39.933
+<v Viswanath Chidambaram>Let's see like what does she do?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/29-0
+00:01:39.053 --> 00:01:39.213
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/32-0
+00:01:40.813 --> 00:01:45.356
+<v Sarooparam Chenaram Darji>That part love to add the account as of
+now it does not add the account teams</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/32-1
+00:01:45.356 --> 00:01:46.813
+<v Sarooparam Chenaram Darji>account is not there yet.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/34-0
+00:01:46.173 --> 00:01:50.090
+<v Viswanath Chidambaram>No, okay, fine. Yeah,
+we will actually do that. We will do that.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/34-1
+00:01:50.090 --> 00:01:54.188
+<v Viswanath Chidambaram>Subaru ne would have already left on me,
+right? Okay, ask actually,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/34-2
+00:01:54.188 --> 00:01:58.888
+<v Viswanath Chidambaram>could you ask him to lets say like just
+actually reset Visa Lakshi's name and</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/34-3
+00:01:58.888 --> 00:02:02.685
+<v Viswanath Chidambaram>actually give it to you?
+We will just use it for local things,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/34-4
+00:02:02.685 --> 00:02:04.493
+<v Viswanath Chidambaram>our teams communication stuff.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/33-0
+00:02:02.893 --> 00:02:03.213
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/35-0
+00:02:05.453 --> 00:02:07.533
+<v Sarooparam Chenaram Darji>Okay, I'll pull her. Yeah, pull him.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/38-0
+00:02:07.133 --> 00:02:09.398
+<v Viswanath Chidambaram>Yeah,
+today it's today such piece will actually</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/38-1
+00:02:09.398 --> 00:02:12.560
+<v Viswanath Chidambaram>like give the account to it.
+You can actually fix it like whenever</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/36-0
+00:02:11.533 --> 00:02:11.933
+<v Sarooparam Chenaram Darji>Thanks.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/38-2
+00:02:12.560 --> 00:02:13.693
+<v Viswanath Chidambaram>actually the other time.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/37-0
+00:02:14.253 --> 00:02:14.573
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/40-0
+00:02:24.453 --> 00:02:25.053
+<v Sarooparam Chenaram Darji>Subramanian.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/41-0
+00:02:27.773 --> 00:02:28.253
+<v Subramaniyan  Periyakaruppan>Yes, bro.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/43-0
+00:02:27.933 --> 00:02:33.853
+<v Viswanath Chidambaram>Give me one minute, man. One minute, man.
+I will check it. Mr. Ghar.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/42-0
+00:02:29.373 --> 00:02:30.253
+<v Sarooparam Chenaram Darji>Yeah, okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/44-0
+00:02:34.653 --> 00:02:35.373
+<v Subramaniyan  Periyakaruppan>One sec.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/45-0
+00:02:36.893 --> 00:02:37.533
+<v Viswanath Chidambaram>Like.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/46-0
+00:02:41.053 --> 00:02:43.693
+<v Subramaniyan  Periyakaruppan>Okay, sir, sir.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/47-0
+00:02:49.293 --> 00:02:49.853
+<v Viswanath Chidambaram>Yeah, right.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/48-0
+00:02:57.693 --> 00:02:58.973
+<v Viswanath Chidambaram>Ore in a song.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/49-0
+00:03:01.453 --> 00:03:04.013
+<v Viswanath Chidambaram>Piyramathalam Sarvapaksha,
+how to name her by.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/50-0
+00:03:05.613 --> 00:03:06.093
+<v Sarooparam Chenaram Darji>Right.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/51-0
+00:03:07.493 --> 00:03:08.813
+<v Viswanath Chidambaram>No, he's asking for a name.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/52-0
+00:03:10.493 --> 00:03:11.133
+<v Sarooparam Chenaram Darji>May.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/53-0
+00:03:11.213 --> 00:03:12.973
+<v Viswanath Chidambaram>So just go for AB 01.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/54-0
+00:03:13.853 --> 00:03:20.013
+<v Subramaniyan  Periyakaruppan>Okay, sir, under the ABS code not zero.
+Okay, sir, ABS zero.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/55-0
+00:03:21.453 --> 00:03:25.613
+<v Sarooparam Chenaram Darji>01 or it could be currently.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/56-0
+00:03:29.853 --> 00:03:32.413
+<v Sarooparam Chenaram Darji>I will give you the name.
+Give me a second.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/57-0
+00:03:33.213 --> 00:03:36.893
+<v Viswanath Chidambaram>Hey Cortana,
+you can actually prepare everything.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/58-0
+00:03:37.533 --> 00:03:38.093
+<v Subramaniyan  Periyakaruppan>Okay, sir.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/59-0
+00:03:40.333 --> 00:03:42.920
+<v Viswanath Chidambaram>We did not see this thing at all.
+We forgot to come, I believe.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/59-1
+00:03:42.920 --> 00:03:44.053
+<v Viswanath Chidambaram>We will do us good tomorrow.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/60-0
+00:03:44.973 --> 00:03:45.453
+<v Subramaniyan  Periyakaruppan>Okay, sir.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/64-0
+00:04:07.773 --> 00:04:13.453
+<v Sarooparam Chenaram Darji>Just call it ADA ADA may be might work,
+yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/65-0
+00:04:11.453 --> 00:04:13.693
+<v Subramaniyan  Periyakaruppan>AD point.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/66-0
+00:04:15.613 --> 00:04:16.253
+<v Viswanath Chidambaram>Oi bhai.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/67-0
+00:04:17.373 --> 00:04:21.564
+<v Sarooparam Chenaram Darji>Its from Tron. Basically,
+simply search for Tron female names like</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/67-1
+00:04:21.564 --> 00:04:22.253
+<v Sarooparam Chenaram Darji>Tron movie.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/68-0
+00:04:22.333 --> 00:04:22.813
+<v Viswanath Chidambaram>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/69-0
+00:04:24.333 --> 00:04:26.813
+<v Sarooparam Chenaram Darji>Peda, but is it hard to pronounce?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/70-0
+00:04:29.853 --> 00:04:30.973
+<v Sarooparam Chenaram Darji>If it is, we can.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/72-0
+00:04:30.253 --> 00:04:37.453
+<v Subramaniyan  Periyakaruppan>It won't be called Era's Ada.
+It might sound like Ada or not sure.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/71-0
+00:04:30.653 --> 00:04:31.133
+<v Viswanath Chidambaram>No.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/73-0
+00:04:35.933 --> 00:04:40.013
+<v Sarooparam Chenaram Darji>Yeah, we will find other. Wait a second,
+artificial.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/74-0
+00:04:41.933 --> 00:04:43.053
+<v Viswanath Chidambaram>Get some Indian names.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/75-0
+00:04:44.093 --> 00:04:45.373
+<v Sarooparam Chenaram Darji>Just call it Friday.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/76-0
+00:04:46.493 --> 00:04:47.133
+<v Subramaniyan  Periyakaruppan>Friday.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/77-0
+00:04:47.693 --> 00:04:48.053
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/78-0
+00:04:48.813 --> 00:04:49.373
+<v Subramaniyan  Periyakaruppan>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/79-0
+00:04:52.813 --> 00:04:53.693
+<v Sarooparam Chenaram Darji>Iron Man.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/82-0
+00:04:54.973 --> 00:05:01.512
+<v Sarooparam Chenaram Darji>It is a female version of Jarvis Friday,
+and it is Friday already,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/80-0
+00:04:55.293 --> 00:04:55.653
+<v Subramaniyan  Periyakaruppan>Sorry.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/81-0
+00:04:57.853 --> 00:05:00.413
+<v Subramaniyan  Periyakaruppan>Yeah, its film version of Galaxy.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/82-1
+00:05:01.512 --> 00:05:04.733
+<v Sarooparam Chenaram Darji>so we named her Friday on Friday.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/84-0
+00:05:07.733 --> 00:05:11.659
+<v Subramaniyan  Periyakaruppan>Actually,
+Spider Man's assistant is called the</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/84-1
+00:05:11.659 --> 00:05:14.333
+<v Subramaniyan  Periyakaruppan>Friday. I guess it was given by.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/83-0
+00:05:11.853 --> 00:05:15.853
+<v Sarooparam Chenaram Darji>Yeah, she had Karen. He had Karen.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/85-0
+00:05:18.413 --> 00:05:25.533
+<v Sarooparam Chenaram Darji>Name like it's not like it's not like
+changing the name is that hard, right?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/86-0
+00:05:25.933 --> 00:05:26.973
+<v Subramaniyan  Periyakaruppan>Yeah, it's time back.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/87-0
+00:05:28.413 --> 00:05:28.533
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/89-0
+00:05:38.013 --> 00:05:41.053
+<v Subramaniyan  Periyakaruppan>Should I give it to him right now or
+maybe by tomorrow, sir?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/90-0
+00:05:40.573 --> 00:05:44.333
+<v Sarooparam Chenaram Darji>Yeah, it's suspicious. At least share it,
+login.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/91-0
+00:05:43.853 --> 00:05:46.413
+<v Subramaniyan  Periyakaruppan>Okay, fine. I'll try to change the phone.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/92-0
+00:05:48.893 --> 00:05:53.133
+<v Sarooparam Chenaram Darji>She's already here, named Luna.
+I'm not sure whether you've noticed.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/93-0
+00:05:52.053 --> 00:05:56.768
+<v Subramaniyan  Periyakaruppan>Yeah, I could see it. I checked it.
+I thought initially JK was in India,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/93-1
+00:05:56.768 --> 00:05:59.933
+<v Subramaniyan  Periyakaruppan>and then I saw initially that it is in El
+andra.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/94-0
+00:06:00.573 --> 00:06:02.573
+<v Sarooparam Chenaram Darji>Yeah, nobody is there. Where the hell?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/95-0
+00:06:08.573 --> 00:06:10.493
+<v Sarooparam Chenaram Darji>Luna, can you unmute yourself?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/96-0
+00:06:18.413 --> 00:06:20.093
+<v Viswanath Chidambaram>You might not even know that she was a
+nude.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/97-0
+00:06:21.293 --> 00:06:26.813
+<v Sarooparam Chenaram Darji>Okay, she didn't knew, but I muted her.
+Now only she can unmute herself.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/98-0
+00:06:30.173 --> 00:06:31.533
+<v Viswanath Chidambaram>It's going to take some time, right?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/100-0
+00:06:30.533 --> 00:06:34.672
+<v Sarooparam Chenaram Darji>Take your time delay 3 message 3 prompt
+delay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/100-1
+00:06:34.672 --> 00:06:39.693
+<v Sarooparam Chenaram Darji>Maybe delay is in like prompt duration
+not even seconds.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/99-0
+00:06:36.493 --> 00:06:36.973
+<v Viswanath Chidambaram>yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/101-0
+00:06:46.173 --> 00:06:51.693
+<v Sarooparam Chenaram Darji>I can end it from okay,
+she was able to do it.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/102-0
+00:06:46.613 --> 00:06:50.894
+<v Luna>Stand you're feeling that way.
+It's important to take time for yourself.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/102-1
+00:06:50.894 --> 00:06:54.999
+<v Luna>I'm here to listen and help.
+Please feel free to share what's on your</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/102-2
+00:06:54.999 --> 00:06:55.293
+<v Luna>mind.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/103-0
+00:06:56.333 --> 00:06:58.013
+<v Sarooparam Chenaram Darji>Nothing, just stay quiet there.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/105-0
+00:06:59.693 --> 00:07:01.910
+<v Luna>Got it,
+you should be all set to speak now,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/105-1
+00:07:01.910 --> 00:07:03.573
+<v Luna>let me know how I can assist you.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/106-0
+00:07:07.053 --> 00:07:07.853
+<v Viswanath Chidambaram>Did you got nude?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/107-0
+00:07:09.333 --> 00:07:09.613
+<v Sarooparam Chenaram Darji>What?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/108-0
+00:07:11.133 --> 00:07:13.213
+<v Viswanath Chidambaram>No, Luna, could you go on mute?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/110-0
+00:07:24.453 --> 00:07:25.373
+<v Viswanath Chidambaram>Did she go on Uber?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/111-0
+00:07:25.773 --> 00:07:26.813
+<v Sarooparam Chenaram Darji>No, not yet.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/112-0
+00:07:28.413 --> 00:07:28.973
+<v Viswanath Chidambaram>Let's see.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/113-0
+00:07:31.453 --> 00:07:33.373
+<v Sarooparam Chenaram Darji>Luna, can you mute yourself?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/114-0
+00:07:40.333 --> 00:07:44.013
+<v Sarooparam Chenaram Darji>little bit dumber,
+don't want to call her dumb, but...</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/116-0
+00:07:43.373 --> 00:07:46.708
+<v Luna>No, not yet.
+The conversations seem to revolve around</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/115-0
+00:07:45.293 --> 00:07:47.933
+<v Sarooparam Chenaram Darji>And then go ahead, just go ahead, go.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/116-1
+00:07:46.708 --> 00:07:49.549
+<v Luna>technical issues and action items.
+Of course,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/116-2
+00:07:49.549 --> 00:07:54.428
+<v Luna>please let me know what specific details
+or information you'd like and I'll be</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/116-3
+00:07:54.428 --> 00:07:55.293
+<v Luna>happy to help.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/117-0
+00:07:55.613 --> 00:07:57.533
+<v Sarooparam Chenaram Darji>I just want you to mute yourself.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/119-0
+00:08:09.213 --> 00:08:09.613
+<v Sarooparam Chenaram Darji>Check.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/122-0
+00:08:19.613 --> 00:08:28.333
+<v Subramaniyan  Periyakaruppan>Okay, sir, please change my data.
+Already changed my data. Password.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/123-0
+00:08:31.053 --> 00:08:32.573
+<v Viswanath Chidambaram>Jail Kendra, Mumbai.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/125-0
+00:08:31.213 --> 00:08:32.573
+<v Sarooparam Chenaram Darji>I muted her, Sir.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/126-0
+00:08:36.733 --> 00:08:38.333
+<v Viswanath Chidambaram>You can call it again a minute if needed.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/127-0
+00:08:39.053 --> 00:08:39.533
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/128-0
+00:08:40.893 --> 00:08:43.610
+<v Sarooparam Chenaram Darji>No, I cannot call her.
+Once I have the account,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/128-1
+00:08:43.610 --> 00:08:46.893
+<v Sarooparam Chenaram Darji>then we will be able to call her even
+without what is it.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/129-0
+00:08:46.253 --> 00:08:48.733
+<v Viswanath Chidambaram>Not a student, not a student.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/130-0
+00:08:48.173 --> 00:08:49.413
+<v Sarooparam Chenaram Darji>Sending another link.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/131-0
+00:08:50.333 --> 00:08:54.493
+<v Viswanath Chidambaram>No, what is any other link?
+Is it a prompt?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/132-0
+00:08:54.973 --> 00:08:59.116
+<v Sarooparam Chenaram Darji>Yeah,
+basically I can assess into the user now.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/132-1
+00:08:59.116 --> 00:09:06.195
+<v Sarooparam Chenaram Darji>So I simply like told Pi so it does have
+a CLI also so you can send a command via</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/132-2
+00:09:06.195 --> 00:09:10.253
+<v Sarooparam Chenaram Darji>CLI link.
+Here is the link just to go sign in.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/133-0
+00:09:11.693 --> 00:09:13.613
+<v Sarooparam Chenaram Darji>Like join the meeting from that.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/134-0
+00:09:15.053 --> 00:09:18.573
+<v Viswanath Chidambaram>So this is just Pi in computerization,
+right? How does it persist?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/135-0
+00:09:19.773 --> 00:09:21.453
+<v Sarooparam Chenaram Darji>Persist what?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/138-0
+00:09:22.893 --> 00:09:27.453
+<v Sarooparam Chenaram Darji>It's a basically like it's a service that
+user level service.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/136-0
+00:09:23.373 --> 00:09:24.173
+<v Viswanath Chidambaram>So.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/137-0
+00:09:26.413 --> 00:09:27.093
+<v Viswanath Chidambaram>Understood.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/139-0
+00:09:28.373 --> 00:09:28.893
+<v Viswanath Chidambaram>Mhm.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/140-0
+00:09:29.453 --> 00:09:29.813
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/141-0
+00:09:31.693 --> 00:09:35.853
+<v Sarooparam Chenaram Darji>IDL login music or count.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/142-0
+00:09:41.093 --> 00:09:42.653
+<v Sarooparam Chenaram Darji>Did not give her password.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/144-0
+00:09:45.293 --> 00:09:46.493
+<v Sarooparam Chenaram Darji>So it's fine.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/143-0
+00:09:45.533 --> 00:09:46.093
+<v Viswanath Chidambaram>We're not.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/146-0
+00:09:47.613 --> 00:09:49.693
+<v Sarooparam Chenaram Darji>Why would you need a password?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/145-0
+00:09:47.853 --> 00:09:48.413
+<v Subramaniyan  Periyakaruppan>Sorry bro.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/147-0
+00:09:52.333 --> 00:09:56.129
+<v Subramaniyan  Periyakaruppan>Actually,
+I reset already she had a password,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/147-1
+00:09:56.129 --> 00:09:57.533
+<v Subramaniyan  Periyakaruppan>she had a public.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/152-0
+00:10:28.413 --> 00:10:31.693
+<v Sarooparam Chenaram Darji>We have seen that password too many times
+before.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/161-0
+00:10:59.133 --> 00:11:03.966
+<v Sarooparam Chenaram Darji>Save the updated password with me,
+so it doesn't have access.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/161-1
+00:11:03.966 --> 00:11:10.437
+<v Sarooparam Chenaram Darji>Maybe I can give you the teams password,
+but I don't want to log into run like try</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/161-2
+00:11:10.437 --> 00:11:14.413
+<v Sarooparam Chenaram Darji>to log in herself and get logged out or
+something.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/159-0
+00:11:12.973 --> 00:11:13.453
+<v Subramaniyan  Periyakaruppan>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/160-0
+00:11:15.053 --> 00:11:15.773
+<v Subramaniyan  Periyakaruppan>Please let me.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/169-0
+00:11:41.053 --> 00:11:43.213
+<v Sarooparam Chenaram Darji>It is showing Mr Laxmi's photo.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/171-0
+00:11:45.453 --> 00:11:47.053
+<v Subramaniyan  Periyakaruppan>Yeah, I will try to remote, yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/170-0
+00:11:45.533 --> 00:11:46.253
+<v Sarooparam Chenaram Darji>Just trying.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/172-0
+00:11:48.333 --> 00:11:51.293
+<v Sarooparam Chenaram Darji>I can't demo it. I logged in already.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/173-0
+00:11:50.653 --> 00:11:52.733
+<v Subramaniyan  Periyakaruppan>In the faithful dog on me.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/174-0
+00:11:56.493 --> 00:11:57.693
+<v Sarooparam Chenaram Darji>Thanks.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/175-0
+00:11:56.733 --> 00:11:57.773
+<v Subramaniyan  Periyakaruppan>Hey, it's me.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/176-0
+00:12:03.613 --> 00:12:04.653
+<v Sarooparam Chenaram Darji>Okay, they want.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/177-0
+00:12:09.853 --> 00:12:13.453
+<v Sarooparam Chenaram Darji>Now we will try to pull Friday into the
+meeting.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/178-0
+00:12:15.293 --> 00:12:19.133
+<v Sarooparam Chenaram Darji>Let's see whether, let's say,
+let's see whether she picks it up or not.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/179-0
+00:12:24.493 --> 00:12:27.453
+<v Sarooparam Chenaram Darji>I'm not sure whether it will reflect here.
+Okay, it shows.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/180-0
+00:12:29.213 --> 00:12:29.773
+<v Subramaniyan  Periyakaruppan>Okay, sir.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/181-0
+00:12:31.533 --> 00:12:32.893
+<v Subramaniyan  Periyakaruppan>What is the title? Cheers.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/182-0
+00:12:32.893 --> 00:12:34.173
+<v Viswanath Chidambaram>Sir, that is working for you, am I right?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/183-0
+00:12:35.213 --> 00:12:35.613
+<v Sarooparam Chenaram Darji>What?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/184-0
+00:12:36.253 --> 00:12:37.093
+<v Subramaniyan  Periyakaruppan>Is it working for you?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/186-0
+00:12:37.053 --> 00:12:41.613
+<v Viswanath Chidambaram>No, like if okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/185-0
+00:12:37.373 --> 00:12:40.653
+<v Sarooparam Chenaram Darji>Yeah, he's free. He's free.
+I'm able to lot.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/188-0
+00:12:40.173 --> 00:12:42.173
+<v Subramaniyan  Periyakaruppan>Okay, bye bye.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/189-0
+00:12:44.853 --> 00:12:46.173
+<v Sarooparam Chenaram Darji>I pulled her.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/190-0
+00:12:47.133 --> 00:12:48.943
+<v Viswanath Chidambaram>Sir,
+I wanted to ask actually whether actually</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/190-1
+00:12:48.943 --> 00:12:50.253
+<v Viswanath Chidambaram>it is a let's say like what is it?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/192-0
+00:12:53.573 --> 00:12:56.543
+<v Viswanath Chidambaram>Each model or like a TTS,
+like a thing stitched together?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/192-1
+00:12:56.543 --> 00:12:59.053
+<v Viswanath Chidambaram>Is it a single model or thing stitched
+together?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/193-0
+00:12:59.493 --> 00:13:04.013
+<v Sarooparam Chenaram Darji>Things stitched together,
+speech model is also that's why it is.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/193-1
+00:13:04.013 --> 00:13:07.213
+<v Sarooparam Chenaram Darji>it was using GPT,
+it is using GPT Audio Mini.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/195-0
+00:13:08.893 --> 00:13:13.715
+<v Sarooparam Chenaram Darji>Then GPT 4GP,
+it is using GPT audio mini for talking</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/194-0
+00:13:09.333 --> 00:13:10.173
+<v Viswanath Chidambaram>Which one is used?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/195-1
+00:13:13.715 --> 00:13:18.173
+<v Sarooparam Chenaram Darji>for searching and all.
+It is using GPGPT 6 luna.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/196-0
+00:13:19.773 --> 00:13:21.053
+<v Sarooparam Chenaram Darji>For doing research or.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/197-0
+00:13:20.013 --> 00:13:24.133
+<v Viswanath Chidambaram>Like how long actually does actually
+round trip take actually to this DPTRDO?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/198-0
+00:13:26.013 --> 00:13:29.613
+<v Sarooparam Chenaram Darji>I don't know,
+I haven't checked the latency and all.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/199-0
+00:13:28.493 --> 00:13:32.820
+<v Viswanath Chidambaram>Yeah, that is what I just ask. Actually,
+I do like a give you a latency thing</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/199-1
+00:13:32.820 --> 00:13:36.093
+<v Viswanath Chidambaram>instead of actually testing it. Okay,
+just actually, yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/201-0
+00:13:33.453 --> 00:13:37.343
+<v Sarooparam Chenaram Darji>Yeah, I will tell by.
+I already have control.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/201-1
+00:13:37.343 --> 00:13:39.373
+<v Sarooparam Chenaram Darji>I will check and things.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/200-0
+00:13:37.853 --> 00:13:38.253
+<v Viswanath Chidambaram>Haan.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/202-0
+00:13:41.453 --> 00:13:44.733
+<v Sarooparam Chenaram Darji>Okay, so it is not picking the calls.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/203-0
+00:13:47.933 --> 00:13:50.679
+<v Sarooparam Chenaram Darji>But basically you will have to add
+instructions,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/203-1
+00:13:50.679 --> 00:13:54.827
+<v Sarooparam Chenaram Darji>say like whenever you get a call,
+you should pick it always stay there in</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/203-2
+00:13:54.827 --> 00:13:56.173
+<v Sarooparam Chenaram Darji>the meet like teams tab.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/204-0
+00:13:58.453 --> 00:14:02.093
+<v Sarooparam Chenaram Darji>And I think it is still showing. Okay,
+it is showing Friday here.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/205-0
+00:14:06.813 --> 00:14:12.093
+<v Sarooparam Chenaram Darji>Should I get rid of all the history chats
+it have or keep it?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/206-0
+00:14:14.893 --> 00:14:18.224
+<v Viswanath Chidambaram>So if actually the flow is not impacted
+by it, then it wouldn't matter,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/206-1
+00:14:18.224 --> 00:14:18.733
+<v Viswanath Chidambaram>am I right?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/207-0
+00:14:20.573 --> 00:14:21.773
+<v Sarooparam Chenaram Darji>Flow in the sense.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/209-0
+00:14:24.653 --> 00:14:28.443
+<v Sarooparam Chenaram Darji>No, I am talking.
+I am talking about charity history of</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/208-0
+00:14:24.813 --> 00:14:27.013
+<v Viswanath Chidambaram>So if the history is go ahead.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/209-1
+00:14:28.443 --> 00:14:29.933
+<v Sarooparam Chenaram Darji>Vishalakshi's account.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/211-0
+00:14:32.973 --> 00:14:37.088
+<v Viswanath Chidambaram>actually, like may be not today,
+we will figure out,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/210-0
+00:14:37.053 --> 00:14:39.613
+<v Sarooparam Chenaram Darji>Enacted basically.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/211-1
+00:14:37.088 --> 00:14:40.893
+<v Viswanath Chidambaram>we will figure out actually work together,
+yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/212-0
+00:14:43.293 --> 00:14:46.670
+<v Sarooparam Chenaram Darji>Anyway,
+it is not going to check whether whatever</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/212-1
+00:14:46.670 --> 00:14:50.453
+<v Sarooparam Chenaram Darji>we tell it will do it.
+So I will simply and now I will.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/214-0
+00:14:49.533 --> 00:14:53.752
+<v Viswanath Chidambaram>No, but anyway, like he might have,
+she might have been picking something,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/214-1
+00:14:53.752 --> 00:14:57.184
+<v Viswanath Chidambaram>somebody something, am I right?
+So it is better to drop. No,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/213-0
+00:14:55.293 --> 00:14:55.773
+<v Sarooparam Chenaram Darji>What?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/214-2
+00:14:57.184 --> 00:14:59.773
+<v Viswanath Chidambaram>she might have been talking to somebody
+else.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/215-0
+00:15:00.093 --> 00:15:02.413
+<v Sarooparam Chenaram Darji>Hey,
+that's that history I'm talking about.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/216-0
+00:15:01.653 --> 00:15:04.547
+<v Viswanath Chidambaram>Why it is better to actually and better
+not to look at the chat? So,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/216-1
+00:15:04.547 --> 00:15:07.064
+<v Viswanath Chidambaram>like what we will do is actually like as
+of now you use it,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/216-2
+00:15:07.064 --> 00:15:10.253
+<v Viswanath Chidambaram>we will ask to drop the account,
+create a new account, and use the license.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/217-0
+00:15:11.733 --> 00:15:16.813
+<v Sarooparam Chenaram Darji>Maybe I can simply like archive.
+I think all the jets is there option.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/218-0
+00:15:16.013 --> 00:15:17.829
+<v Viswanath Chidambaram>No,
+like we will decide on the by as of no,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/218-1
+00:15:17.829 --> 00:15:18.573
+<v Viswanath Chidambaram>there is no worry.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/219-0
+00:15:19.213 --> 00:15:19.693
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/220-0
+00:15:20.573 --> 00:15:21.373
+<v Viswanath Chidambaram>We'll decide on that.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/221-0
+00:15:22.093 --> 00:15:25.516
+<v Sarooparam Chenaram Darji>Okay,
+as of now it is not going to read it will</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/221-1
+00:15:25.516 --> 00:15:28.013
+<v Sarooparam Chenaram Darji>simply send a message or something.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/222-0
+00:15:29.293 --> 00:15:36.653
+<v Sarooparam Chenaram Darji>I can tell it to send message to Karpa
+government. You told me to send a message.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/223-0
+00:15:38.093 --> 00:15:38.413
+<v Viswanath Chidambaram>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/224-0
+00:15:39.053 --> 00:15:43.459
+<v Sarooparam Chenaram Darji>But we will do one thing. First,
+I will tell Pi to add instructions saying</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/224-1
+00:15:43.459 --> 00:15:46.808
+<v Sarooparam Chenaram Darji>like whenever you get a call,
+you pick a call, whatever,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/224-2
+00:15:46.808 --> 00:15:51.333
+<v Sarooparam Chenaram Darji>whenever someone tells you to send a
+message or something, you do that also.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/225-0
+00:15:52.893 --> 00:15:54.333
+<v Sarooparam Chenaram Darji>I log the music.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/226-0
+00:15:53.373 --> 00:15:57.491
+<v Viswanath Chidambaram>We would even actually like a we are a
+whitelisting and it should be able to do</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/226-1
+00:15:57.491 --> 00:15:58.573
+<v Viswanath Chidambaram>anything that it can.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/228-0
+00:15:58.813 --> 00:16:04.671
+<v Sarooparam Chenaram Darji>Yeah, at least like a picking calls,
+basically it should be like waiting for</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/227-0
+00:16:00.173 --> 00:16:00.813
+<v Viswanath Chidambaram>So like.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/229-0
+00:16:04.093 --> 00:16:09.616
+<v Viswanath Chidambaram>Okay, no.
+So what should happen is as he was</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/228-1
+00:16:04.671 --> 00:16:05.813
+<v Sarooparam Chenaram Darji>this one, okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/229-1
+00:16:09.616 --> 00:16:13.053
+<v Viswanath Chidambaram>actually saying, what is it?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/230-0
+00:16:15.053 --> 00:16:16.893
+<v Viswanath Chidambaram>People should be able to inspect that on
+the fly.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/231-0
+00:16:18.013 --> 00:16:18.413
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/232-0
+00:16:19.293 --> 00:16:20.413
+<v Viswanath Chidambaram>That is really important.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/233-0
+00:16:21.373 --> 00:16:21.533
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/234-0
+00:16:24.253 --> 00:16:27.853
+<v Viswanath Chidambaram>So the pilot should be really thin,
+the rest of it is memory.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/235-0
+00:16:30.253 --> 00:16:30.733
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/236-0
+00:16:32.333 --> 00:16:34.833
+<v Viswanath Chidambaram>Okay,
+so like we should not be adding things to</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/236-1
+00:16:34.833 --> 00:16:38.948
+<v Viswanath Chidambaram>agent unless even lets say you want to
+actually like do like give it some hard</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/236-2
+00:16:38.948 --> 00:16:41.293
+<v Viswanath Chidambaram>rules. Okay, do not do this,
+do not do that.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/237-0
+00:16:42.613 --> 00:16:44.696
+<v Viswanath Chidambaram>OK,
+it should be able to let's see the army's</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/237-1
+00:16:44.696 --> 00:16:45.693
+<v Viswanath Chidambaram>information by itself.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/238-0
+00:16:46.333 --> 00:16:46.693
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/239-0
+00:16:47.733 --> 00:16:48.893
+<v Viswanath Chidambaram>And then does it based on that?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/240-0
+00:16:50.173 --> 00:16:50.653
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/241-0
+00:16:51.653 --> 00:16:52.173
+<v Viswanath Chidambaram>We'll figure out.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/243-0
+00:16:53.773 --> 00:16:59.584
+<v Sarooparam Chenaram Darji>But at least picking up the call,
+I should add the details now will fine</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/242-0
+00:16:54.253 --> 00:16:55.453
+<v Viswanath Chidambaram>Don't add there.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/246-0
+00:16:59.133 --> 00:17:02.968
+<v Viswanath Chidambaram>Yeah, as of now, don't bother about it.
+OK, no, as of now, don't bother about it.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/243-1
+00:16:59.584 --> 00:17:01.813
+<v Sarooparam Chenaram Darji>tune the instructions, okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/246-1
+00:17:02.968 --> 00:17:05.962
+<v Viswanath Chidambaram>That is the direction.
+So like whatever you might implement now</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/246-2
+00:17:05.962 --> 00:17:09.563
+<v Viswanath Chidambaram>might not be useful unless and until you
+want actually something to be there</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/244-0
+00:17:07.133 --> 00:17:07.613
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/246-3
+00:17:09.563 --> 00:17:11.855
+<v Viswanath Chidambaram>temporarily,
+which will help you like a speed up</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/246-4
+00:17:11.855 --> 00:17:13.773
+<v Viswanath Chidambaram>development, you should not be adding it.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/245-0
+00:17:14.333 --> 00:17:14.773
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/248-0
+00:17:16.213 --> 00:17:19.564
+<v Sarooparam Chenaram Darji>OK,
+then I am simply only changing the name</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/248-1
+00:17:19.564 --> 00:17:21.773
+<v Sarooparam Chenaram Darji>variable from Luna to Friday.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/247-0
+00:17:20.733 --> 00:17:21.053
+<v Viswanath Chidambaram>yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/249-0
+00:17:22.533 --> 00:17:22.813
+<v Viswanath Chidambaram>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/250-0
+00:17:23.533 --> 00:17:30.173
+<v Sarooparam Chenaram Darji>And simply told her that she have access
+to the team's accounts. just.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/251-0
+00:17:31.853 --> 00:17:32.733
+<v Viswanath Chidambaram>That is good.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/252-0
+00:17:33.373 --> 00:17:36.721
+<v Sarooparam Chenaram Darji>Yeah,
+you have the access to team of Teams</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/252-1
+00:17:36.721 --> 00:17:39.213
+<v Sarooparam Chenaram Darji>account. Now you're on your own.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/253-0
+00:17:40.893 --> 00:17:42.653
+<v Viswanath Chidambaram>Not just teams account, OK.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/254-0
+00:17:43.133 --> 00:17:43.453
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/257-0
+00:17:43.973 --> 00:17:47.225
+<v Viswanath Chidambaram>Tell her that actually these are actually,
+what is it? Basically,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/257-1
+00:17:47.225 --> 00:17:50.033
+<v Viswanath Chidambaram>you have a computer,
+we have actually given you actually</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/257-2
+00:17:50.033 --> 00:17:52.694
+<v Viswanath Chidambaram>multiple actually usernames, logins,
+and steps, okay,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/255-0
+00:17:52.493 --> 00:17:52.973
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/257-3
+00:17:52.694 --> 00:17:55.995
+<v Viswanath Chidambaram>like just actually respond to events that
+happened in the machine.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/257-4
+00:17:55.995 --> 00:17:58.952
+<v Viswanath Chidambaram>If you get a call,
+attend it like what is it like very high</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/256-0
+00:17:57.453 --> 00:17:57.853
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/257-5
+00:17:58.952 --> 00:18:02.992
+<v Viswanath Chidambaram>level thing just actually tell actually
+what is it capable of don't like we don't</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/257-6
+00:18:02.992 --> 00:18:05.013
+<v Viswanath Chidambaram>even have to talk about them second step.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/258-0
+00:18:05.293 --> 00:18:10.165
+<v Sarooparam Chenaram Darji>Yeah,
+I'll simply tell it like act as a normal</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/258-1
+00:18:10.165 --> 00:18:12.653
+<v Sarooparam Chenaram Darji>employee of our company.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/259-0
+00:18:11.453 --> 00:18:12.973
+<v Viswanath Chidambaram>Yeah, humorous, yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/260-0
+00:18:14.613 --> 00:18:18.627
+<v Sarooparam Chenaram Darji>Employee of our company,
+you have a computer,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/260-1
+00:18:18.627 --> 00:18:24.649
+<v Sarooparam Chenaram Darji>you have a account and everything.
+You just use it basically like we</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/260-2
+00:18:24.649 --> 00:18:30.584
+<v Sarooparam Chenaram Darji>basically act on the events.
+If someone like calls you, pick it up,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/260-3
+00:18:30.584 --> 00:18:33.813
+<v Sarooparam Chenaram Darji>for example, if someone messages you.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/263-0
+00:18:34.013 --> 00:18:39.646
+<v Sarooparam Chenaram Darji>You message like you reply to them.
+If lets say someone tells you in the</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/261-0
+00:18:39.293 --> 00:18:40.253
+<v Viswanath Chidambaram>Examples are.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/263-1
+00:18:39.646 --> 00:18:42.733
+<v Sarooparam Chenaram Darji>meeting to reply, yeah, just an example.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/262-0
+00:18:41.933 --> 00:18:43.533
+<v Viswanath Chidambaram>Examples are been, rules are not been.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/265-0
+00:18:44.253 --> 00:18:48.062
+<v Sarooparam Chenaram Darji>Yeah,
+simply like I'll give it specifically as</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/264-0
+00:18:45.453 --> 00:18:47.133
+<v Viswanath Chidambaram>Tulsakhir vidhad ailasan.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/265-1
+00:18:48.062 --> 00:18:50.413
+<v Sarooparam Chenaram Darji>an examples, not as in rules.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/266-0
+00:18:51.373 --> 00:18:54.694
+<v Viswanath Chidambaram>Part of the reason actually I'm asking
+you to take this approach is from RMCG to</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/266-1
+00:18:54.694 --> 00:18:56.253
+<v Viswanath Chidambaram>RMCG, the interest might be different.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/267-0
+00:18:56.813 --> 00:18:57.253
+<v Sarooparam Chenaram Darji>No.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/270-0
+00:18:58.253 --> 00:19:02.362
+<v Viswanath Chidambaram>That it can actually go through the
+policy document or it can actually like</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/268-0
+00:18:58.813 --> 00:18:59.133
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/269-0
+00:19:01.053 --> 00:19:01.373
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/270-1
+00:19:02.362 --> 00:19:04.093
+<v Viswanath Chidambaram>people can tell it and what not.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/271-0
+00:19:05.933 --> 00:19:07.693
+<v Sarooparam Chenaram Darji>He's joining the meeting.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/272-0
+00:19:10.973 --> 00:19:12.173
+<v Sarooparam Chenaram Darji>I did not tell her.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/274-0
+00:19:17.213 --> 00:19:19.853
+<v Viswanath Chidambaram>Did you send a message to join this
+meeting?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/273-0
+00:19:17.453 --> 00:19:18.213
+<v Sarooparam Chenaram Darji>93.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/275-0
+00:19:20.333 --> 00:19:20.733
+<v Sarooparam Chenaram Darji>No.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/276-0
+00:19:22.053 --> 00:19:23.373
+<v Viswanath Chidambaram>No, she's in the lobby.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/277-0
+00:19:24.093 --> 00:19:25.773
+<v Sarooparam Chenaram Darji>Yes, she's in the lobby.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/278-0
+00:19:26.653 --> 00:19:27.133
+<v Viswanath Chidambaram>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/279-0
+00:19:28.173 --> 00:19:32.333
+<v Sarooparam Chenaram Darji>I did not told her specifically to join.
+I think she's just trying.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/280-0
+00:19:32.093 --> 00:19:35.053
+<v Viswanath Chidambaram>Ask Karna, let's see like admitter,
+let's see like what does she pay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/283-0
+00:19:43.053 --> 00:19:43.773
+<v Sarooparam Chenaram Darji>Friday.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/284-0
+00:19:49.373 --> 00:19:50.173
+<v Sarooparam Chenaram Darji>I did that.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/285-0
+00:20:01.053 --> 00:20:02.333
+<v Friday>Working on it.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/286-0
+00:20:04.253 --> 00:20:08.173
+<v Sarooparam Chenaram Darji>What are you doing here?
+Who told you to join this meeting?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/287-0
+00:20:10.093 --> 00:20:10.653
+<v Friday>Got it.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/288-0
+00:20:14.413 --> 00:20:17.773
+<v Friday>I'm here to assist with the meeting as I
+was instructed to join.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/291-0
+00:20:19.133 --> 00:20:21.471
+<v Friday>Voice response is that I'm here to
+support you,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/291-1
+00:20:21.471 --> 00:20:24.492
+<v Friday>you could start by telling me more about
+what's on your mind,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/291-2
+00:20:24.492 --> 00:20:26.733
+<v Friday>or any specific topics you'd like to
+explore.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/292-0
+00:20:28.493 --> 00:20:31.861
+<v Viswanath Chidambaram>I could actually say something in
+Gujarati and then translate it to Tamil.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/295-0
+00:20:29.253 --> 00:20:36.774
+<v Sarooparam Chenaram Darji>No, I am kicking her out.
+She is acting like a tape recorder.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/292-1
+00:20:31.861 --> 00:20:33.613
+<v Viswanath Chidambaram>I also say the same thing in Hindi too.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/295-1
+00:20:36.774 --> 00:20:45.873
+<v Sarooparam Chenaram Darji>I kicked her out. I will fix it.
+It is not acting as a proper brain like a</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/293-0
+00:20:37.853 --> 00:20:38.213
+<v Viswanath Chidambaram>Ha ha.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/294-0
+00:20:39.773 --> 00:20:40.013
+<v Viswanath Chidambaram>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/295-2
+00:20:45.873 --> 00:20:47.693
+<v Sarooparam Chenaram Darji>with the brain.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/296-0
+00:20:46.493 --> 00:20:49.479
+<v Viswanath Chidambaram>Yeah, anyway,
+by any and there is one of the thing we</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/296-1
+00:20:49.479 --> 00:20:50.973
+<v Viswanath Chidambaram>have to check the cost too.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/298-0
+00:20:51.613 --> 00:20:56.447
+<v Sarooparam Chenaram Darji>Yeah,
+first we can check if she have a separate,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/298-1
+00:20:56.447 --> 00:20:57.533
+<v Sarooparam Chenaram Darji>what is it?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/301-0
+00:20:56.573 --> 00:20:59.346
+<v Viswanath Chidambaram>Yeah,
+first what I would recommend is to forget</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/301-1
+00:20:59.346 --> 00:21:02.755
+<v Viswanath Chidambaram>about this one, OK?
+Forget about actually what is the like</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/301-2
+00:21:02.755 --> 00:21:06.453
+<v Viswanath Chidambaram>she being correct, OK?
+And forget about she remembering things,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/299-0
+00:21:06.093 --> 00:21:06.573
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/301-3
+00:21:06.453 --> 00:21:09.053
+<v Viswanath Chidambaram>OK? Just focus on 2 items,
+latency and cost.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/300-0
+00:21:09.613 --> 00:21:10.013
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/302-0
+00:21:12.253 --> 00:21:12.973
+<v Sarooparam Chenaram Darji>We'll check.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/303-0
+00:21:12.413 --> 00:21:13.533
+<v Viswanath Chidambaram>Just we can.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/305-0
+00:21:14.173 --> 00:21:16.333
+<v Sarooparam Chenaram Darji>Okay, we'll check those things first.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/304-0
+00:21:14.933 --> 00:21:16.173
+<v Viswanath Chidambaram>Because actually these 2 things.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/307-0
+00:21:17.933 --> 00:21:18.493
+<v Viswanath Chidambaram>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/309-0
+00:21:18.333 --> 00:21:25.942
+<v Sarooparam Chenaram Darji>Cost we can check right now basically by
+now she used this there okay the round</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/308-0
+00:21:22.093 --> 00:21:24.013
+<v Viswanath Chidambaram>No, by not one or 2 times.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/309-1
+00:21:25.942 --> 00:21:26.893
+<v Sarooparam Chenaram Darji>trip cost.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/311-0
+00:21:26.333 --> 00:21:30.705
+<v Viswanath Chidambaram>so what I would recommend is okay,
+I will just actually make her sit in the</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/311-1
+00:21:30.705 --> 00:21:35.538
+<v Viswanath Chidambaram>meeting and actually measure actually how
+long lets see how much actually like does</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/311-2
+00:21:35.538 --> 00:21:39.968
+<v Viswanath Chidambaram>she cost for 30 minutes or so. Okay,
+we will ask actually people to actually</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/311-3
+00:21:39.968 --> 00:21:43.535
+<v Viswanath Chidambaram>pull out the meeting,
+we will even actually give her actually</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/311-4
+00:21:43.535 --> 00:21:48.253
+<v Viswanath Chidambaram>GitHub repo access and ask her actually
+turn this Gini Math configurat and stuff.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/310-0
+00:21:48.733 --> 00:21:49.133
+<v Sarooparam Chenaram Darji>Alright.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/313-0
+00:21:49.773 --> 00:21:52.689
+<v Viswanath Chidambaram>Okay, first actually,
+like we will ask her be in the meeting,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/313-1
+00:21:52.689 --> 00:21:54.994
+<v Viswanath Chidambaram>okay,
+and actually let people ask her questions.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/313-2
+00:21:54.994 --> 00:21:57.769
+<v Viswanath Chidambaram>But even to like even for people to ask
+her questions, no,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/313-3
+00:21:57.769 --> 00:21:59.133
+<v Viswanath Chidambaram>the latest it should be less.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/312-0
+00:21:59.613 --> 00:22:00.013
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/316-0
+00:22:01.373 --> 00:22:04.519
+<v Viswanath Chidambaram>Okay, so focus on the latency first,
+try to cut out the latency,</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/316-1
+00:22:04.519 --> 00:22:08.198
+<v Viswanath Chidambaram>and then we'll focus on the cost,
+and then we'll actually go for the actual</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/316-2
+00:22:08.198 --> 00:22:10.813
+<v Viswanath Chidambaram>development. Until then,
+it can be just an interface.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/314-0
+00:22:08.813 --> 00:22:08.933
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/315-0
+00:22:11.293 --> 00:22:11.693
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/317-0
+00:22:15.373 --> 00:22:15.773
+<v Sarooparam Chenaram Darji>Got you.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/318-0
+00:22:15.933 --> 00:22:16.733
+<v Viswanath Chidambaram>Anything else, by?</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/319-0
+00:22:17.453 --> 00:22:17.933
+<v Sarooparam Chenaram Darji>I know.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/320-0
+00:22:19.053 --> 00:22:20.093
+<v Viswanath Chidambaram>Okay, ma'am, see you then. Bye.</v>
+
+40f11cf8-dd01-4b73-be88-3c0f346f222a/321-0
+00:22:20.813 --> 00:22:21.373
+<v Sarooparam Chenaram Darji>Okay.</v>
