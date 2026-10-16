@@ -357,6 +357,11 @@ class Backend:
         text = msg["text"]
         meeting = self.kb.active_meeting()
         meeting_id = meeting["id"] if meeting else None
+        meeting_team = meeting["team_id"] if meeting else None
+        # Same auto-provisioning as h_question: an in-meeting speaker is a
+        # member of the meeting's team (the host admitted them).
+        if meeting_team is not None and msg.get("in_meeting"):
+            self.kb.ensure_member_of_team(requester, meeting_team)
         allowed = self.kb.allowed_team_ids(requester)
         ctx = []
         if meeting_id:
