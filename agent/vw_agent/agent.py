@@ -139,6 +139,9 @@ class Worker:
     def __init__(self):
         self.client = AgentClient(CONFIG["socket_path"], self.on_push)
         self.browser = browser_mod.Browser()
+        # the worker carries its own brain: it looks at the screen and decides
+        from vw_backend.brain import Brain
+        self.brain = Brain()
         self.segmenter = None
         self.screen_watcher = None
         self.parec = None
@@ -208,14 +211,20 @@ class Worker:
                 "type": "result", "req_id": msg.get("req_id"),
                 "ok": "error" not in data, "data": data})
 
-    # ---- meeting join (requirement 1) ----------------------------------------------
+    # ---- meeting join (requirement 1): vision-driven ---------------------------
     def join_meeting(self, url):
         if url.startswith("demo://"):
             # scripted demo meeting: no real browser navigation
             self.joined_url = url
         else:
             print("[agent] joining meeting: %s" % url, flush=True)
-            result = self.browser.join(url)
+            try:
+                result = self._vision_join(url)
+            except Exception as exc:
+                # no vision brain available -> fall back to scripted flow
+                print("[agent] vision join unavailable (%s); scripted fallback"
+                      % exc, flush=True)
+                result = self.browser.join(url)
             self.joined_url = url
         # register the meeting on the backend so memory is tied to a team
         # (always re-register: a previous demo meeting must not own this one)
@@ -228,6 +237,32 @@ class Worker:
         except Exception as exc:
             print("[agent] meeting.start failed: %s" % exc, flush=True)
         return {"joined": self.joined_url}
+
+    def _vision_join(self, url, max_steps=18):
+        """Look at the screen, decide, act, repeat - until in the meeting."""
+        b = self.browser
+        b.goto(url)
+        actions = []
+        for step in range(max_steps):
+            time.sleep(2.5)                     # let the page settle
+            png = b.shot_png()
+            decision = self.brain.decide_action(
+                png, b.page.url, b.page.title(), actions)
+            action = decision.get("action", "wait")
+            reason = decision.get("reason", "")
+            print("[agent] vision step %d: %s - %s" % (step, action, reason),
+                  flush=True)
+            actions.append("%s: %s" % (action, reason)[:140])
+            if action == "done":
+                return {"joined": url, "via": "vision", "reason": reason}
+            if action == "give_up":
+                return {"error": "brain gave up: %s" % reason}
+            if action in ("click", "fill", "key", "wait"):
+                try:
+                    b.act(decision)
+                except Exception as exc:
+                    print("[agent] act failed: %s" % exc, flush=True)
+        return {"error": "join did not complete within %d vision steps" % max_steps}
 
     # ---- audio loop (requirements 2, 3) ----------------------------------------------
     def _audio_loop(self):
