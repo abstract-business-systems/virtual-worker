@@ -86,6 +86,10 @@ CONTROL_SYSTEM = (
     "Rules:\n"
     "- Start with {\"op\":\"screenshot\"} whenever the task involves the screen.\n"
     "- To click something with a label, locate it first, then click its coords.\n"
+    "- To visit a website or search the web, send open_url directly - it opens a "
+    "new browser tab by itself. Do NOT navigate with ctrl+l or the address bar.\n"
+    "- Keep it to at most a few steps when possible; verify with one screenshot "
+    "after acting, then finish.\n"
     "- The user has ALREADY heard a short acknowledgement; do not repeat one - "
     "get straight to work (speak only for progress updates or results).\n"
     "- Pure questions about the discussion or stored facts: recall first, then "
@@ -389,6 +393,9 @@ class Brain:
                 content.append({"type": "image_url", "image_url": {
                     "url": "data:image/png;base64,%s" % image_b64}})
             msgs.append({"role": "user", "content": content})
+        if not say_final:
+            # loop exhausted without an explicit done - report what happened
+            say_final = "I did my best on that, but I am not certain I fully finished."
         return {"say": say_final}
 
     def compose_answer(self, question, recent_transcript, kb_hits, segment_hits):
