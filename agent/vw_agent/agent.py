@@ -313,7 +313,7 @@ class Worker:
         import difflib
         for word in low.replace(",", " ").split():
             if abs(len(word) - len(wake)) <= 2 and \
-                    difflib.SequenceMatcher(None, word, wake).ratio() >= 0.72:
+                    difflib.SequenceMatcher(None, word, wake).ratio() >= 0.65:
                 return True
         return False
 
