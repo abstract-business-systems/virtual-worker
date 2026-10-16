@@ -365,16 +365,13 @@ class Backend:
         allowed = self.kb.allowed_team_ids(requester)
         ctx = []
         if meeting_id:
-            recent = self.kb.recent_transcript(meeting_id, limit=25)
+            recent = self.kb.recent_transcript(meeting_id, limit=12)
             if recent:
                 ctx.append("Recent meeting transcript:")
                 ctx.extend("%s: %s" % (r["speaker"], r["text"])
                            for r in recent)
-        if allowed:
-            hits = self.kb.kb_search(text, allowed)[:5]
-            if hits:
-                ctx.append("Memory that may be relevant:")
-                ctx.extend("- %s" % h.get("text") for h in hits)
+        # NOTE: no memory pre-injection - Luna must recall only when the
+        # user actually asks about past discussions or stored facts.
         return self.brain.act(text, agent=self.agent, kb=self.kb,
                               requester=requester,
                               context="\n".join(ctx))

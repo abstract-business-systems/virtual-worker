@@ -154,6 +154,8 @@ class Worker:
         self.joined_url = None
         self.meeting_id = None
         self._last_wake_ts = 0.0
+        self._mute_until = 0.0
+        self._last_spoken = ""
         self._armed_until = 0.0
 
     # ---- lifecycle -------------------------------------------------------------
@@ -374,6 +376,10 @@ class Worker:
         self._append_transcript(speaker=CONFIG["operator_name"], text=text)
         low = text.lower()
         now = time.time()
+        if now < self._mute_until:
+            print("[agent] ignoring echo of own voice: %r" % text[:60],
+                  flush=True)
+            return
         if (self._contains_wake(low) or now < self._armed_until) and \
                 self._run_intent(low, text):
             return
@@ -383,7 +389,7 @@ class Worker:
                 self._handle_command(question)
             else:
                 # bare wake name: arm for the question that follows
-                self._armed_until = now + 25
+                self._armed_until = now + 12
                 self._last_wake_ts = now
                 print("[agent] wake name alone - waiting for the question",
                       flush=True)
@@ -391,22 +397,21 @@ class Worker:
         if now < self._armed_until and sum(c.isalpha() for c in text) >= 6:
             self._handle_command(text)
             return
-        if now - self._last_wake_ts < 60 and (
-                "?" in text or low.startswith(("what", "can you", "tell me",
-                                               "how", "why", "when", "who",
-                                               "do you", "did you", "repeat",
-                                               "say again", "say that again",
-                                               "open", "close", "please",
-                                               "find", "search", "show",
-                                               "check", "write", "make",
-                                               "create", "go to", "look up"))):
-            # follow-up request shortly after addressing Alex
+        if now - self._last_wake_ts < 30 and sum(c.isalpha() for c in text) >= 6 \
+                and ("?" in text or low.startswith(self._FOLLOWUP_STARTS)):
+            # a direct follow-up right after Alex answered
             self._handle_command(text)
             return
         if "remind" in low or (now - self._last_wake_ts < 12 and
                                parse_mod.parse_reminder(text,
                                        default_tz=CONFIG["default_tz"])):
             self._maybe_reminder(text)
+
+    _FOLLOWUP_STARTS = (
+        "and", "also", "then", "so", "why", "what else", "who else",
+        "how", "what", "when", "where", "which", "who",
+        "can you", "could you", "please", "tell me", "do you", "did you",
+        "repeat", "say again", "say that again", "one more")
 
     _ALPHA_RE = None
 
@@ -495,16 +500,43 @@ class Worker:
         except Exception as exc:
             print("[agent] transcript.append failed: %s" % exc, flush=True)
 
+    _COMMAND_STARTS = (
+        "open", "close", "click", "go to", "goto", "browse", "visit",
+        "find", "search", "look up", "look for", "check", "write", "make",
+        "create", "join", "leave", "drop", "remember", "note", "take a note",
+        "show me", "type", "press", "play", "stop", "start", "set",
+        "calculate", "convert", "translate", "download", "screenshot",
+        "summarize", "summarise", "email", "send", "mute", "unmute")
+
+    _QUESTION_STARTS = (
+        "what", "when", "who", "where", "why", "how", "did", "is", "are",
+        "was", "were", "do you", "did we", "can you tell", "tell me",
+        "which", "repeat", "say again", "say that again")
+
     def _handle_command(self, command):
-        """Everything the operator asks Alex: acknowledge immediately, then
-        let the brain (control model) fulfil it - computer, memory or chat."""
+        """Everything the operator asks Luna. Questions take the fast
+        streaming path; computer/actions go to the brain (with an ack)."""
         low = command.lower()
+        if low.startswith(("repeat", "say again", "say that again",
+                           "one more time")):
+            if self._last_spoken:
+                self.say("Sure. " + self._last_spoken)
+                return
         if "remind" in low:
             parsed = parse_mod.parse_reminder(command,
                                               default_tz=CONFIG["default_tz"])
             if parsed:
                 self._maybe_reminder(command)
                 return
+        if low.startswith(self._COMMAND_STARTS):
+            self._dispatch_to_brain(command)
+            return
+        if low.startswith(self._QUESTION_STARTS) or "?" in command:
+            self._armed_until = 0.0
+            self._last_wake_ts = time.time()
+            self._answer_question(command)
+            return
+        # ambiguous: let the brain decide (it can still just answer)
         self._dispatch_to_brain(command)
 
     def _dispatch_to_brain(self, command):
@@ -683,6 +715,8 @@ class Worker:
             if once_key in self.spoken:
                 return  # never repeat the same announcement (requirement 5)
             self.spoken.append(once_key)
+        # do not listen to our own voice echoed back by the meeting
+        self._mute_until = time.time() + 3.0 + 0.07 * len(text)
         with self._lock:
             print("[agent] speaking: %s" % text, flush=True)
             try:
@@ -697,6 +731,7 @@ class Worker:
                 except Exception:
                     pass
             self.spoken.append(text)
+            self._last_spoken = text
 
     # ---- screen loop (requirement 6) ------------------------------------------------
     def _on_screen_change(self, text):

@@ -94,8 +94,11 @@ CONTROL_SYSTEM = (
     "after acting, then finish.\n"
     "- The user has ALREADY heard a short acknowledgement; do not repeat one - "
     "get straight to work (speak only for progress updates or results).\n"
-    "- Pure questions about the discussion or stored facts: recall first, then "
-    "done with the answer.\n"
+    "- Pure questions about the CURRENT discussion: answer directly from the "
+    "context, then done.\n"
+    "- Only use recall/remember when the user explicitly asks about past "
+    "meetings, stored facts, or asks you to remember something. NEVER bring up "
+    "old memories, past meetings or stored notes unasked.\n"
     "- Spoken text: short, natural, friendly. Never markdown, never spell out URLs.\n"
     "- Never start meetings, never change account/security settings, never spend "
     "money, never share the screen.\n"
@@ -326,7 +329,7 @@ class Brain:
                                               if context else "")},
                 {"role": "user", "content": text}]
         say_final = ""
-        for step in range(14):
+        for step in range(10):
             raw = self._chat(msgs)
             op = self._extract_json(raw)
             if not isinstance(op, dict) or "op" not in op:
