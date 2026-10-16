@@ -23,7 +23,7 @@ ssh abs-worker@localhost 'bash -s' < deploy/bootstrap-abs-worker.sh
 Bootstrap installs a venv + deps (pip only, no root needed), Chromium for
 Playwright, systemd **user** units (`vw-display`, `vw-audio`, `vw-backend`,
 `vw-agent`) and puts `vw` / `vw-admin` on PATH. Secrets live in
-`~abs-worker/worker.env` (mode 600, gitignored):
+`~/vw-data/config/worker.env` (mode 600, gitignored):
 `OPENROUTER_API_KEY` for the brain, `GOOGLE_EMAIL`/`GOOGLE_PASSWORD` for the
 Meet account.
 
