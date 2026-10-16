@@ -268,6 +268,14 @@ class Backend:
                                            msg["text"])
         return {"segment_id": seg_id, "meeting_id": mid}
 
+    def h_action_run(self, msg):
+        if self.agent.sock is None:
+            raise RuntimeError("agent is not connected")
+        fwd = {"type": "action", "name": msg["name"],
+               "url": msg.get("url"),
+               "req_id": "fwd-%s" % msg.get("req_id", "x")}
+        return self.agent.forward_request(fwd, timeout=180)
+
     def h_meeting_url(self, msg):
         meeting = self.kb.active_meeting()
         if not meeting:

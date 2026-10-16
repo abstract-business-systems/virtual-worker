@@ -204,6 +204,37 @@ class Worker:
             self.client.send_push({
                 "type": "result", "req_id": msg.get("req_id"),
                 "ok": "error" not in data, "data": data})
+        elif t == "action":
+            name = msg.get("name")
+            if name == "rejoin":
+                url = msg.get("url") or self._active_meeting_url()
+                if not url:
+                    send = {"type": "result", "req_id": msg.get("req_id"),
+                            "ok": False, "error": "no meeting url"}
+                    self.client.send_push(send)
+                    return
+                def run():
+                    try:
+                        self._do_rejoin(url)
+                        ok, data = True, {"rejoined": True}
+                    except Exception as exc:
+                        ok, data = False, {"error": str(exc)}
+                    self.client.send_push({"type": "result",
+                                           "req_id": msg.get("req_id"),
+                                           "ok": ok, "data": data})
+                threading.Thread(target=run, daemon=True).start()
+            elif name == "leave":
+                def run():
+                    self._do_leave()
+                    self.client.send_push({"type": "result",
+                                           "req_id": msg.get("req_id"),
+                                           "ok": True, "data": {"left": True}})
+                threading.Thread(target=run, daemon=True).start()
+            else:
+                self.client.send_push({"type": "result",
+                                       "req_id": msg.get("req_id"),
+                                       "ok": False,
+                                       "error": "unknown action %s" % name})
         elif t == "demo":
             data = {}
             try:
@@ -344,6 +375,7 @@ class Worker:
             or ("join" in low and "again" in low))
         if not wants_leave and not wants_rejoin:
             return False
+        self._last_wake_ts = time.time()   # follow-ups after actions count too
         if wants_rejoin:
             url = self._active_meeting_url()
             if not url:

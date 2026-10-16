@@ -110,6 +110,12 @@ def main(argv):
         elif cmd == "say":
             print(request({"type": "agent.say", "req_id": "cli",
                            "text": " ".join(args)}))
+        elif cmd == "rejoin":
+            print(request({"type": "action.run", "req_id": "cli",
+                           "name": "rejoin"}, timeout=200))
+        elif cmd == "leave":
+            print(request({"type": "action.run", "req_id": "cli",
+                           "name": "leave"}, timeout=60))
         elif cmd == "selftest":
             print(request({"type": "agent.selftest", "req_id": "cli"},
                           timeout=320))
