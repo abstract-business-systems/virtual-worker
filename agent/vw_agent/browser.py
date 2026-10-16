@@ -33,14 +33,16 @@ class Browser:
                     # look like a normal browser: Meet refuses automation-flagged
                     # sessions ("Chrome is being controlled by automated test
                     # software") before the host ever sees a knock
-                    ignore_default_args=["--enable-automation"],
+                    ignore_default_args=["--enable-automation",
+                                         "--no-sandbox"],
                     args=args + ["--window-size=1920,1080"])
                 print("[browser] using system Google Chrome", flush=True)
             except Exception:
                 self.ctx = self.pw.chromium.launch_persistent_context(
                     profile, headless=False,
                     viewport={"width": 1920, "height": 1080},
-                    ignore_default_args=["--enable-automation"],
+                    ignore_default_args=["--enable-automation",
+                                         "--no-sandbox"],
                     args=args + ["--window-size=1920,1080"])
                 print("[browser] using bundled chromium", flush=True)
             # grant mic/camera like a normal user would have accepted, instead
@@ -63,16 +65,52 @@ class Browser:
         """Full-window screenshot as PNG bytes (same size as the viewport)."""
         return self.page.screenshot(type="png")
 
+    def _resolve(self, target):
+        """Find an element by accessible name / label / text (brain's target)."""
+        page = self.page
+        strategies = (
+            lambda: page.get_by_placeholder(target),
+            lambda: page.get_by_role("textbox", name=target),
+            lambda: page.get_by_role("button", name=target),
+            lambda: page.get_by_label(target),
+            lambda: page.get_by_role("link", name=target),
+            lambda: page.get_by_text(target, exact=False),
+        )
+        for strat in strategies:
+            try:
+                loc = strat().first
+                if loc.is_visible(timeout=1200):
+                    return loc
+            except Exception:
+                continue
+        return None
+
     def act(self, decision):
-        """Execute a decision from the brain: click/fill/key/wait."""
+        """Execute a decision from the brain: click/fill/key/wait.
+
+        Preferred: resolve `target` in the DOM (precise). Fallback: raw
+        coordinates from the vision model.
+        """
         action = decision.get("action")
         coord = decision.get("coordinate")
+        target = decision.get("target")
+        loc = self._resolve(target) if target else None
         if action == "click":
-            self.page.mouse.click(coord[0], coord[1])
-        elif action == "fill":
-            if coord:
+            if loc is not None:
+                loc.click(timeout=4000)
+            elif coord:
                 self.page.mouse.click(coord[0], coord[1])
-            self.page.keyboard.type(decision.get("text", ""), delay=40)
+            else:
+                raise ValueError("click: no target and no coordinate")
+        elif action == "fill":
+            if loc is not None:
+                loc.click(timeout=4000)
+            elif coord:
+                self.page.mouse.click(coord[0], coord[1])
+            time.sleep(0.4)
+            self.page.keyboard.press("Control+A")  # replace any content
+            self.page.keyboard.type(decision.get("text", ""), delay=90)
+            self.page.keyboard.press("Tab")        # commit the field
         elif action == "key":
             self.page.keyboard.press(decision.get("text", "Enter"))
         elif action == "wait":
