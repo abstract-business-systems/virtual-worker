@@ -211,26 +211,42 @@ class KnowledgeBase:
         placeholders = ",".join("?" for _ in allowed_team_ids)
         return " AND team_id IN (%s)" % placeholders, list(allowed_team_ids)
 
+    @staticmethod
+    def _fts_queries(query):
+        """AND-of-tokens first (precise), then OR-of-tokens (recall)."""
+        toks = ['"%s"' % t for t in
+                _FTS_QUERY_RE.sub(" ", query).split() if t]
+        if not toks:
+            return []
+        return [" ".join(toks), " OR ".join(toks)]
+
     def kb_search(self, query, allowed_team_ids, limit=6):
         filt, params = self._team_filter(allowed_team_ids)
+        rows = []
         with self.lock, self._conn() as c:
-            try:
-                rows = c.execute(
-                    "SELECT e.id, e.text, e.created_at, e.team_id FROM kb_fts f"
-                    " JOIN kb_entries e ON e.id=f.rowid WHERE kb_fts MATCH ?"
-                    + filt
-                    + " ORDER BY rank LIMIT ?",
-                    [fts_escape(query)] + params + [limit],
-                ).fetchall()
-            except sqlite3.OperationalError:
-                rows = []
+            for match in self._fts_queries(query):
+                try:
+                    rows = c.execute(
+                        "SELECT e.id, e.text, e.created_at, e.team_id"
+                        " FROM kb_fts f JOIN kb_entries e ON e.id=f.rowid"
+                        " WHERE kb_fts MATCH ?"
+                        + filt
+                        + " ORDER BY rank LIMIT ?",
+                        [match] + params + [limit],
+                    ).fetchall()
+                except sqlite3.OperationalError:
+                    rows = []
+                if rows:
+                    break
         return [dict(r) for r in rows]
 
     def segments_search(self, query, meeting_id, allowed_team_ids, limit=6):
         """Search past transcript segments, ACL-checked via the meeting's team."""
         filt, params = self._team_filter(allowed_team_ids)
+        rows = []
         with self.lock, self._conn() as c:
-            try:
+            for match in self._fts_queries(query):
+              try:
                 rows = c.execute(
                     "SELECT s.id, s.ts, s.speaker, s.text, s.meeting_id"
                     " FROM transcript_fts f JOIN transcript_segments s ON s.id=f.rowid"
@@ -238,9 +254,9 @@ class KnowledgeBase:
                     " WHERE transcript_fts MATCH ? AND s.meeting_id != ?"
                     + filt.replace("team_id", "m.team_id")
                     + " ORDER BY rank LIMIT ?",
-                    [fts_escape(query), meeting_id or -1] + params + [limit],
-                ).fetchall()
-            except sqlite3.OperationalError:
+                    [match, meeting_id or -1] + params + [limit],
+                  ).fetchall()
+              except sqlite3.OperationalError:
                 rows = []
         return [dict(r) for r in rows]
 
