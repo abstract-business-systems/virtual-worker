@@ -23,7 +23,12 @@ CONFIG = {
     "browser_profile": os.environ.get("VW_BROWSER_PROFILE",
                                       os.path.expanduser("~/.browser-profile")),
     # sockets / data
-    "socket_path": os.environ.get("VW_SOCKET", "/run/virtual-worker/agent.sock"),
+    "socket_path": os.environ.get(
+        "VW_SOCKET",
+        next((c for c in ["/run/virtual-worker/agent.sock",
+                          os.path.expanduser("~/vw-data/run/agent.sock"),
+                          os.path.expanduser("~/run/agent.sock")] if os.path.exists(c)),
+             os.path.expanduser("~/vw-data/run/agent.sock"))),
     "display": os.environ.get("DISPLAY", ":99"),
     # audio buses (created by ensure_pulse_setup)
     "sink": os.environ.get("VW_SINK", "vw_speaker"),        # meeting audio plays here

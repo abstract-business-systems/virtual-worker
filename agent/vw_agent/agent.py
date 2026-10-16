@@ -358,8 +358,20 @@ class Worker:
         question = (question or "").strip()
         print("[agent] asking brain: %r" % question, flush=True)
         try:
+            context = self.client.request({
+                "type": "context.get",
+                "question": question,
+                "requester": CONFIG["operator_name"],
+                "meeting_id": self.meeting_id,
+                "in_meeting": self.joined_url is not None,
+            }, timeout=30)
+        except Exception as exc:
+            print("[agent] context.get failed: %s" % exc, flush=True)
+            context = {}
+        try:
             deltas = self.brain.stream_answer(
-                question, [], [], [])
+                question, context.get("transcript", []),
+                context.get("kb_hits", []), context.get("segment_hits", []))
         except Exception as exc:
             print("[agent] streaming failed (%s), fallback" % exc, flush=True)
             try:

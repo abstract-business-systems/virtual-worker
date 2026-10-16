@@ -268,6 +268,28 @@ class Backend:
                                            msg["text"])
         return {"segment_id": seg_id, "meeting_id": mid}
 
+    def h_context_get(self, msg):
+        """Assembled, ACL-checked context for the streaming answer path:
+        recent transcript + relevant past segments + KB hits for the question."""
+        requester = msg.get("requester", "unknown")
+        question = msg.get("question", "")
+        meeting = self.kb.active_meeting()
+        meeting_id = msg.get("meeting_id") or (meeting["id"] if meeting else None)
+        meeting_team = meeting["team_id"] if meeting else None
+        if meeting_team is not None and msg.get("in_meeting"):
+            self.kb.ensure_member_of_team(requester, meeting_team)
+        allowed = self.kb.allowed_team_ids(requester)
+        if not allowed:
+            return {"transcript": [], "kb_hits": [], "segment_hits": [],
+                    "allowed": False}
+        return {
+            "transcript": self.kb.recent_transcript(meeting_id) if meeting_id else [],
+            "kb_hits": self.kb.kb_search(question, allowed),
+            "segment_hits": (self.kb.segments_search(question, meeting_id, allowed)
+                             if meeting_id else []),
+            "allowed": True,
+        }
+
     def h_transcript_get(self, msg):
         meeting = self.kb.active_meeting()
         mid = msg.get("meeting_id") or (meeting["id"] if meeting else None)

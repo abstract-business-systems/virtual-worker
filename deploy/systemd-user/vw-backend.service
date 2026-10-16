@@ -4,10 +4,10 @@ Description=Virtual worker backend
 Wants=vw-display.service vw-audio.service
 After=network-online.target
 [Service]
-Environment=VW_SOCKET=%h/run/agent.sock
-Environment=VW_DB=%h/data/kb.db
+Environment=VW_SOCKET=%h/vw-data/run/agent.sock
+Environment=VW_DB=%h/vw-data/db/kb.db
 Environment=PYTHONPATH=%h/virtual-worker/common:%h/virtual-worker/backend:%h/virtual-worker/agent
-EnvironmentFile=-%h/worker.env
+EnvironmentFile=-%h/vw-data/config/worker.env
 WorkingDirectory=%h/virtual-worker
 ExecStart=%h/venv/bin/python3 -m vw_backend.server
 Restart=on-failure

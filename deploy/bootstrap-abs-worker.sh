@@ -14,14 +14,14 @@ echo "==> playwright chromium (runs on Xvfb, not headless)"
 ~/venv/bin/python3 -m playwright install chromium
 
 echo "==> directories"
-mkdir -p ~/run ~/data ~/.config/systemd/user
+mkdir -p ~/vw-data/run ~/vw-data/db ~/vw-data/logs ~/vw-data/config ~/.config/systemd/user
 
 echo "==> env file (edit ~/worker.env to add GOOGLE_* / OPENROUTER_API_KEY)"
-if [ ! -f ~/worker.env ]; then
+if [ ! -f ~/vw-data/config/worker.env ]; then
   sed -e "s|^VW_SOCKET=.*|VW_SOCKET=$HOME/run/agent.sock|" \
       -e "s|^VW_DB=.*|VW_DB=$HOME/data/kb.db|" \
-      deploy/env.template > ~/worker.env
-  chmod 600 ~/worker.env
+      deploy/env.template > ~/vw-data/config/worker.env
+  chmod 600 ~/vw-data/config/worker.env
 fi
 
 echo "==> systemd user units"

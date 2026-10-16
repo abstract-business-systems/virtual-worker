@@ -16,6 +16,7 @@ def default_socket_path():
     if env:
         return env
     candidates = ["/run/virtual-worker/agent.sock",
+                  os.path.expanduser("~/vw-data/run/agent.sock"),
                   os.path.expanduser("~/run/agent.sock")]
     for c in candidates:
         if os.path.exists(c):
