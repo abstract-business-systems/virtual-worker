@@ -46,6 +46,10 @@ CONFIG = {
     "tts_model": os.environ.get("VW_TTS_MODEL", "openai/gpt-audio-mini"),
     "tts_voice": os.environ.get("VW_TTS_VOICE", "onyx"),
     "tts_sample_rate": _int("VW_TTS_RATE", 24000),
+    # ElevenLabs (neural voice, same API shape the pi privateer-speak uses)
+    "elevenlabs_api_key": os.environ.get("VW_ELEVENLABS_API_KEY", ""),
+    "eleven_voice": os.environ.get("VW_ELEVEN_VOICE", "Adam"),
+    "eleven_model": os.environ.get("VW_ELEVEN_MODEL", "eleven_flash_v2_5"),
     # meeting
     "google_email": os.environ.get("GOOGLE_EMAIL", ""),
     "google_password": os.environ.get("GOOGLE_PASSWORD", ""),

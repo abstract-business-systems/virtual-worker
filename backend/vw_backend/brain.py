@@ -61,6 +61,41 @@ VISION_PERSONA = (
     "recovery or settings you were not asked for."
 )
 
+CONTROL_MODEL_DEFAULT = "openai/gpt-6-luna"
+
+CONTROL_SYSTEM = (
+    "You are Alex, a virtual worker attending an online meeting. The human "
+    "speaks to you aloud; you receive their words as text. They may ask "
+    "questions, give commands, or ask you to do things on the computer in "
+    "front of you (a Linux XFCE desktop showing a browser).\n"
+    "You fulfil requests by replying with EXACTLY one JSON object per turn "
+    "and nothing else:\n"
+    ' {"op":"screenshot"}                        look at the screen (returns an image)\n'
+    ' {"op":"click","x":123,"y":456}             left click\n'
+    ' {"op":"double_click","x":123,"y":456}\n'
+    ' {"op":"type","text":"hello"}               type into the focused field\n'
+    ' {"op":"key","keys":"ctrl+l"}               press a hotkey or key\n'
+    ' {"op":"scroll","amount":-3}                scroll (negative = down)\n'
+    ' {"op":"locate","text":"Join now"}          OCR-find text on screen (coords)\n'
+    ' {"op":"wait","seconds":3}\n'
+    ' {"op":"open_url","url":"https://..."}      navigate the browser\n'
+    ' {"op":"speak","text":"..."}                say something aloud right now\n'
+    ' {"op":"remember","text":"..."}             store a fact in long-term memory\n'
+    ' {"op":"recall","query":"..."}              search memory and meeting notes\n'
+    ' {"op":"done","say":"..."}                  finish; "say" is your spoken reply\n'
+    "Rules:\n"
+    "- Start with {\"op\":\"screenshot\"} whenever the task involves the screen.\n"
+    "- To click something with a label, locate it first, then click its coords.\n"
+    "- The user has ALREADY heard a short acknowledgement; do not repeat one - "
+    "get straight to work (speak only for progress updates or results).\n"
+    "- Pure questions about the discussion or stored facts: recall first, then "
+    "done with the answer.\n"
+    "- Spoken text: short, natural, friendly. Never markdown, never spell out URLs.\n"
+    "- Never start meetings, never change account/security settings, never spend "
+    "money, never share the screen.\n"
+    "- Always end with {\"op\":\"done\"}."
+)
+
 SUMMARY_PERSONA = (
     "You summarize business meeting transcripts. Write a short factual summary "
     "(max 8 sentences) of decisions, action items and open questions. Plain text."
@@ -76,6 +111,8 @@ class Brain:
             "VW_VISION_MODEL", self.model)
         self.pi_bin = pi_bin or os.environ.get("VW_PI_BIN", "pi")
         self.pi_model = pi_model or os.environ.get("VW_PI_MODEL")
+        self.control_model = os.environ.get(
+            "VW_CONTROL_MODEL", CONTROL_MODEL_DEFAULT)
         if self.backend == "auto":
             self.backend = "pi" if shutil.which(self.pi_bin) else "openrouter"
 
@@ -241,6 +278,119 @@ class Brain:
         return self._ask_openrouter(system, prompt)
 
     # ---- public API --------------------------------------------------------------
+    # ---- agentic control loop (brain 2.0) ----------------------------------
+    def _chat(self, messages, model=None, max_tokens=400):
+        key = os.environ.get("OPENROUTER_API_KEY")
+        if not key:
+            raise RuntimeError("OPENROUTER_API_KEY not set")
+        body = json.dumps({
+            "model": model or self.control_model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+        }).encode()
+        req = urllib.request.Request(
+            "https://openrouter.ai/api/v1/chat/completions",
+            data=body,
+            headers={
+                "Authorization": "Bearer %s" % key,
+                "Content-Type": "application/json",
+            },
+        )
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            data = json.loads(resp.read())
+        return data["choices"][0]["message"]["content"].strip()
+
+    def act(self, text, agent, kb, requester="operator", context=""):
+        """Drive the computer / memory / conversation with the control model.
+
+        The model replies with JSON tool-calls; computer ops are executed by
+        the agent (which owns the display) over the agent socket."""
+        import base64 as _b64
+        import time as _time
+        msgs = [{"role": "system",
+                 "content": CONTROL_SYSTEM + (("\n\nContext:\n" + context)
+                                              if context else "")},
+                {"role": "user", "content": text}]
+        say_final = ""
+        for step in range(14):
+            raw = self._chat(msgs)
+            op = self._extract_json(raw)
+            if not isinstance(op, dict) or "op" not in op:
+                say_final = raw.strip()[:600]
+                break
+            kind = op.get("op")
+            result_txt = "ok"
+            image_b64 = None
+
+            def comp(payload, timeout=40):
+                import uuid as _uuid
+                payload = dict(payload)
+                payload["type"] = "comp"
+                payload["req_id"] = "c" + _uuid.uuid4().hex[:10]
+                return agent.forward_request(payload, timeout=timeout)
+
+            try:
+                if kind == "screenshot":
+                    r = comp({"op": "screenshot"})
+                    image_b64 = r.get("image")
+                    result_txt = "screenshot %sx%s attached" % (
+                        r.get("w"), r.get("h"))
+                elif kind == "locate":
+                    r = comp({"op": "locate", "text": str(op.get("text", ""))})
+                    result_txt = "ocr hits: %s" % json.dumps(r.get("hits", []))
+                elif kind in ("click", "double_click"):
+                    comp({"op": kind, "x": int(op["x"]), "y": int(op["y"])})
+                elif kind == "type":
+                    comp({"op": "type", "text": str(op.get("text", ""))},
+                         timeout=60)
+                elif kind == "key":
+                    comp({"op": "key", "keys": str(op.get("keys", ""))})
+                elif kind == "scroll":
+                    comp({"op": "scroll",
+                          "amount": int(op.get("amount", -3))})
+                elif kind == "wait":
+                    _time.sleep(min(10.0, float(op.get("seconds", 2))))
+                elif kind == "open_url":
+                    comp({"op": "open_url", "url": str(op.get("url", ""))},
+                         timeout=90)
+                elif kind == "speak":
+                    agent.send({"type": "speak",
+                                "text": str(op.get("text", ""))})
+                    result_txt = "spoken to the user"
+                elif kind == "remember":
+                    meeting = kb.active_meeting()
+                    mid = meeting["id"] if meeting else None
+                    team_id = meeting["team_id"] if meeting else None
+                    if team_id is None:
+                        allowed = kb.allowed_team_ids(requester)
+                        team_id = allowed[0] if allowed else None
+                    if team_id is None:
+                        result_txt = "error: no team to store under"
+                    else:
+                        kid = kb.kb_put(str(op.get("text", "")), team_id,
+                                        source_meeting=mid)
+                        result_txt = "stored as kb %s" % kid
+                elif kind == "recall":
+                    allowed = kb.allowed_team_ids(requester)
+                    hits = kb.kb_search(str(op.get("query", "")), allowed)
+                    result_txt = json.dumps(
+                        [{"text": h.get("text"), "team": h.get("team_id")}
+                         for h in hits][:6])
+                elif kind == "done":
+                    say_final = str(op.get("say", "")).strip()[:900]
+                    break
+                else:
+                    result_txt = "error: unknown op %r" % kind
+            except Exception as exc:
+                result_txt = "error: %s" % exc
+            msgs.append({"role": "assistant", "content": json.dumps(op)})
+            content = [{"type": "text", "text": "result: " + result_txt}]
+            if image_b64:
+                content.append({"type": "image_url", "image_url": {
+                    "url": "data:image/png;base64,%s" % image_b64}})
+            msgs.append({"role": "user", "content": content})
+        return {"say": say_final}
+
     def compose_answer(self, question, recent_transcript, kb_hits, segment_hits):
         ctx = []
         if recent_transcript:

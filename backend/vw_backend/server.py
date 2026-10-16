@@ -352,6 +352,28 @@ class Backend:
         return {"hits": hits, "allowed": bool(allowed)}
 
     # ---- the question flow (requirements 2, 3, 7) ------------------------------------
+    def h_brain_act(self, msg):
+        requester = msg.get("requester", "operator")
+        text = msg["text"]
+        meeting = self.kb.active_meeting()
+        meeting_id = meeting["id"] if meeting else None
+        allowed = self.kb.allowed_team_ids(requester)
+        ctx = []
+        if meeting_id:
+            recent = self.kb.recent_transcript(meeting_id, limit=25)
+            if recent:
+                ctx.append("Recent meeting transcript:")
+                ctx.extend("%s: %s" % (r["speaker"], r["text"])
+                           for r in recent)
+        if allowed:
+            hits = self.kb.kb_search(text, allowed)[:5]
+            if hits:
+                ctx.append("Memory that may be relevant:")
+                ctx.extend("- %s" % h.get("text") for h in hits)
+        return self.brain.act(text, agent=self.agent, kb=self.kb,
+                              requester=requester,
+                              context="\n".join(ctx))
+
     def h_question(self, msg):
         requester = msg.get("requester", "unknown")
         text = msg["text"]

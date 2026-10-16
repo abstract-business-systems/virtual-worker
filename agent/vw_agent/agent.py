@@ -235,6 +235,51 @@ class Worker:
                                        "req_id": msg.get("req_id"),
                                        "ok": False,
                                        "error": "unknown action %s" % name})
+        elif t == "comp":
+            # backend-driven computer control (brain 2.0 tool calls)
+            def run():
+                op = msg.get("op")
+                data, ok, err = {}, True, None
+                try:
+                    if op == "screenshot":
+                        import base64
+                        path = actions.screenshot()
+                        from PIL import Image
+                        raw = open(path, "rb").read()
+                        with Image.open(path) as im:
+                            w, h = im.size
+                        data = {"image": base64.b64encode(raw).decode(),
+                                "w": w, "h": h}
+                    elif op == "locate":
+                        hits = actions.locate_all(str(msg.get("text", "")))
+                        data = {"hits": [(int(x), int(y)) for x, y in hits][:8]}
+                    elif op == "click":
+                        actions.click(int(msg["x"]), int(msg["y"]))
+                    elif op == "double_click":
+                        actions.xdotool("mousemove", str(int(msg["x"])),
+                                        str(int(msg["y"])),
+                                        "click", "--repeat", "2", "--delay", "80", "1")
+                    elif op == "type":
+                        actions.type_text(str(msg.get("text", "")))
+                    elif op == "key":
+                        actions.key(str(msg.get("keys", "")))
+                    elif op == "scroll":
+                        amt = int(msg.get("amount", -3))
+                        actions.xdotool(
+                            "click", "--repeat", str(max(1, abs(amt))),
+                            "--delay", "60", "4" if amt > 0 else "5")
+                    elif op == "open_url":
+                        actions.open_url(str(msg.get("url", "")))
+                    else:
+                        ok, err = False, "unknown op %r" % op
+                except Exception as exc:
+                    ok, err = False, str(exc)
+                out = {"type": "result", "req_id": msg.get("req_id"),
+                       "ok": ok, "data": data}
+                if err:
+                    out["error"] = err
+                self.client.send_push(out)
+            threading.Thread(target=run, daemon=True, name="comp").start()
         elif t == "demo":
             data = {}
             try:
@@ -335,8 +380,7 @@ class Worker:
         if self._contains_wake(low):
             question = self._strip_wake(text).strip(" ,.?!")
             if sum(c.isalpha() for c in question) >= 3:
-                self._armed_until = 0.0
-                self._answer_question(question)
+                self._handle_command(question)
             else:
                 # bare wake name: arm for the question that follows
                 self._armed_until = now + 25
@@ -345,16 +389,19 @@ class Worker:
                       flush=True)
             return
         if now < self._armed_until and sum(c.isalpha() for c in text) >= 6:
-            self._armed_until = 0.0
-            self._answer_question(text)
+            self._handle_command(text)
             return
         if now - self._last_wake_ts < 60 and (
                 "?" in text or low.startswith(("what", "can you", "tell me",
                                                "how", "why", "when", "who",
                                                "do you", "did you", "repeat",
-                                               "say again", "say that again"))):
-            # follow-up question shortly after addressing Alex
-            self._answer_question(text)
+                                               "say again", "say that again",
+                                               "open", "close", "please",
+                                               "find", "search", "show",
+                                               "check", "write", "make",
+                                               "create", "go to", "look up"))):
+            # follow-up request shortly after addressing Alex
+            self._handle_command(text)
             return
         if "remind" in low or (now - self._last_wake_ts < 12 and
                                parse_mod.parse_reminder(text,
@@ -447,6 +494,51 @@ class Worker:
             self.transcript_count += 1
         except Exception as exc:
             print("[agent] transcript.append failed: %s" % exc, flush=True)
+
+    def _handle_command(self, command):
+        """Everything the operator asks Alex: acknowledge immediately, then
+        let the brain (control model) fulfil it - computer, memory or chat."""
+        low = command.lower()
+        if "remind" in low:
+            parsed = parse_mod.parse_reminder(command,
+                                              default_tz=CONFIG["default_tz"])
+            if parsed:
+                self._maybe_reminder(command)
+                return
+        self._dispatch_to_brain(command)
+
+    def _dispatch_to_brain(self, command):
+        import random
+        self._last_wake_ts = time.time()
+        self._armed_until = 0.0
+        ack = random.choice([
+            "On it.", "Sure.", "One moment.", "Give me a second.",
+            "Working on it.", "Okay."])
+        try:
+            self.say(ack)
+        except Exception:
+            pass
+
+        def run():
+            try:
+                res = self.client.request({
+                    "type": "brain.act", "text": command,
+                    "requester": CONFIG["operator_name"],
+                    "in_meeting": True}, timeout=300)
+                say = (res.get("say") or "").strip()
+                if say:
+                    self.say(say)
+            except Exception as exc:
+                print("[agent] brain failed: %s" % exc, flush=True)
+                try:
+                    self._answer_question(command)
+                except Exception:
+                    try:
+                        self.say("Sorry, I could not do that.")
+                    except Exception:
+                        pass
+        threading.Thread(target=run, daemon=True,
+                         name="brain-act").start()
 
     def _answer_question(self, question):
         """Wake detected -> ask the brain -> speak the answer, sentence by

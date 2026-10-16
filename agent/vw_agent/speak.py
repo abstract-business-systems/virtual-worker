@@ -78,10 +78,66 @@ def _tts_wav_espeak(text, wav_path):
                    capture_output=True, timeout=60)
 
 
+_ELEVEN_VOICE_IDS = {}
+
+def _eleven_voice_id(name, key):
+    """Resolve an ElevenLabs voice NAME to its voice_id (cached)."""
+    if not _ELEVEN_VOICE_IDS:
+        req = urllib.request.Request(
+            "https://api.elevenlabs.io/v1/voices",
+            headers={"xi-api-key": key})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            lib = json.loads(resp.read()).get("voices", [])
+        for v in lib:
+            _ELEVEN_VOICE_IDS[v["name"].lower()] = v["voice_id"]
+    vid = _ELEVEN_VOICE_IDS.get(name.lower())
+    if not vid:
+        vid = next(iter(_ELEVEN_VOICE_IDS.values()), None)
+    if not vid:
+        raise RuntimeError("elevenlabs: no voices on this account")
+    return vid
+
+
+def _tts_wav_elevenlabs(text, wav_path):
+    """ElevenLabs neural TTS -> raw pcm_44100 -> WAV (mono s16le)."""
+    import wave
+    key = CONFIG["elevenlabs_api_key"]
+    if not key:
+        raise RuntimeError("elevenlabs: VW_ELEVENLABS_API_KEY not set")
+    vid = _eleven_voice_id(CONFIG["eleven_voice"], key)
+    body = json.dumps({
+        "text": text,
+        "model_id": CONFIG["eleven_model"],
+    }).encode()
+    url = ("https://api.elevenlabs.io/v1/text-to-speech/%s"
+           "?output_format=pcm_44100" % vid)
+    req = urllib.request.Request(url, data=body, headers={
+        "xi-api-key": key,
+        "Content-Type": "application/json",
+        "accept": "audio/*",
+    })
+    with urllib.request.urlopen(req, timeout=90) as resp:
+        pcm = resp.read()
+    w = wave.open(wav_path, "wb")
+    w.setnchannels(1)
+    w.setsampwidth(2)
+    w.setframerate(44100)
+    w.writeframes(pcm)
+    w.close()
+
+
 def tts_synth(text, wav_path):
     """Synthesize `text` to a WAV file (no playback)."""
     engine = CONFIG["tts_engine"]
     error = None
+    if engine in ("auto", "elevenlabs") and CONFIG["elevenlabs_api_key"]:
+        try:
+            _tts_wav_elevenlabs(text, wav_path)
+            return
+        except Exception as exc:
+            error = exc
+            if engine == "elevenlabs":
+                raise
     if engine in ("auto", "openrouter"):
         try:
             _tts_wav_openrouter(text, wav_path)
@@ -106,6 +162,13 @@ def tts_play(text):
         wav = f.name
     try:
         error = None
+        if engine in ("auto", "elevenlabs") and CONFIG["elevenlabs_api_key"]:
+            try:
+                _tts_wav_elevenlabs(text, wav)
+            except Exception as exc:
+                error = exc
+                if engine == "elevenlabs":
+                    raise
         if engine in ("auto", "openrouter"):
             try:
                 _tts_wav_openrouter(text, wav)
