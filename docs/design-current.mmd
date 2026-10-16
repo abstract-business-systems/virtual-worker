@@ -1,0 +1,41 @@
+flowchart TB
+    subgraph OPERATOR["Operator session — srdj, DISPLAY :24"]
+        OP["You — operator"]
+        REPO["Repository — git: docs, backend, agent, deploy, tests"]
+        FF["Firefox on desktop — computer-use join tests"]
+        CUA["cua-driver daemon v0.35.4 — systemd user unit, unrestricted"]
+        EXT["pi computer_use extension"]
+        OP --> EXT
+        EXT --> CUA
+        CUA --> FF
+    end
+
+    subgraph WORKER["abs-worker Linux user — isolated, via ssh abs-worker@localhost"]
+        subgraph SERVICES["systemd user services — linger on"]
+            XD["vw-display — Xvfb :99"]
+            PA["vw-audio — per-user PulseAudio"]
+            BE["vw-backend — socket server, KB SQLite+FTS5, ACL, reminder scheduler, brain"]
+            AG["vw-agent — vision-driven join, STT, wake-name loop, screen-diff OCR 5s, Playwright Chromium, TTS"]
+            XD --> AG
+            PA --> AG
+            BE --> AG
+        end
+        ENV["worker.env mode 600 — GOOGLE empty, OPENROUTER key"]
+        DATA["kb.db, agent.sock mode 660"]
+        PROFILE["browser-profile — dedicated Chrome identity"]
+        SPK["vw_speaker — meeting audio to STT"]
+        TTS["vw_tts to vw_mic — worker speaks"]
+    end
+
+    LLM["OpenRouter — gpt-4o-mini"]
+    MEET["Google Meet on Xvfb :99 — pre-join, knock, host admits"]
+
+    OP -- "ssh" --> SERVICES
+    OP -- "operator CLI commands" --> BE
+    AG -- "unix socket JSON lines" --> BE
+    BE --> LLM
+    AG -- "Playwright: looks, decides, clicks" --> MEET
+    MEET -- "meeting audio" --> SPK
+    TTS -- "speaks only when called" --> MEET
+    AG -. "5s screenshot diff to OCR text only" .-> BE
+    ENV -. "loaded by units" .-> SERVICES

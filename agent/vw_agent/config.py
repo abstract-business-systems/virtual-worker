@@ -36,6 +36,11 @@ CONFIG = {
     "stt_window_max": _float("VW_STT_WINDOW_MAX", 12.0),
     "stt_silence": _float("VW_STT_SILENCE", 0.8),
     "stt_model": os.environ.get("VW_STT_MODEL", "base.en"),
+    # voice
+    "tts_engine": os.environ.get("VW_TTS_ENGINE", "auto"),  # auto|openrouter|espeak
+    "tts_model": os.environ.get("VW_TTS_MODEL", "openai/gpt-audio-mini"),
+    "tts_voice": os.environ.get("VW_TTS_VOICE", "onyx"),
+    "tts_sample_rate": _int("VW_TTS_RATE", 24000),
     # meeting
     "google_email": os.environ.get("GOOGLE_EMAIL", ""),
     "google_password": os.environ.get("GOOGLE_PASSWORD", ""),

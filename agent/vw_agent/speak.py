@@ -1,21 +1,101 @@
-"""Text-to-speech output through the virtual mic bus (vw_tts -> vw_mic)."""
+"""Text-to-speech output through the virtual mic bus (vw_tts -> vw_mic).
+
+Engines, in order of preference:
+  openrouter : neural voice via OpenRouter (openai/gpt-audio-mini, streaming
+               pcm16 -> WAV -> paplay). High quality, uses OPENROUTER_API_KEY.
+  espeak-ng  : offline fallback.
+
+Config: VW_TTS_ENGINE=auto|openrouter|espeak, VW_TTS_MODEL, VW_TTS_VOICE.
+"""
+import base64
+import json
 import os
 import subprocess
 import tempfile
+import urllib.request
+import wave
 
 from .config import CONFIG
 
 
+def _tts_wav_openrouter(text, wav_path):
+    """Synthesize via OpenRouter streaming audio; write a WAV file."""
+    key = os.environ.get("OPENROUTER_API_KEY")
+    if not key:
+        raise RuntimeError("OPENROUTER_API_KEY not set")
+    body = json.dumps({
+        "model": CONFIG["tts_model"],
+        "modalities": ["text", "audio"],
+        "audio": {"voice": CONFIG["tts_voice"], "format": "pcm16"},
+        "stream": True,
+        "messages": [
+            {"role": "system", "content":
+                "You are Alex, a virtual worker. Read the user's text out "
+                "loud, verbatim, in a natural friendly spoken style. Do not "
+                "add anything."},
+            {"role": "user", "content": text},
+        ],
+    }).encode()
+    req = urllib.request.Request(
+        "https://openrouter.ai/api/v1/chat/completions",
+        data=body,
+        headers={"Authorization": "Bearer %s" % key,
+                 "Content-Type": "application/json"},
+    )
+    chunks = []
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        for raw_line in resp:
+            line = raw_line.decode("utf-8", "replace").strip()
+            if not line.startswith("data:"):
+                continue
+            payload = line[5:].strip()
+            if payload == "[DONE]":
+                break
+            try:
+                msg = json.loads(payload)
+            except ValueError:
+                continue
+            if "error" in msg:
+                raise RuntimeError("openrouter tts error: %s"
+                                   % str(msg["error"])[:200])
+            delta = (msg.get("choices") or [{}])[0].get("delta", {})
+            audio = delta.get("audio") or {}
+            if audio.get("data"):
+                chunks.append(audio["data"])
+    if not chunks:
+        raise RuntimeError("openrouter tts returned no audio")
+    pcm = base64.b64decode("".join(chunks))
+    with wave.open(wav_path, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(CONFIG["tts_sample_rate"])
+        w.writeframes(pcm)
+
+
+def _tts_wav_espeak(text, wav_path):
+    subprocess.run(["espeak-ng", "-v", "en-us", "-s", "155", "-p", "40",
+                    "-w", wav_path, text], check=True,
+                   capture_output=True, timeout=60)
+
+
 def tts_play(text):
     """Speak `text` into the vw_tts sink (which feeds the virtual mic)."""
+    engine = CONFIG["tts_engine"]
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
         wav = f.name
     try:
-        subprocess.run(["espeak-ng", "-v", "en-us", "-s", "155", "-p", "40",
-                        "-w", wav, text], check=True,
-                       capture_output=True, timeout=60)
+        error = None
+        if engine in ("auto", "openrouter"):
+            try:
+                _tts_wav_openrouter(text, wav)
+            except Exception as exc:
+                error = exc
+                if engine == "openrouter":
+                    raise
+        if error is not None or engine == "espeak":
+            _tts_wav_espeak(text, wav)
         subprocess.run(["paplay", "--device=%s" % CONFIG["tts_sink"], wav],
-                       check=True, capture_output=True, timeout=120)
+                       check=True, capture_output=True, timeout=180)
     finally:
         try:
             os.unlink(wav)

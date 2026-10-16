@@ -294,7 +294,7 @@ class Worker:
         self._append_transcript(speaker=CONFIG["operator_name"], text=text)
         low = text.lower()
         wake = CONFIG["wake_name"].lower()
-        if wake in low:
+        if self._contains_wake(low):
             self._last_wake_ts = time.time()
             self._answer_question(text)
         elif "remind" in low or (time.time() - self._last_wake_ts < 12 and
@@ -303,6 +303,19 @@ class Worker:
             self._maybe_reminder(text)
             if wake in low:
                 self._last_wake_ts = time.time()
+
+    def _contains_wake(self, low):
+        """Exact substring or fuzzy token match, so STT mis-hearings of the
+        wake name ("a lex", "alice", "awlex", ...) still trigger."""
+        wake = CONFIG["wake_name"].lower()
+        if wake in low:
+            return True
+        import difflib
+        for word in low.replace(",", " ").split():
+            if abs(len(word) - len(wake)) <= 2 and \
+                    difflib.SequenceMatcher(None, word, wake).ratio() >= 0.72:
+                return True
+        return False
 
     def _append_transcript(self, speaker, text):
         try:
