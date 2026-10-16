@@ -259,8 +259,15 @@ class Brain:
         if text.startswith("```"):
             text = text.strip("`").lstrip("json\n").strip()
         start = text.find("{")
+        if start == -1:
+            raise ValueError("no JSON in brain reply: %r" % text[:200])
+        try:
+            obj, _end = json.JSONDecoder().raw_decode(text[start:])
+            return obj
+        except ValueError:
+            pass
         end = text.rfind("}")
-        if start == -1 or end == -1:
+        if end == -1:
             raise ValueError("no JSON in brain reply: %r" % text[:200])
         return json.loads(text[start:end + 1])
 
