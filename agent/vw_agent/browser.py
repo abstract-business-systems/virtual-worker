@@ -21,7 +21,6 @@ class Browser:
             self.pw = sync_playwright().start()
             args = ["--autoplay-policy=no-user-gesture-required",
                     "--no-first-run", "--no-default-browser-check",
-                    "--disable-blink-features=AutomationControlled",
                     "--hide-crash-restore-bubble",
                     "--disable-features=IsolateOrigins"]
             profile = CONFIG["browser_profile"]

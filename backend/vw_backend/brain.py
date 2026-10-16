@@ -50,6 +50,8 @@ VISION_PERSONA = (
     "do NOT click join again immediately: first re-click the name field, "
     "retype the name with fill, check the join button looks enabled (not "
     "greyed out), and only then click it once. "
+    "- If the screen shows 'Asking to be let in' / a knocking spinner, "
+    "choose wait: the host must admit you; keep waiting patiently. "
     "- If a microphone/camera permission dialog appears, click Allow. "
     "- Never start a new meeting, never share content, never touch account "
     "recovery or settings you were not asked for."
