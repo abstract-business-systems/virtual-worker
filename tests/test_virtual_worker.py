@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.join(REPO, "backend"))
 sys.path.insert(0, os.path.join(REPO, "agent"))
 
 from vw_backend.kb import KnowledgeBase, fts_escape          # noqa: E402
-from vw_backend.server import Backend                        # noqa: E402
+from vw_backend.server import Backend, _PAST_REF_RE          # noqa: E402
 from vw_common import send_msg, recv_msg                     # noqa: E402
 from vw_agent import parse as parse_mod                      # noqa: E402
 
@@ -189,11 +189,50 @@ class TestBackendProtocol(unittest.TestCase):
 
 
 class _StubBrain:
-    def compose_answer(self, q, recent, kb_hits, seg_hits):
+    def compose_answer(self, q, recent, kb_hits, seg_hits, summaries=None):
         return "stub answer"
 
     def summarize(self, lines):
         return "stub summary"
+
+
+class TestPastRefGating(unittest.TestCase):
+    """Luna must consult stored memory ONLY for questions that reach into
+    the past - never for current-meeting questions (no quoting of other
+    sessions)."""
+
+    def test_past_questions_match(self):
+        for q in ("what did we discuss last meeting?",
+                  "do you remember the budget from yesterday",
+                  "what was in the previous call",
+                  "anything stored about the launch",
+                  "what did we talk about last week"):
+            self.assertTrue(_PAST_REF_RE.search(q), q)
+
+    def test_current_questions_do_not_match(self):
+        for q in ("Luna what did Viswanath say?",
+                  "what is the budget number",
+                  "can you repeat that",
+                  "what are we deciding now",
+                  "who said that"):
+            self.assertIsNone(_PAST_REF_RE.search(q), q)
+
+
+class TestStopPhrases(unittest.TestCase):
+    def test_stop_detection(self):
+        from vw_agent.agent import Worker
+        from vw_agent import config
+        w = Worker.__new__(Worker)   # skip __init__ (sockets, browser)
+        # the wake word comes from config; use its real value
+        wake = config.CONFIG["wake_name"]
+        for said in ("%s stop" % wake, "stop %s" % wake,
+                     "%s be quiet" % wake, "%s shut up" % wake,
+                     "%s, that's enough" % wake):
+            self.assertTrue(w._is_stop_command(said.lower(), said), said)
+        for said in ("%s stop sharing your screen" % wake,
+                     "%s can you stop the recording" % wake,
+                     "please stop the demo"):
+            self.assertFalse(w._is_stop_command(said.lower(), said), said)
 
 
 class TestProtocolFraming(unittest.TestCase):

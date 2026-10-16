@@ -157,6 +157,7 @@ class Worker:
         self._mute_until = 0.0
         self._last_spoken = ""
         self._armed_until = 0.0
+        self._cancel_token = 0   # bumped by stop commands; in-flight output is dropped
 
     # ---- lifecycle -------------------------------------------------------------
     def start(self):
@@ -312,8 +313,9 @@ class Worker:
         # (always re-register: a previous demo meeting must not own this one)
         try:
             team = CONFIG.get("team") or "Product"
+            platform = "teams" if "teams.microsoft.com" in url else "meet"
             data = self.client.request({"type": "meeting.start",
-                                        "platform": "meet", "url": url,
+                                        "platform": platform, "url": url,
                                         "team": team})
             self.meeting_id = data.get("meeting_id")
         except Exception as exc:
@@ -376,6 +378,11 @@ class Worker:
         self._append_transcript(speaker=CONFIG["operator_name"], text=text)
         low = text.lower()
         now = time.time()
+        # STOP works even while Luna is speaking (the echo guard would
+        # otherwise swallow the command exactly when it matters most).
+        if self._is_stop_command(low, text):
+            self.stop_speaking()
+            return
         if now < self._mute_until:
             print("[agent] ignoring echo of own voice: %r" % text[:60],
                   flush=True)
@@ -402,9 +409,11 @@ class Worker:
             # a direct follow-up right after Alex answered
             self._handle_command(text)
             return
-        if "remind" in low or (now - self._last_wake_ts < 12 and
-                               parse_mod.parse_reminder(text,
-                                       default_tz=CONFIG["default_tz"])):
+        if "remind" in low and (self._contains_wake(low) or
+                                now < self._armed_until or
+                                now - self._last_wake_ts < 30):
+            # reminders only from someone addressing Luna - never from other
+            # people's side conversations
             self._maybe_reminder(text)
 
     _FOLLOWUP_STARTS = (
@@ -415,9 +424,40 @@ class Worker:
 
     _ALPHA_RE = None
 
+    _STOP_PHRASES = (
+        "stop", "stop it", "stop now", "stop talking", "stop speaking",
+        "stop please", "please stop", "be quiet", "quiet", "shut up",
+        "silence", "silence please", "enough", "that's enough",
+        "thats enough", "never mind", "cancel that", "cancel", "skip it",
+        "hold on", "wait wait", "one sec", "hang on")
+
+    def _is_stop_command(self, low, text):
+        """True only for a short, unambiguous halt addressed to Luna
+        ("Luna stop", "stop Luna", "Luna be quiet"). Long requests that
+        merely contain a stop-like word are NOT stops."""
+        if not self._contains_wake(low):
+            return False
+        core = self._strip_wake(text).lower().strip(" ,.!?.\"")
+        return core in self._STOP_PHRASES
+
+    def stop_speaking(self):
+        """Interrupt: silence audio now, drop in-flight output, abort any
+        running brain loop on the backend."""
+        self._cancel_token += 1
+        self._armed_until = 0.0
+        try:
+            speak_mod.stop_playback()
+        except Exception:
+            pass
+        try:
+            self.client.request({"type": "brain.cancel"}, timeout=10)
+        except Exception:
+            pass
+        print("[agent] STOP - speech interrupted", flush=True)
+
     def _run_intent(self, low, text):
         """Detect meeting-control intents (leave/rejoin) and execute them as
-        a normal user would. Only runs when Alex was addressed (wake/armed)."""
+        a normal user would. Only runs when Luna was addressed (wake/armed)."""
         import re as _re
         wants_leave = bool(
             _re.search(r"\b(drop|leave|hang up|exit|get out)\b", low)
@@ -462,7 +502,7 @@ class Worker:
             with self._lock:
                 actions_mod.rejoin_meeting(url, CONFIG["wake_name"])
             print("[agent] action: rejoined the meeting", flush=True)
-            self.say("I have joined the meeting again. Can everyone hear me?")
+            # no announcement: Luna speaks only when called upon
         except Exception as exc:
             print("[agent] rejoin failed: %s" % exc, flush=True)
             self.say("Sorry, I could not rejoin the meeting.")
@@ -550,6 +590,7 @@ class Worker:
             self.say(ack)
         except Exception:
             pass
+        tok = self._cancel_token
 
         def run():
             try:
@@ -558,10 +599,15 @@ class Worker:
                     "requester": CONFIG["operator_name"],
                     "in_meeting": True}, timeout=300)
                 say = (res.get("say") or "").strip()
-                if say:
+                if say and tok == self._cancel_token:
                     self.say(say)
+                elif say:
+                    print("[agent] brain result dropped (stop pressed)",
+                          flush=True)
             except Exception as exc:
                 print("[agent] brain failed: %s" % exc, flush=True)
+                if tok != self._cancel_token:
+                    return
                 try:
                     self._answer_question(command)
                 except Exception:
@@ -619,6 +665,7 @@ class Worker:
         import re
         synth_q = queue.Queue(maxsize=2)
         DONE = object()
+        tok = self._cancel_token
 
         def synth_worker():
             buf = ""
@@ -668,6 +715,10 @@ class Worker:
                 while True:
                     item = synth_q.get()
                     if item is DONE:
+                        break
+                    if tok != self._cancel_token:
+                        print("[agent] answer playback aborted (stop)",
+                              flush=True)
                         break
                     try:
                         speak_mod.play_wav_file(item)

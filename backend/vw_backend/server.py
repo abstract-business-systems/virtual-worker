@@ -8,6 +8,7 @@ CLIs connect, send one request, get one result.
 Access control lives entirely in kb.py (fail-closed).
 """
 import os
+import re
 import socket
 import threading
 import time
@@ -21,6 +22,16 @@ from .scheduler import ReminderScheduler
 from vw_common import default_socket_path
 
 SOCKET_PATH = default_socket_path()
+
+# Questions that explicitly reach into the past (past meetings, stored notes,
+# knowledge base). abs-bot lesson: rolling/current context is the default;
+# memory documents are consulted ONLY for questions that reference them.
+_PAST_REF_RE = re.compile(
+    r"\b(yesterday|the other day|ago|earlier meeting|last (week|month|meeting|"
+    r"call|time|session)|previous (meeting|call|session|discussion)|past "
+    r"meeting|other (meeting|session|day)|before|do you (remember|recall)|"
+    r"remember|recall|stored|saved|your notes|knowledge base|history|"
+    r"remind(ed)? you|we (talked|discussed|spoke) about)\b", re.I)
 
 
 class AgentLink:
@@ -296,8 +307,15 @@ class Backend:
         if not allowed:
             return {"transcript": [], "kb_hits": [], "segment_hits": [],
                     "allowed": False}
+        # Only questions that explicitly reference the past ("what did we
+        # discuss last meeting", "do you remember") may pull stored documents
+        # or OTHER meetings' transcripts. Everything else is grounded in the
+        # current meeting alone - this is what kept Luna from quoting old
+        # sessions unprompted.
+        past_ref = bool(_PAST_REF_RE.search(question))
+        want_memory = past_ref or not msg.get("in_meeting")
         summaries = []
-        if meeting_id:
+        if meeting_id and (want_memory or not msg.get("in_meeting")):
             with self.kb.lock, self.kb._conn() as c:
                 row = c.execute("SELECT text FROM summaries WHERE meeting_id=?",
                                 (meeting_id,)).fetchone()
@@ -306,9 +324,11 @@ class Backend:
         return {
             "transcript": self.kb.recent_transcript(meeting_id) if meeting_id else [],
             "summaries": summaries,
-            "kb_hits": self.kb.kb_search(question, allowed),
-            "segment_hits": (self.kb.segments_search(question, meeting_id, allowed)
-                             if meeting_id else []),
+            "kb_hits": (self.kb.kb_search(question, allowed)
+                        if want_memory else []),
+            "segment_hits": (self.kb.segments_search(question, meeting_id,
+                                                     allowed)
+                             if meeting_id and want_memory else []),
             "allowed": True,
         }
 
@@ -362,7 +382,8 @@ class Backend:
         # member of the meeting's team (the host admitted them).
         if meeting_team is not None and msg.get("in_meeting"):
             self.kb.ensure_member_of_team(requester, meeting_team)
-        allowed = self.kb.allowed_team_ids(requester)
+        # Rolling, bounded working context: recent CURRENT-meeting transcript
+        # only. Stored memories stay out unless the request names the past.
         ctx = []
         if meeting_id:
             recent = self.kb.recent_transcript(meeting_id, limit=12)
@@ -370,11 +391,14 @@ class Backend:
                 ctx.append("Recent meeting transcript:")
                 ctx.extend("%s: %s" % (r["speaker"], r["text"])
                            for r in recent)
-        # NOTE: no memory pre-injection - Luna must recall only when the
-        # user actually asks about past discussions or stored facts.
         return self.brain.act(text, agent=self.agent, kb=self.kb,
                               requester=requester,
                               context="\n".join(ctx))
+
+    def h_brain_cancel(self, msg):
+        """User said stop: abort any running brain loop immediately."""
+        self.brain.cancel_runs()
+        return {"cancelled": True}
 
     def h_question(self, msg):
         requester = msg.get("requester", "unknown")
@@ -395,10 +419,22 @@ class Backend:
                               "information for you.", "allowed": False}
 
         recent = self.kb.recent_transcript(meeting_id) if meeting_id else []
-        kb_hits = self.kb.kb_search(text, allowed)
+        # Past-looking questions may consult stored memory; current-meeting
+        # questions never do (no quoting of other sessions).
+        past_ref = bool(_PAST_REF_RE.search(text))
+        want_memory = past_ref or not msg.get("in_meeting")
+        kb_hits = self.kb.kb_search(text, allowed) if want_memory else []
         seg_hits = (self.kb.segments_search(text, meeting_id, allowed)
-                    if meeting_id else [])
-        answer = self.brain.compose_answer(text, recent, kb_hits, seg_hits)
+                    if meeting_id and want_memory else [])
+        summaries = []
+        if meeting_id and past_ref:
+            with self.kb.lock, self.kb._conn() as c:
+                row = c.execute("SELECT text FROM summaries WHERE meeting_id=?",
+                                (meeting_id,)).fetchone()
+            if row and row["text"]:
+                summaries.append(row["text"])
+        answer = self.brain.compose_answer(text, recent, kb_hits, seg_hits,
+                                           summaries)
         self.kb.log_qa(meeting_id, requester, text)
         return {"answer": answer, "allowed": True, "requester": requester,
                 "sources": {"kb": len(kb_hits), "past_segments": len(seg_hits)}}

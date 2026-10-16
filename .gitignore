@@ -5,3 +5,7 @@ deploy/keys/
 __pycache__/
 *.pyc
 .venv/.meet_now.png
+
+# transient debug screenshots / captures
+.pi/
+/*.png

@@ -150,9 +150,34 @@ def tts_synth(text, wav_path):
         _tts_wav_espeak(text, wav_path)
 
 
+_current_play = None   # Popen of the wav currently being played
+
+
 def play_wav_file(path):
-    subprocess.run(["paplay", "--device=%s" % CONFIG["tts_sink"], path],
-                   check=True, capture_output=True, timeout=180)
+    """Play a wav and wait for it. Interruptible via stop_playback()."""
+    global _current_play
+    proc = subprocess.Popen(
+        ["paplay", "--device=%s" % CONFIG["tts_sink"], path],
+        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    _current_play = proc
+    try:
+        try:
+            proc.wait(timeout=180)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+    finally:
+        if _current_play is proc:
+            _current_play = None
+
+
+def stop_playback():
+    """Immediately silence whatever is being spoken (user said stop)."""
+    proc = _current_play
+    if proc is not None and proc.poll() is None:
+        try:
+            proc.kill()
+        except OSError:
+            pass
 
 
 def tts_play(text):
