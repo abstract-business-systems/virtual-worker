@@ -799,11 +799,13 @@ class Worker:
             self._play_participant(line)
         time.sleep(3)
         # 1) wake + question -> brain -> spoken answer
-        self._play_participant("Alex, what did we agree about the launch?")
+        self._play_participant("%s, what did we agree about the launch?"
+                              % CONFIG["wake_name"])
         time.sleep(15)
         # 2) reminder -> scheduler -> spoken announcement (20s)
-        self._play_participant("Alex, remind me in 20 seconds to prepare the "
-                               "report.")
+        self._play_participant(
+            ("%s, remind me in 20 seconds to prepare the report."
+             % CONFIG["wake_name"]))
         deadline = time.time() + 45
         while time.time() < deadline:
             if any("Reminder for" in s for s in self.spoken):

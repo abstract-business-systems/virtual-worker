@@ -30,9 +30,9 @@ def _tts_wav_openrouter(text, wav_path):
         "stream": True,
         "messages": [
             {"role": "system", "content":
-                "You are Alex, a virtual worker. Read the user's text out "
+                "You are %s, a virtual worker. Read the user's text out "
                 "loud, verbatim, in a natural friendly spoken style. Do not "
-                "add anything."},
+                "add anything." % CONFIG["wake_name"]},
             {"role": "user", "content": text},
         ],
     }).encode()

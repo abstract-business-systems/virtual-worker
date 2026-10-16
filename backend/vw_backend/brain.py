@@ -13,8 +13,10 @@ import shutil
 import subprocess
 import urllib.request
 
+_WORKER_NAME = os.environ.get("VW_NAME", "Alex")
+
 PERSONA = (
-    "You are Alex, a polite virtual worker attending a business meeting as a "
+    f"You are {_WORKER_NAME}, a polite virtual worker attending a business meeting as a "
     "participant. You answer questions asked by meeting participants out loud. "
     "Rules: keep answers short and spoken-style (1-4 sentences, no lists, no "
     "markdown, no emoji). Ground every answer in the meeting transcript, "
@@ -27,7 +29,7 @@ PERSONA = (
 )
 
 VISION_PERSONA = (
-    "You are Alex, a virtual worker driving a browser to join an online "
+    f"You are {_WORKER_NAME}, a virtual worker driving a browser to join an online "
     "meeting. You see one screenshot of the browser window (1920x1080 pixels; "
     "coordinates map 1:1). Goal: enter the meeting politely - on the pre-join "
     "screen turn the camera OFF and the microphone OFF/muted, enter the name "
@@ -64,7 +66,7 @@ VISION_PERSONA = (
 CONTROL_MODEL_DEFAULT = "openai/gpt-6-luna"
 
 CONTROL_SYSTEM = (
-    "You are Alex, a virtual worker attending an online meeting. The human "
+    f"You are {_WORKER_NAME}, a virtual worker attending an online meeting. The human "
     "speaks to you aloud; you receive their words as text. They may ask "
     "questions, give commands, or ask you to do things on the computer in "
     "front of you (a Linux XFCE desktop showing a browser).\n"
@@ -214,8 +216,9 @@ class Brain:
                                  for h in segment_hits))
         if summaries:
             ctx.append("MEETING SUMMARY SO FAR:\n" + "\n".join(summaries))
-        prompt = ("MEETING CONTEXT:\n%s\n\nQUESTION: %s\n\nAnswer out loud as Alex."
-                  % ("\n\n".join(ctx) or "(no context yet)", question))
+        prompt = ("MEETING CONTEXT:\n%s\n\nQUESTION: %s\n\nAnswer out loud as %s."
+                  % ("\n\n".join(ctx) or "(no context yet)", question,
+                     _WORKER_NAME))
         body = json.dumps({
             "model": self.model,
             "messages": [
@@ -413,8 +416,9 @@ class Brain:
                                  for h in segment_hits))
         if summaries:
             ctx.append("MEETING SUMMARY SO FAR:\n" + "\n".join(summaries))
-        prompt = ("MEETING CONTEXT:\n%s\n\nQUESTION: %s\n\nAnswer out loud as Alex."
-                  % ("\n\n".join(ctx) or "(no context yet)", question))
+        prompt = ("MEETING CONTEXT:\n%s\n\nQUESTION: %s\n\nAnswer out loud as %s."
+                  % ("\n\n".join(ctx) or "(no context yet)", question,
+                     _WORKER_NAME))
         return self._ask(PERSONA, prompt)
 
     def summarize(self, transcript_lines):

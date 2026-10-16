@@ -159,7 +159,10 @@ def open_url(url):
     key("Return", 0.6)
 
 
-def rejoin_meeting(url, name="Alex"):
+def rejoin_meeting(url, name=None):
+    if name is None:
+        from .config import CONFIG
+        name = CONFIG["wake_name"]
     """Open the meeting link and complete the pre-join screen by looking:
     locate the name field via OCR, type the name, press Enter. Then make
     sure the audio is routed to the worker's buses."""
