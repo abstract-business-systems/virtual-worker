@@ -10,7 +10,9 @@ The PoC demo (vw demo) plays scripted utterances through the meeting bus with
 espeak so the full STT -> wake -> brain -> TTS loop runs end-to-end without a
 real Google account. The real flow uses the same path once joined via Meet.
 """
+import os
 import queue
+import tempfile
 import threading
 import time
 import traceback
@@ -151,6 +153,7 @@ class Worker:
         self.joined_url = None
         self.meeting_id = None
         self._last_wake_ts = 0.0
+        self._armed_until = 0.0
 
     # ---- lifecycle -------------------------------------------------------------
     def start(self):
@@ -271,7 +274,7 @@ class Worker:
                                          CONFIG["stt_sample_rate"])
         print("[agent] recording meeting audio from %s" % buses["sink_monitor"],
               flush=True)
-        chunk = int(0.4 * CONFIG["stt_sample_rate"]) * 2  # 0.4s of s16le
+        chunk = int(0.2 * CONFIG["stt_sample_rate"]) * 2  # 0.2s of s16le
         while True:
             pcm = proc.stdout.read(chunk)
             if not pcm:
@@ -293,27 +296,50 @@ class Worker:
         print("[agent] heard: %r (%.1fs)" % (text, dur), flush=True)
         self._append_transcript(speaker=CONFIG["operator_name"], text=text)
         low = text.lower()
-        wake = CONFIG["wake_name"].lower()
+        now = time.time()
         if self._contains_wake(low):
-            self._last_wake_ts = time.time()
+            question = self._strip_wake(text).strip(" ,.?!")
+            if sum(c.isalpha() for c in question) >= 3:
+                self._armed_until = 0.0
+                self._answer_question(question)
+            else:
+                # bare wake name: arm for the question that follows
+                self._armed_until = now + 12
+                print("[agent] wake name alone - waiting for the question",
+                      flush=True)
+            return
+        if now < self._armed_until and sum(c.isalpha() for c in text) >= 6:
+            self._armed_until = 0.0
             self._answer_question(text)
-        elif "remind" in low or (time.time() - self._last_wake_ts < 12 and
-                                  parse_mod.parse_reminder(text,
-                                          default_tz=CONFIG["default_tz"])):
+            return
+        if "remind" in low or (now - self._last_wake_ts < 12 and
+                               parse_mod.parse_reminder(text,
+                                       default_tz=CONFIG["default_tz"])):
             self._maybe_reminder(text)
-            if wake in low:
-                self._last_wake_ts = time.time()
+
+    _ALPHA_RE = None
+
+    def _strip_wake(self, text):
+        """Remove the wake name (and fuzzy variants) from the start/middle."""
+        import re
+        wake = CONFIG["wake_name"].lower()
+        pat = re.compile(r"\b[\w'\-]{0,3}%s[\w'\-]{0,3}\b" % re.escape(wake),
+                         re.I)
+        return pat.sub("", text)
 
     def _contains_wake(self, low):
         """Exact substring or fuzzy token match, so STT mis-hearings of the
-        wake name ("a lex", "alice", "awlex", ...) still trigger."""
+        wake name ("a lex", "alice", "awlex", "lx", ...) still trigger."""
         wake = CONFIG["wake_name"].lower()
         if wake in low:
             return True
         import difflib
-        for word in low.replace(",", " ").split():
-            if abs(len(word) - len(wake)) <= 2 and \
-                    difflib.SequenceMatcher(None, word, wake).ratio() >= 0.65:
+        import string
+        for word in low.split():
+            word = word.strip(string.punctuation)
+            if not word or abs(len(word) - len(wake)) > 2:
+                continue
+            if difflib.SequenceMatcher(None, word, wake).ratio() >= 0.65:
                 return True
         return False
 
@@ -326,28 +352,107 @@ class Worker:
         except Exception as exc:
             print("[agent] transcript.append failed: %s" % exc, flush=True)
 
-    def _answer_question(self, heard_text):
-        """Wake name detected -> ask the brain -> speak the answer aloud."""
-        question = heard_text
-        for prefix in (CONFIG["wake_name"], "%s," % CONFIG["wake_name"]):
-            question = question.replace(prefix, "")
-        question = question.strip(" ,.?!")
-        print("[agent] wake detected; asking brain: %r" % question, flush=True)
+    def _answer_question(self, question):
+        """Wake detected -> ask the brain -> speak the answer, sentence by
+        sentence as they stream (first words within ~2s of generation)."""
+        question = (question or "").strip()
+        print("[agent] asking brain: %r" % question, flush=True)
         try:
-            data = self.client.request({
-                "type": "question",
-                "requester": CONFIG["operator_name"],
-                "text": question,
-                "meeting_id": self.meeting_id,
-                "in_meeting": self.joined_url is not None,
-                "recent_transcript": []}, timeout=120)
+            deltas = self.brain.stream_answer(
+                question, [], [], [])
         except Exception as exc:
-            answer = "Sorry, I could not process that. (%s)" % exc
-            data = {"answer": answer}
-        answer = data.get("answer", "")
-        print("[agent] answer: %s" % answer, flush=True)
-        self.say(answer)
-        self._maybe_reminder(heard_text)
+            print("[agent] streaming failed (%s), fallback" % exc, flush=True)
+            try:
+                data = self.client.request({
+                    "type": "question",
+                    "requester": CONFIG["operator_name"],
+                    "text": question,
+                    "meeting_id": self.meeting_id,
+                    "in_meeting": self.joined_url is not None,
+                    "recent_transcript": []}, timeout=120)
+                answer = data.get("answer", "Sorry, I could not process that.")
+            except Exception as exc2:
+                answer = "Sorry, I could not process that. (%s)" % exc2
+            self.say(answer)
+            self._maybe_reminder(question)
+            return
+        self._speak_stream(deltas, question)
+        self._maybe_reminder(question)
+
+    def _speak_stream(self, deltas, question):
+        """Consume streamed answer text; synthesize and play sentence by
+        sentence, pipelined so playback of sentence k overlaps synthesis of
+        sentence k+1."""
+        import re
+        synth_q = queue.Queue(maxsize=2)
+        DONE = object()
+
+        def synth_worker():
+            buf = ""
+            full = []
+            try:
+                for delta in deltas:
+                    buf += delta
+                    full.append(delta)
+                    while True:
+                        m = re.search(r"[.!?](?:\s|$)", buf)
+                        if not m:
+                            break
+                        sentence = buf[:m.end()].strip()
+                        buf = buf[m.end():]
+                        if sentence and sum(c.isalpha() for c in sentence) >= 2:
+                            wav = tempfile.NamedTemporaryFile(
+                                suffix=".wav", delete=False)
+                            wav.close()
+                            try:
+                                speak_mod.tts_synth(sentence, wav.name)
+                                synth_q.put(wav.name)
+                            except Exception as exc:
+                                print("[agent] synth failed: %s" % exc,
+                                      flush=True)
+                if buf.strip():
+                    wav = tempfile.NamedTemporaryFile(suffix=".wav",
+                                                      delete=False)
+                    wav.close()
+                    try:
+                        speak_mod.tts_synth(buf.strip(), wav.name)
+                        synth_q.put(wav.name)
+                    except Exception as exc:
+                        print("[agent] synth failed: %s" % exc, flush=True)
+            finally:
+                synth_q.put(DONE)
+                print("[agent] answer: %s" % "".join(full), flush=True)
+
+        threading.Thread(target=synth_worker, daemon=True,
+                         name="answer-synth").start()
+        with self._lock:
+            try:
+                self.browser.set_mic(unmute=True)
+            except Exception:
+                pass
+            try:
+                spoken_any = False
+                while True:
+                    item = synth_q.get()
+                    if item is DONE:
+                        break
+                    try:
+                        speak_mod.play_wav_file(item)
+                        spoken_any = True
+                        self.spoken.append(open(item, "rb").read(1) and
+                                          "")  # keep bookkeeping cheap
+                    finally:
+                        try:
+                            os.unlink(item)
+                        except OSError:
+                            pass
+                if not spoken_any:
+                    speak_mod.tts_play("Sorry, I could not answer that.")
+            finally:
+                try:
+                    self.browser.set_mic(unmute=False)
+                except Exception:
+                    pass
 
     def _maybe_reminder(self, text):
         rem = parse_mod.parse_reminder(text, default_tz=CONFIG["default_tz"])

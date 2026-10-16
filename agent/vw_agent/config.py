@@ -34,7 +34,7 @@ CONFIG = {
     "screen_diff_threshold": _float("VW_SCREEN_DIFF", 0.02),
     "stt_sample_rate": _int("VW_STT_RATE", 16000),
     "stt_window_max": _float("VW_STT_WINDOW_MAX", 12.0),
-    "stt_silence": _float("VW_STT_SILENCE", 0.8),
+    "stt_silence": _float("VW_STT_SILENCE", 0.5),
     "stt_model": os.environ.get("VW_STT_MODEL", "base.en"),
     # voice
     "tts_engine": os.environ.get("VW_TTS_ENGINE", "auto"),  # auto|openrouter|espeak

@@ -268,6 +268,13 @@ class Backend:
                                            msg["text"])
         return {"segment_id": seg_id, "meeting_id": mid}
 
+    def h_transcript_get(self, msg):
+        meeting = self.kb.active_meeting()
+        mid = msg.get("meeting_id") or (meeting["id"] if meeting else None)
+        if mid is None:
+            return {"transcript": []}
+        return {"transcript": self.kb.recent_transcript(mid, limit=30)}
+
     def h_reminder_create(self, msg):
         rid = self.kb.create_reminder(
             msg["who"], msg["what"], msg["due_utc"],

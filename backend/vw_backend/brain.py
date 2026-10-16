@@ -149,6 +149,59 @@ class Brain:
             data = json.loads(resp.read())
         return data["choices"][0]["message"]["content"].strip()
 
+    def stream_answer(self, question, recent_transcript, kb_hits, segment_hits):
+        """Yield answer text deltas via OpenRouter streaming (low latency)."""
+        key = os.environ.get("OPENROUTER_API_KEY")
+        if not key:
+            raise RuntimeError("OPENROUTER_API_KEY not set")
+        ctx = []
+        if recent_transcript:
+            lines = ["[%s] %s: %s" % (s.get("ts"), s.get("speaker", "?"), s.get("text", ""))
+                     for s in recent_transcript]
+            ctx.append("CURRENT MEETING TRANSCRIPT (recent):\n" + "\n".join(lines))
+        if kb_hits:
+            ctx.append("KNOWLEDGE BASE (authorized for this requester):\n" +
+                       "\n".join("- %s" % h["text"] for h in kb_hits))
+        if segment_hits:
+            ctx.append("PAST MEETING EXCERPTS (authorized for this requester):\n" +
+                       "\n".join("- %s: %s" % (h.get("speaker", "?"), h["text"])
+                                 for h in segment_hits))
+        prompt = ("MEETING CONTEXT:\n%s\n\nQUESTION: %s\n\nAnswer out loud as Alex."
+                  % ("\n\n".join(ctx) or "(no context yet)", question))
+        body = json.dumps({
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": PERSONA},
+                {"role": "user", "content": prompt},
+            ],
+            "stream": True,
+            "max_tokens": 400,
+        }).encode()
+        req = urllib.request.Request(
+            "https://openrouter.ai/api/v1/chat/completions",
+            data=body,
+            headers={"Authorization": "Bearer %s" % key,
+                     "Content-Type": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            for raw_line in resp:
+                line = raw_line.decode("utf-8", "replace").strip()
+                if not line.startswith("data:"):
+                    continue
+                payload = line[5:].strip()
+                if payload == "[DONE]":
+                    break
+                try:
+                    msg = json.loads(payload)
+                except ValueError:
+                    continue
+                if "error" in msg:
+                    raise RuntimeError("stream error: %s" % str(msg["error"])[:200])
+                delta = (msg.get("choices") or [{}])[0].get("delta", {})
+                piece = delta.get("content")
+                if piece:
+                    yield piece
+
     @staticmethod
     def _extract_json(text):
         text = text.strip()

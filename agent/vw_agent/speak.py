@@ -78,6 +78,27 @@ def _tts_wav_espeak(text, wav_path):
                    capture_output=True, timeout=60)
 
 
+def tts_synth(text, wav_path):
+    """Synthesize `text` to a WAV file (no playback)."""
+    engine = CONFIG["tts_engine"]
+    error = None
+    if engine in ("auto", "openrouter"):
+        try:
+            _tts_wav_openrouter(text, wav_path)
+            return
+        except Exception as exc:
+            error = exc
+            if engine == "openrouter":
+                raise
+    if error is not None or engine == "espeak":
+        _tts_wav_espeak(text, wav_path)
+
+
+def play_wav_file(path):
+    subprocess.run(["paplay", "--device=%s" % CONFIG["tts_sink"], path],
+                   check=True, capture_output=True, timeout=180)
+
+
 def tts_play(text):
     """Speak `text` into the vw_tts sink (which feeds the virtual mic)."""
     engine = CONFIG["tts_engine"]
@@ -94,8 +115,7 @@ def tts_play(text):
                     raise
         if error is not None or engine == "espeak":
             _tts_wav_espeak(text, wav)
-        subprocess.run(["paplay", "--device=%s" % CONFIG["tts_sink"], wav],
-                       check=True, capture_output=True, timeout=180)
+        play_wav_file(wav)
     finally:
         try:
             os.unlink(wav)
