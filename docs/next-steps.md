@@ -25,8 +25,11 @@ thin, inspectable interface around the existing capabilities.
 
 ## Additional next steps from M3
 
-The 28 October latency review adds investigation and brainstorming work; it
-does not authorize changing the implementation immediately.
+The 28 October latency review clarifies that the immediate goal is to
+understand where the delay comes from and improve the interaction during the
+wait. It adds investigation and brainstorming work; it does not authorize
+changing the implementation immediately. The technical investigation and the
+functional response should be pursued in parallel.
 
 ### 1. Brainstorm the functional response
 
@@ -41,8 +44,9 @@ does not authorize changing the implementation immediately.
 
 - Review the timing breakdown that already exists instead of assuming which
   component is slow.
-- Keep the data in a spreadsheet or CSV-style record so measurements can be
-  compared.
+- Keep the measurements in a structured record so results can be compared;
+  the meeting mentioned a spreadsheet or CSV only as an optional format, not as
+  the goal.
 - Measure the delay at multiple levels, including the system, an intermediate
   or client/interface layer, the backend, and user prompts.
 - Use the measurements to distinguish client, network, backend, provider, STT,
@@ -58,9 +62,10 @@ does not authorize changing the implementation immediately.
 - Do not change code, provider, region, or client architecture until the data
   supports a direction.
 
-M3 therefore leaves us with a functional idea to brainstorm and a measurement
-and research task to organize. It does not select a fix or set final latency
-targets.
+M3 therefore leaves us with two parallel next steps: brainstorm the functional
+response that reduces friction during waiting, and organize research that
+identifies the technical source of the delay. It does not select a fix, require
+creating a CSV, or set final latency targets.
 
 ## Priority requirements
 
