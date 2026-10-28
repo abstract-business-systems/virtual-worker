@@ -1,6 +1,6 @@
 # Virtual Worker — Next Steps and Engineering Requirements
 
-Source: [`docs/meetings/261016-next-steps.vtt`](meetings/261016-next-steps.vtt)
+Source: [`docs/recordings/2.vtt`](recordings/2.vtt)
 
 This document captures the priorities, decisions, and follow-up work from the
 16 October meeting. It complements the product requirements in
