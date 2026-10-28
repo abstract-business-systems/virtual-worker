@@ -262,6 +262,13 @@ class Backend:
         fwd = {"type": "demo", "req_id": "fwd-%s" % msg.get("req_id", "x")}
         return self.agent.forward_request(fwd, timeout=240)
 
+    def h_agent_latency(self, msg):
+        if self.agent.sock is None:
+            raise RuntimeError("agent is not connected")
+        fwd = {"type": "latency", "trials": msg.get("trials", 5),
+               "req_id": "fwd-%s" % msg.get("req_id", "x")}
+        return self.agent.forward_request(fwd, timeout=420)
+
     def h_agent_selftest(self, msg):
         if self.agent.sock is None:
             raise RuntimeError("agent is not connected")

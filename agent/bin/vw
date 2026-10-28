@@ -5,14 +5,16 @@
   vw say "text"         make the worker speak (debug)
   vw selftest           end-to-end environment self test
   vw demo               scripted end-to-end demo (no Google account needed)
+  vw latency            question-only end-to-end latency benchmark
 """
 import sys
 
 from vw_backend.cli import main as admin_main  # noqa: E402
 
-AGENT_COMMANDS = {"join", "status", "say", "selftest", "demo"}
+AGENT_COMMANDS = {"join", "status", "say", "selftest", "demo", "latency"}
 MAP = {"join": "meeting.join", "status": "agent.status", "say": "agent.say",
-       "selftest": "agent.selftest", "demo": "agent.demo"}
+       "selftest": "agent.selftest", "demo": "agent.demo",
+       "latency": "agent.latency"}
 
 
 def main(argv):

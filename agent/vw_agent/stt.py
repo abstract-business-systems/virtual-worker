@@ -47,6 +47,10 @@ class Segmenter:
         self._buf = []          # float samples
         self._speech = False
         self._quiet_since = None
+        # Monotonic timestamps make latency measurements immune to wall-clock
+        # adjustments; last_timing is consumed by the agent after each segment.
+        self._speech_started_at = None
+        self.last_timing = None
 
     def feed_pcm(self, pcm_bytes):
         """Feed raw s16le bytes; returns a transcript text when a segment ends."""
@@ -62,27 +66,42 @@ class Segmenter:
                 if speaking:
                     self._speech = True
                     self._speech_samples = list(frame_samples)
+                    self._speech_started_at = time.monotonic()
                     self._quiet_since = None
                 continue
             self._speech_samples.extend(frame_samples)
             if not speaking:
                 if self._quiet_since is None:
-                    self._quiet_since = time.time()
-                elif time.time() - self._quiet_since >= self.silence:
+                    self._quiet_since = time.monotonic()
+                elif time.monotonic() - self._quiet_since >= self.silence:
                     result = self._flush()
             elif len(self._speech_samples) >= self.window_max * self.rate:
                 result = self._flush()
         return result
 
     def _flush(self):
+        # Capture the endpoint and STT boundaries for the end-to-end trace.
+        endpointed_at = time.monotonic()
+        speech_started_at = self._speech_started_at
         self._speech = False
         self._quiet_since = None
+        self._speech_started_at = None
         samples = self._speech_samples
         self._speech_samples = []
         dur = len(samples) / self.rate
         if dur < 0.4:
+            self.last_timing = None
             return None
+        stt_started_at = time.monotonic()
         text = self.transcribe(samples)
+        stt_finished_at = time.monotonic()
+        self.last_timing = {
+            "speech_started_at": speech_started_at,
+            "endpointed_at": endpointed_at,
+            "stt_started_at": stt_started_at,
+            "stt_finished_at": stt_finished_at,
+            "speech_duration_s": dur,
+        }
         return (text, dur) if text else None
 
     def transcribe(self, samples):

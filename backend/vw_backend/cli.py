@@ -121,6 +121,10 @@ def main(argv):
                           timeout=320))
         elif cmd == "demo":
             print(request({"type": "agent.demo", "req_id": "cli"}, timeout=70))
+        elif cmd == "latency":
+            trials = int(args[0]) if args else 5
+            print(request({"type": "agent.latency", "req_id": "cli",
+                           "trials": trials}, timeout=420))
         else:
             print("unknown command: %s" % cmd)
             return 1

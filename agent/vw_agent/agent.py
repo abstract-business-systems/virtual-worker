@@ -158,6 +158,8 @@ class Worker:
         self._last_spoken = ""
         self._armed_until = 0.0
         self._cancel_token = 0   # bumped by stop commands; in-flight output is dropped
+        self._latency_records = []
+        self._latency_condition = threading.Condition()
 
     # ---- lifecycle -------------------------------------------------------------
     def start(self):
@@ -293,6 +295,16 @@ class Worker:
             self.client.send_push({
                 "type": "result", "req_id": msg.get("req_id"),
                 "ok": "error" not in data, "data": data})
+        elif t == "latency":
+            data = {}
+            try:
+                data = self.latency_demo(int(msg.get("trials", 5)))
+            except Exception as exc:
+                traceback.print_exc()
+                data = {"error": str(exc)}
+            self.client.send_push({
+                "type": "result", "req_id": msg.get("req_id"),
+                "ok": "error" not in data, "data": data})
 
     # ---- meeting join (requirement 1): vision-driven ---------------------------
     def join_meeting(self, url):
@@ -370,10 +382,14 @@ class Worker:
                 continue
             if seg:
                 text, dur = seg
-                self._handle_segment(text, dur)
+                # Carry STT timestamps into the same trace as model and TTS.
+                timing = dict(getattr(self.segmenter, "last_timing", None) or {})
+                self._handle_segment(text, dur, timing)
 
-    def _handle_segment(self, text, dur):
+    def _handle_segment(self, text, dur, timing=None):
         text = text.strip()
+        timing = dict(timing or {})
+        timing["recognized_at"] = time.monotonic()
         print("[agent] heard: %r (%.1fs)" % (text, dur), flush=True)
         self._append_transcript(speaker=CONFIG["operator_name"], text=text)
         low = text.lower()
@@ -393,7 +409,7 @@ class Worker:
         if self._contains_wake(low):
             question = self._strip_wake(text).strip(" ,.?!")
             if sum(c.isalpha() for c in question) >= 3:
-                self._handle_command(question)
+                self._handle_command(question, timing)
             else:
                 # bare wake name: arm for the question that follows
                 self._armed_until = now + 12
@@ -402,12 +418,12 @@ class Worker:
                       flush=True)
             return
         if now < self._armed_until and sum(c.isalpha() for c in text) >= 6:
-            self._handle_command(text)
+            self._handle_command(text, timing)
             return
         if now - self._last_wake_ts < 30 and sum(c.isalpha() for c in text) >= 6 \
                 and ("?" in text or low.startswith(self._FOLLOWUP_STARTS)):
             # a direct follow-up right after Alex answered
-            self._handle_command(text)
+            self._handle_command(text, timing)
             return
         if "remind" in low and (self._contains_wake(low) or
                                 now < self._armed_until or
@@ -553,7 +569,7 @@ class Worker:
         "was", "were", "do you", "did we", "can you tell", "tell me",
         "which", "repeat", "say again", "say that again")
 
-    def _handle_command(self, command):
+    def _handle_command(self, command, timing=None):
         """Everything the operator asks Luna. Questions take the fast
         streaming path; computer/actions go to the brain (with an ack)."""
         low = command.lower()
@@ -574,7 +590,7 @@ class Worker:
         if low.startswith(self._QUESTION_STARTS) or "?" in command:
             self._armed_until = 0.0
             self._last_wake_ts = time.time()
-            self._answer_question(command)
+            self._answer_question(command, timing)
             return
         # ambiguous: let the brain decide (it can still just answer)
         self._dispatch_to_brain(command)
@@ -618,12 +634,15 @@ class Worker:
         threading.Thread(target=run, daemon=True,
                          name="brain-act").start()
 
-    def _answer_question(self, question):
+    def _answer_question(self, question, timing=None):
         """Wake detected -> ask the brain -> speak the answer, sentence by
         sentence as they stream (first words within ~2s of generation)."""
         question = (question or "").strip()
+        timing = dict(timing or {})
+        timing["question_received_at"] = time.monotonic()
         print("[agent] asking brain: %r" % question, flush=True)
         try:
+            timing["context_started_at"] = time.monotonic()
             context = self.client.request({
                 "type": "context.get",
                 "question": question,
@@ -631,6 +650,7 @@ class Worker:
                 "meeting_id": self.meeting_id,
                 "in_meeting": self.joined_url is not None,
             }, timeout=30)
+            timing["context_finished_at"] = time.monotonic()
         except Exception as exc:
             print("[agent] context.get failed: %s" % exc, flush=True)
             context = {}
@@ -655,10 +675,10 @@ class Worker:
             self.say(answer)
             self._maybe_reminder(question)
             return
-        self._speak_stream(deltas, question)
+        self._speak_stream(deltas, question, timing)
         self._maybe_reminder(question)
 
-    def _speak_stream(self, deltas, question):
+    def _speak_stream(self, deltas, question, timing=None):
         """Consume streamed answer text; synthesize and play sentence by
         sentence, pipelined so playback of sentence k overlaps synthesis of
         sentence k+1."""
@@ -666,12 +686,19 @@ class Worker:
         synth_q = queue.Queue(maxsize=2)
         DONE = object()
         tok = self._cancel_token
+        timing = dict(timing or {})
 
         def synth_worker():
+            # The generator starts the network request only when iterated, so
+            # model timing must begin immediately before this loop.
             buf = ""
             full = []
+            first_sentence = True
             try:
+                timing["model_started_at"] = time.monotonic()
                 for delta in deltas:
+                    if "model_first_delta_at" not in timing:
+                        timing["model_first_delta_at"] = time.monotonic()
                     buf += delta
                     full.append(delta)
                     while True:
@@ -685,7 +712,12 @@ class Worker:
                                 suffix=".wav", delete=False)
                             wav.close()
                             try:
+                                if first_sentence:
+                                    timing["tts_started_at"] = time.monotonic()
                                 speak_mod.tts_synth(sentence, wav.name)
+                                if first_sentence:
+                                    timing["tts_finished_at"] = time.monotonic()
+                                    first_sentence = False
                                 synth_q.put(wav.name)
                             except Exception as exc:
                                 print("[agent] synth failed: %s" % exc,
@@ -695,11 +727,17 @@ class Worker:
                                                       delete=False)
                     wav.close()
                     try:
+                        if first_sentence:
+                            timing["tts_started_at"] = time.monotonic()
                         speak_mod.tts_synth(buf.strip(), wav.name)
+                        if first_sentence:
+                            timing["tts_finished_at"] = time.monotonic()
+                            first_sentence = False
                         synth_q.put(wav.name)
                     except Exception as exc:
                         print("[agent] synth failed: %s" % exc, flush=True)
             finally:
+                timing["model_finished_at"] = time.monotonic()
                 synth_q.put(DONE)
                 print("[agent] answer: %s" % "".join(full), flush=True)
 
@@ -721,6 +759,10 @@ class Worker:
                               flush=True)
                         break
                     try:
+                        # First playback is the user-visible response-start
+                        # boundary; later sentences only affect completion.
+                        if "audio_started_at" not in timing:
+                            timing["audio_started_at"] = time.monotonic()
                         speak_mod.play_wav_file(item)
                         spoken_any = True
                         self.spoken.append(open(item, "rb").read(1) and
@@ -733,10 +775,46 @@ class Worker:
                 if not spoken_any:
                     speak_mod.tts_play("Sorry, I could not answer that.")
             finally:
+                timing["response_finished_at"] = time.monotonic()
+                self._report_latency(question, timing)
                 try:
                     self.browser.set_mic(unmute=False)
                 except Exception:
                     pass
+
+    def _report_latency(self, question, timing):
+        """Emit a one-line trace for a real spoken question/answer cycle.
+
+        Keep this as structured log output so a benchmark can be repeated
+        without adding a database or changing the worker's runtime protocol.
+        """
+        import json
+        fields = {
+            "speech_to_text_ms": (timing.get("stt_finished_at", 0) -
+                                   timing.get("speech_started_at", 0)) * 1000,
+            "stt_ms": (timing.get("stt_finished_at", 0) -
+                        timing.get("stt_started_at", 0)) * 1000,
+            "context_ms": (timing.get("context_finished_at", 0) -
+                            timing.get("context_started_at", 0)) * 1000,
+            "model_to_first_token_ms": (timing.get("model_first_delta_at", 0) -
+                                         timing.get("model_started_at", 0)) * 1000,
+            "first_tts_ms": (timing.get("tts_finished_at", 0) -
+                              timing.get("tts_started_at", 0)) * 1000,
+            "recognized_to_audio_ms": (timing.get("audio_started_at", 0) -
+                                       timing.get("recognized_at", 0)) * 1000,
+            "speech_to_audio_ms": (timing.get("audio_started_at", 0) -
+                                   timing.get("speech_started_at", 0)) * 1000,
+            "audio_playback_ms": (timing.get("response_finished_at", 0) -
+                                  timing.get("audio_started_at", 0)) * 1000,
+            "speech_to_finished_ms": (timing.get("response_finished_at", 0) -
+                                       timing.get("speech_started_at", 0)) * 1000,
+        }
+        record = {"question": question, "metrics_ms": fields,
+                  "speech_duration_s": timing.get("speech_duration_s")}
+        with self._latency_condition:
+            self._latency_records.append(record)
+            self._latency_condition.notify_all()
+        print("[latency] %s" % json.dumps(record, sort_keys=True), flush=True)
 
     def _maybe_reminder(self, text):
         rem = parse_mod.parse_reminder(text, default_tz=CONFIG["default_tz"])
@@ -871,6 +949,54 @@ class Worker:
         finally:
             self.on_push = orig
             self.client.push_handler = orig
+
+    def latency_demo(self, trials=5):
+        """Run question-only latency trials through the real audio pipeline."""
+        trials = max(1, min(10, int(trials)))
+        if self.meeting_id is None:
+            self.join_meeting("demo://latency-meeting")
+        self._append_transcript(
+            speaker="system",
+            text="latency benchmark context: launch is on October 20 and Bob "
+                 "will prepare the report.")
+        questions = [
+            "%s, what did we agree about the launch?" % CONFIG["wake_name"],
+            "%s, who will prepare the report?" % CONFIG["wake_name"],
+            "%s, when is the launch?" % CONFIG["wake_name"],
+            "%s, what is the main decision?" % CONFIG["wake_name"],
+            "%s, what is the launch plan?" % CONFIG["wake_name"],
+        ][:trials]
+        with self._latency_condition:
+            start_index = len(self._latency_records)
+        records = []
+        for question in questions:
+            with self._latency_condition:
+                before = len(self._latency_records)
+            self._play_participant(question)
+            deadline = time.monotonic() + 60
+            with self._latency_condition:
+                while len(self._latency_records) <= before:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        break
+                    self._latency_condition.wait(remaining)
+                if len(self._latency_records) > before:
+                    records.append(self._latency_records[before])
+            time.sleep(1)
+        if not records:
+            return {"trials": 0, "records": [], "summary_ms": {}}
+        import math
+        metric_names = sorted(records[0]["metrics_ms"])
+        summary = {}
+        for name in metric_names:
+            values = sorted(r["metrics_ms"][name] for r in records)
+            p50 = values[(len(values) - 1) // 2]
+            p95 = values[max(0, math.ceil(len(values) * 0.95) - 1)]
+            summary[name] = {"p50": round(p50, 1), "p95": round(p95, 1),
+                             "min": round(values[0], 1),
+                             "max": round(values[-1], 1)}
+        return {"trials": len(records), "records": records,
+                "summary_ms": summary, "start_record": start_index}
 
     def demo(self):
         """End-to-end scripted meeting played through the real audio pipeline."""
