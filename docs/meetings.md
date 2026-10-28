@@ -33,6 +33,10 @@ When a new recording `N.vtt` is added:
 |---|---|---|---|---|---|---|
 | M1 | [`1.vtt`](recordings/1.vtt) | 2026-10-15 | 9m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Initial virtual-worker requirements and proof-of-concept scope | [`requirements.md`](requirements.md) |
 | M2 | [`2.vtt`](recordings/2.vtt) | 2026-10-16 | 22m | Viswanath Chidambaram; Sarooparam Chenaram Darji; Subramaniyan Periyakaruppan; Friday/Luna test voices | Prototype review, Teams behavior, latency/cost priorities, and next steps | [`next-steps.md`](next-steps.md), [`latency-findings.md`](latency-findings.md) |
+| M3 | [`3.vtt`](recordings/3.vtt) | 2026-10-28* | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Latency review: functional acknowledgement, layered measurement, and provider/network investigation | [`next-steps.md`](next-steps.md) |
+
+*The transcript does not state the recording date for M3; 2026-10-28 is the
+recording file's added date.*
 
 ## 3. Meeting summaries
 
@@ -57,9 +61,38 @@ inspectable operation, and keeping the control layer thin. The agreed actions
 are in [`next-steps.md`](next-steps.md). The later local latency measurement
 and its pipeline analysis are in [`latency-findings.md`](latency-findings.md).
 
+### M3 — Latency review (`3.vtt`)
+
+The meeting confirmed that latency work needs both technical and functional
+solutions.
+
+- The worker should acknowledge a request immediately, optionally summarize
+  what it understood, and let the user correct missing or incorrect details.
+- While the acknowledgement is playing, the backend should continue processing
+  the request.
+- If the user interrupts, the current work should be cancelled and the worker
+  should listen to the new request.
+- Latency must be measured by layer before changing code: system/audio,
+  endpointing and STT, backend/provider, TTS, and the user-visible prompt path.
+- Network and provider location should be investigated if model requests are
+  materially slow. No provider-region change was decided in the meeting.
+
+The follow-up planning items are recorded in [`next-steps.md`](next-steps.md).
+
 ## 4. Journal
 
 Newest entries appear first.
+
+*The recording date for M3 is not stated in the transcript; 2026-10-28 is the
+file-added date.*
+
+### 2026-10-28 — M3 latency review and layered measurements
+
+- Added M3 as the latency follow-up meeting.
+- Confirmed that functional acknowledgement and technical optimization should
+  be pursued together.
+- Added layered measurement and interruptible acknowledgement to the next-step
+  planning items.
 
 ### 2026-10-28 — Local latency benchmark recorded
 
@@ -94,13 +127,15 @@ Newest entries appear first.
 | 4 | Validate incoming calls and outgoing messages | M2 | Engineering | Open — authorized test participants only |
 | 5 | Measure browser and real Teams delivery latency | M2 | Engineering | Open — current benchmark stops at the virtual microphone |
 | 6 | Revisit memory and broader employee workflows | M1/M2 | Product and engineering | Deferred until the latency and cost gates are understood |
+| 7 | Measure latency by layer before changing implementation | M3 | Engineering | Open — system/audio, STT, backend/provider, TTS, and prompt/user-visible timing |
+| 8 | Design immediate acknowledgement, correction, and interruption behavior | M3 | Engineering | Open — acknowledgement should play while processing continues; interruption cancels current work |
 
 ## 6. Document map
 
 | Document | Purpose |
 |---|---|
 | `meetings.md` | Living index, summaries, journal, and action items |
-| `recordings/1.vtt`, `recordings/2.vtt` | Immutable meeting source transcripts |
+| `recordings/1.vtt`, `recordings/2.vtt`, `recordings/3.vtt` | Immutable meeting source transcripts |
 | `requirements.md` | Product requirements from M1 |
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |

@@ -1,6 +1,7 @@
 # Virtual Worker — Next Steps and Engineering Requirements
 
 Source: [`docs/recordings/2.vtt`](recordings/2.vtt)
+Additional source: [`docs/recordings/3.vtt`](recordings/3.vtt)
 
 This document captures the priorities, decisions, and follow-up work from the
 16 October meeting. It complements the product requirements in
@@ -21,6 +22,54 @@ The next development gate is:
 
 Until those measurements are available, the implementation should remain a
 thin, inspectable interface around the existing capabilities.
+
+## Additional next steps from M3
+
+The 28 October latency review adds planning work; it does not authorize
+implementing the solutions immediately.
+
+### 1. Define the acknowledgement flow
+
+- Give the user an immediate acknowledgement while work continues.
+- Include a short summary of what Friday understood.
+- Let the user correct missing or incorrect details.
+- Cancel the current request if the user interrupts, then listen to the new
+  request.
+- Decide the exact wording, timing, and cancellation behavior before coding.
+
+### 2. Define the layered latency measurement plan
+
+Before changing the implementation, measure the request at separate layers:
+
+- system and audio capture;
+- speech endpointing and STT;
+- backend request and provider response;
+- TTS generation and playback;
+- user-visible prompt and response timing;
+- network ping and server/provider routing.
+
+Record the measurements in a structured, comparable format. The measurement
+plan should identify whether a delay is caused by the client, the network, the
+backend, the model provider, or the voice layer.
+
+### 3. Investigate provider and network options only from evidence
+
+- Compare measured network and provider timing before choosing a different
+  region or provider.
+- Consider nearby provider regions only if the measurements show a material
+  network contribution.
+- Do not change the provider, region, or client architecture based only on a
+  hypothesis.
+
+### 4. Set functional and technical acceptance criteria
+
+- Define the maximum acceptable time before an acknowledgement.
+- Define how quickly an interruption must cancel work.
+- Define the target time before the first useful answer audio.
+- Keep these targets separate from the full-answer completion time.
+
+No provider-region change or latency implementation change was decided in M3.
+These are the next items to plan and measure.
 
 ## Priority requirements
 
