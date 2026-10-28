@@ -33,7 +33,7 @@ When a new recording `N.vtt` is added:
 |---|---|---|---|---|---|---|
 | M1 | [`1.vtt`](recordings/1.vtt) | 2026-10-15 | 9m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Initial virtual-worker requirements and proof-of-concept scope | [`requirements.md`](requirements.md) |
 | M2 | [`2.vtt`](recordings/2.vtt) | 2026-10-16 | 22m | Viswanath Chidambaram; Sarooparam Chenaram Darji; Subramaniyan Periyakaruppan; Friday/Luna test voices | Prototype review, Teams behavior, latency/cost priorities, and next steps | [`next-steps.md`](next-steps.md), [`latency-findings.md`](latency-findings.md) |
-| M3 | [`3.vtt`](recordings/3.vtt) | 2026-10-28* | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Latency review: functional acknowledgement, layered measurement, and provider/network investigation | [`next-steps.md`](next-steps.md) |
+| M3 | [`3.vtt`](recordings/3.vtt) | 2026-10-28* | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Latency review: functional acknowledgement, evidence-based investigation, and multi-level measurement | [`next-steps.md`](next-steps.md) |
 
 *The transcript does not state the recording date for M3; 2026-10-28 is the
 recording file's added date.*
@@ -63,19 +63,22 @@ and its pipeline analysis are in [`latency-findings.md`](latency-findings.md).
 
 ### M3 — Latency review (`3.vtt`)
 
-The meeting confirmed that latency work needs both technical and functional
-solutions.
+The meeting discussed two parallel directions for latency:
 
-- The worker should acknowledge a request immediately, optionally summarize
-  what it understood, and let the user correct missing or incorrect details.
-- While the acknowledgement is playing, the backend should continue processing
-  the request.
-- If the user interrupts, the current work should be cancelled and the worker
-  should listen to the new request.
-- Latency must be measured by layer before changing code: system/audio,
-  endpointing and STT, backend/provider, TTS, and the user-visible prompt path.
-- Network and provider location should be investigated if model requests are
-  materially slow. No provider-region change was decided in the meeting.
+- A functional response should acknowledge the request before the full answer,
+  ideally summarize what Friday understood, and let the user identify missing
+  information.
+- While that acknowledgement is playing, the application could continue its
+  work. If the user interrupts, the current process should be dropped and the
+  new request should be heard.
+- Technical causes must be investigated rather than assumed. The discussion
+  mentioned endpointing, STT, model startup, server ping, the client, and the
+  provider as possible contributors, but did not identify one as the cause.
+- Existing data should be organized in a spreadsheet or CSV and measured at
+  multiple levels, including the system, an intermediate/client layer, the
+  backend, and user prompts.
+- Provider regions and network routing were raised as hypotheses to research,
+  not decisions to change.
 
 The follow-up planning items are recorded in [`next-steps.md`](next-steps.md).
 
@@ -89,10 +92,10 @@ file-added date.*
 ### 2026-10-28 — M3 latency review and layered measurements
 
 - Added M3 as the latency follow-up meeting.
-- Confirmed that functional acknowledgement and technical optimization should
+- Confirmed that functional acknowledgement and technical investigation should
   be pursued together.
-- Added layered measurement and interruptible acknowledgement to the next-step
-  planning items.
+- Recorded the instruction to organize and measure the existing data before
+  changing code.
 
 ### 2026-10-28 — Local latency benchmark recorded
 
@@ -127,8 +130,8 @@ file-added date.*
 | 4 | Validate incoming calls and outgoing messages | M2 | Engineering | Open — authorized test participants only |
 | 5 | Measure browser and real Teams delivery latency | M2 | Engineering | Open — current benchmark stops at the virtual microphone |
 | 6 | Revisit memory and broader employee workflows | M1/M2 | Product and engineering | Deferred until the latency and cost gates are understood |
-| 7 | Measure latency by layer before changing implementation | M3 | Engineering | Open — system/audio, STT, backend/provider, TTS, and prompt/user-visible timing |
-| 8 | Design immediate acknowledgement, correction, and interruption behavior | M3 | Engineering | Open — acknowledgement should play while processing continues; interruption cancels current work |
+| 7 | Brainstorm the functional acknowledgement interface | M3 | Engineering | Open — summarize what was heard, allow correction, and drop the current process on interruption |
+| 8 | Organize existing latency data and define multi-level measurements | M3 | Engineering | Open — record system, intermediate/client, backend, and user-prompt timing before changing code |
 
 ## 6. Document map
 

@@ -25,51 +25,42 @@ thin, inspectable interface around the existing capabilities.
 
 ## Additional next steps from M3
 
-The 28 October latency review adds planning work; it does not authorize
-implementing the solutions immediately.
+The 28 October latency review adds investigation and brainstorming work; it
+does not authorize changing the implementation immediately.
 
-### 1. Define the acknowledgement flow
+### 1. Brainstorm the functional response
 
-- Give the user an immediate acknowledgement while work continues.
-- Include a short summary of what Friday understood.
-- Let the user correct missing or incorrect details.
-- Cancel the current request if the user interrupts, then listen to the new
+- Consider an immediate acknowledgement before the full answer begins.
+- Have Friday summarize what it heard so the user can identify missing details.
+- Consider continuing the work while that acknowledgement is playing.
+- If the user interrupts, drop the current process and listen to the new
   request.
-- Decide the exact wording, timing, and cancellation behavior before coding.
+- Work out the intended interface and behavior before coding it.
 
-### 2. Define the layered latency measurement plan
+### 2. Organize and extend the latency data
 
-Before changing the implementation, measure the request at separate layers:
+- Review the timing breakdown that already exists instead of assuming which
+  component is slow.
+- Keep the data in a spreadsheet or CSV-style record so measurements can be
+  compared.
+- Measure the delay at multiple levels, including the system, an intermediate
+  or client/interface layer, the backend, and user prompts.
+- Use the measurements to distinguish client, network, backend, provider, STT,
+  endpointing, and voice-layer effects.
 
-- system and audio capture;
-- speech endpointing and STT;
-- backend request and provider response;
-- TTS generation and playback;
-- user-visible prompt and response timing;
-- network ping and server/provider routing.
+### 3. Research possible technical causes
 
-Record the measurements in a structured, comparable format. The measurement
-plan should identify whether a delay is caused by the client, the network, the
-backend, the model provider, or the voice layer.
+- Investigate server ping and network timing as part of the breakdown.
+- Treat client performance, model startup, endpointing, STT, and provider
+  location as hypotheses to check, not conclusions.
+- Research nearby provider regions only if the measurements show that network or
+  provider location is contributing materially.
+- Do not change code, provider, region, or client architecture until the data
+  supports a direction.
 
-### 3. Investigate provider and network options only from evidence
-
-- Compare measured network and provider timing before choosing a different
-  region or provider.
-- Consider nearby provider regions only if the measurements show a material
-  network contribution.
-- Do not change the provider, region, or client architecture based only on a
-  hypothesis.
-
-### 4. Set functional and technical acceptance criteria
-
-- Define the maximum acceptable time before an acknowledgement.
-- Define how quickly an interruption must cancel work.
-- Define the target time before the first useful answer audio.
-- Keep these targets separate from the full-answer completion time.
-
-No provider-region change or latency implementation change was decided in M3.
-These are the next items to plan and measure.
+M3 therefore leaves us with a functional idea to brainstorm and a measurement
+and research task to organize. It does not select a fix or set final latency
+targets.
 
 ## Priority requirements
 
