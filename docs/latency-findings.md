@@ -1,136 +1,190 @@
-# Virtual Worker — End-to-End Latency Findings
+# Virtual Worker — Latency Summary
 
-Status: preliminary measurement for later discussion  
-Measurement date: 28 October 2026  
-Source implementation: local worker prototype on `abs-worker`  
-Trials: 5 successful question/answer interactions
+Latest benchmark: five local question-and-answer trials on 28 October 2026.
+This measures the worker's local pipeline, not a complete live Teams call.
 
-## Executive summary
+## Current latency
 
-The current worker takes a median of **8.25 seconds** from detected participant
-speech to the start of the first spoken response. The measured P95 is **9.77
-seconds**.
+- First spoken audio: **7.79 seconds median**, **9.81 seconds P95**
+- Complete spoken answer: **17.97 seconds median**, **25.51 seconds P95**
 
-If the complete response is considered, including all generated speech, the
-median is **21.07 seconds** and the P95 is **25.54 seconds**. This second
-number is strongly affected by response length and audio playback duration; the
-first-audio measurement is the more useful measure of conversational
-responsiveness.
+## Pipeline
 
-No cost measurement or latency optimization was performed as part of this
-exercise.
-
-## What was measured
-
-The benchmark used the worker's local end-to-end audio path:
-
-```text
-participant test speech
-  -> PulseAudio meeting bus
-  -> speech endpointing
-  -> faster-whisper STT
-  -> backend context lookup
-  -> OpenRouter answer model
-  -> streamed response
-  -> text-to-speech synthesis
-  -> virtual microphone playback
+```mermaid
+flowchart TB
+    A[Person speaks] --> B[Capture and silence endpoint<br/>2.01 s]
+    B --> C[Speech to text<br/>1.65 s]
+    C --> D[Context lookup<br/>0.002 s]
+    D --> E[Answer model first token<br/>1.96 s]
+    E --> F[First text to speech audio<br/>2.22 s]
+    F --> G[Virtual microphone]
+    G --> H[Teams and browser delivery<br/>not measured]
 ```
 
-The benchmark was run through the question-only command:
+The measured first-response time is approximately the sum of the stages before
+Friday starts speaking. The stages are measured independently, so the numbers
+will not add up exactly in every run.
 
-```text
-vw latency 5
+## Where the pipeline is slow
+
+### 1. Capture and silence endpoint — about 2.01 seconds
+
+**What happens:** Friday waits for the person to finish speaking, then waits
+for enough silence to decide that the turn has ended.
+
+**Why it is slow:** The worker cannot safely transcribe or answer until it has
+a usable segment. Some of this time is simply the time needed for the person
+to say the question.
+
+**How to improve it:**
+
+- Test a shorter silence setting, such as 0.3 or 0.5 seconds.
+- Use adaptive endpointing instead of one fixed silence value.
+- Start partial STT while the person is still speaking.
+- Detect the wake name from partial audio.
+
+**Trade-off:** A shorter endpoint can cut off natural pauses or incomplete
+sentences.
+
+### 2. Speech-to-text — about 1.65 seconds
+
+**What happens:** faster-whisper transcribes the completed audio segment on the
+CPU.
+
+**Why it is slow:** The current path waits for a complete segment and runs a
+local model before the answer path starts.
+
+**How to improve it:**
+
+- Test a smaller or faster STT model.
+- Use GPU inference if suitable hardware is available.
+- Reduce unnecessary audio window size.
+- Use streaming or partial transcription.
+
+**Trade-off:** Faster models may make more recognition mistakes. The benchmark
+already saw “launch” recognized as “lunch”, so speed must be tested together
+with accuracy.
+
+### 3. Context lookup — about 0.002 seconds
+
+**What happens:** The backend loads the current meeting context.
+
+**Why it is not a problem:** It takes only a few milliseconds. Optimizing this
+will not meaningfully improve the response time.
+
+**How to improve it:** No immediate work is needed. Caching can still keep the
+path predictable as the knowledge base grows.
+
+### 4. Answer model — about 1.96 seconds to the first token
+
+**What happens:** The transcript and context are sent to the remote answer
+model, which produces the first part of the answer.
+
+**Why it is slow:** This includes network time, provider queueing, and model
+generation. The benchmark does not separate those parts.
+
+**How to improve it:**
+
+- Test a lower-latency model.
+- Send a smaller prompt and only the necessary context.
+- Keep streaming enabled.
+- Test a direct provider connection.
+- Use a simple fast path for simple factual questions.
+
+**Trade-off:** Smaller or faster models may give lower-quality answers or handle
+STT mistakes less well.
+
+### 5. First text-to-speech audio — about 2.22 seconds
+
+**What happens:** The first answer sentence is sent to TTS and converted into
+playable audio.
+
+**Why it is slow:** The current implementation waits for the first sentence
+WAV before starting playback. This is the largest delay after STT.
+
+**How to improve it:**
+
+- Stream PCM audio directly into playback.
+- Start TTS as soon as the first safe answer phrase arrives.
+- Use a faster or direct TTS provider.
+- Test a local lightweight voice when speed matters more than voice quality.
+- Keep the TTS connection warm when the provider supports it.
+
+**Trade-off:** Streaming audio requires careful buffering, cancellation, and
+stop handling. Local or faster voices may sound less natural.
+
+### 6. Full answer playback — about 10.60 seconds after first audio
+
+**What happens:** Friday continues synthesizing and playing the remaining
+sentences.
+
+**Why it is slow:** The model may produce a long answer and every sentence
+requires audio playback.
+
+**How to improve it:**
+
+- Keep spoken answers short.
+- Stream later sentences while the first sentence is playing.
+- Stop or cancel the answer immediately when the user interrupts.
+
+**Trade-off:** Shorter answers may omit useful detail.
+
+### 7. Teams and browser delivery — not measured
+
+The benchmark ends when audio starts playing into the virtual microphone. It
+does not measure browser capture, Teams transport, server delay, or when a
+remote participant hears the answer.
+
+**How to improve it:** Run the same benchmark in a real Teams meeting and add
+timestamps around browser capture and remote playback if possible.
+
+## Recommended improvement path
+
+```mermaid
+flowchart TB
+    A[Meeting audio] --> B[Partial STT and wake detection]
+    B --> C[Adaptive short endpoint]
+    C --> D[Fast answer model]
+    D --> E[First answer phrase]
+    E --> F[Streaming TTS PCM]
+    F --> G[Virtual microphone]
+    G --> H[Teams participants]
 ```
 
-The participant utterances were generated speech played into the meeting audio
-bus. This is a controlled local benchmark and does **not** yet represent a
-live Teams network measurement.
+1. **Test endpointing first.** It is low risk and affects every interaction.
+2. **Test faster STT.** Measure speed and recognition accuracy together.
+3. **Test a faster answer model and smaller prompt.** Keep the current model as
+   the quality baseline.
+4. **Change TTS to stream audio directly.** This is the most promising larger
+   improvement because it removes the wait for a complete WAV.
+5. **Keep answers short and interruptible.** This improves completion time and
+   makes the worker feel more responsive.
+6. **Measure the result on a real Teams call.** The local benchmark does not
+   include the final delivery path.
 
-## Aggregate results
+## Improvement options
 
-All values are milliseconds.
+| Option | Expected first audio | Main benefit | Main cost or risk |
+|---|---:|---|---|
+| Tune current settings | About 5–7 seconds, hypothesis | Lowest implementation risk | Hosted model and TTS delays remain |
+| Optimize streaming path | About 3–5 seconds, hypothesis | Preserves most current quality | Requires streaming and cancellation work |
+| Fast local components | About 3–5 seconds, hypothesis | Less network variance | Possible STT, answer, and voice quality loss |
+| Realtime audio pipeline | About 1–3 seconds after speech ends, hypothesis | Best conversational response | Highest complexity and provider dependence |
+| Immediate acknowledgement | Acknowledgement is near-immediate | Reduces perceived waiting | Does not reduce actual answer time |
 
-| Measurement | Minimum | P50 | P95 | Maximum |
-|---|---:|---:|---:|---:|
-| Speech detected to first response audio | 7,939.2 | **8,252.3** | **9,770.4** | 9,770.4 |
-| Speech detected to response completion | 13,427.0 | **21,070.3** | **25,536.6** | 25,536.6 |
-| Speech capture, endpointing, and STT | 3,090.7 | **3,642.1** | **5,470.3** | 5,470.3 |
-| STT model processing only | 1,505.1 | **1,636.4** | **1,672.8** | 1,672.8 |
-| Context lookup | 1.4 | **1.6** | **2.2** | 2.2 |
-| Model request to first token | 1,566.4 | **1,885.0** | **2,311.1** | 2,311.1 |
-| First TTS synthesis | 2,464.4 | **2,613.2** | **3,044.8** | 3,044.8 |
-| Audio playback after first response audio | 5,487.8 | **12,451.0** | **17,055.4** | 17,055.4 |
+These ranges are planning estimates, not measured results. Each option needs an
+A/B benchmark before becoming a product target.
 
-The percentile calculation uses the nearest-rank P95. With five samples, the
-P95 is therefore the slowest measured sample.
+## Bottom line
 
-## Individual trials
+The main gaps are **silence endpointing, CPU STT, remote model startup, and
+first-sentence TTS buffering**. Context lookup and local agent reasoning are
+not causing the observed delay.
 
-| Trial | Recognized question | First response audio | Response complete |
-|---:|---|---:|---:|
-| 1 | “what did we agree about” | 8.48 s | 25.54 s |
-| 2 | “who will prepare the report” | 7.94 s | 13.43 s |
-| 3 | “where is the lunch” | 8.14 s | 20.59 s |
-| 4 | “what is the main decision” | 9.77 s | 21.07 s |
-| 5 | “what is the lunch plan” | 8.25 s | 23.61 s |
+The best practical path is to shorten endpointing, use faster or partial STT,
+select a lower-latency answer path, and stream the first TTS audio directly to
+the virtual microphone. The largest likely improvement comes from removing the
+current wait for a complete TTS WAV.
 
-## Findings
-
-1. **The first response is noticeably slow.** The worker does not begin
-   speaking until roughly eight to ten seconds after speech is detected.
-2. **Context lookup is not a bottleneck.** It consistently takes about two
-   milliseconds.
-3. **Speech capture and endpointing contribute materially.** The combined
-   capture, silence detection, and STT phase has a median of 3.64 seconds.
-4. **The answer model is a secondary contributor.** Time from model request to
-   the first token has a median of 1.89 seconds and a P95 of 2.31 seconds.
-5. **Initial TTS synthesis is also significant.** The first response audio
-   waits a median of 2.61 seconds for synthesis.
-6. **Full-response latency is dominated by response length.** Once the first
-   audio begins, playback can continue for several additional seconds. The
-   completion P95 was 25.54 seconds.
-7. **Speech recognition quality affected the sample.** The test intended to ask
-   about the launch plan, but STT recognized “launch” as “lunch” in the final
-   question. This is recorded as a benchmark quality observation, not treated
-   as a latency failure.
-
-## Timing definitions
-
-- **Speech detected:** the local audio segmenter detects the beginning of a
-  speech segment.
-- **Speech detected to first response audio:** time until the first synthesized
-  response WAV begins playback into the worker's virtual microphone.
-- **Speech detected to response completion:** time until all generated response
-  audio finishes playback.
-- **Speech capture, endpointing, and STT:** includes the utterance duration,
-  configured silence endpoint, and STT processing. It is intentionally broader
-  than STT model time alone.
-- **Model request to first token:** time from starting the streamed answer
-  request until the first model text delta arrives.
-- **First TTS synthesis:** time needed to synthesize the first response sentence
-  after model text becomes available.
-
-## Instrumentation changes
-
-The measurement added timestamp tracing at the following boundaries:
-
-- speech segment start, endpoint, and STT start/finish;
-- context request start/finish;
-- model request start, first token, and finish;
-- first TTS start/finish;
-- first audio playback start;
-- complete response playback finish.
-
-The trace is emitted as a single `[latency]` JSON record in the agent service
-log for every measured question. The benchmark command returns the individual
-records and aggregate statistics.
-
-## Scope and limitations
-
-- This was a five-trial controlled local run, not a live Teams call.
-- The participant side used generated test speech rather than a human speaker.
-- Network conditions, browser audio capture, meeting-server transport, and
-  real participant interruptions were not separately isolated.
-- The benchmark measures response start and completion, but does not define an
-  acceptable product latency target.
-- This document records findings only; no latency optimization was performed.
+The current implementation is measurable and working, but the final latency
+must be rechecked on a live Teams call before setting an acceptance target.
