@@ -176,6 +176,14 @@ class TestBackendProtocol(unittest.TestCase):
                                    "requester": "dana", "in_meeting": True,
                                    "text": "anything about the launch?"})
             self.assertTrue(r["data"]["allowed"])
+            r = self._rpc(s, buf, {"type": "context.get", "req_id": "4",
+                                   "requester": "carol",
+                                   "question": "anything about the launch?",
+                                   "in_meeting": True})
+            self.assertTrue(r["data"]["allowed"])
+            self.assertIn("_timing", r["data"])
+            self.assertGreaterEqual(
+                r["data"]["_timing"]["backend_context_ms"], 0)
         finally:
             s.close()
 

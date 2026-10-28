@@ -651,6 +651,9 @@ class Worker:
                 "in_meeting": self.joined_url is not None,
             }, timeout=30)
             timing["context_finished_at"] = time.monotonic()
+            context_timing = context.get("_timing") or {}
+            timing["context_backend_ms"] = context_timing.get(
+                "backend_context_ms")
         except Exception as exc:
             print("[agent] context.get failed: %s" % exc, flush=True)
             context = {}
@@ -789,27 +792,54 @@ class Worker:
         without adding a database or changing the worker's runtime protocol.
         """
         import json
+
+        def elapsed(start_name, end_name):
+            start = timing.get(start_name)
+            end = timing.get(end_name)
+            if start is None or end is None:
+                return None
+            return round((end - start) * 1000, 3)
+
+        context_ms = elapsed("context_started_at", "context_finished_at")
+        backend_context_ms = timing.get("context_backend_ms")
+        transport_ms = None
+        if context_ms is not None and backend_context_ms is not None:
+            transport_ms = round(context_ms - backend_context_ms, 3)
         fields = {
-            "speech_to_text_ms": (timing.get("stt_finished_at", 0) -
-                                   timing.get("speech_started_at", 0)) * 1000,
-            "stt_ms": (timing.get("stt_finished_at", 0) -
-                        timing.get("stt_started_at", 0)) * 1000,
-            "context_ms": (timing.get("context_finished_at", 0) -
-                            timing.get("context_started_at", 0)) * 1000,
-            "model_to_first_token_ms": (timing.get("model_first_delta_at", 0) -
-                                         timing.get("model_started_at", 0)) * 1000,
-            "first_tts_ms": (timing.get("tts_finished_at", 0) -
-                              timing.get("tts_started_at", 0)) * 1000,
-            "recognized_to_audio_ms": (timing.get("audio_started_at", 0) -
-                                       timing.get("recognized_at", 0)) * 1000,
-            "speech_to_audio_ms": (timing.get("audio_started_at", 0) -
-                                   timing.get("speech_started_at", 0)) * 1000,
-            "audio_playback_ms": (timing.get("response_finished_at", 0) -
-                                  timing.get("audio_started_at", 0)) * 1000,
-            "speech_to_finished_ms": (timing.get("response_finished_at", 0) -
-                                       timing.get("speech_started_at", 0)) * 1000,
+            # Audio and endpoint boundary.
+            "speech_to_endpoint_ms": elapsed(
+                "speech_started_at", "endpointed_at"),
+            "endpoint_to_recognized_ms": elapsed(
+                "endpointed_at", "recognized_at"),
+            "speech_to_text_ms": elapsed(
+                "speech_started_at", "stt_finished_at"),
+            "stt_ms": elapsed("stt_started_at", "stt_finished_at"),
+            # Agent-to-backend context boundary.
+            "recognized_to_question_ms": elapsed(
+                "recognized_at", "question_received_at"),
+            "question_to_context_ms": elapsed(
+                "question_received_at", "context_started_at"),
+            "context_ms": context_ms,
+            "context_backend_ms": backend_context_ms,
+            "context_transport_ms": transport_ms,
+            # Model and voice boundaries.
+            "model_to_first_token_ms": elapsed(
+                "model_started_at", "model_first_delta_at"),
+            "first_tts_ms": elapsed("tts_started_at", "tts_finished_at"),
+            "recognized_to_audio_ms": elapsed(
+                "recognized_at", "audio_started_at"),
+            "endpoint_to_audio_ms": elapsed(
+                "endpointed_at", "audio_started_at"),
+            "speech_to_audio_ms": elapsed(
+                "speech_started_at", "audio_started_at"),
+            "audio_playback_ms": elapsed(
+                "audio_started_at", "response_finished_at"),
+            "speech_to_finished_ms": elapsed(
+                "speech_started_at", "response_finished_at"),
         }
-        record = {"question": question, "metrics_ms": fields,
+        record = {"measurement_scope": "agent-local-pipeline",
+                  "timing_version": 2, "question": question,
+                  "metrics_ms": fields,
                   "speech_duration_s": timing.get("speech_duration_s")}
         with self._latency_condition:
             self._latency_records.append(record)

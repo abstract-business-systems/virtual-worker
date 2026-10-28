@@ -97,7 +97,18 @@ file-added date.*
 - Recorded the instruction to organize and measure the existing data before
   changing code.
 
-### 2026-10-28 — Local latency benchmark recorded
+### 2026-10-28 — Expanded latency measurement and research
+
+- The worker's timing trace was expanded to separate endpointing, STT, agent
+  handling, backend context work, model first token, TTS, and playback.
+- A fresh five-trial local run measured 7.77 seconds median to first audio and
+  20.32 seconds median to complete the spoken response.
+- Network and OpenRouter routing behavior were researched without changing the
+  provider, model, region, or worker behavior.
+- Findings and remaining measurement gaps are recorded in
+  [`latency-findings.md`](latency-findings.md).
+
+### 2026-10-28 — Initial local latency benchmark recorded
 
 - Five local question-and-answer trials were measured through the worker's
   audio pipeline.

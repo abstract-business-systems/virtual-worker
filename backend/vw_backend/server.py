@@ -302,7 +302,20 @@ class Backend:
 
     def h_context_get(self, msg):
         """Assembled, ACL-checked context for the streaming answer path:
-        recent transcript + relevant past segments + KB hits for the question."""
+        recent transcript + relevant past segments + KB hits for the question.
+
+        The private timing field lets the agent separate backend work from the
+        end-to-end context request. It is diagnostic metadata only.
+        """
+        context_started_at = time.monotonic()
+
+        def finish(data):
+            data["_timing"] = {
+                "backend_context_ms": round(
+                    (time.monotonic() - context_started_at) * 1000, 3)
+            }
+            return data
+
         requester = msg.get("requester", "unknown")
         question = msg.get("question", "")
         meeting = self.kb.active_meeting()
@@ -312,8 +325,8 @@ class Backend:
             self.kb.ensure_member_of_team(requester, meeting_team)
         allowed = self.kb.allowed_team_ids(requester)
         if not allowed:
-            return {"transcript": [], "kb_hits": [], "segment_hits": [],
-                    "allowed": False}
+            return finish({"transcript": [], "kb_hits": [],
+                           "segment_hits": [], "allowed": False})
         # Only questions that explicitly reference the past ("what did we
         # discuss last meeting", "do you remember") may pull stored documents
         # or OTHER meetings' transcripts. Everything else is grounded in the
@@ -328,8 +341,9 @@ class Backend:
                                 (meeting_id,)).fetchone()
             if row and row["text"]:
                 summaries.append(row["text"])
-        return {
-            "transcript": self.kb.recent_transcript(meeting_id) if meeting_id else [],
+        return finish({
+            "transcript": self.kb.recent_transcript(meeting_id)
+            if meeting_id else [],
             "summaries": summaries,
             "kb_hits": (self.kb.kb_search(question, allowed)
                         if want_memory else []),
@@ -337,7 +351,7 @@ class Backend:
                                                      allowed)
                              if meeting_id and want_memory else []),
             "allowed": True,
-        }
+        })
 
     def h_transcript_get(self, msg):
         meeting = self.kb.active_meeting()
