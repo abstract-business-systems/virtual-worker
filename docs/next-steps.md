@@ -58,6 +58,11 @@ layers.
 
 ### Next design deliverable
 
+The design plan is drafted in
+[`conversation-layer-plan.md`](conversation-layer-plan.md) — target
+architecture, state machine, interaction timeline, first-phase scope, and open
+questions — prepared for review with Viswanath before implementation.
+
 Before implementation, prepare and review one simple conversation-flow diagram
 covering:
 
@@ -89,7 +94,10 @@ together with streaming STT and streaming TTS.
 
 Open-source options for implementing this layer, including the Pipecat
 recommendation, are documented in
-[`conversation-layer-research.md`](conversation-layer-research.md).
+[`conversation-layer-research.md`](conversation-layer-research.md). The options
+and their trade-offs are also listed, without a final decision, in
+[`conversation-layer-plan.md`](conversation-layer-plan.md), section
+"Conversation layer — implementation options (not finalized)".
 
 **Deferred:** the remaining technical optimizations — model changes, region and
 provider changes, endpoint tuning.

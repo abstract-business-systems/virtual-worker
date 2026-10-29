@@ -144,6 +144,8 @@ are the recording file-added dates.*
 - Researched open-source conversation-layer options. Pipecat is the recommended
   full-framework fit; RealtimeSTT, Silero VAD, and smart-turn are the lighter
   component alternatives. See [`conversation-layer-research.md`](conversation-layer-research.md).
+  Note: the framework choice is not finalized — the options and their trade-offs
+  are also listed in [`conversation-layer-plan.md`](conversation-layer-plan.md).
 
 ### 2026-10-28 — M3 latency review and layered measurements
 
@@ -212,5 +214,6 @@ are the recording file-added dates.*
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |
 | `conversation-layer-research.md` | Open-source conversation-layer options and recommendation |
+| `conversation-layer-plan.md` | Conversation-layer architecture, options (not finalized), and plan for review |
 | `architecture.md` | Current deployed system architecture |
 | `design.md` | Current deployed design and implementation notes |
