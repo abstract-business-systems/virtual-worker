@@ -36,9 +36,10 @@ When a new recording `N.vtt` is added:
 | M3 | [`3.vtt`](recordings/3.vtt) | 2026-10-28* | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Latency review: functional acknowledgement, evidence-based investigation, and multi-level measurement | [`next-steps.md`](next-steps.md) |
 | M4 | [`4.vtt`](recordings/4.vtt) | 2026-10-29* | 10m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Conversation layer, continuous speech processing, acknowledgement, progress updates, and streaming | [`next-steps.md`](next-steps.md) |
 | M5 | [`5.vtt`](recordings/5.vtt) | 2026-10-29* | 21m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Perceived delay as the primary goal; conversation states, background work, interruption, and content separation | [`next-steps.md`](next-steps.md) |
+| M6 | [`6.vtt`](recordings/6.vtt) | 2026-10-29* | 9m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Follow-up 1:1: voice-model cost research, conversation-layer plan alignment, and a Pipecat demo experiment | [`next-steps.md`](next-steps.md), [`conversation-layer-plan.md`](conversation-layer-plan.md) |
 
 *The transcripts do not state their recording dates; 2026-10-28 is the M3
-recording file's added date, and 2026-10-29 is the M4 and M5 file-added date.*
+recording file's added date, and 2026-10-29 is the M4–M6 file-added date.*
 
 ## 3. Meeting summaries
 
@@ -119,12 +120,50 @@ The meetings asked for a conversation-flow diagram and a reviewed design before
 implementation. The technical latency research remains secondary to this
 conversation-layer design.
 
+### M6 — Follow-up 1:1: voice-model cost and Pipecat demo (`6.vtt`)
+
+The meeting aligned the conversation-layer plan and set the next steps:
+
+- **Voice-model costs were never researched.** Earlier work covered only STT
+  and TTS models. The assumption that native voice (speech-to-speech) models
+  are costly must be revisited with real numbers — specifically the current
+  cost of voice models that support background function calls, at the target
+  scale (Friday in meetings ~6 hours/day for roughly 10 people).
+- If native voice models are not cost-effective, look for an existing project
+  that mimics their behavior using STT + LLM + TTS, and compare the cost
+  delta and latency. Prices are expected to fall (assumed at least half in
+  six months), so current cost must be known but is not disqualifying.
+- **The conversation-layer plan was aligned.** The conversation layer is a
+  good idea but must not be the only fix: the technical latency issues are
+  fixed alongside it. Viswanath also asked a ranking question — if only one
+  thing could be fixed, which, and why, or how to split focus between
+  perceived delay and technical latency — which still needs a quantified
+  answer.
+- **A Pipecat demo was approved.** Pipecat's architecture (streaming STT →
+  LLM → TTS) supports local faster-whisper STT, ElevenLabs TTS, and
+  OpenAI-compatible endpoints (OpenRouter via base URL), so models can be
+  mixed without native voice models. Build a small standalone Pipecat demo —
+  nothing else — measure its latency and cost, including the
+  acknowledge-before-long-process behavior, and use the results to decide
+  whether Friday's final implementation could be built on it.
+
 ## 4. Journal
 
 Newest entries appear first.
 
 *The recording dates are not stated in the transcripts; the dates shown above
 are the recording file-added dates.*
+
+### 2026-10-29 — M6 follow-up: voice-model cost and Pipecat demo
+
+- Added M6 as the follow-up 1:1 with Viswanath.
+- Recorded that voice-model costs were never researched and must be measured
+  at target scale before choosing a voice approach.
+- Recorded the plan alignment: conversation layer first, technical latency
+  fixed alongside it.
+- Recorded the approved next step: a minimal Pipecat demo measuring latency,
+  cost, and acknowledge-before-long-process behavior, before finalizing the
+  implementation choice.
 
 ### 2026-10-29 — M4 and M5 conversation-layer direction
 
@@ -203,13 +242,16 @@ are the recording file-added dates.*
 | 8 | Organize existing latency data and define multi-level measurements | M3 | Engineering | Complete — local and live worker-path findings are recorded in [`latency-findings.md`](latency-findings.md) |
 | 9 | Define listening, waiting, acting, progress, interruption, and resumption states | M4/M5 | Product and engineering | Open — keep conversation handling separate from content reasoning |
 | 10 | Defer multi-speaker identification and live translation until the single-speaker flow is clear | M5 | Product and engineering | Deferred — add as a later conversation layer |
+| 11 | Research current native voice-model costs (supporting background function calls) at target scale (~6 h/day, ~10 people), and compare against an STT + LLM + TTS pipeline that mimics voice models, including cost delta and latency | M6 | Engineering | Open — revisit the earlier "costly" assumption with real numbers |
+| 12 | Build a minimal standalone Pipecat demo and measure latency, cost, and perceived delay, including acknowledge-before-long-process behavior | M6 | Engineering | Open — result feeds the implementation-option choice |
+| 13 | Answer the M6 ranking question: perceived delay vs. technical latency — which single focus, or what split, and why | M6 | Product and engineering | Open — needs a quantified ranking, not prose |
 
 ## 6. Document map
 
 | Document | Purpose |
 |---|---|
 | `meetings.md` | Living index, summaries, journal, and action items |
-| `recordings/1.vtt`, `recordings/2.vtt`, `recordings/3.vtt`, `recordings/4.vtt`, `recordings/5.vtt` | Immutable meeting source transcripts |
+| `recordings/1.vtt`, `recordings/2.vtt`, `recordings/3.vtt`, `recordings/4.vtt`, `recordings/5.vtt`, `recordings/6.vtt` | Immutable meeting source transcripts |
 | `requirements.md` | Product requirements from M1 |
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |

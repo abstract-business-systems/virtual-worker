@@ -2,8 +2,9 @@
 
 Source: [`docs/recordings/2.vtt`](recordings/2.vtt)
 Additional sources: [`docs/recordings/3.vtt`](recordings/3.vtt),
-[`docs/recordings/4.vtt`](recordings/4.vtt), and
-[`docs/recordings/5.vtt`](recordings/5.vtt)
+[`docs/recordings/4.vtt`](recordings/4.vtt),
+[`docs/recordings/5.vtt`](recordings/5.vtt), and
+[`docs/recordings/6.vtt`](recordings/6.vtt)
 
 This document captures the priorities, decisions, and follow-up work from the
 16 October meeting. It complements the product requirements in
@@ -63,16 +64,6 @@ The design plan is drafted in
 architecture, state machine, interaction timeline, first-phase scope, and open
 questions — prepared for review with Viswanath before implementation.
 
-Before implementation, prepare and review one simple conversation-flow diagram
-covering:
-
-1. listening to a user;
-2. deciding whether the input is complete;
-3. acknowledging and starting work;
-4. waiting or providing progress;
-5. handling interruption, correction, or resumption;
-6. delivering the content result.
-
 ### Validation of the layer-first order
 
 The direction was validated against the measured baselines in
@@ -101,6 +92,46 @@ and their trade-offs are also listed, without a final decision, in
 
 **Deferred:** the remaining technical optimizations — model changes, region and
 provider changes, endpoint tuning.
+
+## M6 follow-up — voice-model cost and Pipecat demo
+
+The M6 1:1 aligned the plan. **Sequence: a quick cost comparison comes first
+(it is small — voice and STT/TTS model costs, done fast), then the Pipecat
+demo; the ranking answer can be prepared in parallel.** No latency-fixing or
+conversation-layer implementation starts before these.
+
+### 1. Cost comparison research (first — quick)
+
+Native voice (speech-to-speech) model costs were never researched — earlier
+work covered only STT and TTS models. Revisit the "costly" assumption with
+real numbers, kept deliberately small and fast:
+
+- Current cost of voice models that support background function calls, at the
+  target scale: Friday in meetings roughly 6 hours/day for ~10 people.
+- Cost of the voice STT and TTS models for the same path, as the non-voice
+  side of the comparison.
+- Assume prices fall (at least half in six months); know the current cost, but
+  do not let it disqualify an approach prematurely.
+
+### 2. Pipecat demo experiment (after the cost check)
+
+Build a small standalone Pipecat demo — nothing else — and measure:
+
+1. Latency and perceived delay through the streaming STT → LLM → TTS path
+   (local faster-whisper STT, ElevenLabs TTS, OpenRouter via an
+   OpenAI-compatible base URL).
+2. The acknowledge-before-long-process behavior from M3–M5.
+3. Cost per interaction and per meeting-hour.
+
+The result decides whether Friday's final implementation could be built on
+Pipecat, and it completes the cost comparison with measured numbers from the
+streaming path.
+
+### 3. Ranking question (unanswered, in parallel)
+
+Viswanath asked: if only one thing could be fixed, which — perceived delay or
+technical latency — and why? Or how should the focus be split? Answer with a
+quantified ranking (using the measured stage breakdown), not prose.
 
 ## Priority requirements
 

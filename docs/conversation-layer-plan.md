@@ -85,6 +85,10 @@ answer spoken when ready, interruptible.
 
 ## 4. First-phase scope
 
+This implementation phase starts **only after the M6 Pipecat demo** (see
+section 5); the demo results feed the option choice and the integration
+approach.
+
 Three workstreams, in dependency order:
 
 1. **Audio loop rewrite** — VAD + streaming endpointing, the state machine,
@@ -97,7 +101,10 @@ Three workstreams, in dependency order:
 
 > Decision pending with Viswanath. Once an option is finalized, the
 > integration approach follows from it. Pipecat was the research favorite but
-> is **not** a decision.
+> is **not** a decision. M6 set the gate: build a minimal standalone Pipecat
+> demo measuring latency, cost, and the acknowledge-before-long-process
+> behavior — the option choice follows from those results (see
+> [`next-steps.md`](next-steps.md), "M6 follow-up").
 
 | Option | What it is | Trade-off |
 |---|---|---|
@@ -132,6 +139,7 @@ both old and new behind `VW_CONV_ENGINE=legacy|pipecat` for A/B benchmarking.
    ("Pradhy", "Grady"). Wake-word verification or semantic detection?
 4. **Progress updates** — threshold for when a long task deserves an interim
    update.
-5. **Option choice** — A, B, or C from section 5.
+5. **Option choice** — A, B, or C from section 5; gated on the M6 Pipecat
+   demo results.
 6. **TTS streaming cost** — streaming/live TTS may cost more (M4 concern);
    acceptable trade-off?

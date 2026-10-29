@@ -1,0 +1,800 @@
+WEBVTT
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/7-0
+00:00:28.428 --> 00:00:29.148
+<v Viswanath Chidambaram>Has it started?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/8-0
+00:00:30.748 --> 00:00:31.068
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/10-0
+00:00:32.988 --> 00:00:36.332
+<v Viswanath Chidambaram>So where are we? Okay,
+so earlier actually we were actually</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/10-1
+00:00:36.332 --> 00:00:39.954
+<v Viswanath Chidambaram>looking for STMTTS models.
+We never look for voice models. Okay,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/9-0
+00:00:39.868 --> 00:00:39.988
+<v Sarooparam Chenaram Darji>No.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/10-2
+00:00:39.954 --> 00:00:42.908
+<v Viswanath Chidambaram>part of the reason is the assumption is
+it's costly.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/14-0
+00:00:43.308 --> 00:00:48.528
+<v Sarooparam Chenaram Darji>they were costly.
+We looked at some numbers and then made</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/12-0
+00:00:44.188 --> 00:00:46.108
+<v Viswanath Chidambaram>Okay, yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/14-1
+00:00:48.528 --> 00:00:54.828
+<v Sarooparam Chenaram Darji>like they are very costlier,
+but we have to revisit the numbers once.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/13-0
+00:00:51.708 --> 00:00:51.988
+<v Viswanath Chidambaram>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/18-0
+00:00:56.908 --> 00:01:01.997
+<v Viswanath Chidambaram>So where am I going is maybe this Navna A
+might have their own voice model,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/18-1
+00:01:01.997 --> 00:01:03.068
+<v Viswanath Chidambaram>not just HTMLTS.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/16-0
+00:01:02.028 --> 00:01:02.188
+<v Sarooparam Chenaram Darji>Right.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/17-0
+00:01:03.668 --> 00:01:04.188
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/19-0
+00:01:05.308 --> 00:01:08.610
+<v Viswanath Chidambaram>Okay,
+and even if actually actually we are not</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/19-1
+00:01:08.610 --> 00:01:13.105
+<v Viswanath Chidambaram>actually finding anything,
+what we should look for is we should</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/19-2
+00:01:13.105 --> 00:01:17.179
+<v Viswanath Chidambaram>actually look for a project which can use
+regular models,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/19-3
+00:01:17.179 --> 00:01:22.377
+<v Viswanath Chidambaram>HTTTS and inference models, okay,
+and the emirate voice models like while</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/19-4
+00:01:22.377 --> 00:01:25.468
+<v Viswanath Chidambaram>actually maintaining the less
+interlatency.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/20-0
+00:01:25.548 --> 00:01:26.588
+<v Viswanath Chidambaram>I am reducing cost.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/21-0
+00:01:28.988 --> 00:01:31.075
+<v Viswanath Chidambaram>OK,
+we should be looking for something</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/21-1
+00:01:31.075 --> 00:01:34.821
+<v Viswanath Chidambaram>existing go first. Actually,
+the first the first search we have to do</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/21-2
+00:01:34.821 --> 00:01:36.748
+<v Viswanath Chidambaram>is for cost effective device models.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/22-0
+00:01:37.628 --> 00:01:37.948
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/23-0
+00:01:39.308 --> 00:01:41.459
+<v Viswanath Chidambaram>Okay,
+and then actually if actually the voice</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/23-1
+00:01:41.459 --> 00:01:44.545
+<v Viswanath Chidambaram>also not cost stability,
+let's actually take an example for let's</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/23-2
+00:01:44.545 --> 00:01:45.948
+<v Viswanath Chidambaram>say like this one, what is it?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/24-0
+00:01:49.788 --> 00:01:52.793
+<v Viswanath Chidambaram>Friday, okay,
+I'll send that actually Friday will be in</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/24-1
+00:01:52.793 --> 00:01:54.188
+<v Viswanath Chidambaram>meeting for 6 hours today.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/25-0
+00:01:55.068 --> 00:01:55.388
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/26-0
+00:01:55.388 --> 00:01:58.152
+<v Viswanath Chidambaram>Okay,
+I have seen that actually there are</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/26-1
+00:01:58.152 --> 00:02:01.970
+<v Viswanath Chidambaram>actually 10 people.
+I have seen that actually with the 10</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/26-2
+00:02:01.970 --> 00:02:06.643
+<v Viswanath Chidambaram>people today I will be sitting in the
+meeting for 6 hours a day. Okay,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/26-3
+00:02:06.643 --> 00:02:11.513
+<v Viswanath Chidambaram>now actually we have to figure out
+actually like the cost for how much we</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/26-4
+00:02:11.513 --> 00:02:13.948
+<v Viswanath Chidambaram>are the around 10 people, am I right?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/27-0
+00:02:14.628 --> 00:02:17.068
+<v Viswanath Chidambaram>We have to figure out a car for 1620 K.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/28-0
+00:02:18.508 --> 00:02:20.930
+<v Viswanath Chidambaram>Okay,
+which is like thousands of dollars per</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/28-1
+00:02:20.930 --> 00:02:21.468
+<v Viswanath Chidambaram>per month.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/30-0
+00:02:23.428 --> 00:02:25.984
+<v Viswanath Chidambaram>OK, if it is ₹10,
+we could actually like ₹10 per hour.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/29-0
+00:02:23.468 --> 00:02:23.788
+<v Sarooparam Chenaram Darji>Yes.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/30-1
+00:02:25.984 --> 00:02:28.028
+<v Viswanath Chidambaram>We could actually think about replacing
+it.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/32-0
+00:02:30.268 --> 00:02:33.300
+<v Viswanath Chidambaram>Okay, if not,
+then you have to figure out actually what</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/32-1
+00:02:33.300 --> 00:02:36.331
+<v Viswanath Chidambaram>is the alternate.
+Is there a project which can actually</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/32-2
+00:02:36.331 --> 00:02:39.308
+<v Viswanath Chidambaram>like mimic the voice models by using non
+voice models?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/32-3
+00:02:39.308 --> 00:02:41.798
+<v Viswanath Chidambaram>And we have to understand the cost delta
+too.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/32-4
+00:02:41.798 --> 00:02:45.913
+<v Viswanath Chidambaram>So like we can simply assume that
+actually in 6 months the price will be at</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/31-0
+00:02:42.988 --> 00:02:43.468
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/32-5
+00:02:45.913 --> 00:02:46.508
+<v Viswanath Chidambaram>least half.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/35-0
+00:02:48.508 --> 00:02:51.489
+<v Viswanath Chidambaram>Our project actually to scale which we
+need actually six months,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/35-1
+00:02:51.489 --> 00:02:54.195
+<v Viswanath Chidambaram>so we don't have to actually worry about
+the current cost,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/35-2
+00:02:54.195 --> 00:02:57.589
+<v Viswanath Chidambaram>but we definitely have to know the
+current cost for voice models that can</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/33-0
+00:02:55.948 --> 00:02:56.268
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/35-3
+00:02:57.589 --> 00:02:59.148
+<v Viswanath Chidambaram>support background function calls.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/34-0
+00:02:59.788 --> 00:03:00.028
+<v Sarooparam Chenaram Darji>Bye.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/37-0
+00:03:01.388 --> 00:03:04.369
+<v Viswanath Chidambaram>If it is not that,
+then actually we'll figure out the any</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/37-1
+00:03:04.369 --> 00:03:08.480
+<v Viswanath Chidambaram>system that can actually use the HTTPS
+plus inference and mimic the behavior of</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/37-2
+00:03:08.480 --> 00:03:09.148
+<v Viswanath Chidambaram>voice models.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/36-0
+00:03:09.788 --> 00:03:10.268
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/38-0
+00:03:11.068 --> 00:03:12.108
+<v Viswanath Chidambaram>Compare the cost for it.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/39-0
+00:03:12.668 --> 00:03:12.948
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/40-0
+00:03:14.988 --> 00:03:17.108
+<v Viswanath Chidambaram>That's what again we have to do.
+Let's see how things turn out.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/41-0
+00:03:18.028 --> 00:03:18.508
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/42-0
+00:03:21.628 --> 00:03:22.748
+<v Viswanath Chidambaram>Anything else on this?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/43-0
+00:03:24.028 --> 00:03:27.548
+<v Sarooparam Chenaram Darji>No, basically,
+I just wanted to align about these things.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/44-0
+00:03:28.588 --> 00:03:31.708
+<v Viswanath Chidambaram>Okay, thanks.
+What did we plan for 4 hours?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/45-0
+00:03:32.108 --> 00:03:38.883
+<v Sarooparam Chenaram Darji>Wait, this basically the one thing, sorry,
+totally forgot about the architecture</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/45-1
+00:03:38.883 --> 00:03:39.468
+<v Sarooparam Chenaram Darji>itself.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/48-0
+00:03:41.468 --> 00:03:46.615
+<v Sarooparam Chenaram Darji>The you were talking about the
+conversation layer plan and you also</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/48-1
+00:03:46.615 --> 00:03:50.248
+<v Sarooparam Chenaram Darji>wanted me to check whether it is viable
+or not.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/48-2
+00:03:50.248 --> 00:03:55.243
+<v Sarooparam Chenaram Darji>So it says like conversation layer on its
+own, it is a good idea,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/46-0
+00:03:50.348 --> 00:03:50.668
+<v Viswanath Chidambaram>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/48-3
+00:03:55.243 --> 00:03:59.708
+<v Sarooparam Chenaram Darji>but that shouldn't be the only thing you
+should be fixing.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/47-0
+00:03:55.308 --> 00:03:55.788
+<v Viswanath Chidambaram>Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/49-0
+00:04:00.668 --> 00:04:02.945
+<v Viswanath Chidambaram>Okay,
+what else does it will suggest something</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/49-1
+00:04:02.945 --> 00:04:04.108
+<v Viswanath Chidambaram>that should be added to?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/51-0
+00:04:04.828 --> 00:04:09.669
+<v Sarooparam Chenaram Darji>Yeah,
+so it says like you should be fix fixing</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/51-1
+00:04:09.669 --> 00:04:17.084
+<v Sarooparam Chenaram Darji>couple of more things with the
+conversation layer because they are tied</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/50-0
+00:04:13.468 --> 00:04:13.948
+<v Viswanath Chidambaram>Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/51-2
+00:04:17.084 --> 00:04:22.130
+<v Sarooparam Chenaram Darji>with it.
+So like even if you do the conversation</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/51-3
+00:04:22.130 --> 00:04:22.748
+<v Sarooparam Chenaram Darji>layer.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/52-0
+00:04:23.548 --> 00:04:28.988
+<v Sarooparam Chenaram Darji>Your other latency needs to be still
+fixed, which and.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/53-0
+00:04:28.588 --> 00:04:33.005
+<v Viswanath Chidambaram>It is not only the no OK fine
+infrastructure. The question is, again,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/53-1
+00:04:33.005 --> 00:04:36.981
+<v Viswanath Chidambaram>is the conversation basically because the
+primary question is,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/53-2
+00:04:36.981 --> 00:04:42.155
+<v Viswanath Chidambaram>should we be focusing on perceived delay
+over the agency? Did you ask a question?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/53-3
+00:04:42.155 --> 00:04:43.228
+<v Viswanath Chidambaram>What did you say?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/54-0
+00:04:44.028 --> 00:04:48.241
+<v Sarooparam Chenaram Darji>Yeah,
+so perceived delay we should be focusing</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/54-1
+00:04:48.241 --> 00:04:52.096
+<v Sarooparam Chenaram Darji>on,
+but not only focus on it says like you</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/54-2
+00:04:52.096 --> 00:04:58.012
+<v Sarooparam Chenaram Darji>focus on perceived delay,
+but also fix the technical issues which</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/54-3
+00:04:58.012 --> 00:04:58.908
+<v Sarooparam Chenaram Darji>are there.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/56-0
+00:04:59.468 --> 00:05:03.233
+<v Viswanath Chidambaram>Understood, understood. Okay, fine. Okay,
+yeah, that that's a given.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/55-0
+00:05:00.668 --> 00:05:01.548
+<v Sarooparam Chenaram Darji>Along with it.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/56-1
+00:05:03.233 --> 00:05:05.634
+<v Viswanath Chidambaram>But I like I will ask you another
+question,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/56-2
+00:05:05.634 --> 00:05:10.108
+<v Viswanath Chidambaram>saying that let's say like I can focus on
+only one thing, what should I focus on?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/59-0
+00:05:11.628 --> 00:05:15.705
+<v Viswanath Chidambaram>Or actually let's say like you could
+actually give me no actually you could</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/57-0
+00:05:12.068 --> 00:05:12.588
+<v Sarooparam Chenaram Darji>Bye.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/59-1
+00:05:15.705 --> 00:05:19.246
+<v Viswanath Chidambaram>actually ask the you could have asked a
+follow up question. Okay,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/59-2
+00:05:19.246 --> 00:05:23.538
+<v Viswanath Chidambaram>let's say like I can focus on only one
+thing. What would you choose? Why? Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/58-0
+00:05:21.148 --> 00:05:21.268
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/59-3
+00:05:23.538 --> 00:05:27.991
+<v Viswanath Chidambaram>Or else you can ask it actually how much
+actually should we focus on this received</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/59-4
+00:05:27.991 --> 00:05:29.708
+<v Viswanath Chidambaram>delay and how much on technique?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/61-0
+00:05:32.188 --> 00:05:35.991
+<v Viswanath Chidambaram>That will actually like help us actually
+think more and give a ranking.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/61-1
+00:05:35.991 --> 00:05:40.058
+<v Viswanath Chidambaram>The reason I asked you to like ask a
+question is to understand how important</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/61-2
+00:05:40.058 --> 00:05:43.068
+<v Viswanath Chidambaram>is this perceived delay when compared to
+actual latency.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/60-0
+00:05:43.788 --> 00:05:44.308
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/62-0
+00:05:45.308 --> 00:05:47.867
+<v Viswanath Chidambaram>But any data that will clear out,
+but I like you are saying about some</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/62-1
+00:05:47.867 --> 00:05:49.308
+<v Viswanath Chidambaram>architecture. What is this architecture?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/63-0
+00:05:50.108 --> 00:05:53.692
+<v Sarooparam Chenaram Darji>Sir,
+it basically start talking about the</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/63-1
+00:05:53.692 --> 00:05:59.836
+<v Sarooparam Chenaram Darji>conversation layer plan it like it
+planned for the entire layer itself.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/63-2
+00:05:59.836 --> 00:06:01.628
+<v Sarooparam Chenaram Darji>It gave me a diagram.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/64-0
+00:06:03.388 --> 00:06:06.788
+<v Viswanath Chidambaram>Okay, fine,
+we can actually go through ticket.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/65-0
+00:06:04.428 --> 00:06:11.468
+<v Sarooparam Chenaram Darji>And basically, like we can use pipe,
+what is it? What's the name?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/66-0
+00:06:13.148 --> 00:06:13.788
+<v Viswanath Chidambaram>I get.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/67-0
+00:06:14.108 --> 00:06:18.748
+<v Sarooparam Chenaram Darji>A pipe cat or we can come up with our own
+system there.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/68-0
+00:06:20.588 --> 00:06:22.828
+<v Sarooparam Chenaram Darji>But still conversation there.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/69-0
+00:06:21.388 --> 00:06:23.223
+<v Viswanath Chidambaram>Okay,
+actually different voice mail is sent,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/69-1
+00:06:23.223 --> 00:06:23.468
+<v Viswanath Chidambaram>right?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/70-0
+00:06:24.108 --> 00:06:24.228
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/71-0
+00:06:25.868 --> 00:06:29.626
+<v Sarooparam Chenaram Darji>It depends,
+it's basically multi model thing like I</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/71-1
+00:06:29.626 --> 00:06:34.828
+<v Sarooparam Chenaram Darji>think you can depend on that TTS models
+as well, not just voice models.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/73-0
+00:06:36.428 --> 00:06:39.105
+<v Viswanath Chidambaram>This particular thing it depends on
+actually okay,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/73-1
+00:06:39.105 --> 00:06:41.886
+<v Viswanath Chidambaram>so like if you understood what you're
+trying to say,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/73-2
+00:06:41.886 --> 00:06:46.137
+<v Viswanath Chidambaram>if we can just actually that use SpiceJet
+and go to the STT and TTS and actually</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/72-0
+00:06:45.228 --> 00:06:45.588
+<v Sarooparam Chenaram Darji>No.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/73-3
+00:06:46.137 --> 00:06:49.548
+<v Viswanath Chidambaram>still actually mimic the transition.
+That's your opinion, right?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/74-0
+00:06:49.388 --> 00:06:53.548
+<v Sarooparam Chenaram Darji>Yeah, as far as I understood,
+that is what it is saying. Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/77-0
+00:06:51.548 --> 00:06:55.208
+<v Viswanath Chidambaram>Yeah, check that and let me know,
+check that and is like a so like in their</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/77-1
+00:06:55.208 --> 00:06:58.580
+<v Viswanath Chidambaram>demo page, they have voice model,
+but actually the structure actually</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/77-2
+00:06:58.580 --> 00:07:02.625
+<v Viswanath Chidambaram>allows for lets say like mixing up models
+to provide the same experience or similar</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/77-3
+00:07:02.625 --> 00:07:05.948
+<v Viswanath Chidambaram>experience. Is my understanding?
+Is that what you are trying to say?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/75-0
+00:07:04.428 --> 00:07:04.828
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/76-0
+00:07:06.508 --> 00:07:06.908
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/78-0
+00:07:08.508 --> 00:07:11.708
+<v Viswanath Chidambaram>Okay, bye Sir.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/79-0
+00:07:12.668 --> 00:07:17.623
+<v Sarooparam Chenaram Darji>Yeah, whereas this is what they say,
+like streaming STD goes to LLM and then</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/79-1
+00:07:17.623 --> 00:07:21.226
+<v Sarooparam Chenaram Darji>you get the TTS.
+They are not talking about noise model</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/79-2
+00:07:21.226 --> 00:07:21.548
+<v Sarooparam Chenaram Darji>here.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/80-0
+00:07:23.628 --> 00:07:26.611
+<v Viswanath Chidambaram>OK, understood. OK,
+is this actually like a is this other</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/82-0
+00:07:25.428 --> 00:07:33.077
+<v Sarooparam Chenaram Darji>Basically its supposed to so this is pipe
+care basically pipe care says it supposed</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/80-1
+00:07:26.611 --> 00:07:28.308
+<v Viswanath Chidambaram>architecture or 5th architecture?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/82-1
+00:07:33.077 --> 00:07:40.634
+<v Sarooparam Chenaram Darji>local fast service wire STT 11 lakhs TTS
+and open a compatible LLM end points open</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/82-2
+00:07:40.634 --> 00:07:46.188
+<v Sarooparam Chenaram Darji>router via base URL.
+Basically it does support local models.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/81-0
+00:07:43.548 --> 00:07:44.028
+<v Viswanath Chidambaram>Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/84-0
+00:07:46.228 --> 00:07:50.988
+<v Sarooparam Chenaram Darji>TTS models, STT models,
+11 labs and open air compatible models.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/83-0
+00:07:48.428 --> 00:07:49.628
+<v Viswanath Chidambaram>Understood, yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/85-0
+00:07:52.108 --> 00:07:54.958
+<v Viswanath Chidambaram>Yeah, in that case,
+you will actually like if actually we can</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/85-1
+00:07:54.958 --> 00:07:58.037
+<v Viswanath Chidambaram>quickly experiment with it,
+we will try to experiment with it. OK,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/85-2
+00:07:58.037 --> 00:08:01.162
+<v Viswanath Chidambaram>maybe the final implementation of Friday
+could be done on this. OK,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/85-3
+00:08:01.162 --> 00:08:04.471
+<v Viswanath Chidambaram>or at least forget about Friday,
+just actually like launch this project</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/85-4
+00:08:04.471 --> 00:08:05.988
+<v Viswanath Chidambaram>and see like how does it respond.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/86-0
+00:08:07.948 --> 00:08:08.668
+<v Sarooparam Chenaram Darji>I listen.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/87-0
+00:08:07.948 --> 00:08:10.988
+<v Viswanath Chidambaram>Yes,
+it is better now if you're not able to.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/88-0
+00:08:10.428 --> 00:08:15.218
+<v Sarooparam Chenaram Darji>Launch of the pipe cat itself,
+one small like demo with the pipe cat,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/88-1
+00:08:15.218 --> 00:08:16.108
+<v Sarooparam Chenaram Darji>nothing else.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/91-0
+00:08:15.308 --> 00:08:19.321
+<v Viswanath Chidambaram>Yeah, previously kind of thing,
+one or 2 or max try to get it working.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/89-0
+00:08:19.228 --> 00:08:19.628
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/91-1
+00:08:19.321 --> 00:08:23.899
+<v Viswanath Chidambaram>We will actually like compare the HTTP
+and the intelligence models and we'll try</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/91-2
+00:08:23.899 --> 00:08:25.708
+<v Viswanath Chidambaram>to measure the latency and cost.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/90-0
+00:08:26.348 --> 00:08:26.748
+<v Sarooparam Chenaram Darji>Ok.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/93-0
+00:08:27.388 --> 00:08:31.157
+<v Viswanath Chidambaram>Energy cost perceive the delay.
+It really should actually allow us to</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/92-0
+00:08:29.788 --> 00:08:30.268
+<v Sarooparam Chenaram Darji>Thank you.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/93-1
+00:08:31.157 --> 00:08:32.988
+<v Viswanath Chidambaram>like a conflict system compressor.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/94-0
+00:08:33.548 --> 00:08:34.108
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/98-0
+00:08:34.268 --> 00:08:36.530
+<v Viswanath Chidambaram>So that we can actually focus on fixing
+perceivably,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/98-1
+00:08:36.530 --> 00:08:39.476
+<v Viswanath Chidambaram>basically like whenever it should be used
+to actually ask something,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/98-2
+00:08:39.476 --> 00:08:42.079
+<v Viswanath Chidambaram>all which actually acknowledge before
+actually long process,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/98-3
+00:08:42.079 --> 00:08:44.341
+<v Viswanath Chidambaram>whatever we were discussing in the
+monitoring right,</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/95-0
+00:08:42.548 --> 00:08:42.668
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/98-4
+00:08:44.341 --> 00:08:47.628
+<v Viswanath Chidambaram>we'll try to actually give us a session
+prompt and see like what's the open.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/96-0
+00:08:44.348 --> 00:08:44.748
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/97-0
+00:08:48.108 --> 00:08:48.428
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/99-0
+00:08:49.708 --> 00:08:51.708
+<v Viswanath Chidambaram>Okay, any else?</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/100-0
+00:08:50.988 --> 00:08:52.988
+<v Sarooparam Chenaram Darji>Okay, I know.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/102-0
+00:08:54.348 --> 00:08:58.883
+<v Viswanath Chidambaram>Yeah,
+it will be great if you can actually like</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/102-1
+00:08:58.883 --> 00:09:03.228
+<v Viswanath Chidambaram>a actually detailed this and actually
+thermo.</v>
+
+3a5dfd2c-bbaf-49ab-96b8-d1d6defb9f3b/101-0
+00:09:04.188 --> 00:09:04.588
+<v Sarooparam Chenaram Darji>Yeah.</v>
