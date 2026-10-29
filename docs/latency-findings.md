@@ -191,6 +191,80 @@ remote participant hears the answer.
 **How to improve it:** Run the same benchmark in a real Teams meeting and add
 timestamps around browser capture and remote playback if possible.
 
+## Research findings and investigation plan
+
+This section records what the research suggests to test. It does not authorize
+any of these changes.
+
+### Endpointing and STT
+
+- The worker uses a local CPU faster-whisper path. The upstream faster-whisper
+  documentation describes CPU `int8` as a supported configuration and reports
+  lower resource use than full-precision CPU runs, but those published numbers
+  are not a benchmark for this machine or this audio workload.
+- The worker also performs its own energy-based endpointing before calling STT,
+  while STT is invoked with VAD filtering. The two boundaries should be
+  measured separately before changing silence settings.
+- The next fair comparison is the same captured speech samples with the same
+  prompts, comparing endpoint wait, STT duration, and recognition accuracy.
+  No model or endpoint setting should be changed as part of the baseline.
+
+Reference: [faster-whisper documentation](https://github.com/SYSTRAN/faster-whisper).
+
+### Model and provider path
+
+- The measured model interval is from the agent's request start to the first
+  streamed token. It combines connection, routing, provider queueing, and model
+  generation; it is not a provider-only measurement.
+- The current request does not set OpenRouter provider preferences. OpenRouter
+  documents price-oriented default routing and optional latency sorting or
+  latency preferences. Those preferences are not guarantees and should only be
+  compared in a controlled experiment.
+- The next research record should capture the selected model, routing mode, and
+  response timing for each run. It should not change the production routing.
+
+Reference: [OpenRouter provider selection](https://openrouter.ai/docs/guides/routing/provider-selection).
+
+### TTS path
+
+- The TTS HTTP request is streamed, but the current worker collects the audio
+  chunks for the first sentence, writes a complete WAV file, and only then
+  starts playback. Therefore the network stream is not yet audible streaming.
+- The first-TTS measurement is the right boundary for comparing future TTS
+  approaches. The comparison must preserve sentence content and voice quality.
+- The full-answer measurement is separate because answer length and playback
+  duration dominate it.
+
+### Meeting boundary
+
+The live Teams test confirmed that the worker can hear questions and send
+responses, and its first-audio timings were consistent with the local runs.
+The exact remote-hearing timestamp is still not instrumented, so meeting
+transport remains a confirmation gap rather than an identified cause.
+
+Three clean live interactions produced these worker-side timings:
+
+| Question | First worker audio | Full worker playback |
+|---|---:|---:|
+| What did I just say? | 8.93 s | 22.70 s |
+| What is the meeting about? | 8.38 s | 18.08 s |
+| Can you repeat the last point? | 9.24 s | 30.68 s |
+
+These measurements end when the worker starts or finishes local playback into
+the meeting microphone. They do not include a timestamp from the remote
+participant's ears. A few earlier attempts were excluded because STT confused
+the wake name or captured echoed/overlong audio.
+
+### Measurement cautions
+
+- Five-trial maxima are useful warning values but are not stable percentile
+  estimates.
+- A wake-word recognition failure is an interaction/accuracy failure, not a
+  latency measurement.
+- Echo or long captured segments must be excluded from stage comparisons.
+- A latency change should not be called an improvement unless the same prompts,
+  configuration, audio boundary, and success criteria are repeated.
+
 ## Recommended improvement path
 
 ```mermaid

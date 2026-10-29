@@ -64,8 +64,9 @@ functional response should be pursued in parallel.
 
 M3 therefore leaves us with two parallel next steps: brainstorm the functional
 response that reduces friction during waiting, and organize research that
-identifies the technical source of the delay. It does not select a fix, require
-creating a CSV, or set final latency targets.
+identifies the technical source of the delay. The current measured findings and
+research notes are in [`latency-findings.md`](latency-findings.md). It does not
+select a fix, require creating a CSV, or set final latency targets.
 
 ## Priority requirements
 
