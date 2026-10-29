@@ -135,6 +135,15 @@ are the recording file-added dates.*
 - Added listening, waiting, acting, progress, interruption, and resumption as
   conversation design topics.
 - Deferred further latency research until the conversation flow is reviewed.
+- Validated the layer-first direction against the measured baselines: the
+  conversation layer stays the primary focus, and streaming STT plus streaming
+  TTS move into the same first phase because the acknowledgement itself is
+  bounded by endpointing, STT, and TTS startup. The remaining technical
+  optimizations (model, region, provider, endpoint tuning) stay deferred. See
+  [`next-steps.md`](next-steps.md), "Validation of the layer-first order".
+- Researched open-source conversation-layer options. Pipecat is the recommended
+  full-framework fit; RealtimeSTT, Silero VAD, and smart-turn are the lighter
+  component alternatives. See [`conversation-layer-research.md`](conversation-layer-research.md).
 
 ### 2026-10-28 — M3 latency review and layered measurements
 
@@ -188,7 +197,7 @@ are the recording file-added dates.*
 | 4 | Validate incoming calls and outgoing messages | M2 | Engineering | Open — authorized test participants only |
 | 5 | Measure browser and real Teams delivery latency | M2 | Engineering | Open — current benchmark stops at the virtual microphone |
 | 6 | Revisit memory and broader employee workflows | M1/M2 | Product and engineering | Deferred until the latency and cost gates are understood |
-| 7 | Define the conversation-layer flow and acknowledgement behavior | M3/M4/M5 | Product and engineering | Open — prepare and review a diagram before implementation |
+| 7 | Define the conversation-layer flow and acknowledgement behavior | M3/M4/M5 | Product and engineering | Open — prepare and review a diagram before implementation; first phase also includes streaming STT and streaming TTS (see "Validation of the layer-first order" in [`next-steps.md`](next-steps.md)) |
 | 8 | Organize existing latency data and define multi-level measurements | M3 | Engineering | Complete — local and live worker-path findings are recorded in [`latency-findings.md`](latency-findings.md) |
 | 9 | Define listening, waiting, acting, progress, interruption, and resumption states | M4/M5 | Product and engineering | Open — keep conversation handling separate from content reasoning |
 | 10 | Defer multi-speaker identification and live translation until the single-speaker flow is clear | M5 | Product and engineering | Deferred — add as a later conversation layer |
@@ -202,5 +211,6 @@ are the recording file-added dates.*
 | `requirements.md` | Product requirements from M1 |
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |
+| `conversation-layer-research.md` | Open-source conversation-layer options and recommendation |
 | `architecture.md` | Current deployed system architecture |
 | `design.md` | Current deployed design and implementation notes |

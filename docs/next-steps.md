@@ -68,9 +68,31 @@ covering:
 5. handling interruption, correction, or resumption;
 6. delivering the content result.
 
-The technical latency findings and possible engineering fixes remain available
-for later. No further latency research or code change is required before this
-conversation design is reviewed.
+### Validation of the layer-first order
+
+The direction was validated against the measured baselines in
+[`latency-findings.md`](latency-findings.md). The conclusion: the conversation
+layer is the right primary focus, but not on its own.
+
+- The acknowledgement itself is bounded by endpointing (~2 s), CPU STT
+  (~1.5 s), and TTS startup (~2.45 s). Without streaming STT and streaming
+  TTS, Friday's "quick" acknowledgement cannot start sounding before roughly
+  3.5–5 seconds.
+- Pure technical optimization has a small ceiling (~2 s from the model, ~2.5 s
+  from TTS startup) and does not address the endpointing/STT block that
+  dominates.
+- Therefore streaming STT and streaming TTS are enabling work for the
+  conversation layer and belong in the same first phase, not in a later one.
+
+**First phase:** conversation layer (states, acknowledgement, interruption)
+together with streaming STT and streaming TTS.
+
+Open-source options for implementing this layer, including the Pipecat
+recommendation, are documented in
+[`conversation-layer-research.md`](conversation-layer-research.md).
+
+**Deferred:** the remaining technical optimizations — model changes, region and
+provider changes, endpoint tuning.
 
 ## Priority requirements
 
