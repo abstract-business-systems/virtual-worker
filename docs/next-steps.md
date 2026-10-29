@@ -23,73 +23,44 @@ The next development gate is:
 Until those measurements are available, the implementation should remain a
 thin, inspectable interface around the existing capabilities.
 
-## Additional next steps from M3
+## M3 latency checkpoint — complete
 
-The 28 October latency review clarifies that the immediate goal is to
-understand where the delay comes from and improve the interaction during the
-wait. It adds investigation and brainstorming work; it does not authorize
-changing the implementation immediately. The technical investigation and the
-functional response should be pursued in parallel.
+The measurement and research requested by M3 are complete for the current
+latency decision. The findings are recorded in
+[`latency-findings.md`](latency-findings.md).
 
-### 1. Brainstorm the functional response
+The evidence shows that the main delay is inside Friday's processing path:
+endpointing and STT, model first-token time, and first TTS audio. Backend
+context lookup, basic network connectivity, and the meeting path are not the
+main source of the multi-second delay.
 
-- Consider an immediate acknowledgement before the full answer begins.
-- Have Friday summarize what it heard so the user can identify missing details.
-- Consider continuing the work while that acknowledgement is playing.
-- If the user interrupts, drop the current process and listen to the new
-  request.
-- Work out the intended interface and behavior before coding it.
+No provider, model, region, endpoint, TTS, or agent behavior was changed as
+part of this checkpoint. The exact moment a remote participant hears audio was
+not separately timed, but that gap is not needed to identify the main cause.
 
-### 2. Organize and extend the latency data
+## Remaining next step from M3
 
-- Review the timing breakdown that already exists instead of assuming which
-  component is slow.
-- Keep the measurements in a structured record so results can be compared;
-  the meeting mentioned a spreadsheet or CSV only as an optional format, not as
-  the goal.
-- Measure the delay at multiple levels, including the system, an intermediate
-  or client/interface layer, the backend, and user prompts.
-- Use the measurements to distinguish client, network, backend, provider, STT,
-  endpointing, and voice-layer effects.
+Choose which possible response to evaluate first:
 
-### 3. Research possible technical causes
+1. Reduce actual response time, starting with endpointing and STT.
+2. Reduce perceived waiting with an immediate acknowledgement.
+3. Evaluate both, with one chosen as the first controlled comparison.
 
-- Investigate server ping and network timing as part of the breakdown.
-- Treat client performance, model startup, endpointing, STT, and provider
-  location as hypotheses to check, not conclusions.
-- Research nearby provider regions only if the measurements show that network or
-  provider location is contributing materially.
-- Do not change code, provider, region, or client architecture until the data
-  supports a direction.
-
-M3 therefore leaves us with two parallel next steps: brainstorm the functional
-response that reduces friction during waiting, and organize research that
-identifies the technical source of the delay. The current measured findings and
-research notes are in [`latency-findings.md`](latency-findings.md). It does not
-select a fix, require creating a CSV, or set final latency targets.
+The possible fixes and their order are already documented in
+[`latency-findings.md`](latency-findings.md). No further measurement or
+research should be added until this choice is made.
 
 ## Priority requirements
 
-### 1. Measure end-to-end latency first
+### 1. Measure end-to-end latency — current checkpoint complete
 
-The system must measure the time from a participant's input to the worker's
-spoken response. The measurement should cover a realistic interaction in a
-meeting rather than a synthetic single API call.
+The local and live worker-path baselines have been measured. They record speech
+capture and STT, model first-token time, TTS startup, first response audio, and
+full response playback. The results are documented in
+[`latency-findings.md`](latency-findings.md).
 
-At minimum, record:
-
-- speech capture and speech-to-text time;
-- time spent waiting for the response model;
-- response streaming and text-to-speech time;
-- total round-trip time until speech begins;
-- total round-trip time until the response finishes.
-
-The benchmark must include enough interactions to show typical and slow
-responses. The resulting measurements should be used to identify where the
-latency comes from and to make a plan to reduce it.
-
-A specific latency target has not yet been agreed. It must be defined before
-latency work is considered complete.
+A specific latency target and cost target still need to be agreed before any
+latency or broader feature work is considered complete.
 
 ### 2. Measure meeting cost
 

@@ -191,127 +191,56 @@ remote participant hears the answer.
 **How to improve it:** Run the same benchmark in a real Teams meeting and add
 timestamps around browser capture and remote playback if possible.
 
-## Research findings and investigation plan
+## Possible fixes and plan
 
-This section records what the research suggests to test. It does not authorize
-any of these changes.
+No code or settings change is approved yet. The research identifies these
+possible fixes:
 
-### Endpointing and STT
+1. **Immediate acknowledgement** — Friday acknowledges and summarizes the
+   request while the real answer is prepared. This reduces perceived waiting,
+   not the underlying processing time.
+2. **Endpointing and STT** — shorten or adapt the silence decision, consider
+   partial speech recognition, and compare faster CPU STT options. The main
+   risk is cutting off speech or increasing recognition errors.
+3. **Model response** — reduce unnecessary context, compare a faster model, or
+   compare OpenRouter latency-oriented routing. The main risk is lower answer
+   quality or provider variability.
+4. **TTS startup** — begin audible playback from the first safe audio chunks
+   instead of waiting for a complete first-sentence WAV. The main risks are
+   buffering, cancellation, and voice quality.
+5. **Short, interruptible answers** — speak the direct answer first and stop
+   immediately when the user interrupts. This mainly reduces full-answer time.
 
-- The worker uses a local CPU faster-whisper path. The upstream faster-whisper
-  documentation describes CPU `int8` as a supported configuration and reports
-  lower resource use than full-precision CPU runs, but those published numbers
-  are not a benchmark for this machine or this audio workload.
-- The worker also performs its own energy-based endpointing before calling STT,
-  while STT is invoked with VAD filtering. The two boundaries should be
-  measured separately before changing silence settings.
-- The next fair comparison is the same captured speech samples with the same
-  prompts, comparing endpoint wait, STT duration, and recognition accuracy.
-  No model or endpoint setting should be changed as part of the baseline.
+### Plan
 
-Reference: [faster-whisper documentation](https://github.com/SYSTRAN/faster-whisper).
+1. Keep the current measurements as the baseline.
+2. Compare endpointing and STT first, using the same speech samples and checking
+   both speed and recognition accuracy.
+3. Compare TTS startup next, separating provider generation from local WAV
+   assembly and playback.
+4. Compare model and provider timing after that, without changing production
+   routing.
+5. Review the acknowledgement and interruption behavior separately as a
+   functional design.
+6. Choose a change only after comparing results against the same baseline.
 
-### Model and provider path
+The live meeting test showed first worker audio between **8.38 and 9.24
+seconds**, consistent with the local measurements. The exact moment a remote
+participant hears the audio is still unmeasured, but the meeting is not the
+main suspected cause.
 
-- The measured model interval is from the agent's request start to the first
-  streamed token. It combines connection, routing, provider queueing, and model
-  generation; it is not a provider-only measurement.
-- The current request does not set OpenRouter provider preferences. OpenRouter
-  documents price-oriented default routing and optional latency sorting or
-  latency preferences. Those preferences are not guarantees and should only be
-  compared in a controlled experiment.
-- The next research record should capture the selected model, routing mode, and
-  response timing for each run. It should not change the production routing.
+The research basis is documented in the upstream
+[faster-whisper documentation](https://github.com/SYSTRAN/faster-whisper) and
+[OpenRouter provider selection documentation](https://openrouter.ai/docs/guides/routing/provider-selection).
 
-Reference: [OpenRouter provider selection](https://openrouter.ai/docs/guides/routing/provider-selection).
-
-### TTS path
-
-- The TTS HTTP request is streamed, but the current worker collects the audio
-  chunks for the first sentence, writes a complete WAV file, and only then
-  starts playback. Therefore the network stream is not yet audible streaming.
-- The first-TTS measurement is the right boundary for comparing future TTS
-  approaches. The comparison must preserve sentence content and voice quality.
-- The full-answer measurement is separate because answer length and playback
-  duration dominate it.
-
-### Meeting boundary
-
-The live Teams test confirmed that the worker can hear questions and send
-responses, and its first-audio timings were consistent with the local runs.
-The exact remote-hearing timestamp is still not instrumented, so meeting
-transport remains a confirmation gap rather than an identified cause.
-
-Three clean live interactions produced these worker-side timings:
-
-| Question | First worker audio | Full worker playback |
-|---|---:|---:|
-| What did I just say? | 8.93 s | 22.70 s |
-| What is the meeting about? | 8.38 s | 18.08 s |
-| Can you repeat the last point? | 9.24 s | 30.68 s |
-
-These measurements end when the worker starts or finishes local playback into
-the meeting microphone. They do not include a timestamp from the remote
-participant's ears. A few earlier attempts were excluded because STT confused
-the wake name or captured echoed/overlong audio.
-
-### Measurement cautions
-
-- Five-trial maxima are useful warning values but are not stable percentile
-  estimates.
-- A wake-word recognition failure is an interaction/accuracy failure, not a
-  latency measurement.
-- Echo or long captured segments must be excluded from stage comparisons.
-- A latency change should not be called an improvement unless the same prompts,
-  configuration, audio boundary, and success criteria are repeated.
-
-## Recommended improvement path
-
-```mermaid
-flowchart TB
-    A[Meeting audio] --> B[Partial STT and wake detection]
-    B --> C[Adaptive short endpoint]
-    C --> D[Fast answer model]
-    D --> E[First answer phrase]
-    E --> F[Streaming TTS PCM]
-    F --> G[Virtual microphone]
-    G --> H[Teams participants]
-```
-
-1. **Test endpointing first.** It is low risk and affects every interaction.
-2. **Test faster STT.** Measure speed and recognition accuracy together.
-3. **Test a faster answer model and smaller prompt.** Keep the current model as
-   the quality baseline.
-4. **Change TTS to stream audio directly.** This is the most promising larger
-   improvement because it removes the wait for a complete WAV.
-5. **Keep answers short and interruptible.** This improves completion time and
-   makes the worker feel more responsive.
-6. **Measure the result on a real Teams call.** The local benchmark does not
-   include the final delivery path.
-
-## Improvement options
-
-| Option | Expected first audio | Main benefit | Main cost or risk |
-|---|---:|---|---|
-| Tune current settings | About 5–7 seconds, hypothesis | Lowest implementation risk | Hosted model and TTS delays remain |
-| Optimize streaming path | About 3–5 seconds, hypothesis | Preserves most current quality | Requires streaming and cancellation work |
-| Fast local components | About 3–5 seconds, hypothesis | Less network variance | Possible STT, answer, and voice quality loss |
-| Realtime audio pipeline | About 1–3 seconds after speech ends, hypothesis | Best conversational response | Highest complexity and provider dependence |
-| Immediate acknowledgement | Acknowledgement is near-immediate | Reduces perceived waiting | Does not reduce actual answer time |
-
-These ranges are planning estimates, not measured results. Each option needs an
-A/B benchmark before becoming a product target.
+This plan is intentionally limited: it describes possible fixes and their
+order, but it does not apply any fix or change the agent.
 
 ## Bottom line
 
-The main gaps are **silence endpointing, CPU STT, remote model startup, and
-first-sentence TTS buffering**. Context lookup and local agent reasoning are
-not causing the observed delay.
-
-The best practical path is to shorten endpointing, use faster or partial STT,
-select a lower-latency answer path, and stream the first TTS audio directly to
-the virtual microphone. The largest likely improvement comes from removing the
-current wait for a complete TTS WAV.
-
-The current implementation is measurable and working, but the final latency
-must be rechecked on a live Teams call before setting an acceptance target.
+The measured delay is mainly inside Friday: endpointing and STT take about
+4–5 seconds together, model first token takes about 1.5–2.4 seconds, and first
+TTS audio takes about 2.3–2.5 seconds. Backend context and basic network
+connectivity are negligible. The first fix to evaluate should be endpointing
+and STT, with immediate acknowledgement as the separate way to reduce the
+user's perceived waiting.

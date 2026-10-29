@@ -142,7 +142,7 @@ file-added date.*
 | 5 | Measure browser and real Teams delivery latency | M2 | Engineering | Open — current benchmark stops at the virtual microphone |
 | 6 | Revisit memory and broader employee workflows | M1/M2 | Product and engineering | Deferred until the latency and cost gates are understood |
 | 7 | Brainstorm the functional acknowledgement interface | M3 | Engineering | Open — summarize what was heard, allow correction, and drop the current process on interruption |
-| 8 | Organize existing latency data and define multi-level measurements | M3 | Engineering | Open — record system, intermediate/client, backend, and user-prompt timing before changing code |
+| 8 | Organize existing latency data and define multi-level measurements | M3 | Engineering | Complete — local and live worker-path findings are recorded in [`latency-findings.md`](latency-findings.md) |
 
 ## 6. Document map
 
