@@ -34,9 +34,11 @@ When a new recording `N.vtt` is added:
 | M1 | [`1.vtt`](recordings/1.vtt) | 2026-10-15 | 9m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Initial virtual-worker requirements and proof-of-concept scope | [`requirements.md`](requirements.md) |
 | M2 | [`2.vtt`](recordings/2.vtt) | 2026-10-16 | 22m | Viswanath Chidambaram; Sarooparam Chenaram Darji; Subramaniyan Periyakaruppan; Friday/Luna test voices | Prototype review, Teams behavior, latency/cost priorities, and next steps | [`next-steps.md`](next-steps.md), [`latency-findings.md`](latency-findings.md) |
 | M3 | [`3.vtt`](recordings/3.vtt) | 2026-10-28* | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Latency review: functional acknowledgement, evidence-based investigation, and multi-level measurement | [`next-steps.md`](next-steps.md) |
+| M4 | [`4.vtt`](recordings/4.vtt) | 2026-10-29* | 10m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Conversation layer, continuous speech processing, acknowledgement, progress updates, and streaming | [`next-steps.md`](next-steps.md) |
+| M5 | [`5.vtt`](recordings/5.vtt) | 2026-10-29* | 21m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Perceived delay as the primary goal; conversation states, background work, interruption, and content separation | [`next-steps.md`](next-steps.md) |
 
-*The transcript does not state the recording date for M3; 2026-10-28 is the
-recording file's added date.*
+*The transcripts do not state their recording dates; 2026-10-28 is the M3
+recording file's added date, and 2026-10-29 is the M4 and M5 file-added date.*
 
 ## 3. Meeting summaries
 
@@ -82,12 +84,57 @@ The meeting discussed two parallel directions for latency:
 
 The follow-up planning items are recorded in [`next-steps.md`](next-steps.md).
 
+### M4 — Conversation layer and streaming (`4.vtt`)
+
+The meeting separated conversational handling from answer content. Friday
+should continuously process incoming speech enough to decide whether a sentence
+is complete and whether it should listen, wait, acknowledge, or act. It should
+not send every fragment to deep reasoning.
+
+The conversation layer should acknowledge an intended action quickly, start
+long-running work in the background, provide progress when appropriate, and
+allow the user to interrupt or correct the request. The meeting also discussed
+streaming STT and TTS so Friday does not wait for a complete transcription or a
+complete first-sentence audio file before responding.
+
+### M5 — Perceived delay and conversation states (`5.vtt`)
+
+M5 clarified that reducing **perceived delay** is the primary goal; reducing
+actual technical latency is secondary. The conversation layer should make
+Friday appear responsive even when the content task takes seconds or minutes.
+
+- The conversation layer handles interaction, acknowledgement, waiting,
+  listening, progress, interruption, and resumption.
+- The content layer handles the actual reasoning and task result.
+- Candidate states include listening, waiting without processing unrelated
+  speech, and acting. Friday should decide which state applies as new audio
+  arrives.
+- A quick acknowledgement can give the content layer time to work. Long tasks
+  may provide proactive progress updates and later resume the conversation.
+- If the user interrupts, Friday should stop or reconsider the current task.
+- Multi-speaker identification and live translation were recognized as later
+  layers; the first design should solve the simpler single-speaker case.
+
+The meetings asked for a conversation-flow diagram and a reviewed design before
+implementation. The technical latency research remains secondary to this
+conversation-layer design.
+
 ## 4. Journal
 
 Newest entries appear first.
 
-*The recording date for M3 is not stated in the transcript; 2026-10-28 is the
-file-added date.*
+*The recording dates are not stated in the transcripts; the dates shown above
+are the recording file-added dates.*
+
+### 2026-10-29 — M4 and M5 conversation-layer direction
+
+- Added M4 and M5 as follow-up meetings.
+- Recorded perceived delay as the primary objective and actual latency as a
+  secondary engineering concern.
+- Separated the conversation layer from the content/reasoning layer.
+- Added listening, waiting, acting, progress, interruption, and resumption as
+  conversation design topics.
+- Deferred further latency research until the conversation flow is reviewed.
 
 ### 2026-10-28 — M3 latency review and layered measurements
 
@@ -141,15 +188,17 @@ file-added date.*
 | 4 | Validate incoming calls and outgoing messages | M2 | Engineering | Open — authorized test participants only |
 | 5 | Measure browser and real Teams delivery latency | M2 | Engineering | Open — current benchmark stops at the virtual microphone |
 | 6 | Revisit memory and broader employee workflows | M1/M2 | Product and engineering | Deferred until the latency and cost gates are understood |
-| 7 | Brainstorm the functional acknowledgement interface | M3 | Engineering | Open — summarize what was heard, allow correction, and drop the current process on interruption |
+| 7 | Define the conversation-layer flow and acknowledgement behavior | M3/M4/M5 | Product and engineering | Open — prepare and review a diagram before implementation |
 | 8 | Organize existing latency data and define multi-level measurements | M3 | Engineering | Complete — local and live worker-path findings are recorded in [`latency-findings.md`](latency-findings.md) |
+| 9 | Define listening, waiting, acting, progress, interruption, and resumption states | M4/M5 | Product and engineering | Open — keep conversation handling separate from content reasoning |
+| 10 | Defer multi-speaker identification and live translation until the single-speaker flow is clear | M5 | Product and engineering | Deferred — add as a later conversation layer |
 
 ## 6. Document map
 
 | Document | Purpose |
 |---|---|
 | `meetings.md` | Living index, summaries, journal, and action items |
-| `recordings/1.vtt`, `recordings/2.vtt`, `recordings/3.vtt` | Immutable meeting source transcripts |
+| `recordings/1.vtt`, `recordings/2.vtt`, `recordings/3.vtt`, `recordings/4.vtt`, `recordings/5.vtt` | Immutable meeting source transcripts |
 | `requirements.md` | Product requirements from M1 |
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |

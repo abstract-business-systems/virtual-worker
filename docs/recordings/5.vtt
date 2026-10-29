@@ -1,0 +1,1981 @@
+WEBVTT
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/5-0
+00:00:07.102 --> 00:00:11.958
+<v Sarooparam Chenaram Darji>So we have gone through endpointing NSTT
+delay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/5-1
+00:00:11.958 --> 00:00:15.902
+<v Sarooparam Chenaram Darji>It is recorded and transcript is there.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/7-0
+00:00:18.142 --> 00:00:21.102
+<v Sarooparam Chenaram Darji>We have to go through the other remaining
+points.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/6-0
+00:00:18.302 --> 00:00:18.942
+<v Viswanath Chidambaram>Say it again.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/10-0
+00:00:22.582 --> 00:00:23.982
+<v Sarooparam Chenaram Darji>We've gone through the first point.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/12-0
+00:00:22.942 --> 00:00:27.126
+<v Viswanath Chidambaram>Okay, so okay, fine. Yeah, first point,
+first point actually,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/12-1
+00:00:27.126 --> 00:00:32.524
+<v Viswanath Chidambaram>the key thing is so like there is a one
+thing that we have to understand, okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/12-2
+00:00:32.524 --> 00:00:37.652
+<v Viswanath Chidambaram>fixing the latency is not actually what
+fixing the latency is our secondary</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/12-3
+00:00:37.652 --> 00:00:41.498
+<v Viswanath Chidambaram>priority. Okay,
+primary priority is to fix the perceived</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/11-0
+00:00:38.622 --> 00:00:39.022
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/12-4
+00:00:41.498 --> 00:00:41.902
+<v Viswanath Chidambaram>delay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/16-0
+00:00:43.182 --> 00:00:47.493
+<v Viswanath Chidambaram>I am not even using the word delay,
+I am talking about perceived delay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/13-0
+00:00:46.462 --> 00:00:46.782
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/16-1
+00:00:47.493 --> 00:00:51.086
+<v Viswanath Chidambaram>how much delay the user perceives.
+If we can mitigate that,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/14-0
+00:00:48.382 --> 00:00:48.862
+<v Sarooparam Chenaram Darji>Hmm.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/16-2
+00:00:51.086 --> 00:00:55.337
+<v Viswanath Chidambaram>actually that would be helpful.
+That is what actually look so this one</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/16-3
+00:00:55.337 --> 00:01:00.187
+<v Viswanath Chidambaram>that is why we started with saying that
+actually like Friday should not wait for</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/16-4
+00:01:00.187 --> 00:01:02.102
+<v Viswanath Chidambaram>them to complete speaking, okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/15-0
+00:01:01.342 --> 00:01:01.582
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/18-0
+00:01:02.862 --> 00:01:06.506
+<v Viswanath Chidambaram>And there is one other thing apart from
+actually the speech, OK,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/18-1
+00:01:06.506 --> 00:01:10.933
+<v Viswanath Chidambaram>so I believe I am not entirely sure again
+Friday actually has the direct audio</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/18-2
+00:01:10.933 --> 00:01:14.352
+<v Viswanath Chidambaram>input, I am right.
+So like what actually Friday should do is</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/17-0
+00:01:12.942 --> 00:01:13.182
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/18-3
+00:01:14.352 --> 00:01:17.940
+<v Viswanath Chidambaram>no Friday actually has success to the
+voice channel itself, OK,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/18-4
+00:01:17.940 --> 00:01:21.302
+<v Viswanath Chidambaram>it is not like actually the shopping up
+where actually the.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/21-0
+00:01:21.502 --> 00:01:25.989
+<v Viswanath Chidambaram>That the HTT could happen on the device
+and only the text actually comes to the</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/21-1
+00:01:25.989 --> 00:01:28.850
+<v Viswanath Chidambaram>back end.
+That is not the case with Friday, right?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/21-2
+00:01:28.850 --> 00:01:31.822
+<v Viswanath Chidambaram>Friday actually deals with audio directly,
+isn't it?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/19-0
+00:01:30.142 --> 00:01:30.622
+<v Sarooparam Chenaram Darji>Thank.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/20-0
+00:01:32.222 --> 00:01:32.542
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/23-0
+00:01:33.782 --> 00:01:38.271
+<v Viswanath Chidambaram>So what Friday should do is Friday should
+actually continuously, lets say,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/23-1
+00:01:38.271 --> 00:01:41.502
+<v Viswanath Chidambaram>like convert the audio into, sorry,
+speech into text.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/22-0
+00:01:42.942 --> 00:01:43.142
+<v Sarooparam Chenaram Darji>So.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/25-0
+00:01:43.182 --> 00:01:48.222
+<v Viswanath Chidambaram>Okay, and actually when there's a silence,
+Friday should actually immediately let's</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/25-1
+00:01:48.222 --> 00:01:50.862
+<v Viswanath Chidambaram>say decide on what's the next action,
+okay?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/24-0
+00:01:51.022 --> 00:01:51.142
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/26-0
+00:01:53.262 --> 00:01:57.134
+<v Viswanath Chidambaram>Here it is time critical, okay.
+The idea is so it should like Friday</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/26-1
+00:01:57.134 --> 00:02:01.117
+<v Viswanath Chidambaram>should actually look responsible,
+that is actually like important than</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/26-2
+00:02:01.117 --> 00:02:01.902
+<v Viswanath Chidambaram>anything else.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/27-0
+00:02:03.382 --> 00:02:06.728
+<v Viswanath Chidambaram>So Friday actually.
+So like this ChatGPT earlier used to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/27-1
+00:02:06.728 --> 00:02:07.902
+<v Viswanath Chidambaram>always say checking.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/29-0
+00:02:09.102 --> 00:02:11.556
+<v Viswanath Chidambaram>Okay,
+Friday could just actually like simply</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/28-0
+00:02:09.422 --> 00:02:09.662
+<v Sarooparam Chenaram Darji>Yes.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/29-1
+00:02:11.556 --> 00:02:15.427
+<v Viswanath Chidambaram>say actually checking on actually
+something similar and then decide on</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/29-2
+00:02:15.427 --> 00:02:17.662
+<v Viswanath Chidambaram>actually what to do with the voice thing.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/31-0
+00:02:20.622 --> 00:02:24.282
+<v Viswanath Chidambaram>Okay. And if possible,
+we could actually give, what is it?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/31-1
+00:02:24.282 --> 00:02:27.384
+<v Viswanath Chidambaram>Basically,
+like we need actually faster influence</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/31-2
+00:02:27.384 --> 00:02:32.222
+<v Viswanath Chidambaram>here, okay? And actually what is it?
+We have to take only one decision, okay?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/30-0
+00:02:28.142 --> 00:02:28.462
+<v Sarooparam Chenaram Darji>Right.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/35-0
+00:02:31.982 --> 00:02:41.855
+<v Sarooparam Chenaram Darji>Yeah, about this one. So like now,
+so currently Ridy joins the meeting using</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/35-1
+00:02:41.855 --> 00:02:50.702
+<v Sarooparam Chenaram Darji>the browser, it browser using teams,
+it is joining from the browser.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/32-0
+00:02:43.982 --> 00:02:45.502
+<v Viswanath Chidambaram>The meeting using what?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/33-0
+00:02:48.302 --> 00:02:48.782
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/37-0
+00:02:51.502 --> 00:03:00.082
+<v Sarooparam Chenaram Darji>Now currently there will be basically
+there is no direct way like for a Friday</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/34-0
+00:02:51.662 --> 00:02:52.142
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/37-1
+00:03:00.082 --> 00:03:08.988
+<v Sarooparam Chenaram Darji>to tell like lets say there are multiple
+users who is speaking without looking at</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/37-2
+00:03:08.988 --> 00:03:10.182
+<v Sarooparam Chenaram Darji>the screen.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/36-0
+00:03:11.262 --> 00:03:11.822
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/41-0
+00:03:11.342 --> 00:03:15.227
+<v Sarooparam Chenaram Darji>Without looking at the screenshot of the
+screen,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/38-0
+00:03:14.942 --> 00:03:15.422
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/41-1
+00:03:15.227 --> 00:03:20.062
+<v Sarooparam Chenaram Darji>it cannot tell who spoke what or it all
+the sounds are same.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/39-0
+00:03:17.342 --> 00:03:17.822
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/40-0
+00:03:21.102 --> 00:03:21.542
+<v Viswanath Chidambaram>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/42-0
+00:03:21.422 --> 00:03:27.224
+<v Sarooparam Chenaram Darji>Everything is good,
+so maybe we might have to like utilise</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/42-1
+00:03:27.224 --> 00:03:34.893
+<v Sarooparam Chenaram Darji>the like maybe we might have to put
+Friday as a what to teams just giving you</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/42-2
+00:03:34.893 --> 00:03:39.022
+<v Sarooparam Chenaram Darji>the basically like maybe I am saying okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/44-0
+00:03:37.182 --> 00:03:42.049
+<v Viswanath Chidambaram>No, not really. So we'll go on.
+So whenever actually this kind of things</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/44-1
+00:03:42.049 --> 00:03:42.782
+<v Viswanath Chidambaram>arises, no.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/43-0
+00:03:43.262 --> 00:03:43.502
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/45-0
+00:03:44.062 --> 00:03:46.862
+<v Viswanath Chidambaram>Always think about how would human do the
+task.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/47-0
+00:03:49.742 --> 00:03:54.782
+<v Sarooparam Chenaram Darji>Yeah, human. Basically,
+I can differentiate between your voice</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/46-0
+00:03:50.622 --> 00:03:50.942
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/48-0
+00:03:54.302 --> 00:03:58.354
+<v Viswanath Chidambaram>so the answer is,
+so the answer is Friday should know who's</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/47-1
+00:03:54.782 --> 00:03:56.782
+<v Sarooparam Chenaram Darji>and someone else's voice.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/48-1
+00:03:58.354 --> 00:04:01.662
+<v Viswanath Chidambaram>speaking by actually like identifying the
+voice.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/49-0
+00:04:02.862 --> 00:04:04.062
+<v Sarooparam Chenaram Darji>Okay, but...</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/50-0
+00:04:04.142 --> 00:04:05.662
+<v Viswanath Chidambaram>B Laxmi.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/52-0
+00:04:06.542 --> 00:04:14.411
+<v Sarooparam Chenaram Darji>But the thing is, this one,
+even humans cannot differentiate between</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/52-1
+00:04:14.411 --> 00:04:22.622
+<v Sarooparam Chenaram Darji>2 person sounding similarly.
+I'm not sure what's the capability of a I.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/51-0
+00:04:21.262 --> 00:04:25.422
+<v Viswanath Chidambaram>By and yeah,
+we'll go on in the case what we recommend.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/53-0
+00:04:26.942 --> 00:04:28.102
+<v Sarooparam Chenaram Darji>Very last.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/56-0
+00:04:27.262 --> 00:04:31.019
+<v Viswanath Chidambaram>The rule is simple, they can ask or else,
+of course, in this case,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/56-1
+00:04:31.019 --> 00:04:34.159
+<v Viswanath Chidambaram>they already have access to the visual
+learning, right?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/56-2
+00:04:34.159 --> 00:04:38.195
+<v Viswanath Chidambaram>They can see actually who's picking from
+the screen. Hey, the thing is,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/56-3
+00:04:38.195 --> 00:04:40.942
+<v Viswanath Chidambaram>actually decision might actually take
+some time.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/54-0
+00:04:38.302 --> 00:04:38.622
+<v Sarooparam Chenaram Darji>Hi.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/55-0
+00:04:41.422 --> 00:04:41.902
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/57-0
+00:04:42.262 --> 00:04:44.062
+<v Viswanath Chidambaram>Which is fine, not a problem.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/58-0
+00:04:44.742 --> 00:04:44.862
+<v Sarooparam Chenaram Darji>No.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/60-0
+00:04:47.982 --> 00:04:51.528
+<v Viswanath Chidambaram>they can simply ask that too.
+So like I am not able to identify</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/59-0
+00:04:50.942 --> 00:04:51.222
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/60-1
+00:04:51.528 --> 00:04:54.908
+<v Viswanath Chidambaram>actually the actually the both of your
+voices sound similar.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/60-2
+00:04:54.908 --> 00:04:59.063
+<v Viswanath Chidambaram>I am not able to identify who is it. Okay,
+so could you tell me who is it?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/60-3
+00:04:59.063 --> 00:05:01.612
+<v Viswanath Chidambaram>That is fine.
+But that's actually scenario 3,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/60-4
+00:05:01.612 --> 00:05:05.933
+<v Viswanath Chidambaram>scenario 2 actually you could try to
+actually get some initial case basically</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/60-5
+00:05:05.933 --> 00:05:06.542
+<v Viswanath Chidambaram>who's like.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/62-0
+00:05:06.782 --> 00:05:09.890
+<v Viswanath Chidambaram>It is pertuating what not because that is
+what a human does,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/62-1
+00:05:09.890 --> 00:05:13.711
+<v Viswanath Chidambaram>but I am not entirely sure who will be
+discussing about this because about</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/62-2
+00:05:13.711 --> 00:05:17.022
+<v Viswanath Chidambaram>distinguishing between speakers when you
+are talking about this.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/61-0
+00:05:13.982 --> 00:05:14.302
+<v Sarooparam Chenaram Darji>2.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/63-0
+00:05:16.062 --> 00:05:21.438
+<v Sarooparam Chenaram Darji>No,
+basically you are talking about Fridays</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/63-1
+00:05:21.438 --> 00:05:30.233
+<v Sarooparam Chenaram Darji>capability to talk with multiple users
+and live translating things like</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/63-2
+00:05:30.233 --> 00:05:34.142
+<v Sarooparam Chenaram Darji>translating live live dictation.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/66-0
+00:05:32.782 --> 00:05:35.810
+<v Viswanath Chidambaram>Yeah, we will go on by, we will go on by.
+We will actually,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/66-1
+00:05:35.810 --> 00:05:39.898
+<v Viswanath Chidambaram>we will actually solve for the easiest
+problem first and then we will add layers</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/64-0
+00:05:38.862 --> 00:05:39.222
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/66-2
+00:05:39.898 --> 00:05:42.674
+<v Viswanath Chidambaram>to it. Okay,
+let's assume as now let's assume actually</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/65-0
+00:05:41.422 --> 00:05:41.822
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/66-3
+00:05:42.674 --> 00:05:46.862
+<v Viswanath Chidambaram>one person is actually talking to brave.
+Okay, we will actually reduce definitely.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/69-0
+00:05:48.502 --> 00:05:51.280
+<v Viswanath Chidambaram>Okay,
+so like I was actually talking about not</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/69-1
+00:05:51.280 --> 00:05:54.294
+<v Viswanath Chidambaram>even latency,
+I am talking about actually reducing</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/69-2
+00:05:54.294 --> 00:05:57.839
+<v Viswanath Chidambaram>perceived delay. Okay,
+so like what should happen is Friday</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/67-0
+00:05:55.582 --> 00:05:55.822
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/69-3
+00:05:57.839 --> 00:06:01.089
+<v Viswanath Chidambaram>should be like continuously let's say
+like processing,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/69-4
+00:06:01.089 --> 00:06:03.926
+<v Viswanath Chidambaram>let's say like the incoming audio stream,
+okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/69-5
+00:06:03.926 --> 00:06:08.594
+<v Viswanath Chidambaram>it can we can actually convert into text,
+we do not have to convert into text,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/69-6
+00:06:08.594 --> 00:06:10.662
+<v Viswanath Chidambaram>that actually we will decide, okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/68-0
+00:06:11.462 --> 00:06:11.662
+<v Sarooparam Chenaram Darji>No.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/71-0
+00:06:11.582 --> 00:06:14.669
+<v Viswanath Chidambaram>Okay,
+but actually every time actually Friday</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/71-1
+00:06:14.669 --> 00:06:19.098
+<v Viswanath Chidambaram>gets a new input. Okay,
+Friday should actually go for a decision.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/71-2
+00:06:19.098 --> 00:06:23.192
+<v Viswanath Chidambaram>Okay, what should it do?
+Should it continue to listen? Okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/71-3
+00:06:23.192 --> 00:06:27.688
+<v Viswanath Chidambaram>should it actually we start,
+should it actually let them know like</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/71-4
+00:06:27.688 --> 00:06:29.902
+<v Viswanath Chidambaram>that it is going to do something?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/73-0
+00:06:30.462 --> 00:06:35.701
+<v Viswanath Chidambaram>OK, there could be some 34 additions. OK,
+let's say Friday says actually let's say</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/70-0
+00:06:30.542 --> 00:06:30.862
+<v Sarooparam Chenaram Darji>No.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/73-1
+00:06:35.701 --> 00:06:40.687
+<v Viswanath Chidambaram>Friday decides that it has to act. OK,
+now actually it has to check whether it</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/73-2
+00:06:40.687 --> 00:06:43.022
+<v Viswanath Chidambaram>has already informed the user or not.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/72-0
+00:06:44.702 --> 00:06:44.862
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/75-0
+00:06:44.822 --> 00:06:49.369
+<v Viswanath Chidambaram>If it doesn't inform the user,
+then actually it should actually do 2</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/75-1
+00:06:49.369 --> 00:06:53.454
+<v Viswanath Chidambaram>things in parallel.
+One thing is actually to inform the user,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/75-2
+00:06:53.454 --> 00:06:57.671
+<v Viswanath Chidambaram>by the same time actually it can actually
+start the task. Okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/74-0
+00:06:56.622 --> 00:06:56.942
+<v Sarooparam Chenaram Darji>Bye.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/75-3
+00:06:57.671 --> 00:07:01.690
+<v Viswanath Chidambaram>lets say the user actually like owed it.
+Okay, in that case,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/75-4
+00:07:01.690 --> 00:07:04.062
+<v Viswanath Chidambaram>now actually it has to decide again.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/76-0
+00:07:04.262 --> 00:07:07.502
+<v Viswanath Chidambaram>Whether to continue the task or actually
+say like a super like just drop the task.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/77-0
+00:07:08.622 --> 00:07:08.942
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/78-0
+00:07:09.902 --> 00:07:10.462
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/79-0
+00:07:12.382 --> 00:07:16.302
+<v Viswanath Chidambaram>Yeah, like you were talking to Fred. Okay,
+Friday actually like a.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/80-0
+00:07:14.142 --> 00:07:18.537
+<v Sarooparam Chenaram Darji>Yeah,
+after imagine your you got in audible,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/80-1
+00:07:18.537 --> 00:07:20.782
+<v Sarooparam Chenaram Darji>your voice got cut off.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/82-0
+00:07:21.982 --> 00:07:25.899
+<v Viswanath Chidambaram>Okay, imagine,
+imagine that actually you are talking to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/81-0
+00:07:25.342 --> 00:07:25.662
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/82-1
+00:07:25.899 --> 00:07:31.703
+<v Viswanath Chidambaram>Friday. Okay, so like somehow as you said,
+if they decide that I should act, okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/82-2
+00:07:31.703 --> 00:07:34.850
+<v Viswanath Chidambaram>basically let's say you are saying
+actually,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/82-3
+00:07:34.850 --> 00:07:40.304
+<v Viswanath Chidambaram>I want you to check actually this and
+this and when let's say like if you say</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/82-4
+00:07:40.304 --> 00:07:41.982
+<v Viswanath Chidambaram>and Friday already know.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/83-0
+00:07:42.142 --> 00:07:45.201
+<v Viswanath Chidambaram>Of the sentence is not the sentence is
+continuing. OK,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/83-1
+00:07:45.201 --> 00:07:46.702
+<v Viswanath Chidambaram>so it knows it should wait.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/85-0
+00:07:48.302 --> 00:07:50.728
+<v Viswanath Chidambaram>Okay,
+let us say like you forgot to say that.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/85-1
+00:07:50.728 --> 00:07:54.472
+<v Viswanath Chidambaram>Okay, now actually from Friday's,
+Friday's actually opinion of Friday,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/85-2
+00:07:54.472 --> 00:07:58.374
+<v Viswanath Chidambaram>we will actually try to like respond
+immediately. It will say like, okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/85-3
+00:07:58.374 --> 00:08:01.696
+<v Viswanath Chidambaram>I will check it for,
+I will check it for you or something like</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/85-4
+00:08:01.696 --> 00:08:05.704
+<v Viswanath Chidambaram>that. I will send a response. Okay,
+now you can say no, it is not complete.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/85-5
+00:08:05.704 --> 00:08:08.710
+<v Viswanath Chidambaram>Give me a minute.
+I will actually come back and actually</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/85-6
+00:08:08.710 --> 00:08:11.662
+<v Viswanath Chidambaram>give you more instruction.
+You can continue after that.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/84-0
+00:08:12.382 --> 00:08:12.502
+<v Sarooparam Chenaram Darji>Ha.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/87-0
+00:08:13.782 --> 00:08:16.456
+<v Viswanath Chidambaram>OK,
+so now actually like the Friday will not</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/87-1
+00:08:16.456 --> 00:08:20.496
+<v Viswanath Chidambaram>act under the information,
+the original information because you are</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/87-2
+00:08:20.496 --> 00:08:25.070
+<v Viswanath Chidambaram>explicitly asked Friday to wait. OK,
+so like what are they actually train to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/86-0
+00:08:21.902 --> 00:08:22.222
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/87-3
+00:08:25.070 --> 00:08:28.219
+<v Viswanath Chidambaram>convenience this actually conversational
+layers, OK,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/87-4
+00:08:28.219 --> 00:08:31.902
+<v Viswanath Chidambaram>it actually like it puts actually Friday
+into various states.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/88-0
+00:08:32.782 --> 00:08:34.713
+<v Viswanath Chidambaram>Basically,
+I'm imagining actually this should be</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/88-1
+00:08:34.713 --> 00:08:35.422
+<v Viswanath Chidambaram>some input to jeb.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/91-0
+00:08:36.942 --> 00:08:39.730
+<v Viswanath Chidambaram>Okay,
+so like Friday should decide to let's say</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/91-1
+00:08:39.730 --> 00:08:44.026
+<v Viswanath Chidambaram>like what is it like we can even ask what
+could what could be the states.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/91-2
+00:08:44.026 --> 00:08:47.104
+<v Viswanath Chidambaram>It could actually listen. Okay,
+it could wait. Okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/91-3
+00:08:47.104 --> 00:08:51.575
+<v Viswanath Chidambaram>the difference between wait and listen is
+actually wait is actually it might</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/89-0
+00:08:49.102 --> 00:08:49.422
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/91-4
+00:08:51.575 --> 00:08:54.942
+<v Viswanath Chidambaram>actually get the audio input,
+but it will not process it.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/90-0
+00:08:55.582 --> 00:08:55.822
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/92-0
+00:08:56.302 --> 00:08:57.582
+<v Viswanath Chidambaram>For it will not at least I thought.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/93-0
+00:09:00.502 --> 00:09:03.567
+<v Viswanath Chidambaram>Okay, that is great. Okay, listen,
+it is actually like it is actually</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/93-1
+00:09:03.567 --> 00:09:06.938
+<v Viswanath Chidambaram>processing the data and it will it is
+essentially will actually like use the</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/93-2
+00:09:06.938 --> 00:09:08.382
+<v Viswanath Chidambaram>data to continue further actions.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/95-0
+00:09:09.862 --> 00:09:14.022
+<v Viswanath Chidambaram>Okay, let us say like you tell Friday,
+let us say you told Friday that,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/95-1
+00:09:14.022 --> 00:09:17.314
+<v Viswanath Chidambaram>give me a minute,
+I will actually I am actually going to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/95-2
+00:09:17.314 --> 00:09:20.722
+<v Viswanath Chidambaram>talk to someone.
+I will come back and I will come back and</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/95-3
+00:09:20.722 --> 00:09:25.228
+<v Viswanath Chidambaram>actually we will continue then. Okay,
+now let us say like you started talking</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/95-4
+00:09:25.228 --> 00:09:30.022
+<v Viswanath Chidambaram>to let us say a person nearby you, okay,
+Friday should have not immediately, okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/96-0
+00:09:30.102 --> 00:09:32.696
+<v Viswanath Chidambaram>I am talking about the future state.
+If it is easy,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/94-0
+00:09:31.902 --> 00:09:32.142
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/96-1
+00:09:32.696 --> 00:09:36.386
+<v Viswanath Chidambaram>we will try to do it immediately. Okay,
+Friday, I should actually try to,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/96-2
+00:09:36.386 --> 00:09:37.782
+<v Viswanath Chidambaram>let's say, like, what is it?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/97-0
+00:09:40.462 --> 00:09:42.782
+<v Viswanath Chidambaram>Match section,
+the new audio with the older context.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/98-0
+00:09:43.902 --> 00:09:44.142
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/99-0
+00:09:44.422 --> 00:09:48.303
+<v Viswanath Chidambaram>OK, and if it is matching,
+it means the this one is continuing.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/99-1
+00:09:48.303 --> 00:09:51.517
+<v Viswanath Chidambaram>Otherwise,
+actually the user would actually say lets</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/99-2
+00:09:51.517 --> 00:09:52.062
+<v Viswanath Chidambaram>continue.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/101-0
+00:09:53.502 --> 00:09:55.974
+<v Viswanath Chidambaram>To Friday itself.
+So basically like a Friday,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/101-1
+00:09:55.974 --> 00:10:00.111
+<v Viswanath Chidambaram>Friday should be actually extracting
+meaning out of the users voice based on</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/100-0
+00:09:59.502 --> 00:09:59.982
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/101-2
+00:10:00.111 --> 00:10:03.873
+<v Viswanath Chidambaram>actually what they say. OK,
+and actually the reason I'm talking about</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/101-3
+00:10:03.873 --> 00:10:07.902
+<v Viswanath Chidambaram>this vision thing is the idea is to like
+give the user immediate feedback.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/103-0
+00:10:10.462 --> 00:10:13.866
+<v Viswanath Chidambaram>OK, so that is the first point,
+am I right? Because as of no,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/103-1
+00:10:13.866 --> 00:10:16.062
+<v Viswanath Chidambaram>Friday is waiting for them to like pass.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/102-0
+00:10:16.862 --> 00:10:17.182
+<v Sarooparam Chenaram Darji>No.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/106-0
+00:10:17.422 --> 00:10:20.324
+<v Viswanath Chidambaram>And that is actually not needed.
+For example,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/106-1
+00:10:20.324 --> 00:10:25.306
+<v Viswanath Chidambaram>let's say like you have given a long
+request to Friday and then you express it</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/104-0
+00:10:24.622 --> 00:10:24.862
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/106-2
+00:10:25.306 --> 00:10:26.062
+<v Viswanath Chidambaram>as go ahead.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/105-0
+00:10:26.862 --> 00:10:27.182
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/107-0
+00:10:28.062 --> 00:10:30.382
+<v Viswanath Chidambaram>There's no point in study for waiting one
+or 2 seconds more.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/108-0
+00:10:31.182 --> 00:10:31.582
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/113-0
+00:10:32.942 --> 00:10:35.055
+<v Viswanath Chidambaram>So,
+like the online is ready should</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/113-1
+00:10:35.055 --> 00:10:39.750
+<v Viswanath Chidambaram>continuously process audio stream and
+first actually decide on what is the next</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/113-2
+00:10:39.750 --> 00:10:42.684
+<v Viswanath Chidambaram>action.
+Are we going to like interpret it okay or</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/110-0
+00:10:40.462 --> 00:10:40.782
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/113-3
+00:10:42.684 --> 00:10:47.437
+<v Viswanath Chidambaram>are we going to execute it or should we
+actually wait for some more time for the</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/111-0
+00:10:45.382 --> 00:10:45.502
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/113-4
+00:10:47.437 --> 00:10:51.721
+<v Viswanath Chidambaram>reason to come back okay or should we
+actually like what is it should we</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/112-0
+00:10:48.462 --> 00:10:48.862
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/113-5
+00:10:51.721 --> 00:10:52.542
+<v Viswanath Chidambaram>actually like?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/118-0
+00:10:52.862 --> 00:10:55.425
+<v Viswanath Chidambaram>Basically,
+it should actually make the decision.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/118-1
+00:10:55.425 --> 00:10:58.720
+<v Viswanath Chidambaram>I am not interested actually what are the
+decisions are there.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/118-2
+00:10:58.720 --> 00:11:02.799
+<v Viswanath Chidambaram>I can think of few states waiting,
+listening, acting, so on and so forth. OK,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/114-0
+00:10:59.022 --> 00:10:59.262
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/115-0
+00:11:02.382 --> 00:11:02.702
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/118-3
+00:11:02.799 --> 00:11:06.094
+<v Viswanath Chidambaram>just explicitly tell that it is actually
+a conversation layer.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/118-4
+00:11:06.094 --> 00:11:09.128
+<v Viswanath Chidambaram>I am pretty much sure it is a solved
+problem already. OK,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/116-0
+00:11:08.862 --> 00:11:09.102
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/118-5
+00:11:09.128 --> 00:11:11.742
+<v Viswanath Chidambaram>once actually the decision actually like
+is made.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/121-0
+00:11:12.382 --> 00:11:15.292
+<v Viswanath Chidambaram>Friday should act on the decision.
+If it is wait,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/117-0
+00:11:14.462 --> 00:11:14.782
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/121-1
+00:11:15.292 --> 00:11:18.376
+<v Viswanath Chidambaram>Friday doesn't have to do anything.
+If it is reason,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/119-0
+00:11:16.702 --> 00:11:17.022
+<v Sarooparam Chenaram Darji>No.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/121-2
+00:11:18.376 --> 00:11:22.974
+<v Viswanath Chidambaram>Friday doesn't have to do anything. OK,
+if it is, if it is even agreement, OK,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/121-3
+00:11:22.974 --> 00:11:26.873
+<v Viswanath Chidambaram>Friday cannot be like a completely mute.
+OK, when you are talking,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/121-4
+00:11:26.873 --> 00:11:31.062
+<v Viswanath Chidambaram>Friday should be able to acknowledge you
+are saying so on and so forth.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/120-0
+00:11:28.942 --> 00:11:29.262
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/122-0
+00:11:32.062 --> 00:11:34.382
+<v Viswanath Chidambaram>So in those cases,
+Friday should be able to acknowledge too.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/123-0
+00:11:35.022 --> 00:11:35.342
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/125-0
+00:11:36.382 --> 00:11:38.840
+<v Viswanath Chidambaram>So the stream actually,
+this is actually based on, lets say,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/125-1
+00:11:38.840 --> 00:11:42.143
+<v Viswanath Chidambaram>whether some sentence is complete or not,
+whether actually they have been waiting</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/125-2
+00:11:42.143 --> 00:11:44.157
+<v Viswanath Chidambaram>for long or not.
+There will be various scenarios.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/125-3
+00:11:44.157 --> 00:11:45.929
+<v Viswanath Chidambaram>We don't have to worry about the
+scenarios.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/125-4
+00:11:45.929 --> 00:11:47.822
+<v Viswanath Chidambaram>The A will actually fill the scenarios
+for us.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/124-0
+00:11:48.462 --> 00:11:48.782
+<v Sarooparam Chenaram Darji>Oh.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/126-0
+00:11:49.382 --> 00:11:52.462
+<v Viswanath Chidambaram>Okay, so the first thing is, actually,
+once again, these things happen.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/127-0
+00:11:53.902 --> 00:11:56.942
+<v Viswanath Chidambaram>The latency part will not be that big a
+paid.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/128-0
+00:11:57.662 --> 00:11:57.982
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/132-0
+00:11:58.942 --> 00:12:01.104
+<v Viswanath Chidambaram>Okay,
+so first actually the first point</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/132-1
+00:12:01.104 --> 00:12:05.482
+<v Viswanath Chidambaram>actually we'll try to actually focus on
+the conversation layer and actually make</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/132-2
+00:12:05.482 --> 00:12:09.752
+<v Viswanath Chidambaram>actually Friday feel more responsive.
+Okay, now let's talk about other points.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/129-0
+00:12:05.982 --> 00:12:06.302
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/130-0
+00:12:09.422 --> 00:12:09.742
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/132-3
+00:12:09.752 --> 00:12:13.319
+<v Viswanath Chidambaram>This is where we stop last.
+I just elaborated it so that there is</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/132-4
+00:12:13.319 --> 00:12:15.102
+<v Viswanath Chidambaram>some overlap between transcripts.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/131-0
+00:12:15.502 --> 00:12:15.902
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/133-0
+00:12:17.142 --> 00:12:21.687
+<v Viswanath Chidambaram>And we also did not did not talk about
+the distance or about states in the</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/133-1
+00:12:21.687 --> 00:12:23.262
+<v Viswanath Chidambaram>previous thing, I believe.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/134-0
+00:12:23.982 --> 00:12:24.942
+<v Sarooparam Chenaram Darji>No, we haven't.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/135-0
+00:12:25.902 --> 00:12:28.720
+<v Viswanath Chidambaram>Okay, and the second thing Friday,
+rites for speechless.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/135-1
+00:12:28.720 --> 00:12:32.377
+<v Viswanath Chidambaram>Let's now cover the first thing,
+then the local CRM speech administer CRM</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/135-2
+00:12:32.377 --> 00:12:33.662
+<v Viswanath Chidambaram>text, it should be stream.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/140-0
+00:12:35.182 --> 00:12:40.132
+<v Viswanath Chidambaram>The first thing the point number one one
+dot 2 local CPU feature organizer</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/136-0
+00:12:39.342 --> 00:12:39.582
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/140-1
+00:12:40.132 --> 00:12:43.234
+<v Viswanath Chidambaram>converts it into text.
+It should be streaming.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/137-0
+00:12:42.462 --> 00:12:42.702
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/140-2
+00:12:43.234 --> 00:12:46.137
+<v Viswanath Chidambaram>It should not actually one time
+conversion.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/138-0
+00:12:44.622 --> 00:12:44.942
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/140-3
+00:12:46.137 --> 00:12:51.483
+<v Viswanath Chidambaram>This is the largest consumer that is fine
+and the TTS startup is about 2.3 to 2.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/139-0
+00:12:46.942 --> 00:12:47.342
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/140-4
+00:12:51.483 --> 00:12:54.782
+<v Viswanath Chidambaram>5 seconds system waits for complete per
+sentence.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/141-0
+00:12:55.502 --> 00:13:00.414
+<v Viswanath Chidambaram>Yeah, okay, fine. That could be streamed.
+That is why no issues.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/141-1
+00:13:00.414 --> 00:13:02.302
+<v Viswanath Chidambaram>What is the second thing?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/142-0
+00:13:03.742 --> 00:13:08.605
+<v Viswanath Chidambaram>The provider steals audio,
+but worker does not play those chunks</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/142-1
+00:13:08.605 --> 00:13:09.502
+<v Viswanath Chidambaram>immediately.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/143-0
+00:13:10.702 --> 00:13:12.542
+<v Viswanath Chidambaram>Okay, we can actually make it play.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/144-0
+00:13:13.342 --> 00:13:13.582
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/145-0
+00:13:15.662 --> 00:13:17.582
+<v Viswanath Chidambaram>So like it's a stream.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/147-0
+00:13:16.462 --> 00:13:23.222
+<v Sarooparam Chenaram Darji>Basically,
+like live streaming the this one text to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/146-0
+00:13:22.102 --> 00:13:23.822
+<v Viswanath Chidambaram>TGS will solve the problem.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/147-1
+00:13:23.222 --> 00:13:24.782
+<v Sarooparam Chenaram Darji>speech here.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/148-0
+00:13:25.662 --> 00:13:27.502
+<v Viswanath Chidambaram>But there is one thing,
+it could be costly.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/149-0
+00:13:28.382 --> 00:13:30.142
+<v Sarooparam Chenaram Darji>Yeah, most probably.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/150-0
+00:13:31.262 --> 00:13:35.050
+<v Viswanath Chidambaram>if it is actually costly,
+then actually we will use the audio layer</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/150-1
+00:13:35.050 --> 00:13:35.662
+<v Viswanath Chidambaram>to mask it.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/152-0
+00:13:37.582 --> 00:13:40.156
+<v Viswanath Chidambaram>Basically,
+you look once actually the person then</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/152-1
+00:13:40.156 --> 00:13:42.730
+<v Viswanath Chidambaram>comes OK,
+let's say there is going to be some 556</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/152-2
+00:13:42.730 --> 00:13:43.502
+<v Viswanath Chidambaram>sentences more.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/151-0
+00:13:44.062 --> 00:13:44.302
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/153-0
+00:13:45.022 --> 00:13:49.022
+<v Viswanath Chidambaram>Okay,
+Freddy can simply say it's almost ready.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/154-0
+00:13:51.502 --> 00:13:52.062
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/155-0
+00:13:51.982 --> 00:13:54.462
+<v Viswanath Chidambaram>And then it can actually stitch
+everything together and place.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/156-0
+00:13:55.022 --> 00:13:55.502
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/158-0
+00:13:56.702 --> 00:13:59.867
+<v Viswanath Chidambaram>And there is one of the things a Friday
+should actually,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/158-1
+00:13:59.867 --> 00:14:03.475
+<v Viswanath Chidambaram>the key thing is Friday should allow the
+user to interrupt them.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/158-2
+00:14:03.475 --> 00:14:04.862
+<v Viswanath Chidambaram>That is really important.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/157-0
+00:14:05.502 --> 00:14:05.822
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/161-0
+00:14:06.542 --> 00:14:11.195
+<v Viswanath Chidambaram>This is while actually playing back
+actually the audio if you use input comes</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/161-1
+00:14:11.195 --> 00:14:14.833
+<v Viswanath Chidambaram>and lets say the user input could be
+background noise. Okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/159-0
+00:14:13.982 --> 00:14:14.222
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/161-2
+00:14:14.833 --> 00:14:19.724
+<v Viswanath Chidambaram>Friday should still qualify whether they
+actually user interrupting or there is a</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/161-3
+00:14:19.724 --> 00:14:24.555
+<v Viswanath Chidambaram>background noise. It is user interrupting.
+Friday should be should they actually</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/161-4
+00:14:24.555 --> 00:14:26.702
+<v Viswanath Chidambaram>stop actually whatever it is saying.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/160-0
+00:14:27.422 --> 00:14:27.662
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/164-0
+00:14:29.422 --> 00:14:33.182
+<v Viswanath Chidambaram>OK, so like this TTS thing,
+the stream thing I believe could be</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/164-1
+00:14:33.182 --> 00:14:36.061
+<v Viswanath Chidambaram>costly,
+so we will use our conversation layer to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/162-0
+00:14:33.822 --> 00:14:34.142
+<v Sarooparam Chenaram Darji>Done.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/164-2
+00:14:36.061 --> 00:14:36.942
+<v Viswanath Chidambaram>mask the delay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/163-0
+00:14:37.582 --> 00:14:37.982
+<v Sarooparam Chenaram Darji>Got it.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/168-0
+00:14:38.782 --> 00:14:44.190
+<v Viswanath Chidambaram>OK. And model first response about 1.
+5 also like irrespective of actually like</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/168-1
+00:14:44.190 --> 00:14:49.734
+<v Viswanath Chidambaram>ask having a conversation layer to damp
+the slowness are OK or damp the impact of</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/165-0
+00:14:49.502 --> 00:14:49.822
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/168-2
+00:14:49.734 --> 00:14:54.330
+<v Viswanath Chidambaram>actually like slowness. OK,
+we still can actually look for actually</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/166-0
+00:14:53.662 --> 00:14:53.942
+<v Sarooparam Chenaram Darji>Yes.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/168-3
+00:14:54.330 --> 00:14:59.062
+<v Viswanath Chidambaram>models that are actually basically like
+approximate to our geography.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/167-0
+00:14:59.742 --> 00:15:00.062
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/169-0
+00:14:59.742 --> 00:15:02.734
+<v Viswanath Chidambaram>And then you said that itself will
+actually sometime we'll actually have</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/169-1
+00:15:02.734 --> 00:15:03.102
+<v Viswanath Chidambaram>that too.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/170-0
+00:15:03.822 --> 00:15:04.142
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/172-0
+00:15:05.582 --> 00:15:09.500
+<v Viswanath Chidambaram>Okay, it is but smaller. Okay, fine.
+STT full answer flavour,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/172-1
+00:15:09.500 --> 00:15:13.164
+<v Viswanath Chidambaram>long answers and another 30 seconds.
+In some cases, okay,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/172-2
+00:15:13.164 --> 00:15:16.891
+<v Viswanath Chidambaram>this affects completion time,
+not the first response time.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/172-3
+00:15:16.891 --> 00:15:19.102
+<v Viswanath Chidambaram>Completion time is not the concern.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/171-0
+00:15:19.782 --> 00:15:20.022
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/173-0
+00:15:20.542 --> 00:15:25.778
+<v Viswanath Chidambaram>That There is one other thing we never
+should be like waiting for the entire</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/173-1
+00:15:25.778 --> 00:15:27.342
+<v Viswanath Chidambaram>audio to play anything.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/174-0
+00:15:28.222 --> 00:15:28.542
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/175-0
+00:15:28.902 --> 00:15:31.348
+<v Viswanath Chidambaram>OK,
+once actually you have a buffer of some</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/175-1
+00:15:31.348 --> 00:15:35.182
+<v Viswanath Chidambaram>67 minutes, you could go 67 seconds,
+you could start playing things.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/176-0
+00:15:35.662 --> 00:15:35.982
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/179-0
+00:15:37.142 --> 00:15:39.234
+<v Viswanath Chidambaram>So the live thing might be costly,
+but actually,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/177-0
+00:15:39.182 --> 00:15:39.342
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/179-1
+00:15:39.234 --> 00:15:41.582
+<v Viswanath Chidambaram>like a streaming thing doesn't have to be
+that costly.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/178-0
+00:15:42.262 --> 00:15:42.542
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/181-0
+00:15:43.662 --> 00:15:47.883
+<v Viswanath Chidambaram>So let we just actually give them initial
+acknowledgement so that we get actually</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/181-1
+00:15:47.883 --> 00:15:51.742
+<v Viswanath Chidambaram>45 seconds so that we can actually use
+actually streaming instead of live.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/180-0
+00:15:52.382 --> 00:15:52.622
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/182-0
+00:15:54.222 --> 00:15:56.500
+<v Viswanath Chidambaram>Okay, and actually while streaming,
+if they interrupt,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/182-1
+00:15:56.500 --> 00:15:58.942
+<v Viswanath Chidambaram>we can actually stop our playing playing
+by the streaming.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/186-0
+00:16:01.382 --> 00:16:04.886
+<v Viswanath Chidambaram>And whatever I told,
+it is better to create a diagram out of</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/186-1
+00:16:04.886 --> 00:16:08.734
+<v Viswanath Chidambaram>this documented diagram. OK,
+because we will actually align on the</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/183-0
+00:16:05.422 --> 00:16:05.742
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/184-0
+00:16:07.102 --> 00:16:07.382
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/186-2
+00:16:08.734 --> 00:16:11.662
+<v Viswanath Chidambaram>approach first and then we'll ask it to
+implement.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/185-0
+00:16:12.382 --> 00:16:12.702
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/189-0
+00:16:13.342 --> 00:16:16.882
+<v Viswanath Chidambaram>Because I'm pretty much like I haven't
+actually thought about all these cases</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/189-1
+00:16:16.882 --> 00:16:19.332
+<v Viswanath Chidambaram>and anyway,
+I'm not actually giving you full context.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/187-0
+00:16:17.182 --> 00:16:17.582
+<v Sarooparam Chenaram Darji>Got it.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/189-2
+00:16:19.332 --> 00:16:22.871
+<v Viswanath Chidambaram>I'm just actually giving you some bits
+here and there simply because I myself</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/189-3
+00:16:22.871 --> 00:16:25.502
+<v Viswanath Chidambaram>I'm not actually fully aware of actually
+what's going on.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/188-0
+00:16:26.062 --> 00:16:26.222
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/192-0
+00:16:27.822 --> 00:16:32.012
+<v Viswanath Chidambaram>Okay, this one, what is it, what is it,
+what is it? So, like prepare something,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/192-1
+00:16:32.012 --> 00:16:35.468
+<v Viswanath Chidambaram>we'll actually look at it,
+we'll actually like repay it and we'll</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/192-2
+00:16:35.468 --> 00:16:39.342
+<v Viswanath Chidambaram>record that conversation too before
+actually going for an implementation.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/190-0
+00:16:35.822 --> 00:16:36.142
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/191-0
+00:16:39.982 --> 00:16:40.422
+<v Sarooparam Chenaram Darji>OK.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/195-0
+00:16:41.422 --> 00:16:48.203
+<v Viswanath Chidambaram>And this way apart from so I was talking
+only about the functional step infra step</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/193-0
+00:16:46.302 --> 00:16:46.542
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/195-1
+00:16:48.203 --> 00:16:54.330
+<v Viswanath Chidambaram>you try to understand the latency and
+things and there is one other thing.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/194-0
+00:16:50.382 --> 00:16:50.542
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/195-2
+00:16:54.330 --> 00:16:58.822
+<v Viswanath Chidambaram>So the latency numbers might be low, OK,
+but actually.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/196-0
+00:16:59.742 --> 00:17:03.662
+<v Viswanath Chidambaram>It might low actually by measure one,
+but in reality, it might not.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/197-0
+00:17:04.862 --> 00:17:07.332
+<v Viswanath Chidambaram>OK,
+like I am because actually The thing is</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/197-1
+00:17:07.332 --> 00:17:11.935
+<v Viswanath Chidambaram>actually we want to understand what like
+basically you can simply actually try to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/197-2
+00:17:11.935 --> 00:17:15.022
+<v Viswanath Chidambaram>pink the models. OK,
+even that will not actually help.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/198-0
+00:17:16.782 --> 00:17:19.042
+<v Viswanath Chidambaram>Okay,
+the problem is you are actually using</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/198-1
+00:17:19.042 --> 00:17:20.222
+<v Viswanath Chidambaram>OpenDroter, am I right?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/199-0
+00:17:20.702 --> 00:17:21.062
+<v Sarooparam Chenaram Darji>No.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/200-0
+00:17:22.222 --> 00:17:23.742
+<v Viswanath Chidambaram>So Ping will be immediately responded to.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/201-0
+00:17:24.462 --> 00:17:24.822
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/202-0
+00:17:25.342 --> 00:17:29.102
+<v Viswanath Chidambaram>The problem is actually open router has
+to send the request to somebody else.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/203-0
+00:17:29.742 --> 00:17:30.142
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/204-0
+00:17:30.582 --> 00:17:31.702
+<v Viswanath Chidambaram>After they have to respond.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/207-0
+00:17:33.102 --> 00:17:37.360
+<v Viswanath Chidambaram>So, figure out a way to, let's say,
+use models that are physically</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/207-1
+00:17:37.360 --> 00:17:39.902
+<v Viswanath Chidambaram>approximate so that the time to produce.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/205-0
+00:17:38.942 --> 00:17:39.302
+<v Sarooparam Chenaram Darji>Thank you.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/206-0
+00:17:40.542 --> 00:17:40.862
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/208-0
+00:17:41.902 --> 00:17:46.212
+<v Viswanath Chidambaram>So give me one minute.
+I want to understand what is the maximum,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/208-1
+00:17:46.212 --> 00:17:49.858
+<v Viswanath Chidambaram>let us say, sorry,
+what is the minimum time that might</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/208-2
+00:17:49.858 --> 00:17:55.095
+<v Viswanath Chidambaram>actually like needed if actually like we
+are actually like posting data to our</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/208-3
+00:17:55.095 --> 00:17:56.222
+<v Viswanath Chidambaram>like, let us see.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/212-0
+00:17:57.902 --> 00:18:02.276
+<v Viswanath Chidambaram>The polar opposite of where we are.
+So I believe if we actually take from</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/209-0
+00:18:00.622 --> 00:18:01.102
+<v Sarooparam Chenaram Darji>Hmm.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/212-1
+00:18:02.276 --> 00:18:05.762
+<v Viswanath Chidambaram>India directly,
+it goes to Argentina or Mexico, I believe.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/210-0
+00:18:05.422 --> 00:18:05.742
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/212-2
+00:18:05.762 --> 00:18:08.421
+<v Viswanath Chidambaram>OK,
+so generally the distance generally will</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/212-3
+00:18:08.421 --> 00:18:09.662
+<v Viswanath Chidambaram>be 20,000 kilometres.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/211-0
+00:18:10.222 --> 00:18:10.462
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/213-0
+00:18:11.462 --> 00:18:15.987
+<v Viswanath Chidambaram>Where the idea is actually glow like
+earth is actually roughly 40 metres in</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/213-1
+00:18:15.987 --> 00:18:19.022
+<v Viswanath Chidambaram>diameter, sorry,
+not in diameter in circumference.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/214-0
+00:18:22.462 --> 00:18:23.342
+<v Viswanath Chidambaram>Everything audible?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/215-0
+00:18:23.742 --> 00:18:24.382
+<v Sarooparam Chenaram Darji>Yeah, you are.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/216-0
+00:18:25.502 --> 00:18:30.612
+<v Viswanath Chidambaram>So earth is around like if I remember the
+earth is around actually approximately 40,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/216-1
+00:18:30.612 --> 00:18:35.180
+<v Viswanath Chidambaram>000 kilometres in the circumference.
+So like the opposite point will be 20,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/216-2
+00:18:35.180 --> 00:18:36.622
+<v Viswanath Chidambaram>000 kilometres at least.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/217-0
+00:18:38.342 --> 00:18:40.969
+<v Viswanath Chidambaram>Okay,
+if you consider actually light speed to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/217-1
+00:18:40.969 --> 00:18:44.622
+<v Viswanath Chidambaram>be, let's say, like what is it, 300,
+000 kilometres per second.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/218-0
+00:18:46.462 --> 00:18:50.128
+<v Viswanath Chidambaram>So for actually 30,
+000 it will be at least one 10,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/218-1
+00:18:50.128 --> 00:18:55.134
+<v Viswanath Chidambaram>000 seconds, 100 milliseconds. Okay,
+we are talking about actually 20,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/218-2
+00:18:55.134 --> 00:19:00.774
+<v Viswanath Chidambaram>000 kilometres, not 30,000 kilometres.
+So we are talking about 66 ms by default</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/218-3
+00:19:00.774 --> 00:19:04.862
+<v Viswanath Chidambaram>for our data to reach to the farthest
+point in our globe.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/219-0
+00:19:04.942 --> 00:19:06.062
+<v Viswanath Chidambaram>From our location.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/220-0
+00:19:07.902 --> 00:19:10.620
+<v Viswanath Chidambaram>OK,
+so but if we are not talking about the</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/220-1
+00:19:10.620 --> 00:19:14.222
+<v Viswanath Chidambaram>atmosphere, we are talking about,
+let's say the seconds.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/223-0
+00:19:15.702 --> 00:19:17.507
+<v Viswanath Chidambaram>OK,
+so there's a possibility it is not</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/223-1
+00:19:17.507 --> 00:19:20.376
+<v Viswanath Chidambaram>because of single proximity,
+it is because of something else.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/223-2
+00:19:20.376 --> 00:19:24.123
+<v Viswanath Chidambaram>Maybe the model that we are using it has
+higher latency or it has actually lower</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/221-0
+00:19:21.022 --> 00:19:21.342
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/223-3
+00:19:24.123 --> 00:19:27.640
+<v Viswanath Chidambaram>throughput or something like that.
+You might even want to like a change the</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/223-4
+00:19:27.640 --> 00:19:31.295
+<v Viswanath Chidambaram>model or change the browser to actually
+make it faster. That is also possible.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/223-5
+00:19:31.295 --> 00:19:34.302
+<v Viswanath Chidambaram>This is on the engineering layer,
+not on the conversation layer.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/222-0
+00:19:31.822 --> 00:19:32.342
+<v Sarooparam Chenaram Darji>OK.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/225-0
+00:19:34.542 --> 00:19:38.201
+<v Sarooparam Chenaram Darji>It was suggesting to try changing the
+models. At first,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/225-1
+00:19:38.201 --> 00:19:42.382
+<v Sarooparam Chenaram Darji>we were simply researching about it. Yeah,
+model and providers.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/224-0
+00:19:38.782 --> 00:19:39.982
+<v Viswanath Chidambaram>What on provided?</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/226-0
+00:19:42.822 --> 00:19:45.422
+<v Viswanath Chidambaram>That is on the engineering layer or infra
+layer.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/227-0
+00:19:45.102 --> 00:19:45.342
+<v Sarooparam Chenaram Darji>yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/229-0
+00:19:46.582 --> 00:19:49.580
+<v Viswanath Chidambaram>Whatever I told originally told you is
+actually converse chain layer.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/229-1
+00:19:49.580 --> 00:19:52.063
+<v Viswanath Chidambaram>It was my bad.
+I asked you to look at reduce the latency.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/229-2
+00:19:52.063 --> 00:19:54.033
+<v Viswanath Chidambaram>It is not the latency that we have to
+reduce,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/228-0
+00:19:52.942 --> 00:19:53.382
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/229-3
+00:19:54.033 --> 00:19:56.302
+<v Viswanath Chidambaram>so it is the perceived delay that we have
+to reduce.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/231-0
+00:19:56.862 --> 00:20:01.662
+<v Sarooparam Chenaram Darji>Yeah,
+he should not feel that there is a delay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/230-0
+00:19:58.222 --> 00:20:00.062
+<v Viswanath Chidambaram>Latency is just one comfortable.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/234-0
+00:20:01.742 --> 00:20:04.721
+<v Viswanath Chidambaram>Yeah, you are right.
+That is the only goal. Yeah,</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/232-0
+00:20:03.022 --> 00:20:04.542
+<v Sarooparam Chenaram Darji>Even if there is a delay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/234-1
+00:20:04.721 --> 00:20:07.580
+<v Viswanath Chidambaram>you are right.
+It is about them feeling things.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/234-2
+00:20:07.580 --> 00:20:09.902
+<v Viswanath Chidambaram>It is not about what is actually there.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/233-0
+00:20:10.462 --> 00:20:10.862
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/235-0
+00:20:12.862 --> 00:20:13.422
+<v Viswanath Chidambaram>Anybody.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/236-0
+00:20:15.022 --> 00:20:17.982
+<v Sarooparam Chenaram Darji>I'll give it updated transcripts.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/237-0
+00:20:18.862 --> 00:20:19.422
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/238-0
+00:20:19.742 --> 00:20:20.382
+<v Sarooparam Chenaram Darji>Sender.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/239-0
+00:20:21.822 --> 00:20:23.582
+<v Sarooparam Chenaram Darji>Come up with some diagrams and all.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/240-0
+00:20:24.862 --> 00:20:25.262
+<v Viswanath Chidambaram>Okay.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/243-0
+00:20:26.462 --> 00:20:29.618
+<v Viswanath Chidambaram>If first thing,
+this one is in line part and then we will</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/243-1
+00:20:29.618 --> 00:20:33.536
+<v Viswanath Chidambaram>actually go for the conversation.
+It itself is a challenging problem to</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/243-2
+00:20:33.536 --> 00:20:33.862
+<v Viswanath Chidambaram>solve.</v>
+
+44fca73d-1257-42ac-b199-1eb5a2db338c/242-0
+00:20:34.702 --> 00:20:34.942
+<v Sarooparam Chenaram Darji>Yeah.</v>

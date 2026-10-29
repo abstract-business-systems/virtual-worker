@@ -1,7 +1,9 @@
 # Virtual Worker — Next Steps and Engineering Requirements
 
 Source: [`docs/recordings/2.vtt`](recordings/2.vtt)
-Additional source: [`docs/recordings/3.vtt`](recordings/3.vtt)
+Additional sources: [`docs/recordings/3.vtt`](recordings/3.vtt),
+[`docs/recordings/4.vtt`](recordings/4.vtt), and
+[`docs/recordings/5.vtt`](recordings/5.vtt)
 
 This document captures the priorities, decisions, and follow-up work from the
 16 October meeting. It complements the product requirements in
@@ -16,52 +18,71 @@ the assistant's answers.
 
 The next development gate is:
 
-1. Measure and reduce interaction latency.
-2. Measure the cost of a realistic meeting session.
-3. Only then continue with broader assistant behavior and memory work.
+1. Design the conversation layer that reduces perceived delay.
+2. Keep the measured latency findings available for later engineering work.
+3. Measure the cost of a realistic meeting session.
+4. Only then continue with broader assistant behavior and memory work.
 
-Until those measurements are available, the implementation should remain a
-thin, inspectable interface around the existing capabilities.
+Until the conversation and cost gates are reviewed, the implementation should
+remain a thin, inspectable interface around the existing capabilities.
 
-## M3 latency checkpoint — complete
+## M3–M5 conversation-layer checkpoint
 
-The measurement and research requested by M3 are complete for the current
-latency decision. The findings are recorded in
-[`latency-findings.md`](latency-findings.md).
+The M3 latency measurement is complete and remains documented in
+[`latency-findings.md`](latency-findings.md). M4 and M5 clarified the product
+direction:
 
-The evidence shows that the main delay is inside Friday's processing path:
-endpointing and STT, model first-token time, and first TTS audio. Backend
-context lookup, basic network connectivity, and the meeting path are not the
-main source of the multi-second delay.
+> The primary goal is to reduce perceived delay. Reducing actual technical
+> latency is secondary.
 
-No provider, model, region, endpoint, TTS, or agent behavior was changed as
-part of this checkpoint. The exact moment a remote participant hears audio was
-not separately timed, but that gap is not needed to identify the main cause.
+### Conversation layer first
 
-## Remaining next step from M3
+Friday needs a separate conversation layer in front of the content/reasoning
+layer.
 
-Choose which possible response to evaluate first:
+- Continuously process incoming speech enough to decide whether the user has
+  finished a sentence and what state applies.
+- Use simple states such as **listening**, **waiting**, and **acting**.
+- In `waiting`, Friday may receive audio but should not process unrelated
+  speech as a new task.
+- When Friday decides to act, acknowledge what it is going to do and start the
+  content task in the background.
+- Give progress updates for work that takes longer than a normal response.
+- If the user interrupts or says to wait, stop or pause the current task and
+  follow the new conversational instruction.
+- Let the conversation layer remain responsive while the content layer reasons.
 
-1. Reduce actual response time, starting with endpointing and STT.
-2. Reduce perceived waiting with an immediate acknowledgement.
-3. Evaluate both, with one chosen as the first controlled comparison.
+The first design should cover one speaker and normal interruption. Speaker
+identification, multiple simultaneous users, and live translation are later
+layers.
 
-The possible fixes and their order are already documented in
-[`latency-findings.md`](latency-findings.md). No further measurement or
-research should be added until this choice is made.
+### Next design deliverable
+
+Before implementation, prepare and review one simple conversation-flow diagram
+covering:
+
+1. listening to a user;
+2. deciding whether the input is complete;
+3. acknowledging and starting work;
+4. waiting or providing progress;
+5. handling interruption, correction, or resumption;
+6. delivering the content result.
+
+The technical latency findings and possible engineering fixes remain available
+for later. No further latency research or code change is required before this
+conversation design is reviewed.
 
 ## Priority requirements
 
-### 1. Measure end-to-end latency — current checkpoint complete
+### 1. Latency measurement — current checkpoint complete
 
 The local and live worker-path baselines have been measured. They record speech
 capture and STT, model first-token time, TTS startup, first response audio, and
 full response playback. The results are documented in
 [`latency-findings.md`](latency-findings.md).
 
-A specific latency target and cost target still need to be agreed before any
-latency or broader feature work is considered complete.
-
+A specific cost target still needs to be agreed. Actual latency improvements are
+secondary to making the conversation feel responsive.
 ### 2. Measure meeting cost
 
 The system must measure the cost of running the worker in a normal meeting,
