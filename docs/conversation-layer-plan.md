@@ -20,6 +20,18 @@ no speaker identification or live translation; no memory or broader workflows.
 
 Two layers, as decided in M4/M5:
 
+```mermaid
+flowchart TB
+    A[Meeting audio in] --> B[Conversation layer
+endpointing, streaming STT,
+state machine, interruption]
+    B -->|"acknowledgement in ~1–2 s"| C[Friday speaks]
+    B -->|task request| D[Content layer
+context lookup, answer model,
+task generation]
+    D -->|result, in the background| B
+```
+
 - The **conversation layer** owns the audio loop and all timing-critical
   decisions: endpointing, turn detection, acknowledgement, interruption. It
   never blocks on the content layer.
