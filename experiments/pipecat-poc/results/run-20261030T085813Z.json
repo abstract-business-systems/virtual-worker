@@ -1,0 +1,18 @@
+{
+  "t_last_input_chunk_s": 6.428,
+  "t_turn_commit_s": 6.729,
+  "t_first_audio_chunk_s": null,
+  "t_first_audio_from_commit_s": null,
+  "t_response_end_s": null,
+  "audio_chunk_count": 0,
+  "audio_span_s": null,
+  "audio_bytes_raw": 0,
+  "audio_seconds": 0.0,
+  "tool_call": {
+    "name": "get_meeting_context",
+    "called": false
+  },
+  "transcript": "",
+  "errors": [],
+  "wall_total_s": 54.889
+}

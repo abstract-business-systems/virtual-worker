@@ -1,0 +1,18 @@
+{
+  "t_last_input_chunk_s": 6.43,
+  "t_turn_commit_s": 6.73,
+  "t_first_audio_chunk_s": 7.418,
+  "t_first_audio_from_commit_s": 0.688,
+  "t_response_end_s": 8.043,
+  "audio_chunk_count": 10,
+  "audio_span_s": 0.462,
+  "audio_bytes_raw": 184800,
+  "audio_seconds": 3.85,
+  "tool_call": {
+    "name": "get_meeting_context",
+    "called": true
+  },
+  "transcript": "Okay, let me think about what information I can share to help you.",
+  "errors": [],
+  "wall_total_s": 13.298
+}

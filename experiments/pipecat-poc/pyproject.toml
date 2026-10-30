@@ -1,0 +1,9 @@
+[project]
+name = "vw-pipecat-poc"
+version = "0.1.0"
+description = "Isolated Virtual Worker M7 POC — realtime model wrapped in Pipecat"
+requires-python = ">=3.11"
+dependencies = [
+    "pipecat-ai[openai]>=0.1,<2",
+    "sounddevice>=0.5.6",
+]

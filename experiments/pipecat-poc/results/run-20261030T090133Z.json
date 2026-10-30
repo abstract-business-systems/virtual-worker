@@ -1,0 +1,18 @@
+{
+  "t_last_input_chunk_s": 6.431,
+  "t_turn_commit_s": 6.731,
+  "t_first_audio_chunk_s": 7.815,
+  "t_first_audio_from_commit_s": 1.084,
+  "t_response_end_s": 8.292,
+  "audio_chunk_count": 11,
+  "audio_span_s": 0.477,
+  "audio_bytes_raw": 194400,
+  "audio_seconds": 4.05,
+  "tool_call": {
+    "name": "get_meeting_context",
+    "called": true
+  },
+  "transcript": "Alright, let me think about what context I need and then we can dive in.",
+  "errors": [],
+  "wall_total_s": 13.541
+}
