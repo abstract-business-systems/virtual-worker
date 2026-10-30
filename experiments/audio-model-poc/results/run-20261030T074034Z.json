@@ -1,0 +1,19 @@
+{
+  "model": "openai/gpt-audio-mini",
+  "voice": "alloy",
+  "started_utc": "2026-10-30T07:40:34.369408+00:00",
+  "baseline_first_audio_s": 7.77,
+  "note": "OpenRouter requires stream=true for audio output (HTTP 400 otherwise)",
+  "step1": {
+    "stream_error": "<HTTPError 400: 'Bad Request'>",
+    "t_first_audio_chunk_s": null,
+    "t_first_text_chunk_s": null,
+    "audio_chunk_count": 0,
+    "transcript_or_text": "",
+    "tool_calls": [],
+    "usage": null
+  },
+  "step2": {
+    "error": "no question audio generated"
+  }
+}

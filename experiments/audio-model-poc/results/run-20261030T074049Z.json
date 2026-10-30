@@ -1,0 +1,192 @@
+{
+  "model": "openai/gpt-audio-mini",
+  "voice": "alloy",
+  "started_utc": "2026-10-30T07:40:45.105706+00:00",
+  "baseline_first_audio_s": 7.77,
+  "note": "OpenRouter requires stream=true for audio output (HTTP 400 otherwise)",
+  "step1": {
+    "http_status": 200,
+    "t_first_audio_chunk_s": 1.224,
+    "t_first_text_chunk_s": null,
+    "audio_chunk_count": 16,
+    "audio_chunk_span_s": 0.844,
+    "audio_bytes": 406400,
+    "chunks": [
+      {
+        "t": 1.224,
+        "len": 25600
+      },
+      {
+        "t": 1.436,
+        "len": 25600
+      },
+      {
+        "t": 1.473,
+        "len": 25600
+      },
+      {
+        "t": 1.58,
+        "len": 25600
+      },
+      {
+        "t": 1.68,
+        "len": 25600
+      },
+      {
+        "t": 1.716,
+        "len": 25600
+      },
+      {
+        "t": 1.726,
+        "len": 25600
+      },
+      {
+        "t": 1.826,
+        "len": 25600
+      },
+      {
+        "t": 1.832,
+        "len": 25600
+      },
+      {
+        "t": 1.85,
+        "len": 25600
+      },
+      {
+        "t": 1.931,
+        "len": 25600
+      },
+      {
+        "t": 1.958,
+        "len": 25600
+      },
+      {
+        "t": 1.967,
+        "len": 25600
+      },
+      {
+        "t": 1.971,
+        "len": 25600
+      },
+      {
+        "t": 1.975,
+        "len": 25600
+      },
+      {
+        "t": 2.068,
+        "len": 22400
+      }
+    ],
+    "transcript_or_text": "Sure, I can help with that. Could you please provide the calendar or meeting details you use, so I can assist you better?",
+    "tool_calls": [],
+    "usage": {
+      "prompt_tokens": 31,
+      "completion_tokens": 166,
+      "total_tokens": 197,
+      "cost": 0.000417,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 127
+      }
+    },
+    "question_file": "/home/srdj/Workspace/virtual-worker/experiments/audio-model-poc/fixtures/question.wav"
+  },
+  "step2": {
+    "http_status": 200,
+    "t_first_audio_chunk_s": 1.51,
+    "t_first_text_chunk_s": null,
+    "audio_chunk_count": 12,
+    "audio_chunk_span_s": 0.704,
+    "audio_bytes": 284800,
+    "chunks": [
+      {
+        "t": 1.51,
+        "len": 25600
+      },
+      {
+        "t": 1.681,
+        "len": 25600
+      },
+      {
+        "t": 1.758,
+        "len": 25600
+      },
+      {
+        "t": 1.866,
+        "len": 25600
+      },
+      {
+        "t": 1.908,
+        "len": 25600
+      },
+      {
+        "t": 1.964,
+        "len": 25600
+      },
+      {
+        "t": 1.998,
+        "len": 25600
+      },
+      {
+        "t": 2.107,
+        "len": 25600
+      },
+      {
+        "t": 2.117,
+        "len": 25600
+      },
+      {
+        "t": 2.149,
+        "len": 25600
+      },
+      {
+        "t": 2.16,
+        "len": 25600
+      },
+      {
+        "t": 2.214,
+        "len": 3200
+      }
+    ],
+    "transcript_or_text": "Sure, I'll get the meeting context first. One moment, and I'll find the details for you.",
+    "tool_calls": [
+      {
+        "name": "get_meeting_context",
+        "args": ""
+      },
+      {
+        "name": null,
+        "args": ""
+      },
+      {
+        "name": null,
+        "args": "{}"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 140,
+      "completion_tokens": 134,
+      "total_tokens": 274,
+      "cost": 0.0004056,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 63,
+        "video_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 89
+      }
+    },
+    "answer_file": "/home/srdj/Workspace/virtual-worker/experiments/audio-model-poc/results/answer.wav"
+  }
+}
