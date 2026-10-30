@@ -1,0 +1,28 @@
+{
+  "model": "gpt-realtime-2.1-mini",
+  "voice": "alloy",
+  "started_utc": "2026-10-30T08:01:00.871750+00:00",
+  "baseline_first_audio_s": 7.77,
+  "question_file": "/home/srdj/Workspace/virtual-worker/experiments/realtime-model-poc/fixtures/question.wav",
+  "metrics": {
+    "t_last_input_chunk_s": 1.584,
+    "t_speech_stopped_s": null,
+    "t_first_audio_chunk_s": null,
+    "audio_chunk_count": 0,
+    "audio_bytes_b64": 0,
+    "tool_call": null,
+    "transcript": "",
+    "usage": null,
+    "event_count": 2
+  },
+  "events": [
+    {
+      "t": 1.584,
+      "type": "session.created"
+    },
+    {
+      "t": 1.85,
+      "type": "error"
+    }
+  ]
+}

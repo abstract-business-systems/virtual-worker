@@ -113,65 +113,58 @@ real numbers, kept deliberately small and fast:
   side of the comparison.
 - Assume prices fall (at least half in six months); know the current cost, but
   do not let it disqualify an approach prematurely.
-- **Realtime models are OpenAI-direct only.** OpenRouter carries no realtime
-  models at all (verified against its model list) — only `openai/gpt-audio`
-  and `openai/gpt-audio-mini`. A realtime mini tier exists (`gpt-realtime-2.1-mini`,
-  audio $10/M in, $20/M out on OpenAI's official pricing page — the same audio
-  rates as `gpt-audio-mini`), reachable only through OpenAI's websocket
-  Realtime API. That path provides server-side voice-activity detection and
-  interruption built in, at the same per-token audio cost as
-  `gpt-audio-mini` over chat completions — a relevant comparison point for
-  the demo.
-- **Preliminary finding (researched, verified against live pricing pages):**
-  OpenAI `gpt-audio-mini` — a voice model — is cheap and capable: audio in/out
-  modalities with tool calling supported (OpenRouter supported-parameters,
-  verified). Audio token density is ~600 tokens/minute (~10 tokens/second),
-  derived from OpenAI's own audio pricing footnote ($0.06/min input at
-  $100/1M tokens). Costs at ~₹95/USD:
+- **Realtime model finding (primary — the M7 POC target, measured from our
+  own probe run in `experiments/realtime-model-poc/`):** OpenAI
+  `gpt-realtime-2.1-mini` is OpenAI-direct only (websocket Realtime API;
+  OpenRouter carries no realtime models at all). Verified live in the POC:
+  server-side voice-activity/turn detection works (`semantic_vad`),
+  interruption semantics are built in, tool calling fires mid-voice, and
+  **first-audio latency was ~1.7 s after input** — an ~80% cut vs. the
+  7.77 s worker baseline. Token densities measured from the probe's usage
+  objects: ~10 tokens/sec input, ~15 tokens/sec output. Costs at ~₹95/USD:
 
-  | Meeting hour (listen 60 min + speak ~10 min) | Via OpenRouter | Direct OpenAI |
+  | Realtime model | Per meeting-hour (listen 60 min + speak ~10 min) | Per month (~8 h/day, 5–6 days/week ≈ 190 meeting-hours) |
   |---|---|---|
-  | Per hour | ~₹3.4 (~₹0.06/min) | ~₹46 (~₹0.76/min) |
-  | Per month at scale (60 meeting-h/day, 22 days) | **~₹4,500** | **~₹60,000** |
+  | Direct OpenAI | ~₹51 (~₹0.85/min) | **~₹9,800** |
 
-  Via OpenRouter the listed audio rates ($0.60/M in, $2.40/M out) equal its
-  text rates; direct OpenAI charges audio at $10/M in and $20/M out. The
-  demo must verify actual token usage per request to settle which rate
-  applies. Either way the earlier "thousands of dollars per month" concern
-  is overstated. This opens a no-Pipecat option (D in the plan): one audio
-  model replaces STT + LLM + TTS, with only VAD endpointing, barge-in, and
-  the state machine kept as our own code. Its real first-audio latency and
-  OpenRouter audio streaming must be measured in the demo.
+  Scale note: one agent listening ~8 h/day, 5–6 days/week — not 24/7 and not
+  the "6 h/day, 10 people" phrasing from M6. The earlier "thousands of
+  dollars per month" concern is overstated.
 
-### 2. Pipecat / single-model POC (after the cost check)
+  *Footnote (fallback comparison):* `gpt-audio-mini` over OpenRouter chat
+  completions measures ~₹4/meeting-hour (**~₹780/month**) — 12× cheaper than
+  the realtime path, already the worker's default TTS model, but it needs
+  hand-built endpointing and barge-in (no server turn detection). Measured
+  in `experiments/audio-model-poc/`; rate caveat: OpenRouter bills audio at
+  text rates there ($0.60/M in, $2.40/M out), confirmed by our probe's
+  actual usage cost.
+
+### 2. Pipecat / realtime-model POC (after the cost check)
 
 **Scope confirmed in M7:** the POC checks whether Pipecat and the OpenAI
-audio model can work for us — mimic Friday's current behavior, answer
+realtime model can work for us — mimic Friday's current behavior, answer
 questions, and ideally keep conversation memory. It may live inside the
 virtual worker or be a standalone POC. Measure the output quality and the
 associated cost. **Timebox: two hours maximum per POC**; after one hour if
 stuck, ask Viswanath.
 
-Build the smallest possible probe first — one script, no framework — then
-extend it. Test matrix:
+The raw probes are already run and measured (see
+`experiments/realtime-model-poc/` and the footnote comparison in
+`experiments/audio-model-poc/`):
 
-1. **First-audio latency** — stream `gpt-audio-mini` from OpenRouter with
-   audio in/out; measure end-of-speech → first audible chunk. The
-   make-or-break number against the **7.77 s** baseline.
-2. **Audio streaming behavior** — does audio arrive in smooth playable
-   chunks through OpenRouter, or as one blob? Decides whether the
-   single-model path is viable at all.
-3. **Tool calling mid-voice** — can one response acknowledge and call a
-   backend tool? The acknowledge-before-long-process behavior from M3–M5.
-4. **Actual token usage and spend** — read `usage` from responses and compare
-   against the billed amount; settles the OpenRouter-vs-direct audio rate
-   question for real.
+1. **First-audio latency** — realtime model via OpenAI-direct: **~1.7 s
+   after input** against the **7.77 s** baseline. ✓ measured
+2. **Audio streaming behavior** — arrives in a few large bursts; playback
+   start comfortably buffered. ✓ measured
+3. **Tool calling mid-voice** — acknowledge + `get_meeting_context` in one
+   voice response. ✓ measured
+4. **Actual token usage and spend** — ~$0.003 per short exchange; ~₹9,800/month
+   at the corrected scale. ✓ measured
 
-If the probe is healthy, extend to the acknowledge-and-tool-call flow
-(item 3) and only then decide whether Pipecat adds enough to justify the
-framework dependency (compare the same flows wrapped in a minimal Pipecat
-pipeline). The result decides whether Friday's final implementation could be
-built on the single model or Pipecat.
+Remaining for this step: wrap the same flow in a minimal Pipecat pipeline and
+compare latency, effort, and framework overhead against the raw probe; the
+result decides whether Pipecat adds enough to justify the dependency, and
+whether Friday's final implementation could be built on the realtime model.
 
 ### 3. Ranking question (unanswered, in parallel)
 

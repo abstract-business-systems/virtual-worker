@@ -1,0 +1,244 @@
+{
+  "model": "gpt-realtime-2.1-mini",
+  "voice": "alloy",
+  "started_utc": "2026-10-30T08:02:57.494393+00:00",
+  "baseline_first_audio_s": 7.77,
+  "question_file": "/home/srdj/Workspace/virtual-worker/experiments/realtime-model-poc/fixtures/question.wav",
+  "metrics": {
+    "t_last_input_chunk_s": 0.888,
+    "t_speech_stopped_s": null,
+    "t_first_audio_chunk_s": 2.556,
+    "audio_chunk_count": 12,
+    "audio_bytes_b64": 304000,
+    "tool_call": {
+      "name": "get_meeting_context",
+      "args": "{}"
+    },
+    "transcript": "Okay, let me quickly see what\u2019s in your recent meeting and calendar context.",
+    "usage": {
+      "total_tokens": 581,
+      "input_tokens": 412,
+      "output_tokens": 169,
+      "input_token_details": {
+        "text_tokens": 349,
+        "audio_tokens": 63,
+        "image_tokens": 0,
+        "cached_tokens": 0,
+        "cached_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        }
+      },
+      "output_token_details": {
+        "text_tokens": 74,
+        "audio_tokens": 95,
+        "reasoning_tokens": 23
+      }
+    },
+    "event_count": 50,
+    "answer_file": "/home/srdj/Workspace/virtual-worker/experiments/realtime-model-poc/results/answer.wav"
+  },
+  "events": [
+    {
+      "t": 0.888,
+      "type": "session.created"
+    },
+    {
+      "t": 1.155,
+      "type": "session.updated"
+    },
+    {
+      "t": 1.356,
+      "type": "input_audio_buffer.speech_started"
+    },
+    {
+      "t": 1.723,
+      "type": "input_audio_buffer.committed"
+    },
+    {
+      "t": 1.726,
+      "type": "conversation.item.added"
+    },
+    {
+      "t": 1.726,
+      "type": "conversation.item.done"
+    },
+    {
+      "t": 1.73,
+      "type": "response.created"
+    },
+    {
+      "t": 2.271,
+      "type": "response.output_item.added"
+    },
+    {
+      "t": 2.272,
+      "type": "conversation.item.added"
+    },
+    {
+      "t": 2.276,
+      "type": "response.content_part.added"
+    },
+    {
+      "t": 2.277,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.28,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.37,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.372,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.556,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.556,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.656,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.656,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.746,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.746,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.746,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.746,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.839,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.839,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.839,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.839,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.839,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.839,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.839,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.839,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.89,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.98,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.98,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.023,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.074,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.125,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.125,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.209,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.209,
+      "type": "response.output_item.added"
+    },
+    {
+      "t": 3.209,
+      "type": "conversation.item.added"
+    },
+    {
+      "t": 3.209,
+      "type": "response.function_call_arguments.delta"
+    },
+    {
+      "t": 3.209,
+      "type": "response.output_audio.done"
+    },
+    {
+      "t": 3.209,
+      "type": "response.output_audio_transcript.done"
+    },
+    {
+      "t": 3.209,
+      "type": "response.content_part.done"
+    },
+    {
+      "t": 3.209,
+      "type": "conversation.item.done"
+    },
+    {
+      "t": 3.209,
+      "type": "response.output_item.done"
+    },
+    {
+      "t": 3.209,
+      "type": "response.function_call_arguments.done"
+    },
+    {
+      "t": 3.209,
+      "type": "conversation.item.done"
+    },
+    {
+      "t": 3.209,
+      "type": "response.output_item.done"
+    },
+    {
+      "t": 3.209,
+      "type": "response.done"
+    }
+  ]
+}

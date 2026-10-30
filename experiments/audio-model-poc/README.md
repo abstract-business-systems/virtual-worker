@@ -1,4 +1,9 @@
-# M7 POC — OpenAI audio model via OpenRouter (isolated)
+# M7-adjacent POC — gpt-audio-mini via OpenRouter (isolated) — *fallback comparison*
+
+> **Status note:** this probe tested the chat-completions voice model
+> (`gpt-audio-mini`), which is **not** the M7 POC target. The M7 target is the
+> OpenAI realtime model — see [`../realtime-model-poc/`](../realtime-model-poc/).
+> Keep this folder as comparison data for the cheap fallback path.
 
 Meeting scope: [`docs/recordings/7.vtt`](../../docs/recordings/7.vtt) — check
 whether the OpenAI audio model (`gpt-audio-mini` via OpenRouter) can mimic
@@ -57,20 +62,26 @@ Findings:
    audio-in call) matches OpenRouter billing audio at text rates
    ($0.60/M in, $2.40/M out); OpenAI-direct audio rates would be ~6× higher.
    Measured audio density: ~10 tok/s input (9.9), ~15 tok/s output.
-6. **Cost at scale (measured density):** ~₹4/meeting-hour (listen 60 min +
-   speak ~10 min) → **~₹5,000–5,500/month** at target scale (60
-   meeting-hours/day, 22 days) via OpenRouter.
+6. **Cost at scale (measured density, corrected usage):** ~₹4/meeting-hour
+   (listen 60 min + speak ~10 min). At ~8 h/day, 5–6 days/week ≈ 190
+   meeting-hours/month → **~₹780/month** via OpenRouter.
 7. Quality note: with a minimal system prompt the model converses naturally
    rather than following scripted lines — behavior is prompt-driven, as M5
    intended.
 
+6. **Cost at scale (measured density, corrected usage):** the agent listens
+   to meetings ~**8 h/day, 5–6 days/week ≈ 190 meeting-hours/month**. At
+   ~₹4/meeting-hour → **~₹780/month** via OpenRouter.
+
 ## Run
 
 ```bash
-python3 experiments/audio-model-poc/probe.py
+uv run --project experiments experiments/audio-model-poc/probe.py
 ```
 
-Requires `OPENROUTER_API_KEY` in the environment (same as the backend).
+Environment is project-level via `experiments/pyproject.toml` + `uv` —
+never installed system- or user-wide. Requires `OPENROUTER_API_KEY` in the
+environment (same as the backend).
 
 ## Results
 

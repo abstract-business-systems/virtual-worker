@@ -1,0 +1,246 @@
+{
+  "model": "gpt-realtime-2.1-mini",
+  "voice": "alloy",
+  "started_utc": "2026-10-30T08:02:40.882330+00:00",
+  "baseline_first_audio_s": 7.77,
+  "question_file": "/home/srdj/Workspace/virtual-worker/experiments/realtime-model-poc/fixtures/question.wav",
+  "metrics": {
+    "t_last_input_chunk_s": 0.913,
+    "t_speech_stopped_s": null,
+    "t_first_audio_chunk_s": null,
+    "audio_chunk_count": 0,
+    "audio_bytes_b64": 0,
+    "tool_call": {
+      "name": "get_meeting_context",
+      "args": "{}"
+    },
+    "transcript": "",
+    "usage": {
+      "total_tokens": 544,
+      "input_tokens": 412,
+      "output_tokens": 132,
+      "input_token_details": {
+        "text_tokens": 349,
+        "audio_tokens": 63,
+        "image_tokens": 0,
+        "cached_tokens": 0,
+        "cached_tokens_details": {
+          "text_tokens": 0,
+          "audio_tokens": 0,
+          "image_tokens": 0
+        }
+      },
+      "output_token_details": {
+        "text_tokens": 51,
+        "audio_tokens": 81
+      }
+    },
+    "event_count": 51
+  },
+  "events": [
+    {
+      "t": 0.913,
+      "type": "session.created"
+    },
+    {
+      "t": 1.191,
+      "type": "session.updated"
+    },
+    {
+      "t": 1.191,
+      "type": "input_audio_buffer.speech_started"
+    },
+    {
+      "t": 1.818,
+      "type": "input_audio_buffer.committed"
+    },
+    {
+      "t": 1.818,
+      "type": "conversation.item.added"
+    },
+    {
+      "t": 1.825,
+      "type": "conversation.item.done"
+    },
+    {
+      "t": 1.828,
+      "type": "response.created"
+    },
+    {
+      "t": 2.224,
+      "type": "response.output_item.added"
+    },
+    {
+      "t": 2.224,
+      "type": "conversation.item.added"
+    },
+    {
+      "t": 2.23,
+      "type": "response.content_part.added"
+    },
+    {
+      "t": 2.23,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.237,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.239,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.316,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.32,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.324,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.475,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.475,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.475,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.694,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.694,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.694,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.701,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.788,
+      "type": "response.output_audio_transcript.delta"
+    },
+    {
+      "t": 2.927,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.933,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.942,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 2.943,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.022,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.022,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.022,
+      "type": "response.output_audio.delta"
+    },
+    {
+      "t": 3.022,
+      "type": "response.output_item.added"
+    },
+    {
+      "t": 3.022,
+      "type": "conversation.item.added"
+    },
+    {
+      "t": 3.022,
+      "type": "response.function_call_arguments.delta"
+    },
+    {
+      "t": 3.022,
+      "type": "response.output_audio.done"
+    },
+    {
+      "t": 3.022,
+      "type": "response.output_audio_transcript.done"
+    },
+    {
+      "t": 3.022,
+      "type": "response.content_part.done"
+    },
+    {
+      "t": 3.022,
+      "type": "conversation.item.done"
+    },
+    {
+      "t": 3.022,
+      "type": "response.output_item.done"
+    },
+    {
+      "t": 3.022,
+      "type": "response.function_call_arguments.done"
+    },
+    {
+      "t": 3.022,
+      "type": "conversation.item.done"
+    },
+    {
+      "t": 3.022,
+      "type": "response.output_item.done"
+    },
+    {
+      "t": 3.022,
+      "type": "response.done"
+    }
+  ]
+}
