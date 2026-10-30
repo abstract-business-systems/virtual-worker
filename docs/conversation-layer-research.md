@@ -40,6 +40,53 @@ first-sentence WAV.
 | [Smart-turn](https://github.com/pipecat-ai/smart-turn) | BSD-2-Clause | The "did the user finish?" decision — the listening/waiting/acting boundary from M5. Small ONNX model, runs on CPU. |
 | [WhisperLive](https://github.com/collabora/WhisperLive) / [whisper_streaming](https://github.com/ufal/whisper_streaming) | MIT | Streaming STT servers. Viable but heavier deployment than RealtimeSTT. |
 
+## Pipecat deep-dive (verified from the repository, 2026-10-29)
+
+Checked against the live `pipecat-ai/pipecat` repo (BSD-2-Clause, very active,
+Python ≥ 3.11, production/stable):
+
+- **Local audio transport is first-class** (`src/pipecat/transports/local/`),
+  so the virtual-mic/Teams setup needs no Daily or LiveKit infrastructure —
+  those are optional extras, not core.
+- **Dedicated OpenRouter LLM service** (`src/pipecat/services/openrouter/`)
+  exists, beyond the generic OpenAI-compatible base URL.
+- **Silero VAD is bundled** (ONNX model in-repo) and **smart-turn v3
+  (local, ONNX) end-of-turn detection is built in** — `onnxruntime` is a core
+  dependency, so endpointing and turn detection work on CPU with no extra
+  setup.
+- **Core dependency footprint is modest**: common libraries (numpy, pydantic,
+  aiohttp, openai SDK, websockets, onnxruntime). No mandatory cloud SDKs.
+- **Speech-to-speech services** (OpenAI Realtime, Gemini Live, AWS Nova
+  Sonic, Azure Voice Live, Grok Voice, Ultravox) are separate websocket
+  integrations — note these are *not* chat-completions audio models, so
+  Option D (gpt-audio-mini via chat completions) would still be a custom
+  processor inside Pipecat, or a direct-API probe outside it.
+- Ships a CLI (`pipecat init`) and quickstart for scaffolding a demo bot in
+  minutes — relevant to the M6 demo gate.
+- `Pipecat Flows` provides structured conversation/state management, which
+  partially overlaps our planned state machine.
+
+Conclusion for the option decision: with the local transport, bundled VAD,
+built-in smart-turn, and the OpenRouter service, the integration is mostly
+configuration plus one conversation-state processor — the integration sketch
+in [`conversation-layer-plan.md`](conversation-layer-plan.md) stands, with
+less custom code than assumed. The demo comparison is then: raw
+single-model probe (Option D) vs. the same flow wrapped in Pipecat
+(Option A).
+
+### Model swapping (configuration, not customization)
+
+Model/provider changes are pure configuration: the pipeline is a list of
+service objects, so changing a model is changing a string (`model="..."`) and
+changing a provider is swapping one service class while the rest of the
+pipeline is untouched. The README lists 25+ STT, 30+ LLM, and 35+ TTS
+services, including the current stack (local Whisper, ElevenLabs, OpenRouter).
+We would wrap service creation in the existing `config.py` environment
+pattern (`VW_STT_MODEL`, `VW_LLM_MODEL`, `VW_TTS_MODEL`) so swaps become
+config changes, not code changes. Caveat: each provider has its own latency
+and cost profile, so swaps still warrant a quick re-measurement via the
+planned demo harness.
+
 ## Recommendation
 
 Adopt **Pipecat** as the conversation layer. It already ships the orchestration
