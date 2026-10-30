@@ -111,6 +111,7 @@ Three workstreams, in dependency order:
 | **A. Pipecat framework** | Python voice-agent framework (BSD-2, very active): VAD, streaming STT/TTS, turn detection, barge-in built in. We add one custom transport bridging `vw_mic`/`vw_tts` and one processor holding the state machine. | Fastest to the full experience; adds a framework dependency and version churn. |
 | **B. Component integration** | RealtimeSTT + Silero VAD + smart-turn wired into our own loop; we write the state machine ourselves. | Lower dependency risk; more hand-written orchestration to build and maintain. |
 | **C. Patch current pipeline only** | Streaming TTS + VAD endpointing on the existing code; no framework, no new STT stack. | Smallest change; state machine still hand-built; slowest path to the full experience. |
+| **D. Single audio model, no framework** | OpenAI `gpt-audio-mini` via OpenRouter: audio in/out with tool calling (verified supported). One model replaces STT + LLM + TTS — 128k context, already the configured TTS model. Audio density ~600 tokens/min; cost ~₹3.4/meeting-hour via OpenRouter (audio billed at text rates there) vs ~₹46/hour direct OpenAI. We keep only VAD endpointing, barge-in, and the state machine. | No framework at all and likely the cheapest path; unknowns are real first-audio latency through streaming chat completions, OpenRouter audio-chunk streaming, and which audio rate actually applies — all measured in the demo. |
 
 Excluded during research: LiveKit Agents (requires its own WebRTC
 infrastructure), TEN Framework (too heavy), Vocode (unmaintained).
@@ -139,7 +140,8 @@ both old and new behind `VW_CONV_ENGINE=legacy|pipecat` for A/B benchmarking.
    ("Pradhy", "Grady"). Wake-word verification or semantic detection?
 4. **Progress updates** — threshold for when a long task deserves an interim
    update.
-5. **Option choice** — A, B, or C from section 5; gated on the M6 Pipecat
-   demo results.
+5. **Option choice** — A, B, C, or D from section 5; gated on the M6 Pipecat
+   demo results (and, for D, the same demo run through the single audio
+   model).
 6. **TTS streaming cost** — streaming/live TTS may cost more (M4 concern);
    acceptable trade-off?

@@ -112,20 +112,49 @@ real numbers, kept deliberately small and fast:
   side of the comparison.
 - Assume prices fall (at least half in six months); know the current cost, but
   do not let it disqualify an approach prematurely.
+- **Preliminary finding (researched, verified against live pricing pages):**
+  OpenAI `gpt-audio-mini` — a voice model — is cheap and capable: audio in/out
+  modalities with tool calling supported (OpenRouter supported-parameters,
+  verified). Audio token density is ~600 tokens/minute (~10 tokens/second),
+  derived from OpenAI's own audio pricing footnote ($0.06/min input at
+  $100/1M tokens). Costs at ~₹95/USD:
 
-### 2. Pipecat demo experiment (after the cost check)
+  | Meeting hour (listen 60 min + speak ~10 min) | Via OpenRouter | Direct OpenAI |
+  |---|---|---|
+  | Per hour | ~₹3.4 (~₹0.06/min) | ~₹46 (~₹0.76/min) |
+  | Per month at scale (60 meeting-h/day, 22 days) | **~₹4,500** | **~₹60,000** |
 
-Build a small standalone Pipecat demo — nothing else — and measure:
+  Via OpenRouter the listed audio rates ($0.60/M in, $2.40/M out) equal its
+  text rates; direct OpenAI charges audio at $10/M in and $20/M out. The
+  demo must verify actual token usage per request to settle which rate
+  applies. Either way the earlier "thousands of dollars per month" concern
+  is overstated. This opens a no-Pipecat option (D in the plan): one audio
+  model replaces STT + LLM + TTS, with only VAD endpointing, barge-in, and
+  the state machine kept as our own code. Its real first-audio latency and
+  OpenRouter audio streaming must be measured in the demo.
 
-1. Latency and perceived delay through the streaming STT → LLM → TTS path
-   (local faster-whisper STT, ElevenLabs TTS, OpenRouter via an
-   OpenAI-compatible base URL).
-2. The acknowledge-before-long-process behavior from M3–M5.
-3. Cost per interaction and per meeting-hour.
+### 2. Pipecat / single-model demo experiment (after the cost check)
 
-The result decides whether Friday's final implementation could be built on
-Pipecat, and it completes the cost comparison with measured numbers from the
-streaming path.
+Build the smallest possible probe first — one script, no framework — then
+extend it. Test matrix:
+
+1. **First-audio latency** — stream `gpt-audio-mini` from OpenRouter with
+   audio in/out; measure end-of-speech → first audible chunk. The
+   make-or-break number against the **7.77 s** baseline.
+2. **Audio streaming behavior** — does audio arrive in smooth playable
+   chunks through OpenRouter, or as one blob? Decides whether the
+   single-model path is viable at all.
+3. **Tool calling mid-voice** — can one response acknowledge and call a
+   backend tool? The acknowledge-before-long-process behavior from M3–M5.
+4. **Actual token usage and spend** — read `usage` from responses and compare
+   against the billed amount; settles the OpenRouter-vs-direct audio rate
+   question for real.
+
+If the probe is healthy, extend to the acknowledge-and-tool-call flow
+(item 3) and only then decide whether Pipecat adds enough to justify the
+framework dependency (compare the same flows wrapped in a minimal Pipecat
+pipeline). The result decides whether Friday's final implementation could be
+built on the single model or Pipecat.
 
 ### 3. Ranking question (unanswered, in parallel)
 
