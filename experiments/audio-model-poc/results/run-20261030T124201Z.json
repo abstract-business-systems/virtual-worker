@@ -1,0 +1,212 @@
+{
+  "model": "openai/gpt-audio-mini",
+  "voice": "alloy",
+  "started_utc": "2026-10-30T12:41:55.904897+00:00",
+  "baseline_first_audio_s": 7.77,
+  "note": "OpenRouter requires stream=true for audio output (HTTP 400 otherwise)",
+  "step1": {
+    "http_status": 200,
+    "t_first_audio_chunk_s": 1.346,
+    "t_first_text_chunk_s": null,
+    "audio_chunk_count": 15,
+    "audio_chunk_span_s": 0.738,
+    "audio_bytes": 371200,
+    "chunks": [
+      {
+        "t": 1.346,
+        "len": 25600
+      },
+      {
+        "t": 1.53,
+        "len": 25600
+      },
+      {
+        "t": 1.594,
+        "len": 25600
+      },
+      {
+        "t": 1.752,
+        "len": 25600
+      },
+      {
+        "t": 1.777,
+        "len": 25600
+      },
+      {
+        "t": 1.831,
+        "len": 25600
+      },
+      {
+        "t": 1.847,
+        "len": 25600
+      },
+      {
+        "t": 1.988,
+        "len": 25600
+      },
+      {
+        "t": 1.996,
+        "len": 25600
+      },
+      {
+        "t": 2.009,
+        "len": 25600
+      },
+      {
+        "t": 2.028,
+        "len": 25600
+      },
+      {
+        "t": 2.063,
+        "len": 25600
+      },
+      {
+        "t": 2.081,
+        "len": 25600
+      },
+      {
+        "t": 2.084,
+        "len": 25600
+      },
+      {
+        "t": 2.084,
+        "len": 12800
+      }
+    ],
+    "transcript_or_text": "Of course! Let me check your schedule. Could you tell me what time zone you're in, so I can give you accurate details?",
+    "tool_calls": [],
+    "usage": {
+      "prompt_tokens": 31,
+      "completion_tokens": 155,
+      "total_tokens": 186,
+      "cost": 0.0003906,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 116
+      }
+    },
+    "question_file": "/home/srdj/Workspace/virtual-worker/experiments/audio-model-poc/fixtures/question.wav"
+  },
+  "step2": {
+    "http_status": 200,
+    "t_first_audio_chunk_s": 1.461,
+    "t_first_text_chunk_s": null,
+    "audio_chunk_count": 18,
+    "audio_chunk_span_s": 2.162,
+    "audio_bytes": 441600,
+    "chunks": [
+      {
+        "t": 1.461,
+        "len": 25600
+      },
+      {
+        "t": 1.481,
+        "len": 25600
+      },
+      {
+        "t": 1.704,
+        "len": 25600
+      },
+      {
+        "t": 1.807,
+        "len": 25600
+      },
+      {
+        "t": 2.009,
+        "len": 25600
+      },
+      {
+        "t": 2.183,
+        "len": 25600
+      },
+      {
+        "t": 2.298,
+        "len": 25600
+      },
+      {
+        "t": 2.453,
+        "len": 25600
+      },
+      {
+        "t": 2.561,
+        "len": 25600
+      },
+      {
+        "t": 2.665,
+        "len": 25600
+      },
+      {
+        "t": 2.804,
+        "len": 25600
+      },
+      {
+        "t": 2.936,
+        "len": 25600
+      },
+      {
+        "t": 3.111,
+        "len": 25600
+      },
+      {
+        "t": 3.145,
+        "len": 25600
+      },
+      {
+        "t": 3.164,
+        "len": 25600
+      },
+      {
+        "t": 3.36,
+        "len": 25600
+      },
+      {
+        "t": 3.622,
+        "len": 25600
+      },
+      {
+        "t": 3.623,
+        "len": 6400
+      }
+    ],
+    "transcript_or_text": "Sure, thank you for letting me know. I'll go ahead and check the context. Once I have that, I\u2019ll confirm the details. Let\u2019s proceed.",
+    "tool_calls": [
+      {
+        "name": "get_meeting_context",
+        "args": ""
+      },
+      {
+        "name": null,
+        "args": ""
+      },
+      {
+        "name": null,
+        "args": "{}"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 135,
+      "completion_tokens": 195,
+      "total_tokens": 330,
+      "cost": 0.000549,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 58,
+        "video_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 138
+      }
+    },
+    "answer_file": "/home/srdj/Workspace/virtual-worker/experiments/audio-model-poc/results/answer.wav"
+  }
+}

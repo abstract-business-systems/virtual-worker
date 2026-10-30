@@ -1,0 +1,183 @@
+{
+  "model": "openai/gpt-audio-mini",
+  "voice": "alloy",
+  "started_utc": "2026-10-30T12:41:35.428932+00:00",
+  "baseline_first_audio_s": 7.77,
+  "note": "OpenRouter requires stream=true for audio output (HTTP 400 otherwise)",
+  "step1": {
+    "http_status": 200,
+    "t_first_audio_chunk_s": 1.188,
+    "t_first_text_chunk_s": null,
+    "audio_chunk_count": 27,
+    "audio_chunk_span_s": 0.881,
+    "audio_bytes": 675200,
+    "chunks": [
+      {
+        "t": 1.188,
+        "len": 25600
+      },
+      {
+        "t": 1.302,
+        "len": 25600
+      },
+      {
+        "t": 1.444,
+        "len": 25600
+      },
+      {
+        "t": 1.486,
+        "len": 25600
+      },
+      {
+        "t": 1.546,
+        "len": 25600
+      },
+      {
+        "t": 1.57,
+        "len": 25600
+      },
+      {
+        "t": 1.688,
+        "len": 25600
+      },
+      {
+        "t": 1.714,
+        "len": 25600
+      },
+      {
+        "t": 1.735,
+        "len": 25600
+      },
+      {
+        "t": 1.788,
+        "len": 25600
+      },
+      {
+        "t": 1.793,
+        "len": 25600
+      },
+      {
+        "t": 1.815,
+        "len": 25600
+      },
+      {
+        "t": 1.817,
+        "len": 25600
+      },
+      {
+        "t": 1.929,
+        "len": 25600
+      },
+      {
+        "t": 1.936,
+        "len": 25600
+      },
+      {
+        "t": 1.952,
+        "len": 25600
+      },
+      {
+        "t": 1.959,
+        "len": 25600
+      },
+      {
+        "t": 1.961,
+        "len": 25600
+      },
+      {
+        "t": 1.983,
+        "len": 25600
+      },
+      {
+        "t": 1.986,
+        "len": 25600
+      },
+      {
+        "t": 2.035,
+        "len": 25600
+      },
+      {
+        "t": 2.04,
+        "len": 25600
+      },
+      {
+        "t": 2.041,
+        "len": 25600
+      },
+      {
+        "t": 2.056,
+        "len": 25600
+      },
+      {
+        "t": 2.062,
+        "len": 25600
+      },
+      {
+        "t": 2.065,
+        "len": 25600
+      },
+      {
+        "t": 2.069,
+        "len": 9600
+      }
+    ],
+    "transcript_or_text": "Sure! Could you tell me a bit more about your schedule? For example, what time zone you're in, or if there are any specific appointments you're expecting? That way I can give you the most accurate information.",
+    "tool_calls": [],
+    "usage": {
+      "prompt_tokens": 31,
+      "completion_tokens": 270,
+      "total_tokens": 301,
+      "cost": 0.0006666,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0,
+        "video_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 211
+      }
+    },
+    "question_file": "/home/srdj/Workspace/virtual-worker/experiments/audio-model-poc/fixtures/question.wav"
+  },
+  "step2": {
+    "http_status": 200,
+    "t_first_audio_chunk_s": null,
+    "t_first_text_chunk_s": null,
+    "audio_chunk_count": 0,
+    "transcript_or_text": "",
+    "tool_calls": [
+      {
+        "name": "get_meeting_context",
+        "args": ""
+      },
+      {
+        "name": null,
+        "args": ""
+      },
+      {
+        "name": null,
+        "args": "{}"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 182,
+      "completion_tokens": 12,
+      "total_tokens": 194,
+      "cost": 0.000138,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 105,
+        "video_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 0,
+        "audio_tokens": 0
+      }
+    }
+  }
+}
