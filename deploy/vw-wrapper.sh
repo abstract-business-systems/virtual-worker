@@ -1,8 +1,10 @@
 #!/bin/sh
-# vw / vw-admin wrappers: put the worker tree on PYTHONPATH and run.
+# vw / vw-admin wrappers: run through the project's uv-managed venv.
 REPO="${VW_REPO:-$HOME/virtual-worker}"
 export PYTHONPATH="$REPO/common:$REPO/backend:$REPO/agent${PYTHONPATH:+:$PYTHONPATH}"
+PY="$REPO/.venv/bin/python3"
+[ -x "$PY" ] || PY=python3
 case "$(basename "$0")" in
-  vw-admin) exec python3 -m vw_backend.cli "$@" ;;
-  vw)       exec python3 "$REPO/agent/bin/vw" "$@" ;;
+  vw-admin) exec "$PY" -m vw_backend.cli "$@" ;;
+  vw)       exec "$PY" "$REPO/agent/bin/vw" "$@" ;;
 esac

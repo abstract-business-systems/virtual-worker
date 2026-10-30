@@ -5,13 +5,13 @@
 set -e
 cd ~/virtual-worker
 
-echo "==> venv + python deps"
-python3 -m venv ~/venv
-~/venv/bin/pip install -q --upgrade pip
-~/venv/bin/pip install -q -r requirements.txt
-
-echo "==> playwright chromium (runs on Xvfb, not headless)"
-~/venv/bin/python3 -m playwright install chromium
+echo "==> uv-managed venv + python deps"
+if ! command -v uv >/dev/null 2>&1; then
+  curl -LsSf https://astral.sh/uv/install.sh | sh
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+uv sync --frozen
+.venv/bin/python3 -m playwright install chromium
 
 echo "==> directories"
 mkdir -p ~/vw-data/run ~/vw-data/db ~/vw-data/logs ~/vw-data/config ~/.config/systemd/user

@@ -121,7 +121,7 @@ ssh abs-worker@localhost 'systemctl --user restart vw-backend vw-agent'
 ```
 /home/abs-worker/
   virtual-worker/           code (agent/, backend/, common/, deploy/)
-  venv/                     Python environment
+  .venv/                    Python environment (uv-managed)
   vw-data/
     config/worker.env       secrets + config, mode 600
     db/kb.db                SQLite knowledge base (backend-owned)

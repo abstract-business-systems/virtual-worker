@@ -9,7 +9,7 @@ Environment=VW_DB=%h/vw-data/db/kb.db
 Environment=PYTHONPATH=%h/virtual-worker/common:%h/virtual-worker/backend:%h/virtual-worker/agent
 EnvironmentFile=-%h/vw-data/config/worker.env
 WorkingDirectory=%h/virtual-worker
-ExecStart=%h/venv/bin/python3 -m vw_agent.agent
+ExecStart=%h/virtual-worker/.venv/bin/python3 -m vw_agent.agent
 Restart=on-failure
 RestartSec=3
 [Install]

@@ -1,3 +1,6 @@
+# Legacy pip requirements — the environment is now managed with uv (see
+# pyproject.toml + uv.lock). Kept only as a reference for the pinned versions.
+
 # Python deps for agent + backend (installed into the abs-worker venv).
 # Everything is pip-installable — no root packages needed.
 faster-whisper==1.0.3
