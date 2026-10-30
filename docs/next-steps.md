@@ -112,6 +112,15 @@ real numbers, kept deliberately small and fast:
   side of the comparison.
 - Assume prices fall (at least half in six months); know the current cost, but
   do not let it disqualify an approach prematurely.
+- **Realtime models are OpenAI-direct only.** OpenRouter carries no realtime
+  models at all (verified against its model list) — only `openai/gpt-audio`
+  and `openai/gpt-audio-mini`. A realtime mini tier exists (`gpt-realtime-2.1-mini`,
+  audio $10/M in, $20/M out on OpenAI's official pricing page — the same audio
+  rates as `gpt-audio-mini`), reachable only through OpenAI's websocket
+  Realtime API. That path provides server-side voice-activity detection and
+  interruption built in, at the same per-token audio cost as
+  `gpt-audio-mini` over chat completions — a relevant comparison point for
+  the demo.
 - **Preliminary finding (researched, verified against live pricing pages):**
   OpenAI `gpt-audio-mini` — a voice model — is cheap and capable: audio in/out
   modalities with tool calling supported (OpenRouter supported-parameters,
