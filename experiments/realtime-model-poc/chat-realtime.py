@@ -45,7 +45,8 @@ from pipecat.audio.vad.vad_analyzer import VADParams, VADState
 
 HERE = Path(__file__).parent
 IN_RATE = 16000        # VAD native rate
-MODEL = os.environ.get("OPENAI_REALTIME_MODEL", "gpt-realtime-2.1-mini")
+MODEL = (os.environ.get("CHAT_MODEL")
+         or os.environ.get("OPENAI_REALTIME_MODEL", "gpt-realtime-2.1-mini"))
 VOICE = os.environ.get("OPENAI_REALTIME_VOICE", "alloy")
 WS_URL = f"wss://api.openai.com/v1/realtime?model={MODEL}"
 OUT_RATE = 44100

@@ -75,7 +75,8 @@ per-turn latency and cost printed after every exchange. Run it from inside
 this folder:
 
 ```bash
-./run-chat.sh     # or ./run-chat.sh -d for mic levels, VAD events, logs
+./run.sh           # or ./run.sh -d for mic levels, VAD events, logs
+./run.sh --model gpt-realtime-2.1   # full model instead of mini
 ```
 
 Env overrides: `CHAT_INPUT_DEVICE` (mic index), `CHAT_MIN_VOLUME`

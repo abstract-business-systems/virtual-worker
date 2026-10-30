@@ -88,3 +88,25 @@ environment (same as the backend).
 Recorded in `results/`; see the run JSON for exact numbers. The demo test
 matrix and decision context are in
 [`docs/next-steps.md`](../../docs/next-steps.md) ("M6 follow-up").
+## Model presets (voice / think split)
+
+`models.ini` defines named presets. Run one with:
+
+```bash
+./run.sh          # default preset "mini" — voice model does everything
+./run.sh mode1    # gpt-audio-mini talks, gpt-4o-mini thinks
+./run.sh mode2    # gpt-audio-mini talks, gpt-4o thinks
+```
+
+- `voice` = model with audio in/out (hears + speaks)
+- `think` = text model that answers (native tools work here — no OpenRouter
+  audio fragility). Empty = single-call mode.
+- `./run.sh --model X` overrides the voice model; edit `models.ini` to add
+  presets.
+
+Cascade stages are timed per turn: `stt / think / tts` + first-audio latency
+and summed cost — the point of the experiment is measuring this split.
+
+Known quirk: gpt-audio-mini doesn't reliably transcribe (it drifts into
+answering); a dedicated STT (e.g. Whisper) is the cleaner cascade if STT
+quality matters.

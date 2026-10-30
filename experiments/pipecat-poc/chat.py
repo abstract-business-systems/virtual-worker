@@ -86,7 +86,8 @@ def load_env() -> dict:
         sys.exit("Missing OPENAI_API_KEY in experiments/pipecat-poc/.env")
     return {
         "api_key": cfg["OPENAI_API_KEY"],
-        "model": cfg.get("OPENAI_REALTIME_MODEL", "gpt-realtime-2.1-mini"),
+                "model": (os.environ.get("CHAT_MODEL")
+                  or cfg.get("OPENAI_REALTIME_MODEL", "gpt-realtime-2.1-mini")),
     }
 
 

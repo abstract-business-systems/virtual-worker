@@ -37,7 +37,22 @@ from pipecat.audio.vad.vad_analyzer import VADParams, VADState
 HERE = Path(__file__).parent
 IN_RATE = 16000          # VAD native rate
 OUT_RATE = 44100         # typical playback device rate
-MODEL = os.environ.get("VW_POC_MODEL", "openai/gpt-audio-mini")
+# ---- model presets (models.ini) — ./run.sh <preset> picks one ----
+# voice = model that talks (audio in/out); think = text model that answers.
+# Empty think = the voice model does everything in one call.
+import configparser
+_PRESETS = configparser.ConfigParser()
+_PRESETS.read(HERE / "models.ini")
+PRESET = os.environ.get("CHAT_PRESET", "mini")
+if not _PRESETS.has_section(PRESET):
+    raise SystemExit(f"[preset] '{PRESET}' not in models.ini — sections: "
+                     f"{_PRESETS.sections()}")
+VOICE_MODEL = (_PRESETS.get(PRESET, "voice").strip()
+               or "openai/gpt-audio-mini")
+THINK_MODEL = _PRESETS.get(PRESET, "think", fallback="").strip() or None
+
+# CHAT_MODEL (--model) overrides the voice model of the preset
+MODEL = os.environ.get("CHAT_MODEL") or VOICE_MODEL
 VOICE = os.environ.get("VW_POC_VOICE", "alloy")
 API = "https://openrouter.ai/api/v1/chat/completions"
 KEY = os.environ.get("OPENROUTER_API_KEY")
@@ -146,20 +161,36 @@ def mic_callback(indata, frames, t, status):
         loop.call_soon_threadsafe(mic_q.put_nowait, bytes(indata))
 
 
-async def chat_stream(messages, on_audio, on_text):
+async def chat_stream(messages, on_audio, on_text, *, think=False, tts=False, stt=False):
     """Streaming chat completion on a worker thread (urllib is blocking).
 
     Returns (tool_calls, usage). on_audio(b64_pcm24) and on_text(str) are
     invoked via call_soon_threadsafe as chunks arrive.
+
+    think=True: the preset's THINK text model, tools enabled, text-only.
+    tts=True:   the voice model speaks text (audio out only).
+    stt=True:   the voice model transcribes (audio in, text out).
+    Default:    the voice model, audio in/out, tools (single-call mode).
     """
+    if think:
+        model, modalities, tools = THINK_MODEL, ["text"], TOOLS
+    elif tts:
+        # OpenRouter rejects modalities:["audio"] — text+audio required
+        model, modalities, tools = MODEL, ["text", "audio"], None
+    elif stt:
+        model, modalities, tools = MODEL, ["text"], None
+    else:
+        model, modalities, tools = MODEL, ["text", "audio"], TOOLS
     payload = {
-        "model": MODEL,
-        "modalities": ["text", "audio"],
-        "audio": {"voice": VOICE, "format": "pcm16"},
+        "model": model,
+        "modalities": modalities,
         "stream": True,
         "messages": messages,
-        "tools": TOOLS,
     }
+    if not think and not stt:
+        payload["audio"] = {"voice": VOICE, "format": "pcm16"}
+    if tools:
+        payload["tools"] = tools
     import urllib.request
 
     tool_calls: list[dict] = []
@@ -198,9 +229,16 @@ async def chat_stream(messages, on_audio, on_text):
                     tr = (delta.get("audio") or {}).get("transcript")
                     if tr:
                         loop.call_soon_threadsafe(on_text, tr)
+                    # text-only responses (stt/think/tts paths) come via content
+                    c = delta.get("content")
+                    if c:
+                        loop.call_soon_threadsafe(on_text, c)
                     for i, tc in enumerate(delta.get("tool_calls") or []):
                         fn = tc.get("function") or {}
-                        slot = parts_args.setdefault(i, {"name": None, "args": []})
+                        slot = parts_args.setdefault(
+                            i, {"id": tc.get("id"), "name": None, "args": []})
+                        if tc.get("id"):
+                            slot["id"] = tc.get("id")
                         if fn.get("name"):
                             slot["name"] = fn["name"]
                         if fn.get("arguments"):
@@ -279,16 +317,16 @@ async def run():
     last_level_print = time.monotonic()
 
     async def do_turn(utt: bytes):
-        """Send one utterance, stream + play the reply, run tools."""
+        """One spoken turn. Single-call mode when no think model is set;
+        otherwise a three-stage cascade: STT -> think -> TTS, each stage
+        timed and costed separately (that's the experiment)."""
         nonlocal total_cost, turns
         t_end = time.perf_counter()
         b64 = pcm_to_wav_b64(utt)
         turns += 1
-        print(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — asking "
-              f"{MODEL}...", flush=True)
-
         my_turn = turn_seq
         first_audio: dict = {}
+        usage_total = {}
 
         def on_audio(b64_chunk):
             if my_turn != turn_seq:
@@ -296,54 +334,136 @@ async def run():
             first_audio.setdefault("t", time.perf_counter() - t_end)
             asyncio.ensure_future(speaker.feed(base64.b64decode(b64_chunk)))
 
-        text_parts: list[str] = []
-
-        def on_text(t):
-            text_parts.append(t)
-
-        msgs = history + [{"role": "user", "content": [
+        audio_user_msg = {"role": "user", "content": [
             {"type": "text", "text": "Answer my spoken question."},
             {"type": "input_audio",
              "input_audio": {"data": b64, "format": "wav"}},
-        ]}]
+        ]}
 
-        tool_calls, usage = await chat_stream(msgs, on_audio, on_text)
-        transcript = "".join(text_parts).strip()
-
-        # follow-up when the model called a tool. NOTE: gpt-audio-mini via
-        # OpenRouter rejects proper tool_calls/tool messages after audio input
-        # ("This model does not support the format you provided") — verified.
-        # The result must be embedded as a plain-string user message.
-        if any(tc["name"] for tc in tool_calls):
-            name = next(tc["name"] for tc in tool_calls if tc["name"])
-            args = next((tc["arguments"] for tc in tool_calls if tc["name"]), "{}")
-            tool_result = json.dumps({"recent_meeting": "M7 POC scoping",
-                                      "next_event": "Friday demo review"})
-            follow = msgs + [{"role": "user", "content": [
-                {"type": "text",
-                 "text": f"{name} returned: {tool_result}. Answer the "
-                         f"original question briefly."}]}]
-            text_parts.clear()
-            first_audio.clear()
-            _, usage2 = await chat_stream(follow, on_audio, on_text)
-            if usage2:
-                usage = usage2
+        if not THINK_MODEL:
+            # ---- single-call mode: voice model hears, thinks, speaks ----
+            print(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — asking "
+                  f"{MODEL}...", flush=True)
+            msgs = history + [audio_user_msg]
+            text_parts: list[str] = []
+            tool_calls, usage = await chat_stream(msgs, on_audio,
+                                                  text_parts.append)
             transcript = "".join(text_parts).strip()
+            if usage:
+                usage_total = dict(usage)
+            if any(tc["name"] for tc in tool_calls):
+                name = next(tc["name"] for tc in tool_calls if tc["name"])
+                args = next((tc["arguments"] for tc in tool_calls
+                             if tc["name"]), "{}")
+                tool_result = json.dumps({"recent_meeting": "M7 POC scoping",
+                                          "next_event": "Friday demo review"})
+                follow = msgs + [{"role": "user", "content": [
+                    {"type": "text",
+                     "text": f"{name} returned: {tool_result}. Answer the "
+                             f"original question briefly."}]}]
+                text_parts.clear()
+                first_audio.clear()
+                _, usage2 = await chat_stream(follow, on_audio,
+                                              text_parts.append)
+                if usage2:
+                    usage_total = usage2
+                transcript = "".join(text_parts).strip()
+            reply = transcript or "(tool result answer)"
+            stages = ""
+        else:
+            # ---- cascade mode: voice hears, think model answers, voice speaks
+            print(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — cascade "
+                  f"{MODEL} -> {THINK_MODEL} -> {MODEL}...", flush=True)
 
-        # memory: approximate — assistant reply stored as its transcript text
-        history.append({"role": "user", "content": [
-            {"type": "text", "text": "Answer my spoken question."},
-            {"type": "input_audio", "input_audio": {"data": b64, "format": "wav"}},
-        ]})
-        history.append({"role": "assistant",
-                        "content": transcript or "(tool result answer)"})
+            # 1) STT: voice model, audio in -> transcript text
+            stt_parts: list[str] = []
+            t0 = time.perf_counter()
+            _, u = await chat_stream(
+                [{"role": "system",
+                  "content": "You are a transcription engine. Output ONLY the "
+                             "exact words spoken in the audio — no replies, "
+                             "no commentary, no questions."},
+                 {"role": "user", "content": [{"type": "input_audio",
+                  "input_audio": {"data": b64, "format": "wav"}}]}],
+                None, stt_parts.append, stt=True)
+            # audio in + text out needs the audio field too; modalities text
+            user_text = "".join(stt_parts).strip()
+            t_stt = time.perf_counter() - t0
+            if u:
+                usage_total = dict(u)
+            print(f"[stage] stt {t_stt:.2f}s: You: {user_text}", flush=True)
+            if not user_text:
+                print("[stage] stt produced no text — turn skipped", flush=True)
+                return
 
-        cost = (usage or {}).get("cost") or 0
+            # 2) THINK: text model answers, with native tools (text models
+            #    accept standard tool_calls — no OpenRouter audio fragility)
+            think_msgs = (history
+                          + [{"role": "user", "content": user_text}])
+            reply_parts: list[str] = []
+            t0 = time.perf_counter()
+            tool_calls, u = await chat_stream(think_msgs, None,
+                                              reply_parts.append, think=True)
+            if any(tc["name"] for tc in tool_calls):
+                tc = next(tc for tc in tool_calls if tc["name"])
+                tool_result = json.dumps({"recent_meeting": "M7 POC scoping",
+                                          "next_event": "Friday demo review"})
+                think_msgs += [
+                    {"role": "assistant", "content": "".join(reply_parts),
+                     "tool_calls": [{"id": tc.get("id") or "call_1",
+                                     "type": "function",
+                                     "function": {"name": tc["name"],
+                                                  "arguments": tc["arguments"]}}],
+                     },
+                    {"role": "tool",
+                     "tool_call_id": tc.get("id") or "call_1",
+                     "content": tool_result},
+                ]
+                reply_parts.clear()
+                _, u2 = await chat_stream(think_msgs, None,
+                                          reply_parts.append, think=True)
+                if u2:
+                    u = u2
+            reply = "".join(reply_parts).strip()
+            t_think = time.perf_counter() - t0
+            if u and u.get("cost"):
+                usage_total["cost"] = usage_total.get("cost", 0) + u["cost"]
+            print(f"[stage] think {t_think:.2f}s", flush=True)
+
+            # 3) TTS: voice model speaks the reply (text in, audio out)
+            first_audio.clear()
+            t0 = time.perf_counter()
+            _, u = await chat_stream(
+                [{"role": "user", "content": reply}],
+                on_audio, None, tts=True)
+            t_tts = time.perf_counter() - t0
+            if u and u.get("cost"):
+                usage_total["cost"] = usage_total.get("cost", 0) + u["cost"]
+            print(f"[stage] tts {t_tts:.2f}s", flush=True)
+            stages = (f" | stt {t_stt:.2f}s think {t_think:.2f}s "
+                      f"tts {t_tts:.2f}s")
+            transcript = reply
+
+        # memory
+        if THINK_MODEL:
+            history.append({"role": "user", "content": user_text})
+            history.append({"role": "assistant", "content": reply})
+        else:
+            history.append({"role": "user", "content": [
+                {"type": "text", "text": "Answer my spoken question."},
+                {"type": "input_audio",
+                 "input_audio": {"data": b64, "format": "wav"}},
+            ]})
+            history.append({"role": "assistant",
+                            "content": transcript or "(tool result answer)"})
+
+        cost = (usage_total or {}).get("cost") or 0
         total_cost += cost
         lat = first_audio.get("t") or 0.0
         print(
-            f"\n--- turn {turns} --- latency {lat:.2f}s | cost ~${cost:.4f} | "
-            f"total ~${total_cost:.4f}\nFriday: {transcript}\n> ", flush=True)
+            f"\n--- turn {turns} --- latency {lat:.2f}s{stages} | "
+            f"cost ~${cost:.4f} | total ~${total_cost:.4f}\n"
+            f"Friday: {transcript}\n> ", flush=True)
 
     try:
         while True:
