@@ -26,6 +26,7 @@ from pathlib import Path
 
 import numpy as np
 import sounddevice as sd
+import wave
 from loguru import logger
 
 from pipecat.audio.utils import calculate_audio_volume, create_stream_resampler
@@ -125,21 +126,44 @@ class MicInput(FrameProcessor):
             self._device_rate = int(dev["default_samplerate"])
             if self._debug:
                 print(f"[mic] opening '{dev['name']}' at {self._device_rate} Hz", flush=True)
-            self._stream = sd.RawInputStream(
-                samplerate=self._device_rate,
-                blocksize=int(self._device_rate / 10),  # 100 ms blocks — batching matters:
-                # per-10ms SOXR VHQ resampling starves the event loop and the
-                # downstream pipeline never processes frames (verified)
-                dtype="int16",
-                channels=1,
-                device=int(os.environ["CHAT_INPUT_DEVICE"])
-                if os.getenv("CHAT_INPUT_DEVICE")
-                else None,
-                callback=self._callback,
-            )
-            self._stream.start()
+            if os.getenv("CHAT_TEST_WAV"):
+                print("[test] feeder mode — wav replaces mic", flush=True)
+                async def _feeder():
+                    try:
+                        await asyncio.sleep(1.0)
+                        with wave.open(os.environ["CHAT_TEST_WAV"]) as w:
+                            pcm = w.readframes(w.getnframes()); wsr = w.getframerate()
+                        r = create_stream_resampler()
+                        up = await r.resample(pcm, wsr, self._device_rate)
+                        chunk = int(self._device_rate / 10) * 2
+                        silence = b"\x00\x00" * int(self._device_rate * 1.5)
+                        for b in [up[i:i+chunk] for i in range(0, len(up), chunk)] + [silence]:
+                            if self._q:
+                                self._q.put_nowait(b)
+                            await asyncio.sleep(0.1)
+                        print("[test] utterance fed", flush=True)
+                    except Exception as e:
+                        import traceback
+                        print(f"[test error] {type(e).__name__}: {e}", flush=True)
+                        traceback.print_exc()
+            else:
+                self._stream = sd.RawInputStream(
+                    samplerate=self._device_rate,
+                    blocksize=int(self._device_rate / 10),  # 100 ms blocks — batching matters:
+                    # per-10ms SOXR VHQ resampling starves the event loop and the
+                    # downstream pipeline never processes frames (verified)
+                    dtype="int16",
+                    channels=1,
+                    device=int(os.environ["CHAT_INPUT_DEVICE"])
+                    if os.getenv("CHAT_INPUT_DEVICE")
+                    else None,
+                    callback=self._callback,
+                )
+                self._stream.start()
             self._running = True
             self._task = self.create_task(self._reader())
+            if os.getenv("CHAT_TEST_WAV"):
+                self.create_task(_feeder())
         await self.push_frame(frame, direction)
 
     async def _reader(self):

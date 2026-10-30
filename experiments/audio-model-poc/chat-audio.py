@@ -229,10 +229,14 @@ async def run():
                            else sd.default.device[0])
     rate = int(dev["default_samplerate"])
     ch = 1
-    mic = sd.RawInputStream(samplerate=rate, blocksize=int(rate / 10),
-                            dtype="int16", channels=ch, device=dev["index"],
-                            callback=mic_callback)
-    mic.start()
+    test_wav = os.getenv("CHAT_TEST_WAV")
+    mic_started = False
+    if not test_wav:
+        mic = sd.RawInputStream(samplerate=rate, blocksize=int(rate / 10),
+                                dtype="int16", channels=ch, device=dev["index"],
+                                callback=mic_callback)
+        mic.start()
+        mic_started = True
 
     resampler = create_stream_resampler()
     vad_resampler = create_stream_resampler()
@@ -251,9 +255,25 @@ async def run():
           f"[key] OPENROUTER_API_KEY {'set' if KEY else 'MISSING'}\n> ",
           flush=True)
 
+    if test_wav:
+        async def feeder():
+            await asyncio.sleep(1.0)
+            with wave.open(test_wav) as w:
+                pcm = w.readframes(w.getnframes()); wsr = w.getframerate()
+            r = create_stream_resampler()
+            up = await r.resample(pcm, wsr, rate)
+            chunk = int(rate / 10) * 2
+            silence = b"\x00\x00" * int(rate * 1.5)
+            for b in [up[i:i+chunk] for i in range(0, len(up), chunk)] + [silence]:
+                await mic_q.put(b)
+                await asyncio.sleep(0.1)
+            print("[test] utterance fed", flush=True)
+        asyncio.create_task(feeder())
+
     state = "quiet"
     lvl_buf = bytearray()
     utter24 = bytearray()      # 24 kHz utterance being recorded
+    ever_sound = False
     utt_start = None
     quiet_since = None
     last_level_print = time.monotonic()
@@ -327,7 +347,32 @@ async def run():
 
     try:
         while True:
-            block = await mic_q.get()  # 100 ms @ device rate
+            # timeout tick: the commit check must run even when no mic
+            # blocks arrive (silence after an utterance still needs
+            # evaluating, or the turn is never committed)
+            try:
+                block = await asyncio.wait_for(mic_q.get(), timeout=0.1)
+            except asyncio.TimeoutError:
+                block = None
+            if block is None:
+                if state == "recording":
+                    # keep the VAD advancing on silence so the analyzer can
+                    # reach QUIET (stop_secs needs samples, not wall time)
+                    st = await vad.analyze_audio(
+                        b"\x00\x00" * int(IN_RATE / 10 * 2))
+                    if st == VADState.QUIET:
+                        utter24 += b"\x00\x00" * int(24000 / 10 * 2)
+                        if quiet_since is None:
+                            quiet_since = time.monotonic()
+                    if (quiet_since is not None
+                            and time.monotonic() - quiet_since >= 0.5
+                            and len(utter24) / 2 / 24000 >= 0.4
+                            and not speaker.playing):
+                        state = "quiet"
+                        utt = bytes(utter24)
+                        utter24.clear()
+                        asyncio.ensure_future(do_turn(utt))
+                continue
             pcm = np.frombuffer(block, dtype=np.int16)
             raw16 = await vad_resampler.resample(block, rate, IN_RATE)
             raw24 = await resampler.resample(block, rate, 24000)
@@ -341,6 +386,15 @@ async def run():
                 except Exception:
                     vol = -1
                 print(f"[mic] listening… level={vol:.2f}", flush=True)
+                if lvl_buf:
+                    a = np.frombuffer(bytes(lvl_buf), np.int16).astype(np.float64)
+                    rms = float(np.sqrt(np.mean(a ** 2)))
+                    if rms > 300:
+                        ever_sound = True
+                    elif not ever_sound:
+                        print("[warn] mic capture is silent — the machine is "
+                              "not receiving your voice. On RDP: enable "
+                              "microphone redirection and reconnect.", flush=True)
 
             st = await vad.analyze_audio(raw16)
 
