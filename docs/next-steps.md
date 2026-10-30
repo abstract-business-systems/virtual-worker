@@ -349,3 +349,24 @@ The next checkpoint is complete when:
 - Which policy document is authoritative when a user instruction conflicts
   with a configured policy?
 - What level of live inspection, logging, and audit history is required?
+
+## Conversation-layer experiments — concluded (30 October)
+
+All M7/M8 experiments are complete and live-tested; results and the
+discussion material for the architecture review are in
+[`architecture-discussion.md`](architecture-discussion.md):
+
+- Three talkable implementations (Pipecat+realtime, raw realtime,
+  OpenRouter audio path), each with `run.sh` presets and model
+  configuration in `models.ini` (voice/think split included).
+- Measured: realtime ~1.1–1.6 s first audio (~₹9,800/mo at 190 h),
+  cheap path ~2.4 s (~₹780/mo), voice/think cascade ~3.5 s (~₹800–900/mo).
+- User verdicts: realtime paths feel best; Pipecat slightly more natural
+  than the hand-built raw layer; cheap path uniquely survives network drops.
+- Verified: server-side turn detection never commits on
+  `gpt-realtime-2.1-mini` (client VAD mandatory); the framework adds no
+  latency; model swapping is configuration, not code.
+
+Remaining before the next development phase: the architecture review with
+the architect (doc above), then wire the chosen flow into the worker's
+virtual-mic path with real worker tools.
