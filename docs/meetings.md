@@ -37,9 +37,12 @@ When a new recording `N.vtt` is added:
 | M4 | [`4.vtt`](recordings/4.vtt) | 2026-10-29* | 10m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Conversation layer, continuous speech processing, acknowledgement, progress updates, and streaming | [`next-steps.md`](next-steps.md) |
 | M5 | [`5.vtt`](recordings/5.vtt) | 2026-10-29* | 21m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Perceived delay as the primary goal; conversation states, background work, interruption, and content separation | [`next-steps.md`](next-steps.md) |
 | M6 | [`6.vtt`](recordings/6.vtt) | 2026-10-29* | 9m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Follow-up 1:1: voice-model cost research, conversation-layer plan alignment, and a Pipecat demo experiment | [`next-steps.md`](next-steps.md), [`conversation-layer-plan.md`](conversation-layer-plan.md) |
+| M7 | [`7.vtt`](recordings/7.vtt) | 2026-10-30* | 2m† | Viswanath Chidambaram; Sarooparam Chenaram Darji | POC scope: Pipecat and the OpenAI audio model — quality, cost, conversation memory, two-hour timebox | [`next-steps.md`](next-steps.md) |
 
 *The transcripts do not state their recording dates; 2026-10-28 is the M3
-recording file's added date, and 2026-10-29 is the M4–M6 file-added date.*
+recording file's added date, 2026-10-29 is the M4–M6 file-added date, and
+2026-10-30 is the M7 file-added date.
+†M7's recording started late; earlier discussion is not captured.*
 
 ## 3. Meeting summaries
 
@@ -147,12 +150,35 @@ The meeting aligned the conversation-layer plan and set the next steps:
   acknowledge-before-long-process behavior, and use the results to decide
   whether Friday's final implementation could be built on it.
 
+### M7 — POC scope (`7.vtt`)
+
+A short 1:1 confirming the scope of the Pipecat / OpenAI audio-model POC:
+
+- Goal: check whether Pipecat and the OpenAI audio (live) model can work for
+  us — mimic Friday's current behavior, answer questions, and ideally keep
+  conversation memory.
+- It may live inside the virtual worker or be a separate standalone POC.
+- Measure the quality of the output and the associated cost.
+- **Timebox: two hours maximum per POC.** After one hour, if stuck, ask
+  Viswanath for help.
+- Note: the recording started late, so an earlier part of the discussion is
+  not captured.
+
 ## 4. Journal
 
 Newest entries appear first.
 
 *The recording dates are not stated in the transcripts; the dates shown above
 are the recording file-added dates.*
+
+### 2026-10-30 — M7 POC scope confirmed
+
+- Added M7 as the short scope-setting 1:1.
+- Recorded the POC criteria: mimic current behavior, answer questions,
+  conversation memory ideally, measure quality and cost; standalone POC
+  allowed.
+- Recorded the timebox: two hours maximum per POC; escalate to Viswanath
+  after one hour if stuck.
 
 ### 2026-10-29 — M6 follow-up: voice-model cost and Pipecat demo
 
@@ -245,13 +271,14 @@ are the recording file-added dates.*
 | 11 | Research current native voice-model costs (supporting background function calls) at target scale (~6 h/day, ~10 people), and compare against an STT + LLM + TTS pipeline that mimics voice models, including cost delta and latency | M6 | Engineering | Open — revisit the earlier "costly" assumption with real numbers |
 | 12 | Build a minimal standalone Pipecat demo and measure latency, cost, and perceived delay, including acknowledge-before-long-process behavior | M6 | Engineering | Open — result feeds the implementation-option choice |
 | 13 | Answer the M6 ranking question: perceived delay vs. technical latency — which single focus, or what split, and why | M6 | Product and engineering | Open — needs a quantified ranking, not prose |
+| 14 | Run the POCs: Pipecat demo and/or the OpenAI audio-model probe — mimic current behavior, answer questions, conversation memory ideally; measure output quality and cost | M7 | Engineering | Open — two-hour timebox per POC; standalone POC allowed; escalate after one hour if stuck |
 
 ## 6. Document map
 
 | Document | Purpose |
 |---|---|
 | `meetings.md` | Living index, summaries, journal, and action items |
-| `recordings/1.vtt`, `recordings/2.vtt`, `recordings/3.vtt`, `recordings/4.vtt`, `recordings/5.vtt`, `recordings/6.vtt` | Immutable meeting source transcripts |
+| `recordings/1.vtt`, `recordings/2.vtt`, `recordings/3.vtt`, `recordings/4.vtt`, `recordings/5.vtt`, `recordings/6.vtt`, `recordings/7.vtt` | Immutable meeting source transcripts |
 | `requirements.md` | Product requirements from M1 |
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |

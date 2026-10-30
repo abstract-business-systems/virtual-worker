@@ -104,7 +104,10 @@ Three workstreams, in dependency order:
 > is **not** a decision. M6 set the gate: build a minimal standalone Pipecat
 > demo measuring latency, cost, and the acknowledge-before-long-process
 > behavior — the option choice follows from those results (see
-> [`next-steps.md`](next-steps.md), "M6 follow-up").
+> [`next-steps.md`](next-steps.md), "M6 follow-up"). M7 confirmed the scope:
+> mimic current behavior, answer questions, conversation memory ideally,
+> measure quality and cost — standalone POC allowed, **two-hour timebox per
+> POC**.
 
 | Option | What it is | Trade-off |
 |---|---|---|

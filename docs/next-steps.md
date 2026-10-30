@@ -3,8 +3,9 @@
 Source: [`docs/recordings/2.vtt`](recordings/2.vtt)
 Additional sources: [`docs/recordings/3.vtt`](recordings/3.vtt),
 [`docs/recordings/4.vtt`](recordings/4.vtt),
-[`docs/recordings/5.vtt`](recordings/5.vtt), and
-[`docs/recordings/6.vtt`](recordings/6.vtt)
+[`docs/recordings/5.vtt`](recordings/5.vtt),
+[`docs/recordings/6.vtt`](recordings/6.vtt), and
+[`docs/recordings/7.vtt`](recordings/7.vtt)
 
 This document captures the priorities, decisions, and follow-up work from the
 16 October meeting. It complements the product requirements in
@@ -142,7 +143,14 @@ real numbers, kept deliberately small and fast:
   the state machine kept as our own code. Its real first-audio latency and
   OpenRouter audio streaming must be measured in the demo.
 
-### 2. Pipecat / single-model demo experiment (after the cost check)
+### 2. Pipecat / single-model POC (after the cost check)
+
+**Scope confirmed in M7:** the POC checks whether Pipecat and the OpenAI
+audio model can work for us — mimic Friday's current behavior, answer
+questions, and ideally keep conversation memory. It may live inside the
+virtual worker or be a standalone POC. Measure the output quality and the
+associated cost. **Timebox: two hours maximum per POC**; after one hour if
+stuck, ask Viswanath.
 
 Build the smallest possible probe first — one script, no framework — then
 extend it. Test matrix:
