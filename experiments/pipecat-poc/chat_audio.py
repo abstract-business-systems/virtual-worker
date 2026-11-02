@@ -40,6 +40,7 @@ from pipecat.audio.vad.silero import SileroVADAnalyzer
 from pipecat.audio.vad.vad_analyzer import VADParams, VADState
 
 HERE = Path(__file__).parent
+from cli_ui import banner, dim, err, friday, hdr, stage, tool, warn as _warn_c, you as _you_c
 IN_RATE = 16000          # VAD + whisper native rate
 OUT_RATE = 44100         # typical playback device rate
 
@@ -162,8 +163,7 @@ def whisper_transcribe(pcm24: bytes, quiet: bool = False) -> str:
         size = (STT_CFG.split(":", 1)[1]
                 if (STT_CFG and ":" in STT_CFG) else "base")
         if not quiet:
-            print(f"[stt] loading local whisper '{size}' "
-                  f"(first run downloads it)...", flush=True)
+            print(stage(f"[stt] loading local whisper '{size}' (first run downloads it)..."), flush=True)
         _whisper = WhisperModel(size, device="cpu", compute_type="int8")
     # resample 24k int16 -> 16k float32 (whisper native rate)
     pcm16 = (np.frombuffer(pcm24, dtype=np.int16).astype(np.float32)
@@ -173,8 +173,7 @@ def whisper_transcribe(pcm24: bytes, quiet: bool = False) -> str:
                                           vad_filter=True)
     text = " ".join(s.text for s in segments).strip()
     if not quiet:
-        print(f"[stt] whisper ready {time.perf_counter() - t0:.2f}s "
-              f"(incl. load)", flush=True)
+        print(stage(f"[stt] whisper ready {time.perf_counter() - t0:.2f}s (incl. load)"), flush=True)
     return text
 
 
@@ -336,8 +335,7 @@ async def chat_stream(messages, on_audio, on_text, *, think=False, tts=False, st
                     except json.JSONDecodeError:
                         continue
                     if ev.get("error"):
-                        print(f"[api error] {json.dumps(ev['error'])[:300]}",
-                              flush=True)
+                        print(err(f"[api error] {json.dumps(ev['error'])[:300]}"), flush=True)
                     if ev.get("usage"):
                         usage = ev["usage"]
                     ch = (ev.get("choices") or [{}])[0]
@@ -367,9 +365,9 @@ async def chat_stream(messages, on_audio, on_text, *, think=False, tts=False, st
                     for _, v in sorted(parts_args.items()))
         except urllib.error.HTTPError as e:
             body = e.read().decode(errors="replace")[:300]
-            print(f"[api error] HTTP {e.code}: {body}", flush=True)
+            print(err(f"[api error] HTTP {e.code}: {body}"), flush=True)
         except Exception as e:  # noqa: BLE001
-            print(f"[error] stream failed: {e!r}", flush=True)
+            print(err(f"[error] stream failed: {e!r}"), flush=True)
 
     await asyncio.to_thread(worker)
     return tool_calls, usage
@@ -407,10 +405,10 @@ async def run():
     mode_desc = (f"{MODEL} single-call" if not THINK_MODEL else
                  f"{STT_CFG or MODEL} -> {THINK_MODEL} -> {MODEL}")
 
-    print(f"Friday [{PRESET} mode: {mode_desc}] listening — speak, then "
-          f"pause. Ctrl+C to quit.\n[device] {dev['name']} @ {rate} Hz\n"
-          f"[workdir] {WORKDIR}\n"
-          f"[key] OPENROUTER_API_KEY {'set' if KEY else 'MISSING'}\n> ",
+    print(banner(f"Friday [{PRESET} mode: {mode_desc}] listening — speak, "
+                 f"then pause. Ctrl+C to quit.") + "\n"
+          + dim(f"[device] {dev['name']} @ {rate} Hz | [workdir] {WORKDIR} | "
+                f"OPENROUTER_API_KEY {'set' if KEY else 'MISSING'}") + "\n> ",
           flush=True)
 
     if test_wav:
@@ -455,8 +453,7 @@ async def run():
 
         if not THINK_MODEL:
             # ---- audio mode: voice model hears, thinks, speaks ----
-            print(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — asking "
-                  f"{MODEL}...", flush=True)
+            print(dim(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — asking {MODEL}..."), flush=True)
             # show what the agent is getting (local whisper, display only,
             # runs while the request is already in flight)
             disp = asyncio.create_task(
@@ -464,10 +461,9 @@ async def run():
 
             def _show_you(t):
                 if t.exception():
-                    print(f"[you] (transcribe failed: {t.exception()!r})",
-                          flush=True)
+                    print(err(f"[you] (transcribe failed: {t.exception()!r})"), flush=True)
                 else:
-                    print(f"[you] {t.result().strip()}", flush=True)
+                    print(_you_c(f"[you] {t.result().strip()}"), flush=True)
 
             disp.add_done_callback(_show_you)
             audio_user_msg = {"role": "user", "content": [
@@ -487,8 +483,7 @@ async def run():
                 name = tc["name"]
                 tool_result = run_tool(name, tc["arguments"])
                 result_json = json.dumps(tool_result)
-                print(f"[tool] {name}({(tc['arguments'] or '')[:80]}) -> "
-                      f"{result_json[:160]}", flush=True)
+                print(tool(f"[tool] {name}({(tc['arguments'] or '')[:80]}) -> {result_json[:160]}"), flush=True)
                 follow = msgs + [{"role": "user", "content": [
                     {"type": "text",
                      "text": f"{name} returned: {result_json}. Answer the "
@@ -505,9 +500,7 @@ async def run():
             user_text = "Answer my spoken question."
         else:
             # ---- separate mode: STT -> think -> TTS ----
-            print(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — "
-                  f"separate pipeline {STT_CFG or MODEL} -> "
-                  f"{THINK_MODEL} -> {MODEL}...", flush=True)
+            print(dim(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — separate pipeline {STT_CFG or MODEL} -> {THINK_MODEL} -> {MODEL}..."), flush=True)
 
             # 1) STT: local whisper or the voice model transcribes
             t0 = time.perf_counter()
@@ -528,10 +521,9 @@ async def run():
             t_stt = time.perf_counter() - t0
             if u:
                 usage_total = dict(u)
-            print(f"[stage] stt {t_stt:.2f}s: You: {user_text}", flush=True)
+            print(stage(f"[stage] stt {t_stt:.2f}s:") + " " + _you_c(f"You: {user_text}"), flush=True)
             if not user_text:
-                print("[stage] stt produced no text — turn skipped",
-                      flush=True)
+                print(_warn_c("[stage] stt produced no text — turn skipped"), flush=True)
                 return
 
             # 2) THINK: text model answers, with native tools (text models
@@ -546,8 +538,7 @@ async def run():
                 tc = next(tc for tc in tool_calls if tc["name"])
                 name = tc["name"]
                 tool_result = json.dumps(run_tool(name, tc["arguments"]))
-                print(f"[tool] {name}({(tc['arguments'] or '')[:80]}) -> "
-                      f"{tool_result[:160]}", flush=True)
+                print(tool(f"[tool] {name}({(tc['arguments'] or '')[:80]}) -> {tool_result[:160]}"), flush=True)
                 think_msgs += [
                     {"role": "assistant", "content": "".join(reply_parts),
                      "tool_calls": [{"id": tc.get("id") or "call_1",
@@ -568,7 +559,7 @@ async def run():
             t_think = time.perf_counter() - t0
             if u and u.get("cost"):
                 usage_total["cost"] = usage_total.get("cost", 0) + u["cost"]
-            print(f"[stage] think {t_think:.2f}s", flush=True)
+            print(stage(f"[stage] think {t_think:.2f}s"), flush=True)
 
             # 3) TTS: voice model speaks the reply (text in, audio out)
             first_audio.clear()
@@ -579,7 +570,7 @@ async def run():
             t_tts = time.perf_counter() - t0
             if u and u.get("cost"):
                 usage_total["cost"] = usage_total.get("cost", 0) + u["cost"]
-            print(f"[stage] tts {t_tts:.2f}s", flush=True)
+            print(stage(f"[stage] tts {t_tts:.2f}s"), flush=True)
             stages = (f" | stt {t_stt:.2f}s think {t_think:.2f}s "
                       f"tts {t_tts:.2f}s")
             transcript = reply
@@ -600,10 +591,11 @@ async def run():
         cost = (usage_total or {}).get("cost") or 0
         total_cost += cost
         lat = first_audio.get("t") or 0.0
+        stages_c = f" | {stages.strip(' |')}" if stages else ""
         print(
-            f"\n--- turn {turns} --- latency {lat:.2f}s{stages} | "
-            f"cost ~${cost:.4f} | total ~${total_cost:.4f}\n"
-            f"Friday: {transcript}\n> ", flush=True)
+            f"\n{hdr(f'--- turn {turns} --- latency {lat:.2f}s{stages_c} | ')}" 
+            f"{hdr(f'cost ~${cost:.4f} | total ~${total_cost:.4f}')}"
+            f"\n{friday(f'Friday: {transcript}')}\n> ", flush=True)
 
     try:
         while True:
@@ -645,16 +637,14 @@ async def run():
                     vol = calculate_audio_volume(bytes(lvl_buf), 24000)
                 except Exception:
                     vol = -1
-                print(f"[mic] listening… level={vol:.2f}", flush=True)
+                print(dim(f"[mic] listening… level={vol:.2f}"), flush=True)
                 if lvl_buf:
                     a = np.frombuffer(bytes(lvl_buf), np.int16).astype(np.float64)
                     rms = float(np.sqrt(np.mean(a ** 2)))
                     if rms > 300:
                         ever_sound = True
                     elif not ever_sound:
-                        print("[warn] mic capture is silent — the machine is "
-                              "not receiving your voice. On RDP: enable "
-                              "microphone redirection and reconnect.", flush=True)
+                        print(_warn_c("[warn] mic capture is silent — the machine is not receiving your voice. On RDP: enable microphone redirection and reconnect."), flush=True)
 
             st = await vad.analyze_audio(raw16)
 
@@ -662,7 +652,7 @@ async def run():
             if st == VADState.SPEAKING and speaker.playing:
                 turn_seq += 1
                 speaker.barge_in()
-                print("[barge-in] cutting playback", flush=True)
+                print(_warn_c("[barge-in] cutting playback"), flush=True)
                 state = "recording"
                 utter24.clear()
                 utt_start = time.monotonic()

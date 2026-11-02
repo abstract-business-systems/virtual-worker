@@ -62,6 +62,7 @@ from pipecat.transports.base_transport import BaseTransport
 from pipecat.workers.runner import WorkerRunner
 
 HERE = Path(__file__).parent
+from cli_ui import banner, dim, err, friday, hdr, tool, warn as _warn_c, you as _you_c
 
 _whisper = None  # lazy-loaded local whisper (user-speech display)
 
@@ -318,11 +319,11 @@ class TurnMetrics(FrameProcessor):
                 self._utt += frame.audio
                 self._utt_rate = frame.sample_rate
         elif isinstance(frame, UserStartedSpeakingFrame):
-            print("[vad] speech started", flush=True)
+            print(dim("[vad] speech started"), flush=True)
             self._recording = True
             self._utt = bytearray()
         elif isinstance(frame, UserStoppedSpeakingFrame):
-            print("[vad] speech stopped — asking Friday...", flush=True)
+            print(dim("[vad] speech stopped — asking Friday..."), flush=True)
             self._recording = False
             self.t_turn_end = time.perf_counter()
             self.first_audio_latency = None
@@ -333,7 +334,7 @@ class TurnMetrics(FrameProcessor):
                 self.first_audio_latency = time.perf_counter() - self.t_turn_end
             self.audio_secs_out += len(frame.audio) / 2 / frame.sample_rate
         elif isinstance(frame, ErrorFrame):
-            print(f"\n[error] {frame}", flush=True)
+            print(err(f"\n[error] {frame}"), flush=True)
         await self.push_frame(frame, direction)
 
     def _show_you(self):
@@ -365,9 +366,9 @@ class TurnMetrics(FrameProcessor):
             try:
                 text = await asyncio.to_thread(_work)
                 if text:
-                    print(f"[you] {text}", flush=True)
+                    print(_you_c(f"[you] {text}"), flush=True)
             except Exception as e:  # noqa: BLE001
-                print(f"[you] (transcription failed: {e!r})", flush=True)
+                print(err(f"[you] (transcription failed: {e!r})"), flush=True)
 
         asyncio.ensure_future(_run())
 
@@ -378,18 +379,19 @@ class TurnMetrics(FrameProcessor):
         reliable per-turn hook downstream — the old frame-based report
         never fired, which is why every saved session had turns: 0.)"""
         if interrupted:
-            print("[turn] interrupted — no report", flush=True)
+            print(_warn_c("[turn] interrupted — no report"), flush=True)
             return
         self.turns += 1
         in_tok = self._in_secs * TOK_PER_SEC_IN
         out_tok = self.audio_secs_out * TOK_PER_SEC_OUT
         turn_cost = (in_tok * AUDIO_IN_USD_PER_M + out_tok * AUDIO_OUT_USD_PER_M) / 1e6
         self.total_cost_usd += turn_cost
+        reply = (text or '').strip()
         print(
-            f"\n--- turn {self.turns} --- "
-            f"latency {self.first_audio_latency or 0:.2f}s | "
-            f"cost ~${turn_cost:.4f} | total ~${self.total_cost_usd:.4f}\n"
-            f"Friday: {(text or '').strip()}\n> ",
+            f"\n{hdr(f'--- turn {self.turns} --- ')}"
+            f"{hdr(f'latency {self.first_audio_latency or 0:.2f}s | ')}"
+            f"{hdr(f'cost ~${turn_cost:.4f} | total ~${self.total_cost_usd:.4f}')}"
+            f"\n{friday('Friday: ' + reply)}\n> ",
             flush=True,
         )
         self._in_secs = 0.0
@@ -475,7 +477,7 @@ async def run() -> dict:
                 return {"returncode": -1, "output": f"(error: {e!r})"}
 
         result = await loop.run_in_executor(None, _run)
-        print(f"[tool] bash({cmd[:80]}) -> {json.dumps(result)[:160]}", flush=True)
+        print(tool(f"[tool] bash({cmd[:80]}) -> {json.dumps(result)[:160]}"), flush=True)
         await params.result_callback(json.dumps(result))
 
     service = OpenAIRealtimeLLMService(
