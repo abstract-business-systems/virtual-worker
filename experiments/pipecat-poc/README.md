@@ -1,12 +1,34 @@
-# Pipecat POC (M7) — realtime model wrapped in a minimal Pipecat pipeline
+# Pipecat POC (M8) — three conversation-layer modes in one pipeline
 
-Isolated POC for the M7 scope: check whether **Pipecat + the OpenAI live
-model** can work for us, mimic Friday's behavior, answer questions, and
-measure output quality and cost. 2-hour timebox.
+Isolated POC: one talkable CLI in three **typed** conversation modes (M8
+naming), after the M7 realtime probe established the latency/feel baseline.
+
+## Modes — `./run.sh <mode>` (default: realtime)
+
+| Mode | Pipeline | First audio (measured) | Cost/turn |
+|---|---|---|---|
+| `realtime` | one OpenAI realtime model listens, thinks, speaks (Pipecat pipeline) | ~1–3 s | ~$0.0025–0.005 |
+| `audio` | one audio-model call per turn, OpenRouter (`chat_audio.py`) | ~3 s | ~$0.0006 |
+| `separate` | local faster-whisper STT → think model (tools) → voice model TTS (`chat_audio.py`) | ~6 s | ~$0.0012 |
+
+Models per mode live in `models.ini` (`[realtime] / [audio] / [separate]`);
+`--model <name>` overrides the voice/realtime model for one run.
+
+Usage:
+```bash
+./run.sh realtime | audio | separate   # pick the pipeline type
+./run.sh realtime -d                   # debug (mic levels, VAD, pipecat logs)
+./run.sh audio --model openai/gpt-audio
+CHAT_TEST_WAV=fixtures/question.wav ./run.sh realtime   # self-test (no mic)
+```
+
+Keys in git-ignored `.env`: `OPENAI_API_KEY` (realtime),
+`OPENROUTER_API_KEY` (audio/separate).
 
 Companion probes:
 - Raw websocket: `../realtime-model-poc/` (the latency/behavior baseline)
-- Fallback comparison: `../audio-model-poc/` (footnote only)
+- Original cheap-path engine: `../audio-model-poc/` (audio/separate modes
+  here are its proven engine, moved in so all three modes share one CLI)
 
 ## Setup
 

@@ -319,26 +319,34 @@ class TurnMetrics(FrameProcessor):
             if self.t_turn_end and self.first_audio_latency is None:
                 self.first_audio_latency = time.perf_counter() - self.t_turn_end
             self.audio_secs_out += len(frame.audio) / 2 / frame.sample_rate
-        elif isinstance(frame, TTSTextFrame):
-            self.text.append(frame.text)
-        elif isinstance(frame, LLMFullResponseEndFrame):
-            self.turns += 1
-            in_tok = self._in_secs * TOK_PER_SEC_IN
-            out_tok = self.audio_secs_out * TOK_PER_SEC_OUT
-            turn_cost = (in_tok * AUDIO_IN_USD_PER_M + out_tok * AUDIO_OUT_USD_PER_M) / 1e6
-            self.total_cost_usd += turn_cost
-            print(
-                f"\n--- turn {self.turns} --- "
-                f"latency {self.first_audio_latency:.2f}s | "
-                f"cost ~${turn_cost:.4f} | total ~${self.total_cost_usd:.4f}\n"
-                f"Friday: {''.join(self.text).strip()}\n> ",
-                flush=True,
-            )
-            self._in_secs = 0.0
-            self.audio_secs_out = 0.0
         elif isinstance(frame, ErrorFrame):
             print(f"\n[error] {frame}", flush=True)
         await self.push_frame(frame, direction)
+
+    def report_turn(self, text: str, interrupted: bool = False):
+        """Called on the assistant aggregator's on_assistant_turn_stopped
+        event. (pipecat 1.15.0 consumes LLMFullResponseEndFrame and
+        TTSTextFrame inside LLMAssistantAggregator, so this is the only
+        reliable per-turn hook downstream — the old frame-based report
+        never fired, which is why every saved session had turns: 0.)"""
+        if interrupted:
+            print("[turn] interrupted — no report", flush=True)
+            return
+        self.turns += 1
+        in_tok = self._in_secs * TOK_PER_SEC_IN
+        out_tok = self.audio_secs_out * TOK_PER_SEC_OUT
+        turn_cost = (in_tok * AUDIO_IN_USD_PER_M + out_tok * AUDIO_OUT_USD_PER_M) / 1e6
+        self.total_cost_usd += turn_cost
+        print(
+            f"\n--- turn {self.turns} --- "
+            f"latency {self.first_audio_latency or 0:.2f}s | "
+            f"cost ~${turn_cost:.4f} | total ~${self.total_cost_usd:.4f}\n"
+            f"Friday: {(text or '').strip()}\n> ",
+            flush=True,
+        )
+        self._in_secs = 0.0
+        self.audio_secs_out = 0.0
+        self.t_turn_end = None
 
 
 class Spy(FrameProcessor):
@@ -385,7 +393,8 @@ async def run() -> dict:
     metrics = TurnMetrics()
 
     async def get_meeting_context(params: FunctionCallParams):
-        await params.result(
+        # pipecat >= 1.x: deliver results via result_callback (params.result is gone)
+        await params.result_callback(
             json.dumps(
                 {"recent_meeting": "M7 POC scoping", "next_event": "Friday demo review"}
             )
@@ -449,6 +458,13 @@ async def run() -> dict:
     else:
         parts += [pair.user()]
     parts += [service, pair.assistant(), transport.output(), transport._spk]
+
+    # Turn reports fire from the assistant aggregator's turn-stopped event:
+    # the aggregator consumes LLMFullResponseEndFrame/TTSTextFrame, so no
+    # downstream frame hook can see them (turns: 0 bug in every old session).
+    @pair.assistant().event_handler("on_assistant_turn_stopped")
+    async def _on_assistant_turn_stopped(aggregator, msg):
+        metrics.report_turn(msg.content, interrupted=msg.interrupted)
     worker = PipelineWorker(
         Pipeline(parts),
         params=PipelineParams(allow_interruptions=True),
@@ -501,6 +517,17 @@ async def main():
     if os.getenv("PIPECAT_DEBUG"):
         import sys
         logger.add(sys.stderr, level="DEBUG")
+        # raw server-event spy: print every realtime event type as it arrives
+        import json as _json
+        import pipecat.services.openai.realtime.events as _ev
+        _orig = _ev.parse_server_event
+        def _spy(msg):
+            try:
+                print(f"[evt] {_json.loads(msg).get('type')}", flush=True)
+            except Exception:
+                pass
+            return _orig(msg)
+        _ev.parse_server_event = _spy
     result = await run()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out = HERE / "results" / f"chat-{stamp}.json"
