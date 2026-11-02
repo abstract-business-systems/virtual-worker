@@ -2,10 +2,12 @@
 # Talk to Friday — pipecat-poc with three conversation-layer modes (M8).
 #
 # Usage:
-#   ./run.sh [mode] [-d] [--model <name>]
+#   ./run.sh [mode] [-d] [--model <name>] [--folder <path>]
 #     mode = realtime | audio | separate     (default: realtime)
 #     -d    debug (mic levels, VAD events, api errors)
 #     --model <name>   model override for this run
+#     --folder <path>  working directory for the bash tool
+#                      (default: the directory you launched run.sh from)
 #
 # Modes (models.ini sections, typed pipelines):
 #   realtime — one OpenAI realtime model listens, thinks, speaks (live session)
@@ -18,6 +20,7 @@
 #   CHAT_MIN_VOLUME=<0..1>      VAD loudness threshold (default 0.15)
 #   CHAT_TEST_WAV=<path>        self-test: feed a wav instead of the mic
 set -euo pipefail
+INVOKED_FROM="$PWD"   # default bash-tool workdir: where the user launched from
 cd "$(dirname "$0")"
 MODE=realtime
 while [[ $# -gt 0 ]]; do
@@ -25,9 +28,11 @@ while [[ $# -gt 0 ]]; do
     realtime|audio|separate) MODE="$1"; shift ;;
     -d|--debug) export CHAT_DEBUG=1 PIPECAT_DEBUG=1; shift ;;
     --model) export CHAT_MODEL="$2"; shift 2 ;;
+    --folder) export CHAT_WORKDIR="$2"; shift 2 ;;
     *) shift ;;
   esac
 done
+export CHAT_WORKDIR="${CHAT_WORKDIR:-$INVOKED_FROM}"
 # keys live in .env (git-ignored): OPENAI_API_KEY (realtime) and
 # OPENROUTER_API_KEY (audio/separate), like the other POCs
 if [[ -f .env ]]; then

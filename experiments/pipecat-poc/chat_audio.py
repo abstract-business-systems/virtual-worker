@@ -24,6 +24,7 @@ import json
 import os
 import queue
 import signal
+import subprocess
 import sys
 import time
 import wave
@@ -63,10 +64,15 @@ API = "https://openrouter.ai/api/v1/chat/completions"
 KEY = os.environ.get("OPENROUTER_API_KEY")
 DEBUG = bool(os.getenv("CHAT_DEBUG"))
 
+# chat.py (realtime) shares the same workdir convention via CHAT_WORKDIR
+WORKDIR = os.environ.get("CHAT_WORKDIR") or os.getcwd()
+
 SYSTEM_PROMPT = (
     "You are Friday, a virtual worker. Keep spoken answers brief (2-3 "
-    "sentences). Call get_meeting_context when the question touches "
-    "meetings, notes, or the calendar."
+    "sentences). Your working directory is " + WORKDIR + " — use the bash "
+    "tool to inspect and summarize the files there when asked. Call "
+    "get_meeting_context when the question touches meetings, notes, or "
+    "the calendar."
 )
 TOOLS = [{
     "type": "function",
@@ -75,7 +81,66 @@ TOOLS = [{
         "description": "Look up recent meeting notes and calendar context for Friday.",
         "parameters": {"type": "object", "properties": {}, "required": []},
     },
+}, {
+    "type": "function",
+    "function": {
+        "name": "bash",
+        "description": "Run a bash command in the working directory and "
+                       "return its stdout/stderr. Use it to list, read, or "
+                       "summarize files in the working directory.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "command": {"type": "string",
+                            "description": "The bash command to run"},
+            },
+            "required": ["command"],
+        },
+    },
 }]
+
+
+def _tool_get_meeting_context(args: dict):
+    return {"recent_meeting": "M7 POC scoping", "next_event": "Friday demo review"}
+
+
+def _tool_bash(args: dict):
+    """Run one bash command in WORKDIR; return structured output."""
+    cmd = str(args.get("command", ""))
+    if not cmd.strip():
+        return {"returncode": -1, "output": "(empty command)"}
+    try:
+        p = subprocess.run(["bash", "-c", cmd], cwd=WORKDIR,
+                           capture_output=True, text=True, timeout=60)
+        out = p.stdout or ""
+        if p.stderr.strip():
+            out += ("\n[stderr] " if out else "[stderr] ") + p.stderr
+        return {"returncode": p.returncode,
+                "output": (out.strip()[:4000] or "(no output)")}
+    except subprocess.TimeoutExpired:
+        return {"returncode": -1, "output": "(command timed out after 60s)"}
+    except Exception as e:  # noqa: BLE001
+        return {"returncode": -1, "output": f"(error: {e!r})"}
+
+
+TOOL_IMPL = {
+    "get_meeting_context": _tool_get_meeting_context,
+    "bash": _tool_bash,
+}
+
+
+def run_tool(name: str, arguments: str):
+    """Dispatch a tool call; returns the JSON-able result."""
+    try:
+        args = json.loads(arguments or "{}")
+        if not isinstance(args, dict):
+            args = {}
+    except json.JSONDecodeError:
+        args = {}
+    impl = TOOL_IMPL.get(name)
+    if impl is None:
+        return {"error": f"unknown tool {name}"}
+    return impl(args)
 
 if not KEY:
     sys.exit("OPENROUTER_API_KEY not set (experiments/pipecat-poc/.env)")
@@ -86,18 +151,20 @@ turn_seq = 0  # bumped on barge-in; in-flight turn audio with an older token is 
 _whisper = None
 
 
-def whisper_transcribe(pcm24: bytes) -> str:
+def whisper_transcribe(pcm24: bytes, quiet: bool = False) -> str:
     """24 kHz int16 PCM -> transcript text via local faster-whisper.
-    Model is downloaded once (~75 MB for base) and cached."""
+    Model is downloaded once (~75 MB for base) and cached.
+    quiet=True skips the load/timing prints (display-only use)."""
     global _whisper
     t0 = time.perf_counter()
     if _whisper is None:
         from faster_whisper import WhisperModel
-        size = (STT_CFG.split(":", 1)[1] if ":" in STT_CFG else "base")
-        print(f"[stt] loading local whisper '{size}' "
-              f"(first run downloads it)...", flush=True)
+        size = (STT_CFG.split(":", 1)[1]
+                if (STT_CFG and ":" in STT_CFG) else "base")
+        if not quiet:
+            print(f"[stt] loading local whisper '{size}' "
+                  f"(first run downloads it)...", flush=True)
         _whisper = WhisperModel(size, device="cpu", compute_type="int8")
-    import asyncio as _a
     # resample 24k int16 -> 16k float32 (whisper native rate)
     pcm16 = (np.frombuffer(pcm24, dtype=np.int16).astype(np.float32)
              / 32768.0)
@@ -105,8 +172,9 @@ def whisper_transcribe(pcm24: bytes) -> str:
     segments, _info = _whisper.transcribe(pcm16, language="en",
                                           vad_filter=True)
     text = " ".join(s.text for s in segments).strip()
-    print(f"[stt] whisper ready {time.perf_counter() - t0:.2f}s "
-          f"(incl. load)", flush=True)
+    if not quiet:
+        print(f"[stt] whisper ready {time.perf_counter() - t0:.2f}s "
+              f"(incl. load)", flush=True)
     return text
 
 
@@ -341,6 +409,7 @@ async def run():
 
     print(f"Friday [{PRESET} mode: {mode_desc}] listening — speak, then "
           f"pause. Ctrl+C to quit.\n[device] {dev['name']} @ {rate} Hz\n"
+          f"[workdir] {WORKDIR}\n"
           f"[key] OPENROUTER_API_KEY {'set' if KEY else 'MISSING'}\n> ",
           flush=True)
 
@@ -388,6 +457,19 @@ async def run():
             # ---- audio mode: voice model hears, thinks, speaks ----
             print(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — asking "
                   f"{MODEL}...", flush=True)
+            # show what the agent is getting (local whisper, display only,
+            # runs while the request is already in flight)
+            disp = asyncio.create_task(
+                asyncio.to_thread(whisper_transcribe, utt, True))
+
+            def _show_you(t):
+                if t.exception():
+                    print(f"[you] (transcribe failed: {t.exception()!r})",
+                          flush=True)
+                else:
+                    print(f"[you] {t.result().strip()}", flush=True)
+
+            disp.add_done_callback(_show_you)
             audio_user_msg = {"role": "user", "content": [
                 {"type": "text", "text": "Answer my spoken question."},
                 {"type": "input_audio",
@@ -401,14 +483,15 @@ async def run():
             if usage:
                 usage_total = dict(usage)
             if any(tc["name"] for tc in tool_calls):
-                name = next(tc["name"] for tc in tool_calls if tc["name"])
-                args = next((tc["arguments"] for tc in tool_calls
-                             if tc["name"]), "{}")
-                tool_result = json.dumps({"recent_meeting": "M7 POC scoping",
-                                          "next_event": "Friday demo review"})
+                tc = next(tc for tc in tool_calls if tc["name"])
+                name = tc["name"]
+                tool_result = run_tool(name, tc["arguments"])
+                result_json = json.dumps(tool_result)
+                print(f"[tool] {name}({(tc['arguments'] or '')[:80]}) -> "
+                      f"{result_json[:160]}", flush=True)
                 follow = msgs + [{"role": "user", "content": [
                     {"type": "text",
-                     "text": f"{name} returned: {tool_result}. Answer the "
+                     "text": f"{name} returned: {result_json}. Answer the "
                              f"original question briefly."}]}]
                 text_parts.clear()
                 first_audio.clear()
@@ -461,8 +544,10 @@ async def run():
                                               reply_parts.append, think=True)
             if any(tc["name"] for tc in tool_calls):
                 tc = next(tc for tc in tool_calls if tc["name"])
-                tool_result = json.dumps({"recent_meeting": "M7 POC scoping",
-                                          "next_event": "Friday demo review"})
+                name = tc["name"]
+                tool_result = json.dumps(run_tool(name, tc["arguments"]))
+                print(f"[tool] {name}({(tc['arguments'] or '')[:80]}) -> "
+                      f"{tool_result[:160]}", flush=True)
                 think_msgs += [
                     {"role": "assistant", "content": "".join(reply_parts),
                      "tool_calls": [{"id": tc.get("id") or "call_1",

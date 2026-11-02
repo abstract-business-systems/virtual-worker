@@ -63,6 +63,8 @@ from pipecat.workers.runner import WorkerRunner
 
 HERE = Path(__file__).parent
 
+_whisper = None  # lazy-loaded local whisper (user-speech display)
+
 IN_RATE = 16000     # Silero VAD native rate; service resamples to 24k itself
 IN_BLOCK = 512      # Silero expects 512-sample chunks @ 16 kHz
 OUT_RATE = 44100    # typical output device rate; resampled from 24 k TTS audio
@@ -298,6 +300,9 @@ class TurnMetrics(FrameProcessor):
         self.total_cost_usd = 0.0
         self._t0 = time.perf_counter()
         self._in_secs = 0.0
+        self._utt = bytearray()      # mic audio of the current user utterance
+        self._utt_rate = 16000
+        self._recording = False      # buffering only while user speaks
 
     def _now(self) -> float:
         return time.perf_counter() - self._t0
@@ -308,13 +313,21 @@ class TurnMetrics(FrameProcessor):
             return
         if isinstance(frame, InputAudioRawFrame):
             self._in_secs += len(frame.audio) / 2 / frame.sample_rate
+            # buffer the live utterance so we can show what the agent hears
+            if self._recording and len(self._utt) < 16000 * 30 * 2:
+                self._utt += frame.audio
+                self._utt_rate = frame.sample_rate
         elif isinstance(frame, UserStartedSpeakingFrame):
             print("[vad] speech started", flush=True)
+            self._recording = True
+            self._utt = bytearray()
         elif isinstance(frame, UserStoppedSpeakingFrame):
             print("[vad] speech stopped — asking Friday...", flush=True)
+            self._recording = False
             self.t_turn_end = time.perf_counter()
             self.first_audio_latency = None
             self.text = []
+            self._show_you()
         elif isinstance(frame, TTSAudioRawFrame):
             if self.t_turn_end and self.first_audio_latency is None:
                 self.first_audio_latency = time.perf_counter() - self.t_turn_end
@@ -322,6 +335,41 @@ class TurnMetrics(FrameProcessor):
         elif isinstance(frame, ErrorFrame):
             print(f"\n[error] {frame}", flush=True)
         await self.push_frame(frame, direction)
+
+    def _show_you(self):
+        """Transcribe the buffered utterance with local whisper and print it,
+        so the user can verify what the agent is actually receiving."""
+        utt = bytes(self._utt)
+        rate = self._utt_rate
+        self._utt = bytearray()
+        if len(utt) / 2 / rate < 0.4:
+            return  # too short to be speech
+
+        def _work() -> str:
+            global _whisper
+            if _whisper is None:
+                from faster_whisper import WhisperModel
+                _whisper = WhisperModel("base", device="cpu",
+                                        compute_type="int8")
+            x = (np.frombuffer(utt, dtype=np.int16).astype(np.float32)
+                 / 32768.0)
+            if rate != 16000:
+                n = int(len(x) * 16000 / rate)
+                x = np.interp(np.linspace(0, len(x) - 1, n),
+                              np.arange(len(x)), x).astype(np.float32)
+            segs, _info = _whisper.transcribe(x, language="en",
+                                              vad_filter=True)
+            return " ".join(s.text for s in segs).strip()
+
+        async def _run():
+            try:
+                text = await asyncio.to_thread(_work)
+                if text:
+                    print(f"[you] {text}", flush=True)
+            except Exception as e:  # noqa: BLE001
+                print(f"[you] (transcription failed: {e!r})", flush=True)
+
+        asyncio.ensure_future(_run())
 
     def report_turn(self, text: str, interrupted: bool = False):
         """Called on the assistant aggregator's on_assistant_turn_stopped
@@ -392,6 +440,10 @@ async def run() -> dict:
     cfg = load_env()
     metrics = TurnMetrics()
 
+    # bash tool — runs commands in CHAT_WORKDIR (the directory run.sh was
+    # launched from, or --folder); same convention as chat_audio.py
+    WORKDIR = os.environ.get("CHAT_WORKDIR") or os.getcwd()
+
     async def get_meeting_context(params: FunctionCallParams):
         # pipecat >= 1.x: deliver results via result_callback (params.result is gone)
         await params.result_callback(
@@ -400,13 +452,41 @@ async def run() -> dict:
             )
         )
 
+    async def bash(params: FunctionCallParams):
+        cmd = str((params.arguments or {}).get("command", ""))
+        if not cmd.strip():
+            await params.result_callback(json.dumps({"returncode": -1, "output": "(empty command)"}))
+            return
+        loop = asyncio.get_running_loop()
+
+        def _run():
+            import subprocess
+            try:
+                p = subprocess.run(["bash", "-c", cmd], cwd=WORKDIR,
+                                   capture_output=True, text=True, timeout=60)
+                out = p.stdout or ""
+                if p.stderr.strip():
+                    out += ("\n[stderr] " if out else "[stderr] ") + p.stderr
+                return {"returncode": p.returncode,
+                        "output": (out.strip()[:4000] or "(no output)")}
+            except subprocess.TimeoutExpired:
+                return {"returncode": -1, "output": "(command timed out after 60s)"}
+            except Exception as e:  # noqa: BLE001
+                return {"returncode": -1, "output": f"(error: {e!r})"}
+
+        result = await loop.run_in_executor(None, _run)
+        print(f"[tool] bash({cmd[:80]}) -> {json.dumps(result)[:160]}", flush=True)
+        await params.result_callback(json.dumps(result))
+
     service = OpenAIRealtimeLLMService(
         api_key=cfg["api_key"],
         settings=OpenAIRealtimeLLMService.Settings(
             model=cfg["model"],
             system_instruction=(
                 "You are Friday, a virtual worker. Keep spoken answers brief "
-                "(2-3 sentences). Call get_meeting_context when the question "
+                "(2-3 sentences). Your working directory is " + WORKDIR + " — "
+                "use the bash tool to inspect and summarize the files there "
+                "when asked. Call get_meeting_context when the question "
                 "touches meetings, notes, or the calendar."
             ),
             session_properties=rt_events.SessionProperties(
@@ -428,11 +508,26 @@ async def run() -> dict:
                     "name": "get_meeting_context",
                     "description": "Look up recent meeting notes and calendar context for Friday.",
                     "parameters": {"type": "object", "properties": {}, "required": []},
+                }, {
+                    "type": "function",
+                    "name": "bash",
+                    "description": "Run a bash command in the working directory and "
+                                   "return its stdout/stderr. Use it to list, read, or "
+                                   "summarize files in the working directory.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "command": {"type": "string",
+                                        "description": "The bash command to run"},
+                        },
+                        "required": ["command"],
+                    },
                 }],
             ),
         ),
     )
     service.register_function("get_meeting_context", get_meeting_context)
+    service.register_function("bash", bash)
 
     pair = LLMContextAggregatorPair(
         LLMContext(),

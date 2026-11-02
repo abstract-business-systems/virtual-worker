@@ -25,6 +25,24 @@ CHAT_TEST_WAV=fixtures/question.wav ./run.sh realtime   # self-test (no mic)
 Keys in git-ignored `.env`: `OPENAI_API_KEY` (realtime),
 `OPENROUTER_API_KEY` (audio/separate).
 
+## Tools (M8 scope)
+
+All modes have two tools: `get_meeting_context` (stub) and `bash` — runs a
+bash command in the **workdir** and returns stdout/stderr (60 s timeout,
+output capped at 4 KB). The workdir is the directory `run.sh` was launched
+from, or `--folder <path>`; it is shown in the banner as `[workdir]` and in
+the system prompt, so you can ask Friday things like *"summarize the files
+in this folder"*.
+
+## Reading the terminal
+
+| Line | Meaning |
+|---|---|
+| `[you] …` | what you spoke (local Whisper transcription of the mic capture — the same audio the agent receives) |
+| `[tool] name(args) -> result` | a tool call the agent made |
+| `[stage] stt/think/tts …` | separate-mode per-stage timings |
+| `--- turn N ---` | latency + estimated cost of the turn |
+
 Companion probes:
 - Raw websocket: `../realtime-model-poc/` (the latency/behavior baseline)
 - Original cheap-path engine: `../audio-model-poc/` (audio/separate modes
