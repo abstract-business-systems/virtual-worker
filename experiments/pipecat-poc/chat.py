@@ -28,6 +28,7 @@ import numpy as np
 import sounddevice as sd
 import wave
 from loguru import logger
+logger.remove()  # kill pipecat's import-time banner before it loads
 
 from pipecat.audio.utils import calculate_audio_volume, create_stream_resampler
 from pipecat.audio.vad.vad_analyzer import VADParams
@@ -65,6 +66,7 @@ HERE = Path(__file__).parent
 from cli_ui import banner, dim, err, friday, hdr, tool, warn as _warn_c, you as _you_c
 
 _whisper = None  # lazy-loaded local whisper (user-speech display)
+WORKDIR = os.environ.get("CHAT_WORKDIR") or os.getcwd()
 
 IN_RATE = 16000     # Silero VAD native rate; service resamples to 24k itself
 IN_BLOCK = 512      # Silero expects 512-sample chunks @ 16 kHz
@@ -189,12 +191,7 @@ class MicInput(FrameProcessor):
                         MicInput._vol_err_shown = True
                         print(f"[mic] loudness calc failed: {type(e).__name__}: {e}", flush=True)
                 if self._debug:
-                    print(f"[mic] rms={rms:.0f} loudness={vol:.2f}", flush=True)
-                else:
-                    print(
-                        f"[mic] listening… level={vol:.2f} frames_pushed={MicInput.frames_pushed}",
-                        flush=True,
-                    )
+                    print(dim(f"[mic] rms={rms:.0f} loudness={vol:.2f}"), flush=True)
                 last_dbg = time.monotonic()
             if self._device_rate != IN_RATE:
                 audio = await self._resampler.resample(pcm.tobytes(), self._device_rate, IN_RATE)
@@ -304,6 +301,8 @@ class TurnMetrics(FrameProcessor):
         self._utt = bytearray()      # mic audio of the current user utterance
         self._utt_rate = 16000
         self._recording = False      # buffering only while user speaks
+        self._you_task = None        # pending "You:" transcription
+        self._debug = bool(os.getenv("CHAT_DEBUG"))
 
     def _now(self) -> float:
         return time.perf_counter() - self._t0
@@ -319,11 +318,15 @@ class TurnMetrics(FrameProcessor):
                 self._utt += frame.audio
                 self._utt_rate = frame.sample_rate
         elif isinstance(frame, UserStartedSpeakingFrame):
-            print(dim("[vad] speech started"), flush=True)
+            if self._debug:
+                print(dim("[vad] speech started"), flush=True)
+            if self._you_task is not None:   # flush an unreported utterance
+                await self.flush_you()
             self._recording = True
             self._utt = bytearray()
         elif isinstance(frame, UserStoppedSpeakingFrame):
-            print(dim("[vad] speech stopped — asking Friday..."), flush=True)
+            if self._debug:
+                print(dim("[vad] speech stopped"), flush=True)
             self._recording = False
             self.t_turn_end = time.perf_counter()
             self.first_audio_latency = None
@@ -337,9 +340,23 @@ class TurnMetrics(FrameProcessor):
             print(err(f"\n[error] {frame}"), flush=True)
         await self.push_frame(frame, direction)
 
+    async def flush_you(self):
+        """Await the pending utterance transcription and print the You line,
+        so the transcript always appears before Friday's reply."""
+        t = self._you_task
+        self._you_task = None
+        if t is None:
+            return
+        try:
+            text = (await t).strip()
+            if text:
+                print(_you_c(f"You: {text}"), flush=True)
+        except Exception as e:  # noqa: BLE001
+            print(err(f"You: (transcription failed: {e!r})"), flush=True)
+
     def _show_you(self):
-        """Transcribe the buffered utterance with local whisper and print it,
-        so the user can verify what the agent is actually receiving."""
+        """Transcribe the buffered utterance with local whisper (task stored;
+        printed by flush_you before Friday's reply)."""
         utt = bytes(self._utt)
         rate = self._utt_rate
         self._utt = bytearray()
@@ -364,13 +381,12 @@ class TurnMetrics(FrameProcessor):
 
         async def _run():
             try:
-                text = await asyncio.to_thread(_work)
-                if text:
-                    print(_you_c(f"[you] {text}"), flush=True)
+                return await asyncio.to_thread(_work)
             except Exception as e:  # noqa: BLE001
-                print(err(f"[you] (transcription failed: {e!r})"), flush=True)
+                print(err(f"You: (transcription failed: {e!r})"), flush=True)
+                return ""
 
-        asyncio.ensure_future(_run())
+        self._you_task = asyncio.ensure_future(_run())
 
     def report_turn(self, text: str, interrupted: bool = False):
         """Called on the assistant aggregator's on_assistant_turn_stopped
@@ -379,7 +395,10 @@ class TurnMetrics(FrameProcessor):
         reliable per-turn hook downstream — the old frame-based report
         never fired, which is why every saved session had turns: 0.)"""
         if interrupted:
-            print(_warn_c("[turn] interrupted — no report"), flush=True)
+            print(dim("— interrupted"), flush=True)
+            self._in_secs = 0.0
+            self.audio_secs_out = 0.0
+            self.t_turn_end = None
             return
         self.turns += 1
         in_tok = self._in_secs * TOK_PER_SEC_IN
@@ -387,13 +406,11 @@ class TurnMetrics(FrameProcessor):
         turn_cost = (in_tok * AUDIO_IN_USD_PER_M + out_tok * AUDIO_OUT_USD_PER_M) / 1e6
         self.total_cost_usd += turn_cost
         reply = (text or '').strip()
-        print(
-            f"\n{hdr(f'--- turn {self.turns} --- ')}"
-            f"{hdr(f'latency {self.first_audio_latency or 0:.2f}s | ')}"
-            f"{hdr(f'cost ~${turn_cost:.4f} | total ~${self.total_cost_usd:.4f}')}"
-            f"\n{friday('Friday: ' + reply)}\n> ",
-            flush=True,
-        )
+        print(friday(f"Friday: {reply}"), flush=True)
+        print(dim(f"── turn {self.turns} · first audio "
+                  f"{self.first_audio_latency or 0:.2f}s · "
+                  f"~${turn_cost:.4f} (total ~${self.total_cost_usd:.4f})"),
+              flush=True)
         self._in_secs = 0.0
         self.audio_secs_out = 0.0
         self.t_turn_end = None
@@ -441,10 +458,6 @@ class SDTransport(BaseTransport):
 async def run() -> dict:
     cfg = load_env()
     metrics = TurnMetrics()
-
-    # bash tool — runs commands in CHAT_WORKDIR (the directory run.sh was
-    # launched from, or --folder); same convention as chat_audio.py
-    WORKDIR = os.environ.get("CHAT_WORKDIR") or os.getcwd()
 
     async def get_meeting_context(params: FunctionCallParams):
         # pipecat >= 1.x: deliver results via result_callback (params.result is gone)
@@ -561,6 +574,7 @@ async def run() -> dict:
     # downstream frame hook can see them (turns: 0 bug in every old session).
     @pair.assistant().event_handler("on_assistant_turn_stopped")
     async def _on_assistant_turn_stopped(aggregator, msg):
+        await metrics.flush_you()
         metrics.report_turn(msg.content, interrupted=msg.interrupted)
     worker = PipelineWorker(
         Pipeline(parts),
@@ -578,7 +592,7 @@ async def run() -> dict:
     import signal as _signal
 
     def _on_sigint():
-        print("\n[closing] goodbye", flush=True)
+        print(dim("— closing"), flush=True)
         asyncio.create_task(runner.cancel())
         loop.call_later(3.0, lambda: os._exit(0))
 
@@ -593,11 +607,8 @@ async def run() -> dict:
 
     asyncio.create_task(_install_signals())
 
-    print(
-        "Friday listening — speak, then pause. Ctrl+C to quit.\n"
-        "(Headphones recommended: no echo cancellation.)\n> ",
-        flush=True,
-    )
+    print(banner("Friday (realtime) — speak, then pause. Ctrl+C to quit."))
+    print(dim(f"workdir: {WORKDIR} · tools: bash, get_meeting_context"), flush=True)
     try:
         await run_task
     except asyncio.CancelledError:
@@ -629,7 +640,9 @@ async def main():
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out = HERE / "results" / f"chat-{stamp}.json"
     out.write_text(json.dumps(result, indent=2))
-    print(f"\nsession summary: {json.dumps(result)} -> {out}")
+    print(dim(f"session: {result.get('turns', 0)} turns · "
+              f"~${result.get('total_cost_usd', 0):.4f} · "
+              f"{result.get('wall_total_s', 0)}s → {out.name}"), flush=True)
 
 
 if __name__ == "__main__":

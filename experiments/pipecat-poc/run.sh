@@ -22,16 +22,36 @@
 set -euo pipefail
 INVOKED_FROM="$PWD"   # default bash-tool workdir: where the user launched from
 cd "$(dirname "$0")"
-MODE=realtime
+
+show_usage() {
+  cat <<'EOF'
+Friday — three conversation modes (pipecat POC):
+
+  realtime   one OpenAI realtime model — listens, thinks, speaks (fastest)
+  audio      one audio-model call per turn via OpenRouter (cheapest)
+  separate   local Whisper STT → think model → voice model (best answers)
+
+Usage: ./run.sh <mode> [-d] [--model <name>] [--folder <path>]
+  -d             debug: mic levels, VAD events, api errors
+  --model <n>    override the voice/realtime model for this run
+  --folder <p>   working directory for the bash tool (default: launch dir)
+EOF
+}
+
+MODE=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     realtime|audio|separate) MODE="$1"; shift ;;
     -d|--debug) export CHAT_DEBUG=1 PIPECAT_DEBUG=1; shift ;;
     --model) export CHAT_MODEL="$2"; shift 2 ;;
     --folder) export CHAT_WORKDIR="$2"; shift 2 ;;
-    *) shift ;;
+    *) echo "unknown option or mode: $1" >&2; show_usage; exit 1 ;;
   esac
 done
+if [[ -z "$MODE" ]]; then
+  show_usage
+  exit 0
+fi
 export CHAT_WORKDIR="${CHAT_WORKDIR:-$INVOKED_FROM}"
 # keys live in .env (git-ignored): OPENAI_API_KEY (realtime) and
 # OPENROUTER_API_KEY (audio/separate), like the other POCs

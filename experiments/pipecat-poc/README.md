@@ -38,10 +38,15 @@ in this folder"*.
 
 | Line | Meaning |
 |---|---|
-| `[you] …` | what you spoke (local Whisper transcription of the mic capture — the same audio the agent receives) |
-| `[tool] name(args) -> result` | a tool call the agent made |
-| `[stage] stt/think/tts …` | separate-mode per-stage timings |
-| `--- turn N ---` | latency + estimated cost of the turn |
+| `You: …` (cyan) | what you spoke (local Whisper transcription of the mic capture — the same audio the agent receives) |
+| `Friday: …` (green) | the agent's spoken reply |
+| `[tool] name(args) -> result` (magenta) | a tool call the agent made |
+| `── turn N · first audio Xs · ~$cost` (dim) | per-turn latency and estimated cost; separate mode adds `stt/think/tts` stage times |
+| `[warn]` / `[error]` | yellow / red problems |
+
+Mic/VAD chatter, frame counts, and the pipecat banner are suppressed —
+run with `-d` to see them. `./run.sh` with no arguments prints the mode
+menu; unknown modes are rejected instead of silently falling back.
 
 Companion probes:
 - Raw websocket: `../realtime-model-poc/` (the latency/behavior baseline)

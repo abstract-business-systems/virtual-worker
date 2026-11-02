@@ -173,7 +173,8 @@ def whisper_transcribe(pcm24: bytes, quiet: bool = False) -> str:
                                           vad_filter=True)
     text = " ".join(s.text for s in segments).strip()
     if not quiet:
-        print(stage(f"[stt] whisper ready {time.perf_counter() - t0:.2f}s (incl. load)"), flush=True)
+        if DEBUG:
+            print(stage(f"[stt] whisper ready {time.perf_counter() - t0:.2f}s (incl. load)"), flush=True)
     return text
 
 
@@ -405,11 +406,9 @@ async def run():
     mode_desc = (f"{MODEL} single-call" if not THINK_MODEL else
                  f"{STT_CFG or MODEL} -> {THINK_MODEL} -> {MODEL}")
 
-    print(banner(f"Friday [{PRESET} mode: {mode_desc}] listening — speak, "
-                 f"then pause. Ctrl+C to quit.") + "\n"
-          + dim(f"[device] {dev['name']} @ {rate} Hz | [workdir] {WORKDIR} | "
-                f"OPENROUTER_API_KEY {'set' if KEY else 'MISSING'}") + "\n> ",
-          flush=True)
+    print(banner(f"Friday ({PRESET}) — speak, then pause. Ctrl+C to quit."))
+    print(dim(f"workdir: {WORKDIR} · tools: bash, get_meeting_context · "
+              f"key {'set' if KEY else 'MISSING'}"), flush=True)
 
     if test_wav:
         async def feeder():
@@ -423,7 +422,7 @@ async def run():
             for b in [up[i:i+chunk] for i in range(0, len(up), chunk)] + [silence]:
                 await mic_q.put(b)
                 await asyncio.sleep(0.1)
-            print("[test] utterance fed", flush=True)
+            print(dim("[test] utterance fed"), flush=True)
         asyncio.create_task(feeder())
 
     state = "quiet"
@@ -453,19 +452,12 @@ async def run():
 
         if not THINK_MODEL:
             # ---- audio mode: voice model hears, thinks, speaks ----
-            print(dim(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — asking {MODEL}..."), flush=True)
-            # show what the agent is getting (local whisper, display only,
-            # runs while the request is already in flight)
+            if DEBUG:
+                print(dim(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — asking {MODEL}..."), flush=True)
+            # what the agent is getting: local whisper runs while the
+            # request is in flight; printed with the turn report below
             disp = asyncio.create_task(
                 asyncio.to_thread(whisper_transcribe, utt, True))
-
-            def _show_you(t):
-                if t.exception():
-                    print(err(f"[you] (transcribe failed: {t.exception()!r})"), flush=True)
-                else:
-                    print(_you_c(f"[you] {t.result().strip()}"), flush=True)
-
-            disp.add_done_callback(_show_you)
             audio_user_msg = {"role": "user", "content": [
                 {"type": "text", "text": "Answer my spoken question."},
                 {"type": "input_audio",
@@ -500,7 +492,8 @@ async def run():
             user_text = "Answer my spoken question."
         else:
             # ---- separate mode: STT -> think -> TTS ----
-            print(dim(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — separate pipeline {STT_CFG or MODEL} -> {THINK_MODEL} -> {MODEL}..."), flush=True)
+            if DEBUG:
+                print(dim(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — separate pipeline"), flush=True)
 
             # 1) STT: local whisper or the voice model transcribes
             t0 = time.perf_counter()
@@ -571,7 +564,7 @@ async def run():
             if u and u.get("cost"):
                 usage_total["cost"] = usage_total.get("cost", 0) + u["cost"]
             print(stage(f"[stage] tts {t_tts:.2f}s"), flush=True)
-            stages = (f" | stt {t_stt:.2f}s think {t_think:.2f}s "
+            stages = (f"stt {t_stt:.2f}s think {t_think:.2f}s "
                       f"tts {t_tts:.2f}s")
             transcript = reply
 
@@ -591,11 +584,17 @@ async def run():
         cost = (usage_total or {}).get("cost") or 0
         total_cost += cost
         lat = first_audio.get("t") or 0.0
-        stages_c = f" | {stages.strip(' |')}" if stages else ""
-        print(
-            f"\n{hdr(f'--- turn {turns} --- latency {lat:.2f}s{stages_c} | ')}" 
-            f"{hdr(f'cost ~${cost:.4f} | total ~${total_cost:.4f}')}"
-            f"\n{friday(f'Friday: {transcript}')}\n> ", flush=True)
+        stages_c = f" · {stages.strip(' |')}" if stages else ""
+        if not THINK_MODEL:
+            try:
+                yt = (await disp).strip()
+            except Exception:
+                yt = ""
+            if yt:
+                print(_you_c(f"You: {yt}"), flush=True)
+        print(friday(f"Friday: {transcript}"), flush=True)
+        print(dim(f"── turn {turns} · first audio {lat:.2f}s{stages_c} · "
+                  f"~${cost:.4f} (total ~${total_cost:.4f})"), flush=True)
 
     try:
         while True:
@@ -637,7 +636,8 @@ async def run():
                     vol = calculate_audio_volume(bytes(lvl_buf), 24000)
                 except Exception:
                     vol = -1
-                print(dim(f"[mic] listening… level={vol:.2f}"), flush=True)
+                if DEBUG:
+                    print(dim(f"[mic] level={vol:.2f}"), flush=True)
                 if lvl_buf:
                     a = np.frombuffer(bytes(lvl_buf), np.int16).astype(np.float64)
                     rms = float(np.sqrt(np.mean(a ** 2)))
@@ -664,7 +664,8 @@ async def run():
                     state = "recording"
                     utter24.clear()
                     utt_start = time.monotonic()
-                    print("[vad] speech started", flush=True)
+                    if DEBUG:
+                        print(dim("[vad] speech started"), flush=True)
                 utter24 += raw24
                 quiet_since = None
             elif st == VADState.QUIET and state == "recording":
