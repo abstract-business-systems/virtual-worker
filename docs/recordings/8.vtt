@@ -1,0 +1,767 @@
+WEBVTT
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/5-0
+00:00:05.655 --> 00:00:06.455
+<v Sarooparam Chenaram Darji>We can start.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/7-0
+00:00:08.375 --> 00:00:12.387
+<v Viswanath Chidambaram>Okay,
+so like I believe 5 cab supports all 3</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/7-1
+00:00:12.387 --> 00:00:15.775
+<v Viswanath Chidambaram>modes on the rate. Give me one minute.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/6-0
+00:00:13.255 --> 00:00:13.575
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/10-0
+00:00:17.655 --> 00:00:23.268
+<v Sarooparam Chenaram Darji>Live model, audio model,
+and then STDDTS thinking separately,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/8-0
+00:00:18.255 --> 00:00:18.895
+<v Viswanath Chidambaram>One is.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/10-1
+00:00:23.268 --> 00:00:24.535
+<v Sarooparam Chenaram Darji>all 3 options.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/11-0
+00:00:23.615 --> 00:00:25.455
+<v Viswanath Chidambaram>Yeah, so.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/12-0
+00:00:29.295 --> 00:00:30.655
+<v Viswanath Chidambaram>Does it support 2 calls too?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/13-0
+00:00:31.975 --> 00:00:32.375
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/15-0
+00:00:34.095 --> 00:00:36.680
+<v Viswanath Chidambaram>Okay, so look,
+what I want you to do is look,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/15-1
+00:00:36.680 --> 00:00:40.895
+<v Viswanath Chidambaram>I want you to build a system, okay,
+which can call as a local branch runs.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/16-0
+00:00:41.735 --> 00:00:42.135
+<v Sarooparam Chenaram Darji>No.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/17-0
+00:00:42.575 --> 00:00:45.414
+<v Viswanath Chidambaram>Okay,
+so it should be able to let's say like</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/17-1
+00:00:45.414 --> 00:00:47.055
+<v Viswanath Chidambaram>summary section documents.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/18-0
+00:00:47.975 --> 00:00:48.215
+<v Sarooparam Chenaram Darji>Bye.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/19-0
+00:00:48.655 --> 00:00:51.455
+<v Viswanath Chidambaram>Okay, in one folder,
+whatever folder just started.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/21-0
+00:00:53.215 --> 00:00:57.373
+<v Viswanath Chidambaram>Okay, if you ask about some questions,
+how many files it should be able to tell</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/21-1
+00:00:57.373 --> 00:00:59.711
+<v Viswanath Chidambaram>you,
+give me a summary of every this folder.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/21-2
+00:00:59.711 --> 00:01:03.973
+<v Viswanath Chidambaram>It should be able to like gather all the
+files and then give you a summary. Okay,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/21-3
+00:01:03.973 --> 00:01:07.663
+<v Viswanath Chidambaram>this is what it has to do. Okay,
+basically you will basically you will</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/21-4
+00:01:07.663 --> 00:01:10.989
+<v Viswanath Chidambaram>actually talk to it and it will talk to
+talk back to you. Okay,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/20-0
+00:01:09.095 --> 00:01:09.415
+<v Sarooparam Chenaram Darji>No.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/21-5
+00:01:10.989 --> 00:01:14.055
+<v Viswanath Chidambaram>and actually this is the actually what is
+it working part.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/22-0
+00:01:14.815 --> 00:01:16.015
+<v Viswanath Chidambaram>OK, execution part.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/23-0
+00:01:15.175 --> 00:01:17.975
+<v Sarooparam Chenaram Darji>This is with the pipe gate or without
+pipe gate?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/27-0
+00:01:19.775 --> 00:01:23.125
+<v Viswanath Chidambaram>5 cat I believe will be easier without 5
+cat. I am not sure. Okay,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/24-0
+00:01:21.975 --> 00:01:22.375
+<v Sarooparam Chenaram Darji>Thank you.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/27-1
+00:01:23.125 --> 00:01:26.575
+<v Viswanath Chidambaram>if you think without 5 cat it will be
+easier, go with it, no issues.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/25-0
+00:01:24.135 --> 00:01:24.535
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/26-0
+00:01:27.015 --> 00:01:27.415
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/29-0
+00:01:29.015 --> 00:01:33.175
+<v Sarooparam Chenaram Darji>And then we have to come up with our own
+conversation layer and type.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/28-0
+00:01:29.775 --> 00:01:31.535
+<v Viswanath Chidambaram>Is it pivot? Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/32-0
+00:01:33.215 --> 00:01:36.378
+<v Viswanath Chidambaram>Like it is so like,
+I am not saying you shouldn't okay,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/32-1
+00:01:36.378 --> 00:01:40.728
+<v Viswanath Chidambaram>I am simply saying if it is easier with
+5K, go with 5K, not a problem. Okay,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/30-0
+00:01:37.495 --> 00:01:37.815
+<v Sarooparam Chenaram Darji>One.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/32-2
+00:01:40.728 --> 00:01:45.247
+<v Viswanath Chidambaram>with the so of now actually things are
+actually working fine at least real time</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/32-3
+00:01:45.247 --> 00:01:49.823
+<v Viswanath Chidambaram>only you are able to integrate, okay.
+But I am not entirely sure about the cost,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/32-4
+00:01:49.823 --> 00:01:52.478
+<v Viswanath Chidambaram>okay,
+and the user experience because actually</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/31-0
+00:01:51.175 --> 00:01:51.575
+<v Sarooparam Chenaram Darji>No.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/32-5
+00:01:52.478 --> 00:01:55.415
+<v Viswanath Chidambaram>all the 3 things do not actually work the
+same way.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/34-0
+00:01:56.255 --> 00:02:02.289
+<v Viswanath Chidambaram>Presently they do not have the same
+capabilities.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/33-0
+00:01:58.935 --> 00:01:59.255
+<v Sarooparam Chenaram Darji>No.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/34-1
+00:02:02.289 --> 00:02:10.495
+<v Viswanath Chidambaram>So what is it like this pipe cat thing
+might actually like use all.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/35-0
+00:02:12.695 --> 00:02:14.135
+<v Sarooparam Chenaram Darji>Your voice is cutting.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/36-0
+00:02:13.775 --> 00:02:14.255
+<v Viswanath Chidambaram>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/37-0
+00:02:15.575 --> 00:02:16.935
+<v Sarooparam Chenaram Darji>All the approaches.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/38-0
+00:02:15.735 --> 00:02:19.215
+<v Viswanath Chidambaram>So, like a pipe cap,
+yeah pipe with the same behaviour.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/39-0
+00:02:19.895 --> 00:02:20.375
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/40-0
+00:02:21.695 --> 00:02:24.185
+<v Viswanath Chidambaram>OK,
+essentially only the way that we process</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/40-1
+00:02:24.185 --> 00:02:27.615
+<v Viswanath Chidambaram>actually the audio input and audio output
+difference between.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/41-0
+00:02:30.735 --> 00:02:33.135
+<v Viswanath Chidambaram>So between these 3 only the audio input
+and the.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/42-0
+00:02:31.335 --> 00:02:34.375
+<v Sarooparam Chenaram Darji>What after between your voice got cut off?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/44-0
+00:02:34.255 --> 00:02:41.695
+<v Viswanath Chidambaram>So, my Bluetooth is out of share,
+so it is beeping at the time if you.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/43-0
+00:02:40.935 --> 00:02:41.255
+<v Sarooparam Chenaram Darji>No.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/45-0
+00:02:44.175 --> 00:02:48.731
+<v Viswanath Chidambaram>Each of the way that audio is processed,
+okay, voice in and voice out,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/45-1
+00:02:48.731 --> 00:02:50.335
+<v Viswanath Chidambaram>the rest can be the same.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/47-0
+00:02:52.215 --> 00:02:56.051
+<v Sarooparam Chenaram Darji>What we swap for?
+I only heard from the swap your parent</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/46-0
+00:02:52.495 --> 00:02:53.615
+<v Viswanath Chidambaram>Swarup and Abu.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/47-1
+00:02:56.051 --> 00:02:56.455
+<v Sarooparam Chenaram Darji>order.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/48-0
+00:03:00.335 --> 00:03:02.175
+<v Viswanath Chidambaram>Okay, so what I told was...</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/49-0
+00:03:06.695 --> 00:03:09.735
+<v Sarooparam Chenaram Darji>After you say what I told was,
+you are not audible.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/52-0
+00:03:12.335 --> 00:03:16.095
+<v Viswanath Chidambaram>Sorry man, my bad.
+So I am connected to this one. What is it?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/52-1
+00:03:16.095 --> 00:03:19.672
+<v Viswanath Chidambaram>The machine? Okay,
+I seem that I am connected to my mobile</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/50-0
+00:03:18.615 --> 00:03:19.015
+<v Sarooparam Chenaram Darji>No.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/52-2
+00:03:19.672 --> 00:03:24.220
+<v Viswanath Chidambaram>and I start walking away from the machine.
+That's why I wasn't talking to.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/52-3
+00:03:24.220 --> 00:03:27.495
+<v Viswanath Chidambaram>Now I should be giving the Madhya Dandi
+Madhya Dandi.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/51-0
+00:03:25.415 --> 00:03:25.815
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/54-0
+00:03:39.855 --> 00:03:40.575
+<v Viswanath Chidambaram>Can you?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/55-0
+00:03:41.255 --> 00:03:41.535
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/56-0
+00:03:43.055 --> 00:03:49.855
+<v Viswanath Chidambaram>Give me one minute. Yeah,
+now the Tamil thing that might have other.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/57-0
+00:03:50.935 --> 00:03:53.975
+<v Sarooparam Chenaram Darji>It is recording.
+Should I stop and start a fresh recording?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/60-0
+00:03:53.615 --> 00:03:58.519
+<v Viswanath Chidambaram>No issues, no issues, no issues.
+The Tamil party is not related to the</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/60-1
+00:03:58.519 --> 00:04:01.834
+<v Viswanath Chidambaram>current conversation,
+so the model can skip it.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/58-0
+00:04:00.935 --> 00:04:02.975
+<v Sarooparam Chenaram Darji>Yeah, it will add to.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/60-2
+00:04:01.834 --> 00:04:06.392
+<v Viswanath Chidambaram>I am just saying that so the moral in
+this country is good. Okay,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/59-0
+00:04:05.015 --> 00:04:08.535
+<v Sarooparam Chenaram Darji>It knows like earlier context,
+I will only get whatever is needed.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/60-3
+00:04:06.392 --> 00:04:11.848
+<v Viswanath Chidambaram>lets come back. Yeah, I understand,
+understood, understood. So lets come back.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/60-4
+00:04:11.848 --> 00:04:12.055
+<v Viswanath Chidambaram>So.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/63-0
+00:04:12.575 --> 00:04:15.867
+<v Viswanath Chidambaram>If it pipe cat,
+I believe you could have actually lets</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/63-1
+00:04:15.867 --> 00:04:20.416
+<v Viswanath Chidambaram>say tooling layer and a conversation
+layer, OK. And the conversation layer,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/61-0
+00:04:18.615 --> 00:04:19.015
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/63-2
+00:04:20.416 --> 00:04:24.247
+<v Viswanath Chidambaram>you can actually vary these 3 things,
+the audio model approach,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/62-0
+00:04:23.015 --> 00:04:23.255
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/63-3
+00:04:24.247 --> 00:04:28.497
+<v Viswanath Chidambaram>the real time model approach,
+as well as the HTTTS model approach. OK,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/63-4
+00:04:28.497 --> 00:04:29.455
+<v Viswanath Chidambaram>once it is done.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/64-0
+00:04:32.735 --> 00:04:36.786
+<v Viswanath Chidambaram>Once this is done,
+let's measure the cost per each of the</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/66-0
+00:04:35.975 --> 00:04:40.014
+<v Sarooparam Chenaram Darji>So basically,
+single single experiment BUC with the</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/64-1
+00:04:36.786 --> 00:04:37.135
+<v Viswanath Chidambaram>push.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/66-1
+00:04:40.014 --> 00:04:43.897
+<v Sarooparam Chenaram Darji>pipe cut,
+including all 3 approaches which can be</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/65-0
+00:04:41.135 --> 00:04:43.375
+<v Viswanath Chidambaram>You are right, yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/66-2
+00:04:43.897 --> 00:04:46.615
+<v Sarooparam Chenaram Darji>called with just a single argument.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/67-0
+00:04:47.055 --> 00:04:49.212
+<v Viswanath Chidambaram>You are right, as single argument,
+can't be raised.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/67-1
+00:04:49.212 --> 00:04:50.415
+<v Viswanath Chidambaram>Indore will sentence similar.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/68-0
+00:04:49.655 --> 00:04:56.535
+<v Sarooparam Chenaram Darji>And we need it to be able to call bash or
+something like so it can like.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/70-0
+00:04:56.655 --> 00:04:59.128
+<v Viswanath Chidambaram>Yeah, it can.
+It should be able to summarize some</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/69-0
+00:04:57.855 --> 00:04:58.535
+<v Sarooparam Chenaram Darji>School calling.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/70-1
+00:04:59.128 --> 00:05:03.134
+<v Viswanath Chidambaram>particular it should be able to summarize
+a particular set of values in a folder</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/70-2
+00:05:03.134 --> 00:05:06.597
+<v Viswanath Chidambaram>and this folder can be like a temporary
+folder in the browser itself,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/70-3
+00:05:06.597 --> 00:05:08.575
+<v Viswanath Chidambaram>which you do not, which you do not know.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/72-0
+00:05:10.335 --> 00:05:13.590
+<v Viswanath Chidambaram>Okay,
+ideally actually it should be any folder</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/72-1
+00:05:13.590 --> 00:05:17.399
+<v Viswanath Chidambaram>in the machine. So just go there,
+spin up the command,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/72-2
+00:05:17.399 --> 00:05:19.615
+<v Viswanath Chidambaram>the CWD becomes the source data.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/71-0
+00:05:20.375 --> 00:05:20.695
+<v Sarooparam Chenaram Darji>One.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/73-0
+00:05:21.215 --> 00:05:23.584
+<v Viswanath Chidambaram>Okay,
+not sure actually what kind of complexity</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/73-1
+00:05:23.584 --> 00:05:26.201
+<v Viswanath Chidambaram>that brings in.
+So even if it is a sub folder of the</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/73-2
+00:05:26.201 --> 00:05:29.557
+<v Viswanath Chidambaram>project, I do not care. Okay,
+the idea is like the goal is actually</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/73-3
+00:05:29.557 --> 00:05:30.495
+<v Viswanath Chidambaram>there are 2 things.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/78-0
+00:05:33.855 --> 00:05:38.213
+<v Viswanath Chidambaram>Or the goal is actually 2 things or
+rather actually they say lets say like</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/78-1
+00:05:38.213 --> 00:05:42.919
+<v Viswanath Chidambaram>lets say 2 sets of the same thing, okay?
+One is actually understand the cost and</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/74-0
+00:05:40.815 --> 00:05:41.255
+<v Sarooparam Chenaram Darji>From.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/78-2
+00:05:42.919 --> 00:05:46.463
+<v Viswanath Chidambaram>understand the experience okay and
+understand the tradeoffs.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/75-0
+00:05:45.455 --> 00:05:45.735
+<v Sarooparam Chenaram Darji>Bye.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/78-3
+00:05:46.463 --> 00:05:50.821
+<v Viswanath Chidambaram>If you actually pay less, what do we get?
+If you pay more, what do we get?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/78-4
+00:05:50.821 --> 00:05:54.946
+<v Viswanath Chidambaram>That's actually give me one.
+That's actually something that we have to</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/76-0
+00:05:51.895 --> 00:05:52.295
+<v Sarooparam Chenaram Darji>Wow.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/78-5
+00:05:54.946 --> 00:05:55.295
+<v Viswanath Chidambaram>check.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/79-0
+00:05:56.095 --> 00:06:01.175
+<v Viswanath Chidambaram>For that, actually if you can get a BOC,
+we'll actually check that and then we...</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/77-0
+00:05:56.135 --> 00:05:56.415
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/80-0
+00:05:59.495 --> 00:06:05.975
+<v Sarooparam Chenaram Darji>Should I just update the existing pipe
+cut POC to be able to is the yeah?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/84-0
+00:06:03.135 --> 00:06:06.878
+<v Viswanath Chidambaram>It doesn't matter as long as it works,
+as long as it works.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/84-1
+00:06:06.878 --> 00:06:10.808
+<v Viswanath Chidambaram>And whatever is the easiest way, go ahead,
+visit, throw a POC.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/81-0
+00:06:07.255 --> 00:06:07.735
+<v Sarooparam Chenaram Darji>Thank you.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/84-2
+00:06:10.808 --> 00:06:16.049
+<v Viswanath Chidambaram>It doesn't have to be like a super spooky
+mainly implementation you can actually do</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/82-0
+00:06:14.695 --> 00:06:15.015
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/84-3
+00:06:16.049 --> 00:06:16.735
+<v Viswanath Chidambaram>separately.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/83-0
+00:06:17.335 --> 00:06:17.815
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/86-0
+00:06:18.815 --> 00:06:22.446
+<v Viswanath Chidambaram>Once this is done,
+we will actually figure out how to</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/86-1
+00:06:22.446 --> 00:06:26.480
+<v Viswanath Chidambaram>actually integrate,
+lets say like basically integrate 5 cut</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/86-2
+00:06:26.480 --> 00:06:31.455
+<v Viswanath Chidambaram>with the thing that we were building okay
+or actually even with the wood.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/85-0
+00:06:27.975 --> 00:06:28.295
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/87-0
+00:06:34.135 --> 00:06:35.015
+<v Sarooparam Chenaram Darji>You will.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/88-0
+00:06:34.655 --> 00:06:37.495
+<v Viswanath Chidambaram>Or even the original universal is back
+end.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/89-0
+00:06:37.735 --> 00:06:38.695
+<v Sarooparam Chenaram Darji>Okay, yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/90-0
+00:06:39.455 --> 00:06:43.972
+<v Viswanath Chidambaram>Okay, if that can, that are steps 2,
+also the that are next steps. As of now,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/90-1
+00:06:43.972 --> 00:06:47.215
+<v Viswanath Chidambaram>the idea is to understand what do we get
+for the money.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/91-0
+00:06:48.055 --> 00:06:48.375
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/94-0
+00:06:49.855 --> 00:06:52.972
+<v Viswanath Chidambaram>OK, so just like a estimate for it,
+if possible,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/94-1
+00:06:52.972 --> 00:06:58.125
+<v Viswanath Chidambaram>actually give me some idea about actually
+like what will be delivered in 4 hours</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/94-2
+00:06:58.125 --> 00:07:03.342
+<v Viswanath Chidambaram>and how many 4 hours you might need after
+actually thinking through or after even</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/92-0
+00:07:03.095 --> 00:07:03.455
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/94-3
+00:07:03.342 --> 00:07:06.841
+<v Viswanath Chidambaram>chatting with it.
+It might be like up for another 3040</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/93-0
+00:07:06.255 --> 00:07:06.535
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/94-4
+00:07:06.841 --> 00:07:08.495
+<v Viswanath Chidambaram>minutes or more than that.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/96-0
+00:07:09.375 --> 00:07:16.087
+<v Viswanath Chidambaram>I should be available around 637 hour
+after that. Okay, coming back,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/95-0
+00:07:12.695 --> 00:07:13.215
+<v Sarooparam Chenaram Darji>Yeah, okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/96-1
+00:07:16.087 --> 00:07:17.935
+<v Viswanath Chidambaram>give me one minute.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/97-0
+00:07:20.095 --> 00:07:23.535
+<v Viswanath Chidambaram>3000 yrdkar Ghusaragal.
+Jet support from Mathura.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/98-0
+00:07:25.135 --> 00:07:26.415
+<v Viswanath Chidambaram>Sir, could you put me a note?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/150-0
+00:10:52.855 --> 00:10:54.055
+<v Viswanath Chidambaram>Is there a model?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/151-0
+00:10:56.695 --> 00:10:57.735
+<v Sarooparam Chenaram Darji>Yeah, you are.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/152-0
+00:10:58.615 --> 00:10:59.575
+<v Viswanath Chidambaram>What were we discussing?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/154-0
+00:11:01.095 --> 00:11:09.095
+<v Sarooparam Chenaram Darji>We are discussing about the PUC scope.
+You said the plan for it and after that.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/155-0
+00:11:11.495 --> 00:11:13.335
+<v Sarooparam Chenaram Darji>Basically, I estimate for entry.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/156-0
+00:11:18.135 --> 00:11:18.855
+<v Sarooparam Chenaram Darji>Nothing else.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/157-0
+00:11:18.535 --> 00:11:21.959
+<v Viswanath Chidambaram>Okay, so the idea is to look here.
+The idea is to understand actually what</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/157-1
+00:11:21.959 --> 00:11:23.055
+<v Viswanath Chidambaram>do we get for what cost?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/158-0
+00:11:24.695 --> 00:11:25.015
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/160-0
+00:11:25.255 --> 00:11:30.389
+<v Viswanath Chidambaram>You should unblock it and if you have
+blocked actually to work on the this one,</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/159-0
+00:11:27.015 --> 00:11:27.495
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/160-1
+00:11:30.389 --> 00:11:31.095
+<v Viswanath Chidambaram>what is it?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/161-0
+00:11:33.255 --> 00:11:34.055
+<v Sarooparam Chenaram Darji>Yeah, so much.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/162-0
+00:11:33.815 --> 00:11:36.455
+<v Viswanath Chidambaram>Like for the if it is blog.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/165-0
+00:11:39.735 --> 00:11:43.815
+<v Viswanath Chidambaram>Actually,
+you can actually take this server.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/164-0
+00:11:42.775 --> 00:11:43.175
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/166-0
+00:11:44.615 --> 00:11:45.015
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/167-0
+00:11:46.295 --> 00:11:47.015
+<v Viswanath Chidambaram>Anything else, ma?</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/168-0
+00:11:46.415 --> 00:11:46.775
+<v Sarooparam Chenaram Darji>Got.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/169-0
+00:11:49.335 --> 00:11:49.975
+<v Viswanath Chidambaram>C number.</v>
+
+19254aee-23e8-4b08-a721-b0c59e6b5972/171-0
+00:11:50.615 --> 00:11:50.935
+<v Sarooparam Chenaram Darji>Right.</v>
