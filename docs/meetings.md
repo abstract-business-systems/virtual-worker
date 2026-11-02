@@ -38,11 +38,15 @@ When a new recording `N.vtt` is added:
 | M5 | [`5.vtt`](recordings/5.vtt) | 2026-10-29* | 21m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Perceived delay as the primary goal; conversation states, background work, interruption, and content separation | [`next-steps.md`](next-steps.md) |
 | M6 | [`6.vtt`](recordings/6.vtt) | 2026-10-29* | 9m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Follow-up 1:1: voice-model cost research, conversation-layer plan alignment, and a Pipecat demo experiment | [`next-steps.md`](next-steps.md), [`conversation-layer-plan.md`](conversation-layer-plan.md) |
 | M7 | [`7.vtt`](recordings/7.vtt) | 2026-10-30* | 2m† | Viswanath Chidambaram; Sarooparam Chenaram Darji | POC scope: Pipecat and the OpenAI audio model — quality, cost, conversation memory, two-hour timebox | [`next-steps.md`](next-steps.md) |
+| M8 | [`8.vtt`](recordings/8.vtt) | 2026-11-02‡ | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | POC results review, layering (conversation vs tooling), next scope: a talking document-summaries agent with shell access, time estimate first | [`next-steps.md`](next-steps.md), [`architecture-discussion.md`](architecture-discussion.md) |
 
 *The transcripts do not state their recording dates; 2026-10-28 is the M3
 recording file's added date, 2026-10-29 is the M4–M6 file-added date, and
 2026-10-30 is the M7 file-added date.
-†M7's recording started late; earlier discussion is not captured.*
+†M7's recording started late; earlier discussion is not captured.
+‡2026-11-02 is the M8 recording file's added date. M8's audio dropped
+repeatedly on both sides (Bluetooth issues); the transcript is fragmentary
+and the summary is best-effort.*
 
 ## 3. Meeting summaries
 
@@ -164,12 +168,46 @@ A short 1:1 confirming the scope of the Pipecat / OpenAI audio-model POC:
 - Note: the recording started late, so an earlier part of the discussion is
   not captured.
 
+### M8 — POC results review and next scope (`8.vtt`)
+
+Review of the three conversation-mode POCs and the next scope. *Both
+sides' audio cut repeatedly; this summary is best-effort from a
+fragmentary transcript.*
+
+- The three modes (live/realtime model, audio model, STT+TTS with separate
+  thinking) were reviewed; Viswanath noted the approaches differ mainly in
+  how audio input/output is processed — the rest can stay the same.
+- On Pipecat vs hand-built: use whichever is easiest as long as it works —
+  it does not have to be polished; updating the existing Pipecat POC is fine.
+- Layering: the conversation layer and the tooling layer can vary
+  independently; the realtime-model approach is one swappable option.
+  Conversation memory should carry earlier context across the session.
+- Next scope agreed: a system you talk to — it gathers and summarizes
+  documents in a folder (the folder/CWD is the source data) and can call
+  bash/shell to do it.
+- Goals restated as two: understand the experience (what quality we get)
+  and cost (what we get for less money).
+- Process: give a time estimate (hours) for this next step first; then
+  build; integrating with the already-building worker backend (or the
+  universal-UI backend) is the following step.
+
 ## 4. Journal
 
 Newest entries appear first.
 
 *The recording dates are not stated in the transcripts; the dates shown above
 are the recording file-added dates.*
+
+### 2026-11-02 — M8 review and next scope
+
+- Added M8: reviewed the three conversation-mode POCs; agreement that the
+  approaches differ mainly in audio input/output processing and that the
+  easiest working path wins (updating the existing Pipecat POC is fine).
+- Recorded the next scope: a talking agent that gathers/summarizes
+  documents in a folder and can call bash/shell; time estimate first,
+  worker-backend integration as the following step.
+- Both sides' audio dropped repeatedly during M8; the summary is
+  best-effort (noted in the index).
 
 ### 2026-10-30 — M7 POC scope confirmed
 
@@ -271,14 +309,16 @@ are the recording file-added dates.*
 | 11 | Research current native voice-model costs (supporting background function calls) at target scale (~6 h/day, ~10 people), and compare against an STT + LLM + TTS pipeline that mimics voice models, including cost delta and latency | M6 | Engineering | Open — revisit the earlier "costly" assumption with real numbers |
 | 12 | Build a minimal standalone Pipecat demo and measure latency, cost, and perceived delay, including acknowledge-before-long-process behavior | M6 | Engineering | Open — result feeds the implementation-option choice |
 | 13 | Answer the M6 ranking question: perceived delay vs. technical latency — which single focus, or what split, and why | M6 | Product and engineering | Open — needs a quantified ranking, not prose |
-| 14 | Run the POCs: Pipecat demo and/or the OpenAI audio-model probe — mimic current behavior, answer questions, conversation memory ideally; measure output quality and cost | M7 | Engineering | Open — two-hour timebox per POC; standalone POC allowed; escalate after one hour if stuck |
+| 14 | Run the POCs: Pipecat demo and/or the OpenAI audio-model probe — mimic current behavior, answer questions, conversation memory ideally; measure output quality and cost | M7 | Engineering | Complete — all three modes built as talkable CLIs with measured latency/cost; results in [`architecture-discussion.md`](architecture-discussion.md) |
+| 15 | Give a time estimate (hours) for the talking document-summaries agent (talk to it; it gathers/summarizes docs in a folder; can call bash/shell; carries conversation context) | M8 | Engineering | Open |
+| 16 | Build the talking document-summaries agent — easiest working path, updating the existing Pipecat POC is acceptable; then integrate with the worker backend as the following step | M8 | Engineering | Open — blocked by #15 (estimate first) |
 
 ## 6. Document map
 
 | Document | Purpose |
 |---|---|
 | `meetings.md` | Living index, summaries, journal, and action items |
-| `recordings/1.vtt`, `recordings/2.vtt`, `recordings/3.vtt`, `recordings/4.vtt`, `recordings/5.vtt`, `recordings/6.vtt`, `recordings/7.vtt` | Immutable meeting source transcripts |
+| `recordings/1.vtt` … `recordings/8.vtt` | Immutable meeting source transcripts |
 | `requirements.md` | Product requirements from M1 |
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |
