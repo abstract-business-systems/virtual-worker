@@ -370,3 +370,22 @@ discussion material for the architecture review are in
 Remaining before the next development phase: the architecture review with
 the architect (doc above), then wire the chosen flow into the worker's
 virtual-mic path with real worker tools.
+
+## Three-mode CLI (2 November) — open items
+
+The three conversation modes (`realtime` / `audio` / `separate`) now live in
+`experiments/pipecat-poc` behind one `run.sh`, with the bash tool, workdir,
+mic-transcript display (`You:`), colored output, and token-based cost
+accounting (per-turn and per-session token buckets, in/out and audio/text,
+with session reports written to `results/`).
+
+Open items:
+
+1. **CLI "jank" investigation** — the lean colored output feels slightly
+   janky in live use; cause unclear (terminal/OS rendering vs. our output
+   cadence). Reproduce, isolate, and smooth it.
+2. **Verify token accounting live** — per-turn and session token buckets
+   (in/out, audio/text, cached) are implemented and self-tested with
+   recorded fixtures; confirm against a live multi-turn session and a real
+   bill. Realtime text-token pricing assumes the mini text-family rate
+   ($0.60/$2.40 per M) — reconcile with OpenAI's actual list price.

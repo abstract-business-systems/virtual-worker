@@ -64,6 +64,9 @@ from pipecat.workers.runner import WorkerRunner
 
 HERE = Path(__file__).parent
 from cli_ui import banner, dim, err, friday, hdr, tool, warn as _warn_c, you as _you_c
+import token_accounting as ta
+from pipecat.frames.frames import MetricsFrame
+from pipecat.metrics.metrics import LLMTokenUsage
 
 _whisper = None  # lazy-loaded local whisper (user-speech display)
 WORKDIR = os.environ.get("CHAT_WORKDIR") or os.getcwd()
@@ -286,10 +289,13 @@ class SpeakerOutput(FrameProcessor):
 
 
 class TurnMetrics(FrameProcessor):
-    """Prints per-turn latency, transcript, and cost estimate."""
+    """Per-turn latency, transcript, and real token accounting. The
+    realtime service emits MetricsFrame(LLMTokenUsage) at each
+    response.done — that is the actual billed usage."""
 
-    def __init__(self):
+    def __init__(self, tokens: ta.TokenAccount):
         super().__init__()
+        self.tokens = tokens
         self.t_turn_end: float | None = None
         self.first_audio_latency: float | None = None
         self.text: list[str] = []
@@ -311,6 +317,10 @@ class TurnMetrics(FrameProcessor):
         await super().process_frame(frame, direction)
         if direction != FrameDirection.DOWNSTREAM:
             return
+        if isinstance(frame, MetricsFrame):
+            for m in frame.data:
+                if isinstance(m, LLMTokenUsage):
+                    self.tokens.add(m)
         if isinstance(frame, InputAudioRawFrame):
             self._in_secs += len(frame.audio) / 2 / frame.sample_rate
             # buffer the live utterance so we can show what the agent hears
@@ -322,6 +332,8 @@ class TurnMetrics(FrameProcessor):
                 print(dim("[vad] speech started"), flush=True)
             if self._you_task is not None:   # flush an unreported utterance
                 await self.flush_you()
+            if any(self.tokens.cur[k] for k in ("in", "out")):
+                self.tokens.end_turn()   # close the previous turn's bucket
             self._recording = True
             self._utt = bytearray()
         elif isinstance(frame, UserStoppedSpeakingFrame):
@@ -401,16 +413,27 @@ class TurnMetrics(FrameProcessor):
             self.t_turn_end = None
             return
         self.turns += 1
-        in_tok = self._in_secs * TOK_PER_SEC_IN
-        out_tok = self.audio_secs_out * TOK_PER_SEC_OUT
-        turn_cost = (in_tok * AUDIO_IN_USD_PER_M + out_tok * AUDIO_OUT_USD_PER_M) / 1e6
-        self.total_cost_usd += turn_cost
         reply = (text or '').strip()
+        tok = self.tokens.cur
+        if tok["calls"]:
+            tok = self.tokens.end_turn()
+            total = sum(t["cost"] for t in self.tokens.turns)
+            tok_s = (f"in {tok['in']:,} ({tok['in_audio']:,} audio) · "
+                     f"out {tok['out']:,} ({tok['out_audio']:,} audio)")
+            cost = tok["cost"]
+        else:
+            # no usage frame for this turn — density estimate fallback
+            in_tok = self._in_secs * TOK_PER_SEC_IN
+            out_tok = self.audio_secs_out * TOK_PER_SEC_OUT
+            cost = (in_tok * AUDIO_IN_USD_PER_M
+                    + out_tok * AUDIO_OUT_USD_PER_M) / 1e6
+            total = self.total_cost_usd + cost
+            self.total_cost_usd = total
+            tok_s = f"in ~{in_tok:.0f} (est) · out ~{out_tok:.0f} (est)"
         print(friday(f"Friday: {reply}"), flush=True)
         print(dim(f"── turn {self.turns} · first audio "
-                  f"{self.first_audio_latency or 0:.2f}s · "
-                  f"~${turn_cost:.4f} (total ~${self.total_cost_usd:.4f})"),
-              flush=True)
+                  f"{self.first_audio_latency or 0:.2f}s · {tok_s} · "
+                  f"~${cost:.4f} (total ~${total:.4f})"), flush=True)
         self._in_secs = 0.0
         self.audio_secs_out = 0.0
         self.t_turn_end = None
@@ -457,7 +480,8 @@ class SDTransport(BaseTransport):
 
 async def run() -> dict:
     cfg = load_env()
-    metrics = TurnMetrics()
+    tokens = ta.TokenAccount()
+    metrics = TurnMetrics(tokens)
 
     async def get_meeting_context(params: FunctionCallParams):
         # pipecat >= 1.x: deliver results via result_callback (params.result is gone)
@@ -543,6 +567,14 @@ async def run() -> dict:
     )
     service.register_function("get_meeting_context", get_meeting_context)
     service.register_function("bash", bash)
+
+    # pipecat computes the per-response LLMTokenUsage at response.done but
+    # never pushes the metrics frame downstream — shadow the hook on this
+    # instance so the real billed usage lands in our token account
+    async def _capture_llm_usage(usage: LLMTokenUsage):
+        tokens.add(usage)
+
+    service.start_llm_usage_metrics = _capture_llm_usage
 
     pair = LLMContextAggregatorPair(
         LLMContext(),
@@ -637,12 +669,13 @@ async def main():
             return _orig(msg)
         _ev.parse_server_event = _spy
     result = await run()
+    result["tokens"] = tokens.report()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out = HERE / "results" / f"chat-{stamp}.json"
     out.write_text(json.dumps(result, indent=2))
     print(dim(f"session: {result.get('turns', 0)} turns · "
-              f"~${result.get('total_cost_usd', 0):.4f} · "
-              f"{result.get('wall_total_s', 0)}s → {out.name}"), flush=True)
+              f"{tokens.line()} · {result.get('wall_total_s', 0)}s "
+              f"→ {out.name}"), flush=True)
 
 
 if __name__ == "__main__":

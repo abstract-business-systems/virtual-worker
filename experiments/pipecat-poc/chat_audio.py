@@ -41,6 +41,7 @@ from pipecat.audio.vad.vad_analyzer import VADParams, VADState
 
 HERE = Path(__file__).parent
 from cli_ui import banner, dim, err, friday, hdr, stage, tool, warn as _warn_c, you as _you_c
+import token_accounting as ta
 IN_RATE = 16000          # VAD + whisper native rate
 OUT_RATE = 44100         # typical playback device rate
 
@@ -376,6 +377,7 @@ async def chat_stream(messages, on_audio, on_text, *, think=False, tts=False, st
 
 async def run():
     global loop, mic_q, turn_seq
+    started_utc = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     loop = asyncio.get_running_loop()
     mic_q = asyncio.Queue(maxsize=400)
     speaker.start()
@@ -401,7 +403,7 @@ async def run():
     vad.set_sample_rate(IN_RATE)
 
     history: list[dict] = [{"role": "system", "content": SYSTEM_PROMPT}]
-    total_cost = 0.0
+    tokens = ta.TokenAccount()
     turns = 0
     mode_desc = (f"{MODEL} single-call" if not THINK_MODEL else
                  f"{STT_CFG or MODEL} -> {THINK_MODEL} -> {MODEL}")
@@ -436,13 +438,12 @@ async def run():
     async def do_turn(utt: bytes):
         """One spoken turn. audio mode = single call; separate mode =
         STT -> think -> TTS, each stage timed and costed."""
-        nonlocal total_cost, turns
+        nonlocal turns
         t_end = time.perf_counter()
         b64 = pcm_to_wav_b64(utt)
         turns += 1
         my_turn = turn_seq
         first_audio: dict = {}
-        usage_total = {}
 
         def on_audio(b64_chunk):
             if my_turn != turn_seq:
@@ -468,8 +469,7 @@ async def run():
             tool_calls, usage = await chat_stream(msgs, on_audio,
                                                   text_parts.append)
             transcript = "".join(text_parts).strip()
-            if usage:
-                usage_total = dict(usage)
+            tokens.add(usage)
             if any(tc["name"] for tc in tool_calls):
                 tc = next(tc for tc in tool_calls if tc["name"])
                 name = tc["name"]
@@ -484,8 +484,7 @@ async def run():
                 first_audio.clear()
                 _, usage2 = await chat_stream(follow, on_audio,
                                               text_parts.append)
-                if usage2:
-                    usage_total = usage2
+                tokens.add(usage2)
                 transcript = "".join(text_parts).strip()
             reply = transcript or "(tool result answer)"
             stages = ""
@@ -512,8 +511,7 @@ async def run():
                     None, stt_parts.append, stt=True)
                 user_text = "".join(stt_parts).strip()
             t_stt = time.perf_counter() - t0
-            if u:
-                usage_total = dict(u)
+            tokens.add(u)  # local whisper: u is None, zero tokens
             print(stage(f"[stage] stt {t_stt:.2f}s:") + " " + _you_c(f"You: {user_text}"), flush=True)
             if not user_text:
                 print(_warn_c("[stage] stt produced no text — turn skipped"), flush=True)
@@ -550,8 +548,7 @@ async def run():
                     u = u2
             reply = "".join(reply_parts).strip()
             t_think = time.perf_counter() - t0
-            if u and u.get("cost"):
-                usage_total["cost"] = usage_total.get("cost", 0) + u["cost"]
+            tokens.add(u)
             print(stage(f"[stage] think {t_think:.2f}s"), flush=True)
 
             # 3) TTS: voice model speaks the reply (text in, audio out)
@@ -561,8 +558,7 @@ async def run():
                 [{"role": "user", "content": reply}],
                 on_audio, None, tts=True)
             t_tts = time.perf_counter() - t0
-            if u and u.get("cost"):
-                usage_total["cost"] = usage_total.get("cost", 0) + u["cost"]
+            tokens.add(u)
             print(stage(f"[stage] tts {t_tts:.2f}s"), flush=True)
             stages = (f"stt {t_stt:.2f}s think {t_think:.2f}s "
                       f"tts {t_tts:.2f}s")
@@ -581,8 +577,7 @@ async def run():
             history.append({"role": "assistant",
                             "content": transcript or "(tool result answer)"})
 
-        cost = (usage_total or {}).get("cost") or 0
-        total_cost += cost
+        tok = tokens.end_turn()
         lat = first_audio.get("t") or 0.0
         stages_c = f" · {stages.strip(' |')}" if stages else ""
         if not THINK_MODEL:
@@ -593,8 +588,11 @@ async def run():
             if yt:
                 print(_you_c(f"You: {yt}"), flush=True)
         print(friday(f"Friday: {transcript}"), flush=True)
+        total = sum(t["cost"] for t in tokens.turns)
         print(dim(f"── turn {turns} · first audio {lat:.2f}s{stages_c} · "
-                  f"~${cost:.4f} (total ~${total_cost:.4f})"), flush=True)
+                  f"in {tok['in']:,} ({tok['in_audio']:,} audio) · "
+                  f"out {tok['out']:,} ({tok['out_audio']:,} audio) · "
+                  f"~${tok['cost']:.4f} (total ~${total:.4f})"), flush=True)
 
     try:
         while True:
@@ -691,6 +689,22 @@ async def run():
         if not test_wav:
             mic.stop()
             mic.close()
+        # session report: tokens in/out per turn + totals (M8 cost scope)
+        try:
+            stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+            out = HERE / "results" / f"{PRESET}-{stamp}.json"
+            out.parent.mkdir(exist_ok=True)
+            out.write_text(json.dumps({
+                "mode": PRESET,
+                "engine": "chat_audio",
+                "started_utc": started_utc,
+                "turns": turns,
+                "tokens": tokens.report(),
+            }, indent=2))
+            print(dim(f"session: {turns} turns · {tokens.line()} "
+                      f"→ {out.name}"), flush=True)
+        except Exception as e:  # noqa: BLE001
+            print(err(f"(session report failed: {e!r})"), flush=True)
 
 
 def main():
