@@ -371,7 +371,7 @@ are the recording file-added dates.*
 | 19 | Report monetary cost per minute of conversation and per session (e.g. 10-minute talk) for each approach, from existing data — not token tables | M9 | Engineering | Open — computable from data already collected |
 | 20 | Identify cost-effective alternative models (cheaper realtime alternative if any; better voice model for audio; not married to OpenAI — OpenRouter candidates welcome), swap into the POCs and benchmark cost AND quality; target ~₹800–900/month for a full-time voice assistant | M9 | Engineering | Open — blocked by #17 |
 | 21 | Check where the models are hosted (resolve endpoint IPs / regions); location may account for ~200 ms of latency | M9 | Engineering | Open |
-| 22 | Send a time estimate for #17–#21 before starting (~2 hours suggested by Viswanath; flag if more) | M9 | Engineering | Open |
+| 22 | Send a time estimate for #17–#21 before starting (~2 hours suggested by Viswanath; flag if more) | M9 | Engineering | Complete — estimate sent to Viswanath and agreed |
 
 ## 6. Document map
 
