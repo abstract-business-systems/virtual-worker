@@ -1,0 +1,140 @@
+{
+  "mode": "audio",
+  "engine": "chat_audio",
+  "started_utc": "2026-11-03T12:12:30Z",
+  "turns": 9,
+  "tokens": {
+    "totals": {
+      "in": 6769,
+      "in_text": 5368,
+      "in_audio": 1401,
+      "cached": 0,
+      "cached_text": 0,
+      "cached_audio": 0,
+      "out": 2248,
+      "out_text": 553,
+      "out_audio": 1695,
+      "calls": 13,
+      "cost": 0.17226199999999997
+    },
+    "per_turn": [
+      {
+        "in": 186,
+        "in_text": 175,
+        "in_audio": 11,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 108,
+        "out_text": 28,
+        "out_audio": 80,
+        "calls": 1,
+        "cost": 0.0061895
+      },
+      {
+        "in": 238,
+        "in_text": 209,
+        "in_audio": 29,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 110,
+        "out_text": 29,
+        "out_audio": 81,
+        "calls": 1,
+        "cost": 0.0069245
+      },
+      {
+        "in": 303,
+        "in_text": 227,
+        "in_audio": 76,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 145,
+        "out_text": 33,
+        "out_audio": 112,
+        "calls": 1,
+        "cost": 0.0104975
+      },
+      {
+        "in": 1167,
+        "in_text": 961,
+        "in_audio": 206,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 396,
+        "out_text": 103,
+        "out_audio": 293,
+        "calls": 2,
+        "cost": 0.028776500000000003
+      },
+      {
+        "in": 399,
+        "in_text": 284,
+        "in_audio": 115,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 115,
+        "out_text": 29,
+        "out_audio": 86,
+        "calls": 1,
+        "cost": 0.010184
+      },
+      {
+        "in": 398,
+        "in_text": 284,
+        "in_audio": 114,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 173,
+        "out_text": 38,
+        "out_audio": 135,
+        "calls": 1,
+        "cost": 0.013378
+      },
+      {
+        "in": 2244,
+        "in_text": 1677,
+        "in_audio": 567,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 595,
+        "out_text": 174,
+        "out_audio": 421,
+        "calls": 4,
+        "cost": 0.051020499999999996
+      },
+      {
+        "in": 909,
+        "in_text": 771,
+        "in_audio": 138,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 299,
+        "out_text": 61,
+        "out_audio": 238,
+        "calls": 1,
+        "cost": 0.0221855
+      },
+      {
+        "in": 925,
+        "in_text": 780,
+        "in_audio": 145,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 307,
+        "out_text": 58,
+        "out_audio": 249,
+        "calls": 1,
+        "cost": 0.023106
+      }
+    ]
+  }
+}

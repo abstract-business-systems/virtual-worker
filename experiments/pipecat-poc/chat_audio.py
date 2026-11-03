@@ -149,6 +149,10 @@ if not KEY:
     sys.exit("OPENROUTER_API_KEY not set (experiments/pipecat-poc/.env)")
 
 turn_seq = 0  # bumped on barge-in; in-flight turn audio with an older token is dropped
+# Echo gate: while Friday speaks, the mic (RDP: server audio -> client
+# speakers -> client mic) picks up the playback. Frames during playback are
+# never buffered as user speech; barge-in requires louder-than-bleed speech.
+BARGE_RMS = int(os.environ.get("CHAT_BARGE_RMS", "2500"))
 
 # ---- local Whisper STT (separate mode, stt = whisper:<size>) ----
 _whisper = None
@@ -184,6 +188,29 @@ def openai_transcribe(pcm24: bytes, model: str = "gpt-4o-mini-transcribe") -> st
     # output_tokens, input_token_details{audio_tokens, text_tokens}} —
     # captured so STT cost is in the token report (was silently dropped)
     return body["text"].strip(), body.get("usage")
+
+
+def openai_tts(text: str, voice: str) -> tuple:
+    """Dedicated OpenAI TTS: gpt-4o-mini-tts via /v1/audio/speech.
+    Proper TTS voices (coral/alloy/...) at ~$12/M audio tokens — far
+    better voice quality than the gpt-audio-mini chat path, still cheap.
+    Returns (pcm16 bytes @24 kHz, seconds of speech)."""
+    import io as _io, wave as _wave, urllib.request as _ur
+    body = json.dumps({"model": "gpt-4o-mini-tts", "voice": voice,
+                       "input": text, "response_format": "wav"}).encode()
+    req = _ur.Request(
+        "https://api.openai.com/v1/audio/speech", data=body,
+        headers={"Authorization": f"Bearer {OPENAI_KEY}",
+                 "Content-Type": "application/json"})
+    with _ur.urlopen(req, timeout=60) as r:
+        wav_bytes = r.read()
+    with _wave.open(_io.BytesIO(wav_bytes)) as w:
+        sr = w.getframerate()
+        pcm = w.readframes(w.getnframes())
+    if sr != 24000:
+        import audioop
+        pcm, _ = audioop.ratecv(pcm, 2, 1, sr, 24000, None)
+    return pcm, len(pcm) / 2 / 24000
 
 
 def transcribe_utterance(pcm24: bytes, quiet: bool = False) -> tuple:
@@ -614,9 +641,29 @@ async def run():
             # 3) TTS: voice model speaks the reply (text in, audio out)
             first_audio.clear()
             t0 = time.perf_counter()
-            _, u = await chat_stream(
-                [{"role": "user", "content": reply}],
-                on_audio, None, tts=True)
+            if VOICE_MODEL.startswith("openai-tts:"):
+                # dedicated OpenAI TTS — the audio/speech endpoint returns
+                # no usage, so tokens/cost are estimated from the speech
+                # length at the documented ~15 tokens/s density ($12/M)
+                loop = asyncio.get_running_loop()
+
+                def _speak():
+                    pcm, secs = openai_tts(
+                        reply, VOICE_MODEL.split(":", 1)[1] or "coral")
+                    loop.call_soon_threadsafe(
+                        on_audio, base64.b64encode(pcm).decode())
+                    return secs
+
+                secs = await asyncio.to_thread(_speak)
+                out_tok = round(secs * 15)
+                u = {"prompt_tokens": 0, "completion_tokens": out_tok,
+                     "input_audio_tokens": 0,
+                     "output_audio_tokens": out_tok,
+                     "cost": round(out_tok * 12e-6, 6)}
+            else:
+                _, u = await chat_stream(
+                    [{"role": "user", "content": reply}],
+                    on_audio, None, tts=True)
             t_tts = time.perf_counter() - t0
             tokens.add(u)
             print(stage(f"[stage] tts {t_tts:.2f}s"), flush=True)
@@ -657,6 +704,7 @@ async def run():
                   f"out {tok['out']:,} ({tok['out_audio']:,} audio){cache_s} · "
                   f"~${tok['cost']:.4f} (total ~${total:.4f})"), flush=True)
 
+    was_playing = False
     try:
         while not stopping.is_set():
             # timeout tick: the commit check must run even when no mic
@@ -706,6 +754,35 @@ async def run():
                         ever_sound = True
                     elif not ever_sound:
                         print(_warn_c("[warn] mic capture is silent — the machine is not receiving your voice. On RDP: enable microphone redirection and reconnect."), flush=True)
+
+            if speaker.playing:
+                # Friday is playing: the mic may be hearing the playback
+                # itself (RDP echo). Buffer nothing and don't feed the VAD
+                # (Friday must not barge in on itself); barge in only on
+                # clearly louder real speech.
+                a = np.frombuffer(raw24, dtype=np.int16).astype(np.float64)
+                rms = float(np.sqrt(np.mean(a ** 2))) if len(a) else 0.0
+                if rms >= BARGE_RMS:
+                    turn_seq += 1
+                    speaker.barge_in()
+                    print(_warn_c(
+                        f"[barge-in] real speech over playback "
+                        f"(rms {rms:.0f} >= gate {BARGE_RMS})"), flush=True)
+                    state = "recording"
+                    utter24.clear()
+                    quiet_since = None
+                elif DEBUG:
+                    print(dim(f"[echo] bleed rms {rms:.0f} < gate {BARGE_RMS}"),
+                          flush=True)
+                was_playing = True
+                continue
+            if was_playing:
+                # playback ended without barge-in: drop anything buffered
+                # during it and start listening fresh
+                was_playing = False
+                state = "quiet"
+                utter24.clear()
+                quiet_since = None
 
             st = await vad.analyze_audio(raw16)
 

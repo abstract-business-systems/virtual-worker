@@ -42,6 +42,7 @@ MODE=""
 while [[ $# -gt 0 ]]; do
   case "$1" in
     realtime|audio|separate) MODE="$1"; shift ;;
+    --pipecat) ARGS+=("$1"); shift ;;
     -d|--debug) export CHAT_DEBUG=1 PIPECAT_DEBUG=1; shift ;;
     --model) export CHAT_MODEL="$2"; shift 2 ;;
     --folder) export CHAT_WORKDIR="$2"; shift 2 ;;
@@ -61,6 +62,10 @@ fi
 case "$MODE" in
   realtime) exec uv run chat.py ;;
   audio)    export CHAT_PRESET=audio;    exec uv run chat_audio.py ;;
-  separate) export CHAT_PRESET=separate; exec uv run chat_audio.py ;;
+  separate)
+    if [[ " ${ARGS[*]} " == *" --pipecat "* ]] || [[ -n "$CHAT_SEP_PIPECAT" ]]; then
+      export CHAT_PRESET=separate; exec uv run chat_sep.py
+    fi
+    export CHAT_PRESET=separate; exec uv run chat_audio.py ;;
   *) echo "unknown mode: $MODE (use realtime | audio | separate)"; exit 1 ;;
 esac
