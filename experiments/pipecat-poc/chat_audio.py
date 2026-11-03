@@ -56,6 +56,8 @@ VOICE_MODEL = (_PRESETS.get(PRESET, "voice").strip()
                or "openai/gpt-audio-mini")
 THINK_MODEL = _PRESETS.get(PRESET, "think", fallback="").strip() or None
 STT_CFG = _PRESETS.get(PRESET, "stt", fallback="").strip() or None
+GLOSSARY = os.environ.get("CHAT_GLOSSARY",
+                          _PRESETS.get(PRESET, "glossary", fallback="")).strip()
 # STT_CFG "whisper:<size>" = local faster-whisper; "provider/model" = the
 # OpenRouter voice model transcribes; empty = voice model transcribes.
 
@@ -102,6 +104,25 @@ TOOLS = [{
 }]
 
 
+def spoken_question_hint() -> str:
+    """Text hint sent alongside input_audio. The glossary part biases the
+    audio model's recognition toward domain terms (M9 audio-quality
+    experiment): audio chat models weigh the text prompt when decoding
+    speech, so naming the terms they mishear fixes recognition at zero
+    extra cost (~40 text tokens/turn, cacheable)."""
+    base = "Answer my spoken question."
+    if GLOSSARY:
+        base += (" Glossary of names/terms you may hear — if the audio is "
+                 "unclear, map what you heard to these and use these exact "
+                 "spellings: " + GLOSSARY + ".")
+        # gpt-audio-mini's tool round-trip is a dead end (rejects tool
+        # results, then returns empty streams) — steer informational
+        # questions onto the direct-answer path it handles well.
+        base += (" For questions about meetings, calendar, status, or "
+                 "pending work, answer directly without calling tools.")
+    return base
+
+
 def _tool_get_meeting_context(args: dict):
     return {"recent_meeting": "M7 POC scoping", "next_event": "Friday demo review"}
 
@@ -131,14 +152,39 @@ TOOL_IMPL = {
 }
 
 
+def _repair_tool_args(arguments):
+    """Audio-path models sometimes emit tool arguments as concatenated
+    JSON objects — an empty object followed by the real one — so
+    json.loads fails, the call runs with empty args and the turn dies in
+    confusion. Repair: take the last complete top-level object."""
+    if isinstance(arguments, dict):
+        return arguments
+    try:
+        v = json.loads(arguments or "{}")
+        return v if isinstance(v, dict) else {}
+    except json.JSONDecodeError:
+        pass
+    dec, idx, last, last_nonempty = json.JSONDecoder(), 0, {}, {}
+    src = arguments or ""
+    while idx < len(src):
+        j = src.find("{", idx)
+        if j < 0:
+            break
+        try:
+            obj, end = dec.raw_decode(src, j)
+            if isinstance(obj, dict):
+                last = obj
+                if obj:
+                    last_nonempty = obj
+            idx = end
+        except json.JSONDecodeError:
+            idx = j + 1
+    return last_nonempty or last
+
+
 def run_tool(name: str, arguments: str):
     """Dispatch a tool call; returns the JSON-able result."""
-    try:
-        args = json.loads(arguments or "{}")
-        if not isinstance(args, dict):
-            args = {}
-    except json.JSONDecodeError:
-        args = {}
+    args = _repair_tool_args(arguments)
     impl = TOOL_IMPL.get(name)
     if impl is None:
         return {"error": f"unknown tool {name}"}
@@ -542,7 +588,7 @@ async def run():
             disp = asyncio.create_task(
                 asyncio.to_thread(transcribe_utterance, utt, True))  # (txt, usage)
             audio_user_msg = {"role": "user", "content": [
-                {"type": "text", "text": "Answer my spoken question."},
+                {"type": "text", "text": spoken_question_hint()},
                 {"type": "input_audio",
                  "input_audio": {"data": b64, "format": "wav"}},
             ]}
@@ -558,19 +604,46 @@ async def run():
                 tool_result = run_tool(name, tc["arguments"])
                 result_json = json.dumps(tool_result)
                 print(tool(f"[tool] {name}({(tc['arguments'] or '')[:80]}) -> {result_json[:160]}"), flush=True)
-                follow = msgs + [{"role": "user", "content": [
-                    {"type": "text",
-                     "text": f"{name} returned: {result_json}. Answer the "
-                             f"original question briefly."}]}]
+                # proper tool protocol: the model must SEE its own tool call
+                # and the tool result as assistant/tool messages. The old
+                # user-message hack made the audio model call the tool again
+                # (second call silently ignored) - turns died with no answer.
+                call_id = tc.get("id") or "call_1"
+                msgs += [
+                    {"role": "assistant", "content": transcript,
+                     "tool_calls": [{"id": call_id, "type": "function",
+                                     "function": {"name": name,
+                                                  "arguments": tc["arguments"]}}]},
+                    {"role": "tool", "tool_call_id": call_id,
+                     "content": result_json},
+                ]
                 text_parts.clear()
                 first_audio.clear()
-                _, usage2 = await chat_stream(follow, on_audio,
+                _, usage2 = await chat_stream(msgs, on_audio,
                                               text_parts.append)
                 tokens.add(usage2)
                 transcript = "".join(text_parts).strip()
+                if not transcript:
+                    # gpt-audio-mini is flaky after tool rounds: it
+                    # rejects role:"tool" messages (OpenRouter 400
+                    # "unsupported format") or returns an empty stream.
+                    # Fallback: the legacy user-message result format.
+                    legacy = history + [audio_user_msg, {
+                        "role": "user",
+                        "content": [{"type": "text",
+                                     "text": f"{name} returned: "
+                                             f"{result_json}. Answer the "
+                                             f"original question briefly."}]},
+                    ]
+                    text_parts.clear()
+                    first_audio.clear()
+                    _, usage2 = await chat_stream(legacy, on_audio,
+                                                  text_parts.append)
+                    tokens.add(usage2)
+                    transcript = "".join(text_parts).strip()
             reply = transcript or "(tool result answer)"
             stages = ""
-            user_text = "Answer my spoken question."
+            user_text = "Answer my spoken question."  # real hearing shown via local-whisper line
         else:
             # ---- separate mode: STT -> think -> TTS ----
             if DEBUG:
@@ -694,7 +767,7 @@ async def run():
                 yt = ""
             if yt:
                 print(_you_c(f"You: {yt}"), flush=True)
-        print(friday(f"Friday: {transcript}"), flush=True)
+        print(friday(f"Friday: {transcript or '(tool result answer)'}"), flush=True)
         total = sum(t["cost"] for t in tokens.turns)
         cache_s = (f" · cached {tok['cached']:,} "
                    f"({tok['cached_text']:,} text/{tok['cached_audio']:,} audio)"

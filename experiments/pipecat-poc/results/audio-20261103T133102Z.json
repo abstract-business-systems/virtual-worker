@@ -1,0 +1,36 @@
+{
+  "mode": "audio",
+  "engine": "chat_audio",
+  "started_utc": "2026-11-03T13:30:00Z",
+  "turns": 1,
+  "tokens": {
+    "totals": {
+      "in": 329,
+      "in_text": 242,
+      "in_audio": 87,
+      "cached": 0,
+      "cached_text": 0,
+      "cached_audio": 0,
+      "out": 214,
+      "out_text": 48,
+      "out_audio": 166,
+      "calls": 1,
+      "cost": 0.000711
+    },
+    "per_turn": [
+      {
+        "in": 329,
+        "in_text": 242,
+        "in_audio": 87,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 214,
+        "out_text": 48,
+        "out_audio": 166,
+        "calls": 1,
+        "cost": 0.000711
+      }
+    ]
+  }
+}
