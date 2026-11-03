@@ -310,8 +310,8 @@ are the recording file-added dates.*
 | 12 | Build a minimal standalone Pipecat demo and measure latency, cost, and perceived delay, including acknowledge-before-long-process behavior | M6 | Engineering | Open — result feeds the implementation-option choice |
 | 13 | Answer the M6 ranking question: perceived delay vs. technical latency — which single focus, or what split, and why | M6 | Product and engineering | Open — needs a quantified ranking, not prose |
 | 14 | Run the POCs: Pipecat demo and/or the OpenAI audio-model probe — mimic current behavior, answer questions, conversation memory ideally; measure output quality and cost | M7 | Engineering | Complete — all three modes built as talkable CLIs with measured latency/cost; results in [`architecture-discussion.md`](architecture-discussion.md) |
-| 15 | Give a time estimate (hours) for the talking document-summaries agent (talk to it; it gathers/summarizes docs in a folder; can call bash/shell; carries conversation context) | M8 | Engineering | Open |
-| 16 | Build the talking document-summaries agent — easiest working path, updating the existing Pipecat POC is acceptable; then integrate with the worker backend as the following step | M8 | Engineering | Open — blocked by #15 (estimate first) |
+| 15 | Give a time estimate (hours) for the talking document-summaries agent (talk to it; it gathers/summarizes docs in a folder; can call bash/shell; carries conversation context) | M8 | Engineering | Complete — ~3 h build + 30 min user test, recorded in [`implementation-plan.md`](implementation-plan.md) |
+| 16 | Build the talking document-summaries agent — easiest working path, updating the existing Pipecat POC is acceptable; then integrate with the worker backend as the following step | M8 | Engineering | Complete — fulfilled by the existing bash tool (verified live: "read any file in the current directory and summarize it"); no specialized agent needed. Worker-backend integration remains the following step |
 
 ## 6. Document map
 

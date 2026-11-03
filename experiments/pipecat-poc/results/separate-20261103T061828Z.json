@@ -1,0 +1,62 @@
+{
+  "mode": "separate",
+  "engine": "chat_audio",
+  "started_utc": "2026-11-03T06:17:10Z",
+  "turns": 5,
+  "tokens": {
+    "totals": {
+      "in": 1556,
+      "in_text": 1556,
+      "in_audio": 0,
+      "cached": 0,
+      "cached_text": 0,
+      "cached_audio": 0,
+      "out": 1338,
+      "out_text": 398,
+      "out_audio": 940,
+      "calls": 6,
+      "cost": 0.0032582999999999996
+    },
+    "per_turn": [
+      {
+        "in": 749,
+        "in_text": 749,
+        "in_audio": 0,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 520,
+        "out_text": 187,
+        "out_audio": 333,
+        "calls": 2,
+        "cost": 0.0012293999999999999
+      },
+      {
+        "in": 405,
+        "in_text": 405,
+        "in_audio": 0,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 524,
+        "out_text": 133,
+        "out_audio": 391,
+        "calls": 2,
+        "cost": 0.0012873
+      },
+      {
+        "in": 402,
+        "in_text": 402,
+        "in_audio": 0,
+        "cached": 0,
+        "cached_text": 0,
+        "cached_audio": 0,
+        "out": 294,
+        "out_text": 78,
+        "out_audio": 216,
+        "calls": 2,
+        "cost": 0.0007416
+      }
+    ]
+  }
+}
