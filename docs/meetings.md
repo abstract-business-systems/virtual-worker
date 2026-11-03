@@ -40,6 +40,7 @@ When a new recording `N.vtt` is added:
 | M7 | [`7.vtt`](recordings/7.vtt) | 2026-10-30* | 2m† | Viswanath Chidambaram; Sarooparam Chenaram Darji | POC scope: Pipecat and the OpenAI audio model — quality, cost, conversation memory, two-hour timebox | [`next-steps.md`](next-steps.md) |
 | M8 | [`8.vtt`](recordings/8.vtt) | 2026-11-02‡ | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | POC results review, layering (conversation vs tooling), next scope: a talking document-summaries agent with shell access, time estimate first | [`next-steps.md`](next-steps.md), [`architecture-discussion.md`](architecture-discussion.md) |
 | M9 | [`9.vtt`](recordings/9.vtt) | 2026-11-03§ | 25m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Cost review against product viability; audio-vs-separate cost comparison (no final drop decision); get audio+separate quality to parity first; benchmark cheaper/better models toward a ~₹800–900/month target | [`next-steps.md`](next-steps.md), [`poc-cost-results.md`](poc-cost-results.md) |
+| M10 | [`10.vtt`](recordings/10.vtt) | 2026-11-03¶ | 26m‖ | Viswanath Chidambaram; Sarooparam Chenaram Darji | Cost and latency decomposition: voice-only cost per minute (excluding inference), round-trip response latency definition, latency/cost thresholds, and an agent-driven model-swap benchmark template | [`next-steps.md`](next-steps.md), [`money-per-minute.md`](money-per-minute.md) |
 
 *The transcripts do not state their recording dates; 2026-10-28 is the M3
 recording file's added date, 2026-10-29 is the M4–M6 file-added date, and
@@ -50,6 +51,9 @@ repeatedly on both sides (Bluetooth issues); the transcript is fragmentary
 and the summary is best-effort.
 §2026-11-03 is the M9 recording file's added date. The transcript is noisy
 (Bluetooth drops again); summaries are cross-checked against the raw text.*
+¶2026-11-03 is also the M10 file-added date (same day as M9, recorded later).
+‖26m includes two long idle gaps (~1:24–8:32 and ~16:04–24:21) while Viswanath
+stepped away; the effective discussion is ~16 minutes.
 
 ## 3. Meeting summaries
 
@@ -232,9 +236,71 @@ Review of the cost/latency tables and the next scope. *Transcript noisy
 - Process: send a **time estimate first** (Viswanath suggested ~2 hours
   total; flag if more) before starting.
 
+### M10 — Cost and latency decomposition; measurement spec (`10.vtt`)
+
+Short 1:1 on how the cost/latency numbers must be decomposed before any
+model swapping. *Two long idle gaps (Viswanath stepped away twice);
+effective discussion ~16 minutes.*
+
+- **Provenance of the "25-minute session" challenged:** Sarooparam could
+  not say where the number came from ("got it from the transcript only,
+  I think"). Viswanath took the question over — "this is not your
+  problem. I will take care of it" — and told Sarooparam to focus on
+  engineering. (Cost scenarios built on 25-minute sessions inherit this
+  open question.)
+- **Cost must exclude inference.** The separate-mode ₹1.1/speaking-minute
+  covers STT + intelligence + TTS ("pretty much everything", measured
+  with back-to-back speaking). In the separate approach STT and TTS stay
+  constant while the intelligence can vary — Viswanath wants the
+  **voice-only (STT+TTS) cost per minute** for all three approaches. For
+  realtime/audio, first check whether a **third model for inference** can
+  be used alongside the voice model (with Pipecat); if so, inference cost
+  is constant across all three approaches and can be discounted
+  altogether.
+- **Latency redefined:** not end-to-end — the **round-trip response
+  latency**: user stops speaking → user hears the first audio word ("the
+  connection will be already established, so they will not actually feel
+  the pain"). Average over ~5 minutes of interactions; inference time
+  excluded here too.
+- **Threshold framing:** a hard latency threshold (e.g., ">5 seconds is
+  not acceptable") limits the model choice; a cost threshold (e.g., can't
+  spend more than ₹2) means latency cannot be picky. Understanding cost
+  components is the prerequisite for finding cost-effective models ("if I
+  ask you to find a model which is cost effective, you will not have any
+  clue").
+- **Sequence confirmed:** first make it work with one model set per
+  approach (realtime = 1 model, audio = 1 model, separate = 2 voice
+  models), then measure; swapping models for better cost/latency comes
+  after.
+- **Next:** once voice cost/minute and round-trip latency exist for one
+  model set per approach, prepare a **template so the agent can
+  automatically swap models and test cost + round-trip latency**.
+- **Model candidates:** check the cost difference of two suggested models
+  on OpenRouter — names garbled in the transcript ("Sol 596 and Sol 6",
+  likely gpt-oss variants; confirm exact names with Viswanath).
+- Recording stopped as the topic shifted ("we are talking about
+  different, different context").
+
 ## 4. Journal
 
 Newest entries appear first.
+
+### 2026-11-03 — M10 measurement spec captured
+
+- Cost/latency numbers were redefined: voice-only cost per minute
+  (STT+TTS, excluding inference) and round-trip response latency (user
+  stops speaking → first audio word, averaged over ~5 minutes).
+- Inference is to be made constant across the three approaches (a third
+  inference model alongside the realtime/audio voice models, if Pipecat
+  supports it) and discounted from the comparison.
+- An agent-driven template for automatic model swapping and cost/latency
+  testing was agreed as the follow-up once the two measures exist.
+- The provenance of the "25-minute session" cost assumption was
+  challenged; Viswanath took the question over.
+- The audio-quality glossary experiment was completed the same day
+  (status/meeting questions 5/5 correct with the glossary vs 0/4
+  without); audio mode's tool round-trip proved unreliable at mini
+  pricing, and steering keeps it on the direct-answer path.
 
 *The recording dates are not stated in the transcripts; the dates shown above
 are the recording file-added dates.*
@@ -368,10 +434,15 @@ are the recording file-added dates.*
 | 16 | Build the talking document-summaries agent — easiest working path, updating the existing Pipecat POC is acceptable; then integrate with the worker backend as the following step | M8 | Engineering | Complete — fulfilled by the existing bash tool (verified live: "read any file in the current directory and summarize it"); no specialized agent needed. Worker-backend integration remains the following step |
 | 17 | Make audio and separate modes work properly (quality parity with realtime): replace the janky gpt-audio-mini voice (misheard speech even when spoken slowly) and fix misrecognition — required BEFORE any benchmarking | M9 | Engineering | Open — first priority per M9 ("first get those things working") |
 | 18 | Collate all POC run data (results JSONs) into a CSV/JSON benchmark dataset under a dedicated folder so future runs append; format flexible as long as data is retained | M9 | Engineering | Complete |
-| 19 | Report monetary cost per minute of conversation and per session (e.g. 10-minute talk) for each approach, from existing data — not token tables | M9 | Engineering | Open — computable from data already collected |
+| 19 | Report monetary cost per minute of conversation and per session (e.g. 10-minute talk) for each approach, from existing data — not token tables | M9 | Engineering | Complete — [`money-per-minute.md`](money-per-minute.md); M10 refines this into a voice-only vs inference decomposition (#23) |
 | 20 | Identify cost-effective alternative models (cheaper realtime alternative if any; better voice model for audio; not married to OpenAI — OpenRouter candidates welcome), swap into the POCs and benchmark cost AND quality; target ~₹800–900/month for a full-time voice assistant | M9 | Engineering | Open — blocked by #17 |
 | 21 | Check where the models are hosted (resolve endpoint IPs / regions); location may account for ~200 ms of latency | M9 | Engineering | Complete |
 | 22 | Send a time estimate for #17–#21 before starting (~2 hours suggested by Viswanath; flag if more) | M9 | Engineering | Complete — estimate sent to Viswanath and agreed |
+| 23 | Report voice-only cost per minute (STT+TTS, excluding inference) for all 3 approaches; for realtime/audio first check whether a third inference model can be used alongside the voice model via Pipecat, so inference cost is constant across approaches and discounted | M10 | Engineering | Open |
+| 24 | Measure round-trip response latency (user stops speaking → first audio word heard; connection already established; excluding inference), averaged over ~5 minutes of interactions, for all 3 approaches with one working model set each | M10 | Engineering | Open |
+| 25 | Prepare a template that lets the agent automatically swap models and test cost + round-trip latency across model sets | M10 | Engineering | Open — after #23/#24 |
+| 26 | Check the cost difference of the two suggested models on OpenRouter (names garbled in the transcript — "Sol 596 and Sol 6", likely gpt-oss variants; confirm exact names with Viswanath) | M10 | Engineering | Open |
+| 27 | Identify the provenance of the "25-minute session" assumption used in cost scenarios | M10 | Viswanath | Open — Viswanath took it ("I will take care of it") |
 
 ## 6. Document map
 
