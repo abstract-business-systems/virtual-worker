@@ -53,7 +53,7 @@ and the summary is best-effort.
 (Bluetooth drops again); summaries are cross-checked against the raw text.*
 ¶2026-11-03 is also the M10 file-added date (same day as M9, recorded later).
 ‖26m includes two long idle gaps (~1:24–8:32 and ~16:04–24:21) while Viswanath
-stepped away; the effective discussion is ~16 minutes.
+stepped away; the effective discussion is ~11 minutes.
 
 ## 3. Meeting summaries
 
@@ -248,6 +248,13 @@ effective discussion ~16 minutes.*
   problem. I will take care of it" — and told Sarooparam to focus on
   engineering. (Cost scenarios built on 25-minute sessions inherit this
   open question.)
+- **Division of labor on costs:** the monthly/hourly cost modeling is
+  Viswanath's part ("there is actually one part where you don't want to
+  do very much, which is what is the monthly cost or the hourly cost… I
+  will model and I will actually come up with something") — Sarooparam's
+  part is understanding the **components** ("you should actually
+  understand the components better… if I ask you to find a model which
+  is cost effective, you will not have any clue").
 - **Cost must exclude inference.** The separate-mode ₹1.1/speaking-minute
   covers STT + intelligence + TTS ("pretty much everything", measured
   with back-to-back speaking). In the separate approach STT and TTS stay
@@ -264,14 +271,16 @@ effective discussion ~16 minutes.*
   excluded here too.
 - **Threshold framing:** a hard latency threshold (e.g., ">5 seconds is
   not acceptable") limits the model choice; a cost threshold (e.g., can't
-  spend more than ₹2) means latency cannot be picky. Understanding cost
-  components is the prerequisite for finding cost-effective models ("if I
-  ask you to find a model which is cost effective, you will not have any
-  clue").
+  spend more than ₹2) means latency cannot be picky. The goal across
+  strategies is "better latency for better money" — and a strategy may
+  include replacing a lot of models, not just one.
 - **Sequence confirmed:** first make it work with one model set per
   approach (realtime = 1 model, audio = 1 model, separate = 2 voice
-  models), then measure; swapping models for better cost/latency comes
-  after.
+  models), then measure; the current model-swap focus is **quality**,
+  not latency or cost ("so it is about actually the quality? Am I right?
+  Not latency, not actually cost"), and Viswanath will **verify** the
+  measured value ("you do it for one set of models and we will actually
+  verify the value").
 - **Next:** once voice cost/minute and round-trip latency exist for one
   model set per approach, prepare a **template so the agent can
   automatically swap models and test cost + round-trip latency**.
