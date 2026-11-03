@@ -1,0 +1,31 @@
+{
+  "turns": 2,
+  "total_cost_usd": 0.0,
+  "wall_total_s": 71.7,
+  "tokens": {
+    "totals": {
+      "in": 1387,
+      "in_text": 1237,
+      "in_audio": 150,
+      "cached": 0,
+      "out": 575,
+      "out_text": 215,
+      "out_audio": 360,
+      "calls": 2,
+      "cost": 0.0099582
+    },
+    "per_turn": [
+      {
+        "in": 1387,
+        "in_text": 1237,
+        "in_audio": 150,
+        "cached": 0,
+        "out": 575,
+        "out_text": 215,
+        "out_audio": 360,
+        "calls": 2,
+        "cost": 0.0099582
+      }
+    ]
+  }
+}

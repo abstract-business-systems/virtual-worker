@@ -131,6 +131,7 @@ class TokenAccount:
                 t[k] += turn[k]
             t["calls"] += turn["calls"]
             t["cost"] += turn["cost"]
+        t.pop("priced_by", None)   # keep the report JSON-serializable
         return t
 
     def line(self) -> str:

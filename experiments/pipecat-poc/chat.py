@@ -69,6 +69,7 @@ from pipecat.frames.frames import MetricsFrame
 from pipecat.metrics.metrics import LLMTokenUsage
 
 _whisper = None  # lazy-loaded local whisper (user-speech display)
+TOKENS = ta.TokenAccount()  # module-level: run() feeds it, main() reports it
 WORKDIR = os.environ.get("CHAT_WORKDIR") or os.getcwd()
 
 IN_RATE = 16000     # Silero VAD native rate; service resamples to 24k itself
@@ -422,14 +423,12 @@ class TurnMetrics(FrameProcessor):
                      f"out {tok['out']:,} ({tok['out_audio']:,} audio)")
             cost = tok["cost"]
         else:
-            # no usage frame for this turn — density estimate fallback
-            in_tok = self._in_secs * TOK_PER_SEC_IN
-            out_tok = self.audio_secs_out * TOK_PER_SEC_OUT
-            cost = (in_tok * AUDIO_IN_USD_PER_M
-                    + out_tok * AUDIO_OUT_USD_PER_M) / 1e6
-            total = self.total_cost_usd + cost
-            self.total_cost_usd = total
-            tok_s = f"in ~{in_tok:.0f} (est) · out ~{out_tok:.0f} (est)"
+            # no usage frame yet for this turn (e.g. report fired mid-tool-
+            # flow before the follow-up response's response.done) — don't
+            # fabricate numbers; the session report counts everything
+            tok_s = "usage pending (counted in session report)"
+            cost = 0.0
+            total = sum(t["cost"] for t in self.tokens.turns)
         print(friday(f"Friday: {reply}"), flush=True)
         print(dim(f"── turn {self.turns} · first audio "
                   f"{self.first_audio_latency or 0:.2f}s · {tok_s} · "
@@ -480,7 +479,7 @@ class SDTransport(BaseTransport):
 
 async def run() -> dict:
     cfg = load_env()
-    tokens = ta.TokenAccount()
+    tokens = TOKENS
     metrics = TurnMetrics(tokens)
 
     async def get_meeting_context(params: FunctionCallParams):
@@ -669,12 +668,12 @@ async def main():
             return _orig(msg)
         _ev.parse_server_event = _spy
     result = await run()
-    result["tokens"] = tokens.report()
+    result["tokens"] = TOKENS.report()
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out = HERE / "results" / f"chat-{stamp}.json"
     out.write_text(json.dumps(result, indent=2))
     print(dim(f"session: {result.get('turns', 0)} turns · "
-              f"{tokens.line()} · {result.get('wall_total_s', 0)}s "
+              f"{TOKENS.line()} · {result.get('wall_total_s', 0)}s "
               f"→ {out.name}"), flush=True)
 
 

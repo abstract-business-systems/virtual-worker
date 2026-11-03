@@ -144,6 +144,7 @@ def run_tool(name: str, arguments: str):
         return {"error": f"unknown tool {name}"}
     return impl(args)
 
+OPENAI_KEY = os.environ.get("OPENAI_API_KEY")
 if not KEY:
     sys.exit("OPENROUTER_API_KEY not set (experiments/pipecat-poc/.env)")
 
@@ -151,6 +152,51 @@ turn_seq = 0  # bumped on barge-in; in-flight turn audio with an older token is 
 
 # ---- local Whisper STT (separate mode, stt = whisper:<size>) ----
 _whisper = None
+
+
+def openai_transcribe(pcm24: bytes, model: str = "gpt-4o-mini-transcribe") -> str:
+    """Online STT via OpenAI /v1/audio/transcriptions (online model, as the
+    separate mode intends; gpt-audio-mini itself proved an unreliable
+    transcriber). pcm24: 24 kHz int16 PCM."""
+    import io
+    buf = io.BytesIO()
+    with wave.open(buf, "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(24000)
+        w.writeframes(pcm24)
+    data = buf.getvalue()
+    boundary = "----vwstt"
+    body = (f'--{boundary}\r\nContent-Disposition: form-data; '
+            f'name="file"; filename="utt.wav"\r\n'
+            f'Content-Type: audio/wav\r\n\r\n').encode() + data + \
+           (f'\r\n--{boundary}\r\nContent-Disposition: form-data; '
+            f'name="model"\r\n\r\n{model}\r\n'
+            f'--{boundary}--\r\n').encode()
+    import urllib.request
+    req = urllib.request.Request(
+        "https://api.openai.com/v1/audio/transcriptions", data=body,
+        headers={"Authorization": f"Bearer {OPENAI_KEY}",
+                 "Content-Type": f"multipart/form-data; boundary={boundary}"})
+    with urllib.request.urlopen(req, timeout=60) as resp:
+        return json.load(resp)["text"].strip()
+
+
+def transcribe_utterance(pcm24: bytes, quiet: bool = False) -> str:
+    """Dispatch on STT_CFG:
+      whisper:<size>        local faster-whisper (offline fallback)
+      openai[:<model>]      OpenAI transcription API (default;
+                            gpt-4o-mini-transcribe)
+      <provider/model>      the OpenRouter voice model transcribes
+                            (audio in, text out)
+    Empty STT_CFG = the voice model transcribes."""
+    if STT_CFG and STT_CFG.startswith("openai"):
+        model = STT_CFG.split(":", 1)[1] if ":" in STT_CFG else \
+            "gpt-4o-mini-transcribe"
+        return openai_transcribe(pcm24, model)
+    # STT_CFG "provider/model" should never reach here (openrouter path);
+    # whisper:* or None -> local faster-whisper
+    return whisper_transcribe(pcm24, quiet)
 
 
 def whisper_transcribe(pcm24: bytes, quiet: bool = False) -> str:
@@ -381,6 +427,11 @@ async def run():
     loop = asyncio.get_running_loop()
     mic_q = asyncio.Queue(maxsize=400)
     speaker.start()
+    # clean shutdown on Ctrl+C: break the main loop so the finally block
+    # (session report) runs — asyncio.run does NOT gracefully cancel the
+    # task on a bare KeyboardInterrupt
+    stopping = asyncio.Event()
+    loop.add_signal_handler(signal.SIGINT, stopping.set)
 
     dev = sd.query_devices(int(os.environ["CHAT_INPUT_DEVICE"])
                            if os.getenv("CHAT_INPUT_DEVICE")
@@ -458,7 +509,7 @@ async def run():
             # what the agent is getting: local whisper runs while the
             # request is in flight; printed with the turn report below
             disp = asyncio.create_task(
-                asyncio.to_thread(whisper_transcribe, utt, True))
+                asyncio.to_thread(transcribe_utterance, utt, True))
             audio_user_msg = {"role": "user", "content": [
                 {"type": "text", "text": "Answer my spoken question."},
                 {"type": "input_audio",
@@ -494,12 +545,12 @@ async def run():
             if DEBUG:
                 print(dim(f"[vad] speech stopped ({len(utt)/2/24000:.1f}s) — separate pipeline"), flush=True)
 
-            # 1) STT: local whisper or the voice model transcribes
+            # 1) STT: online OpenAI API (default), local whisper fallback,
+            #    or the OpenRouter voice model transcribes
             t0 = time.perf_counter()
-            if STT_CFG and STT_CFG.startswith("whisper"):
-                user_text = await asyncio.to_thread(whisper_transcribe, utt)
-                u = None
-            else:
+            openrouter_stt = (not STT_CFG
+                              or ("/" in STT_CFG and ":" not in STT_CFG))
+            if openrouter_stt:
                 stt_parts: list[str] = []
                 _, u = await chat_stream(
                     [{"role": "system",
@@ -510,6 +561,11 @@ async def run():
                       "input_audio": {"data": b64, "format": "wav"}}]}],
                     None, stt_parts.append, stt=True)
                 user_text = "".join(stt_parts).strip()
+            else:
+                # online OpenAI API (stt = openai[:model]) or local whisper
+                # (stt = whisper:<size>) — no OpenRouter call, zero tokens
+                user_text = await asyncio.to_thread(transcribe_utterance, utt)
+                u = None
             t_stt = time.perf_counter() - t0
             tokens.add(u)  # local whisper: u is None, zero tokens
             print(stage(f"[stage] stt {t_stt:.2f}s:") + " " + _you_c(f"You: {user_text}"), flush=True)
@@ -595,7 +651,7 @@ async def run():
                   f"~${tok['cost']:.4f} (total ~${total:.4f})"), flush=True)
 
     try:
-        while True:
+        while not stopping.is_set():
             # timeout tick: the commit check must run even when no mic
             # blocks arrive (silence after an utterance still needs
             # evaluating, or the turn is never committed)
