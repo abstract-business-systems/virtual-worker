@@ -60,6 +60,23 @@ comparison.
 OpenRouter paths (audio, separate think/TTS) use provider-computed cost —
 exact, no assumptions.
 
+## Verdict — VC's question (M8): "if you pay less, what do we get? if you pay more?"
+
+| | **Pay more — realtime** (~₹9,800/mo) | **Pay less — audio single-call** (~₹780/mo) | **Middle — separate cascade** (~₹800–1,000 + STT) |
+|---|---|---|---|
+| First audio | **1.1–1.6 s** | 2.6–3.5 s | 4.1–5.5 s |
+| Feel (hands-on verdict) | **Clearly best** — natural turn-taking, mid-voice tools, no abrupt endings | Works, noticeably slower; approximate memory | Works, slowest — three sequential stages are audible |
+| Reliability | Session dies on any network drop (needs reconnect+resume work) | **Uniquely survives network drops** (HTTP per turn, self-heals) | Survives drops like audio mode |
+| Known quirks | 12× cost; OpenAI-locked | Tool-call fragility (rejected `tool_calls` after audio, worked around); stochastic skips | Needs online STT for accuracy; STT cost not yet billed |
+| One line | Best experience, premium price | 12× cheaper, ~1–2.5 s slower, fragile tools | Clean roles, native tools, too slow to feel instant |
+
+**Bottom line:** realtime is the one that works best and costs 12× more; the
+cheap paths work but are measurably slower and (single-call) tool-fragile.
+Full decision material and open questions:
+[`architecture-discussion.md`](architecture-discussion.md). Lean
+recommendation there: Pipecat + realtime as primary, cheap path as
+documented fallback.
+
 ## Verification status
 
 - All three modes: full turn + clean Ctrl+C exit + `results/*.json` report ✓
