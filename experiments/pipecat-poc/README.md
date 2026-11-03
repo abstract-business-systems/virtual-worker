@@ -17,6 +17,8 @@ Models per mode live in `models.ini` (`[realtime] / [audio] / [separate]`);
 Usage:
 ```bash
 ./run.sh realtime | audio | separate   # pick the pipeline type
+./run.sh separate --pipecat          # framework-native pipeline (chat_sep.py)
+uv run python benchmark.py            # refresh docs/benchmarks/sessions.{csv,json}
 ./run.sh realtime -d                   # debug (mic levels, VAD, pipecat logs)
 ./run.sh audio --model openai/gpt-audio
 CHAT_TEST_WAV=fixtures/question.wav ./run.sh realtime   # self-test (no mic)

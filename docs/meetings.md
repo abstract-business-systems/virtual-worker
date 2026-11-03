@@ -367,10 +367,10 @@ are the recording file-added dates.*
 | 15 | Give a time estimate (hours) for the talking document-summaries agent (talk to it; it gathers/summarizes docs in a folder; can call bash/shell; carries conversation context) | M8 | Engineering | Complete — ~3 h build + 30 min user test, recorded in [`implementation-plan.md`](implementation-plan.md) |
 | 16 | Build the talking document-summaries agent — easiest working path, updating the existing Pipecat POC is acceptable; then integrate with the worker backend as the following step | M8 | Engineering | Complete — fulfilled by the existing bash tool (verified live: "read any file in the current directory and summarize it"); no specialized agent needed. Worker-backend integration remains the following step |
 | 17 | Make audio and separate modes work properly (quality parity with realtime): replace the janky gpt-audio-mini voice (misheard speech even when spoken slowly) and fix misrecognition — required BEFORE any benchmarking | M9 | Engineering | Open — first priority per M9 ("first get those things working") |
-| 18 | Collate all POC run data (results JSONs) into a CSV/JSON benchmark dataset under a dedicated folder so future runs append; format flexible as long as data is retained | M9 | Engineering | Open |
+| 18 | Collate all POC run data (results JSONs) into a CSV/JSON benchmark dataset under a dedicated folder so future runs append; format flexible as long as data is retained | M9 | Engineering | Complete |
 | 19 | Report monetary cost per minute of conversation and per session (e.g. 10-minute talk) for each approach, from existing data — not token tables | M9 | Engineering | Open — computable from data already collected |
 | 20 | Identify cost-effective alternative models (cheaper realtime alternative if any; better voice model for audio; not married to OpenAI — OpenRouter candidates welcome), swap into the POCs and benchmark cost AND quality; target ~₹800–900/month for a full-time voice assistant | M9 | Engineering | Open — blocked by #17 |
-| 21 | Check where the models are hosted (resolve endpoint IPs / regions); location may account for ~200 ms of latency | M9 | Engineering | Open |
+| 21 | Check where the models are hosted (resolve endpoint IPs / regions); location may account for ~200 ms of latency | M9 | Engineering | Complete |
 | 22 | Send a time estimate for #17–#21 before starting (~2 hours suggested by Viswanath; flag if more) | M9 | Engineering | Complete — estimate sent to Viswanath and agreed |
 
 ## 6. Document map

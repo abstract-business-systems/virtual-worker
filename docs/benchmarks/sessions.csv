@@ -1,0 +1,24 @@
+ts,mode,engine,model,turns,wall_s,tok_in,tok_in_audio,tok_cached,tok_out,tok_out_audio,cost_usd,cost_per_turn_usd,cost_per_min_usd,src
+2026-11-03T05:36:00Z,audio,chat_audio,gpt-audio-mini,1,,551,162,0,224,161,0.000868,0.000868,,experiments/pipecat-poc/results/audio-20261103T053644Z.json
+2026-11-03T05:50:43Z,audio,chat_audio,gpt-audio-mini,4,,1026,178,0,461,343,0.001722,0.000431,,experiments/pipecat-poc/results/audio-20261103T055128Z.json
+2026-11-03T12:12:30Z,audio,chat_audio,gpt-audio-mini,9,,6769,1401,0,2248,1695,0.172262,0.01914,,experiments/pipecat-poc/results/audio-20261103T121434Z.json
+2026-11-03T12:26:28Z,audio,chat_audio,gpt-audio-mini,12,,4806,1506,0,1425,1075,0.128742,0.010729,,experiments/pipecat-poc/results/audio-20261103T122839Z.json
+20261102 134337,realtime,pipecat,gpt-realtime-2.1-mini,3,40.0,,,,,,0.0123,0.0041,0.000307,experiments/pipecat-poc/results/chat-20261102T134337Z.json
+20261102 134733,realtime,pipecat,gpt-realtime-2.1-mini,2,22.7,,,,,,0.0052,0.0026,0.000229,experiments/pipecat-poc/results/chat-20261102T134733Z.json
+20261102 135000,realtime,pipecat,gpt-realtime-2.1-mini,3,62.1,,,,,,0.0127,0.004233,0.000205,experiments/pipecat-poc/results/chat-20261102T135000Z.json
+20261102 135746,realtime,pipecat,gpt-realtime-2.1-mini,2,19.5,,,,,,0.0056,0.0028,0.000287,experiments/pipecat-poc/results/chat-20261102T135746Z.json
+20261102 143832,realtime,pipecat,gpt-realtime-2.1-mini,9,129.5,,,,,,0.0414,0.0046,0.00032,experiments/pipecat-poc/results/chat-20261102T143832Z.json
+20261102 144323,realtime,pipecat,gpt-realtime-2.1-mini,4,65.7,,,,,,0.0217,0.005425,0.00033,experiments/pipecat-poc/results/chat-20261102T144323Z.json
+20261102 145404,realtime,pipecat,gpt-realtime-2.1-mini,2,30.5,,,,,,0.0054,0.0027,0.000177,experiments/pipecat-poc/results/chat-20261102T145404Z.json
+20261102 145521,realtime,pipecat,gpt-realtime-2.1-mini,4,65.4,,,,,,0.0137,0.003425,0.000209,experiments/pipecat-poc/results/chat-20261102T145521Z.json
+20261102 151218,realtime,pipecat,gpt-realtime-2.1-mini,1,138.8,,,,,,0.0009,0.0009,6e-06,experiments/pipecat-poc/results/chat-20261102T151218Z.json
+20261102 152002,realtime,pipecat,gpt-realtime-2.1-mini,3,57.0,,,,,,0.0185,0.006167,0.000325,experiments/pipecat-poc/results/chat-20261102T152002Z.json
+20261103 053301,realtime,pipecat,gpt-realtime-2.1-mini,2,71.7,1387,150,0,575,360,0.009958,0.004979,0.000139,experiments/pipecat-poc/results/chat-20261103T053301Z.json
+20261103 055019,realtime,pipecat,gpt-realtime-2.1-mini,7,76.7,5312,882,256,1883,1374,0.040026,0.005718,0.000522,experiments/pipecat-poc/results/chat-20261103T055019Z.json
+20261103 060120,realtime,pipecat,gpt-realtime-2.1-mini,1,11.4,459,10,448,249,169,0.003673,0.003673,0.000322,experiments/pipecat-poc/results/chat-20261103T060120Z.json
+20261103 125045,separate,pipecat,gpt-4o-mini-transcribe + gpt-4o-mini + gpt-4o-mini-tts,1,31.1,0,0,0,0,0,,,,experiments/pipecat-poc/results/sep-pipecat-20261103T125045Z.json
+20261103 125141,separate,pipecat,gpt-4o-mini-transcribe + gpt-4o-mini + gpt-4o-mini-tts,1,34.0,0,0,0,0,0,,,,experiments/pipecat-poc/results/sep-pipecat-20261103T125141Z.json
+20261103 125413,separate,pipecat,gpt-4o-mini-transcribe + gpt-4o-mini + gpt-4o-mini-tts,2,31.1,0,0,0,163,163,0.001956,0.000978,6.3e-05,experiments/pipecat-poc/results/sep-pipecat-20261103T125413Z.json
+2026-11-03T05:51:37Z,separate,chat_audio,whisper-local + gpt-4o-mini + piper,7,,1219,0,0,1234,878,0.003031,0.000433,,experiments/pipecat-poc/results/separate-20261103T055310Z.json
+2026-11-03T06:17:10Z,separate,chat_audio,whisper-local + gpt-4o-mini + piper,5,,1556,0,0,1338,940,0.003258,0.000652,,experiments/pipecat-poc/results/separate-20261103T061828Z.json
+2026-11-03T12:07:57Z,separate,chat_audio,whisper-local + gpt-4o-mini + piper,13,,7230,294,0,2952,2381,0.033062,0.002543,,experiments/pipecat-poc/results/separate-20261103T121115Z.json
