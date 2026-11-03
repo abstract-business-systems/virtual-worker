@@ -1,0 +1,1976 @@
+WEBVTT
+
+fba61c3d-4b87-4552-b29d-16bc31023404/14-0
+00:01:36.882 --> 00:01:37.442
+<v Sarooparam Chenaram Darji>Yes, I do.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/15-0
+00:01:38.802 --> 00:01:40.002
+<v Viswanath Chidambaram>Welcome back.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/16-0
+00:01:40.562 --> 00:01:40.842
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/20-0
+00:02:01.282 --> 00:02:01.682
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/21-0
+00:02:01.842 --> 00:02:02.322
+<v Viswanath Chidambaram>According.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/22-0
+00:02:10.562 --> 00:02:11.362
+<v Viswanath Chidambaram>Yeah, I'm audible.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/23-0
+00:02:11.842 --> 00:02:14.722
+<v Sarooparam Chenaram Darji>Yeah, your audible recording has started.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/24-0
+00:02:15.762 --> 00:02:16.322
+<v Viswanath Chidambaram>Mhm.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/25-0
+00:02:18.482 --> 00:02:21.202
+<v Sarooparam Chenaram Darji>These are the numbers basically I got.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/27-0
+00:02:23.362 --> 00:02:24.402
+<v Viswanath Chidambaram>One second zero.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/28-0
+00:02:25.922 --> 00:02:28.736
+<v Sarooparam Chenaram Darji>Yeah,
+so you were also talking about the cash</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/28-1
+00:02:28.736 --> 00:02:31.122
+<v Sarooparam Chenaram Darji>thing. So real time was using the cash.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/32-0
+00:02:32.562 --> 00:02:38.687
+<v Sarooparam Chenaram Darji>Right,
+it was cashing some 58% of input tokens,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/32-1
+00:02:38.687 --> 00:02:42.642
+<v Sarooparam Chenaram Darji>text and audio both like 4 448.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/29-0
+00:02:39.202 --> 00:02:39.682
+<v Viswanath Chidambaram>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/30-0
+00:02:41.522 --> 00:02:41.842
+<v Viswanath Chidambaram>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/31-0
+00:02:44.002 --> 00:02:44.402
+<v Viswanath Chidambaram>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/33-0
+00:02:44.562 --> 00:02:46.882
+<v Sarooparam Chenaram Darji>Text 1064 audio tokens.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/34-0
+00:02:47.442 --> 00:02:48.002
+<v Viswanath Chidambaram>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/35-0
+00:02:48.962 --> 00:02:49.522
+<v Sarooparam Chenaram Darji>And.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/36-0
+00:02:50.802 --> 00:02:52.402
+<v Viswanath Chidambaram>Do we have actually like a dollar
+breakdown?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/37-0
+00:02:53.602 --> 00:02:54.242
+<v Sarooparam Chenaram Darji>Dollar.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/38-0
+00:02:55.602 --> 00:02:59.602
+<v Viswanath Chidambaram>Do you have actually you have monitoring
+card breakdown rather than token thing?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/39-0
+00:03:01.442 --> 00:03:05.682
+<v Sarooparam Chenaram Darji>Monetary cost breakdown means,
+can you say?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/41-0
+00:03:05.842 --> 00:03:08.802
+<v Viswanath Chidambaram>How many dollars per?
+How many dollars per dollars in a lag?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/42-0
+00:03:10.162 --> 00:03:12.162
+<v Sarooparam Chenaram Darji>How many dollars per call?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/43-0
+00:03:13.122 --> 00:03:14.402
+<v Viswanath Chidambaram>How many dollars per session?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/46-0
+00:03:17.362 --> 00:03:21.914
+<v Sarooparam Chenaram Darji>Yeah,
+the session in the sense entire session</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/46-1
+00:03:21.914 --> 00:03:27.257
+<v Sarooparam Chenaram Darji>itself right?
+Cost in the real time time scenario one</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/44-0
+00:03:22.242 --> 00:03:22.562
+<v Viswanath Chidambaram>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/45-0
+00:03:26.562 --> 00:03:27.042
+<v Viswanath Chidambaram>Yes.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/46-2
+00:03:27.257 --> 00:03:32.402
+<v Sarooparam Chenaram Darji>QA turn typical is.
+Are you talking about this one?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/48-0
+00:03:35.122 --> 00:03:40.727
+<v Viswanath Chidambaram>So like what I want to understand is what
+it cost if actually somebody saw like the</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/48-1
+00:03:40.727 --> 00:03:45.530
+<v Viswanath Chidambaram>model, if you remember the model,
+so we assume that actually it will be</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/47-0
+00:03:42.362 --> 00:03:42.642
+<v Sarooparam Chenaram Darji>No.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/48-2
+00:03:45.530 --> 00:03:51.068
+<v Viswanath Chidambaram>let's say like some 20 minutes of output
+and actually some 40 minutes of output or</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/48-3
+00:03:51.068 --> 00:03:52.802
+<v Viswanath Chidambaram>something like that, okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/50-0
+00:03:52.962 --> 00:03:56.876
+<v Viswanath Chidambaram>Thank you. So in the same sense,
+if you can get many price cost,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/50-1
+00:03:56.876 --> 00:04:01.212
+<v Viswanath Chidambaram>you can actually use it elsewhere.
+So the question is instead of terms,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/50-2
+00:04:01.212 --> 00:04:06.149
+<v Viswanath Chidambaram>the idea is to understand 2 things, okay,
+like basically we should know like what</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/50-3
+00:04:06.149 --> 00:04:09.762
+<v Viswanath Chidambaram>would what would be the expense per
+minute of conversation.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/49-0
+00:04:10.562 --> 00:04:10.762
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/52-0
+00:04:12.242 --> 00:04:14.300
+<v Viswanath Chidambaram>Yeah,
+that is the number we are looking at.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/52-1
+00:04:14.300 --> 00:04:17.622
+<v Viswanath Chidambaram>What the measure actually? OK,
+let's actually focus on the numbers you</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/52-2
+00:04:17.622 --> 00:04:20.147
+<v Viswanath Chidambaram>have currently.
+What are the numbers you have when it</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/51-0
+00:04:18.562 --> 00:04:18.962
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/52-3
+00:04:20.147 --> 00:04:20.802
+<v Viswanath Chidambaram>comes to cost?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/53-0
+00:04:21.522 --> 00:04:30.426
+<v Sarooparam Chenaram Darji>So currently it's basically measured part
+and with the cash breakdown basically the</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/53-1
+00:04:30.426 --> 00:04:37.952
+<v Sarooparam Chenaram Darji>its seconds. So first audio 1.
+30 seconds of audio which is costing 0.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/53-2
+00:04:37.952 --> 00:04:38.482
+<v Sarooparam Chenaram Darji>0036.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/54-0
+00:04:40.402 --> 00:04:44.802
+<v Sarooparam Chenaram Darji>With the 524 talk tokens,
+you are talking about the basically.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/55-0
+00:04:46.202 --> 00:04:50.562
+<v Sarooparam Chenaram Darji>Second cost you are talking you are
+saying the minutes cost, right?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/58-0
+00:04:49.362 --> 00:04:52.087
+<v Viswanath Chidambaram>Dollar cost by I am talking like a 5
+minutes cost.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/58-1
+00:04:52.087 --> 00:04:56.469
+<v Viswanath Chidambaram>So like what I want to understand is what
+would be the what actually the answer I</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/56-0
+00:04:52.162 --> 00:04:53.202
+<v Sarooparam Chenaram Darji>Dollar cost.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/58-2
+00:04:56.469 --> 00:04:59.782
+<v Viswanath Chidambaram>want is simple. Okay,
+what would be the cost that actually we</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/58-3
+00:04:59.782 --> 00:05:03.362
+<v Viswanath Chidambaram>have to pay if you are lets say like
+talking to it for 10 minutes?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/57-0
+00:05:04.562 --> 00:05:04.882
+<v Sarooparam Chenaram Darji>Wow.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/59-0
+00:05:05.122 --> 00:05:08.285
+<v Viswanath Chidambaram>Where is it? Okay,
+like this one real time model,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/59-1
+00:05:08.285 --> 00:05:12.713
+<v Viswanath Chidambaram>audio model, it is an STT model.
+These combinations actually how much</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/59-2
+00:05:12.713 --> 00:05:16.382
+<v Viswanath Chidambaram>actually cost the how much they how much
+they might cost.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/59-3
+00:05:16.382 --> 00:05:20.430
+<v Viswanath Chidambaram>If actually we are talking to them for a
+minute for 10 minutes,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/59-4
+00:05:20.430 --> 00:05:25.554
+<v Viswanath Chidambaram>do we have those numbers or we will be
+able to get those numbers out of whatever</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/59-5
+00:05:25.554 --> 00:05:26.882
+<v Viswanath Chidambaram>data we already have?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/60-0
+00:05:27.682 --> 00:05:31.482
+<v Sarooparam Chenaram Darji>I think we can get the numbers based on
+the data.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/60-1
+00:05:31.482 --> 00:05:35.282
+<v Sarooparam Chenaram Darji>I can simply ask it and it can give it
+right now.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/62-0
+00:05:32.722 --> 00:05:37.930
+<v Viswanath Chidambaram>Okay, and there is one other thing,
+but actually you will actually go through</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/62-1
+00:05:37.930 --> 00:05:41.602
+<v Viswanath Chidambaram>your tables first. Okay,
+you are talking first, right?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/61-0
+00:05:39.282 --> 00:05:39.562
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/65-0
+00:05:42.962 --> 00:05:45.614
+<v Viswanath Chidambaram>Like, could we go to the table?
+We will go to the table.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/65-1
+00:05:45.614 --> 00:05:49.011
+<v Viswanath Chidambaram>Let's not worry about the class.
+Let's actually look at the table. Okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/63-0
+00:05:48.162 --> 00:05:48.482
+<v Sarooparam Chenaram Darji>yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/65-2
+00:05:49.011 --> 00:05:51.988
+<v Viswanath Chidambaram>first, actually there like for me,
+the text is not that useful,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/65-3
+00:05:51.988 --> 00:05:54.454
+<v Viswanath Chidambaram>so you might have to help me with the
+numbers. Okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/64-0
+00:05:54.162 --> 00:05:55.362
+<v Sarooparam Chenaram Darji>Yeah, I will make it bigger.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/65-4
+00:05:54.454 --> 00:05:57.804
+<v Viswanath Chidambaram>the first thing is real time only, right?
+Yeah, now it is better. Yeah,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/65-5
+00:05:57.804 --> 00:06:01.572
+<v Viswanath Chidambaram>now actually the thing is actually like
+what is real time T1 and real time TP is</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/65-6
+00:06:01.572 --> 00:06:02.642
+<v Viswanath Chidambaram>it turn on and turn on.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/66-0
+00:06:03.362 --> 00:06:04.322
+<v Viswanath Chidambaram>A try on try do.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/67-0
+00:06:05.042 --> 00:06:08.962
+<v Sarooparam Chenaram Darji>At turn one and turn 2 real time, yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/68-0
+00:06:07.682 --> 00:06:09.762
+<v Viswanath Chidambaram>Did you ask only one question?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/69-0
+00:06:13.522 --> 00:06:19.708
+<v Sarooparam Chenaram Darji>No, I ask multiple questions,
+but if this is the basically tests done</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/69-1
+00:06:19.708 --> 00:06:25.717
+<v Sarooparam Chenaram Darji>by agent, I talk with it,
+but this is the talking done by the agent</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/69-2
+00:06:25.717 --> 00:06:27.042
+<v Sarooparam Chenaram Darji>itself with it.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/70-0
+00:06:28.362 --> 00:06:34.617
+<v Viswanath Chidambaram>Did it actually use the same thing for
+what is it same text for like every</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/70-1
+00:06:34.617 --> 00:06:37.202
+<v Viswanath Chidambaram>approach? Is that the case? or?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/71-0
+00:06:37.762 --> 00:06:40.002
+<v Sarooparam Chenaram Darji>It sent the audio itself.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/73-0
+00:06:41.522 --> 00:06:45.007
+<v Viswanath Chidambaram>Okay, yes, input okay then okay,
+no issues, we will go on. Okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/72-0
+00:06:41.922 --> 00:06:42.362
+<v Sarooparam Chenaram Darji>Wait.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/73-1
+00:06:45.007 --> 00:06:46.722
+<v Viswanath Chidambaram>so like this one actually first.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/74-0
+00:06:49.442 --> 00:06:50.722
+<v Sarooparam Chenaram Darji>Your voice is cutting.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/75-0
+00:06:52.322 --> 00:06:53.522
+<v Sarooparam Chenaram Darji>They're not audible now.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/76-0
+00:07:03.282 --> 00:07:04.002
+<v Sarooparam Chenaram Darji>Are you back?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/77-0
+00:07:04.642 --> 00:07:05.522
+<v Viswanath Chidambaram>Yes, sir, we are on.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/78-0
+00:07:06.322 --> 00:07:06.722
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/80-0
+00:07:09.282 --> 00:07:14.486
+<v Viswanath Chidambaram>Hey, got a call. So yeah,
+real time it is like 1.3, okay, fine.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/79-0
+00:07:09.362 --> 00:07:10.082
+<v Sarooparam Chenaram Darji>You're audible.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/80-1
+00:07:14.486 --> 00:07:19.282
+<v Viswanath Chidambaram>Okay, cost and okay,
+there is no latency information here.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/81-0
+00:07:21.762 --> 00:07:22.802
+<v Sarooparam Chenaram Darji>Latencies.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/82-0
+00:07:24.482 --> 00:07:24.602
+<v Viswanath Chidambaram>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/83-0
+00:07:25.762 --> 00:07:27.202
+<v Sarooparam Chenaram Darji>It's been there was.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/84-0
+00:07:25.842 --> 00:07:30.229
+<v Viswanath Chidambaram>So we need actually the time,
+we need the time between, let us say,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/84-1
+00:07:30.229 --> 00:07:33.391
+<v Viswanath Chidambaram>the user actually finishing their request.
+Okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/84-2
+00:07:33.391 --> 00:07:35.842
+<v Viswanath Chidambaram>are they getting their first response?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/85-0
+00:07:39.202 --> 00:07:41.042
+<v Viswanath Chidambaram>I want to understand the duration.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/86-0
+00:07:42.082 --> 00:07:42.402
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/88-0
+00:07:46.322 --> 00:07:54.722
+<v Sarooparam Chenaram Darji>It says, wait a sec,
+and this is what's the latency it says.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/87-0
+00:07:46.482 --> 00:07:48.402
+<v Viswanath Chidambaram>It is now talking about first.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/89-0
+00:07:57.282 --> 00:08:02.452
+<v Viswanath Chidambaram>So like we like, so if you remember,
+actually we decided to, let's say,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/89-1
+00:08:02.452 --> 00:08:05.682
+<v Viswanath Chidambaram>like measure perceived delay sudden
+latency.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/90-0
+00:08:07.362 --> 00:08:08.562
+<v Viswanath Chidambaram>So try to get that number.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/91-0
+00:08:09.522 --> 00:08:09.842
+<v Sarooparam Chenaram Darji>Thanks.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/92-0
+00:08:11.042 --> 00:08:13.967
+<v Viswanath Chidambaram>Okay, basically to look at this one,
+what is it?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/92-1
+00:08:13.967 --> 00:08:18.562
+<v Viswanath Chidambaram>It is saying audio in point passing
+viewpoint. What is the in point in pass?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/93-0
+00:08:19.762 --> 00:08:21.922
+<v Sarooparam Chenaram Darji>Yeah, this one sending request to the...</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/94-0
+00:08:23.842 --> 00:08:26.162
+<v Sarooparam Chenaram Darji>Model by end point.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/95-0
+00:08:33.202 --> 00:08:35.713
+<v Viswanath Chidambaram>Okay, I have one question.
+What is the difference between real time</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/95-1
+00:08:35.713 --> 00:08:36.082
+<v Viswanath Chidambaram>and audio?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/97-0
+00:08:37.922 --> 00:08:44.259
+<v Sarooparam Chenaram Darji>Real time and the audio real time is
+basically real time model which stays</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/97-1
+00:08:44.259 --> 00:08:51.102
+<v Sarooparam Chenaram Darji>like basically we talk with it in between
+it can do the calls like tool call and</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/97-2
+00:08:51.102 --> 00:08:56.762
+<v Sarooparam Chenaram Darji>everything the audio model we have to
+send request wait for it to.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/96-0
+00:08:51.842 --> 00:08:52.402
+<v Viswanath Chidambaram>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/98-0
+00:08:56.882 --> 00:09:01.602
+<v Sarooparam Chenaram Darji>Answer and then we basically like back
+and forth.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/100-0
+00:09:03.042 --> 00:09:05.442
+<v Sarooparam Chenaram Darji>Where real time it stays live.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/99-0
+00:09:03.602 --> 00:09:04.962
+<v Viswanath Chidambaram>Okay, it's not running at first.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/101-0
+00:09:06.962 --> 00:09:10.858
+<v Viswanath Chidambaram>Okay, fine. Okay then, okay,
+let's actually so the latency here is</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/101-1
+00:09:10.858 --> 00:09:15.452
+<v Viswanath Chidambaram>actually like I work even like I expected
+end to end. What is end to end so 1.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/101-2
+00:09:15.452 --> 00:09:19.697
+<v Viswanath Chidambaram>1 so that I want to understand actually
+what does it mean by end to end?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/101-3
+00:09:19.697 --> 00:09:24.291
+<v Viswanath Chidambaram>Is it actually from the user actually
+like stops the talking and then actually</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/101-4
+00:09:24.291 --> 00:09:27.082
+<v Viswanath Chidambaram>what is it the agents actually start
+measuring?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/102-0
+00:09:28.242 --> 00:09:29.842
+<v Viswanath Chidambaram>Okay, sir, I'm sorry, the agents.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/103-0
+00:09:28.282 --> 00:09:30.322
+<v Sarooparam Chenaram Darji>Which entry and are you referring to?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/104-0
+00:09:31.762 --> 00:09:34.680
+<v Viswanath Chidambaram>So you have this one,
+the latency breakdown,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/104-1
+00:09:34.680 --> 00:09:37.922
+<v Viswanath Chidambaram>the last column expect, sorry,
+expect end to end.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/106-0
+00:09:41.402 --> 00:09:45.430
+<v Sarooparam Chenaram Darji>Latency breakdown expect okay end to end.
+So yeah,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/106-1
+00:09:45.430 --> 00:09:51.591
+<v Sarooparam Chenaram Darji>this one basically you stop speaking,
+reply starts and that is I think end to</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/106-2
+00:09:51.591 --> 00:09:55.224
+<v Sarooparam Chenaram Darji>end.
+It is talking about on one server stream</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/105-0
+00:09:52.762 --> 00:09:55.122
+<v Viswanath Chidambaram>Yeah,
+just I can try to get the definition too.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/106-3
+00:09:55.224 --> 00:09:56.882
+<v Sarooparam Chenaram Darji>turns detected, yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/107-0
+00:09:59.842 --> 00:10:00.962
+<v Viswanath Chidambaram>First audio chunk.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/108-0
+00:10:11.842 --> 00:10:12.202
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/110-0
+00:10:12.282 --> 00:10:13.242
+<v Viswanath Chidambaram>Down to 1.6.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/109-0
+00:10:13.642 --> 00:10:13.962
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/113-0
+00:10:15.002 --> 00:10:17.482
+<v Viswanath Chidambaram>Okay,
+we might have to check actually because</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/113-1
+00:10:17.482 --> 00:10:21.256
+<v Viswanath Chidambaram>where this models live. Okay,
+so like if need have we actually try to</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/113-2
+00:10:21.256 --> 00:10:24.383
+<v Viswanath Chidambaram>do it with Ashur.
+So like you will be able to like ask it</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/113-3
+00:10:24.383 --> 00:10:28.534
+<v Viswanath Chidambaram>actually where the models actually are
+located by actually getting their IP.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/113-4
+00:10:28.534 --> 00:10:32.524
+<v Viswanath Chidambaram>The request will be there already
+recorded somewhere to try to understand</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/112-0
+00:10:31.162 --> 00:10:31.482
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/113-5
+00:10:32.524 --> 00:10:33.602
+<v Viswanath Chidambaram>the models location.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/115-0
+00:10:34.242 --> 00:10:38.651
+<v Viswanath Chidambaram>That might actually account for some 200
+MS that will actually get out. Okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/114-0
+00:10:37.922 --> 00:10:38.442
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/115-1
+00:10:38.651 --> 00:10:42.381
+<v Viswanath Chidambaram>could you could you show me the cost cost
+like a cost really? No,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/115-2
+00:10:42.381 --> 00:10:45.602
+<v Viswanath Chidambaram>like the actual cost,
+not actually the assumption thing.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/116-0
+00:10:47.162 --> 00:10:49.402
+<v Sarooparam Chenaram Darji>Resumptions little bit odd.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/117-0
+00:10:53.402 --> 00:10:53.642
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/118-0
+00:10:54.642 --> 00:10:56.642
+<v Viswanath Chidambaram>Okay, go to the real.
+It is literally what is it?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/119-0
+00:10:54.842 --> 00:10:57.642
+<v Sarooparam Chenaram Darji>There is the cost, yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/121-0
+00:10:59.082 --> 00:11:12.322
+<v Sarooparam Chenaram Darji>524 tokens and 226 tokens and the cost is
+for 10.36 and with yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/122-0
+00:11:10.402 --> 00:11:13.852
+<v Viswanath Chidambaram>And leave it and like you had actually
+something like a QA one question or</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/122-1
+00:11:13.852 --> 00:11:17.486
+<v Viswanath Chidambaram>something and made some projection but
+like after the latest if you go to that</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/122-2
+00:11:17.486 --> 00:11:17.762
+<v Viswanath Chidambaram>table.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/123-0
+00:11:21.162 --> 00:11:21.722
+<v Sarooparam Chenaram Darji>This one.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/125-0
+00:11:23.762 --> 00:11:29.939
+<v Viswanath Chidambaram>Yeah, realization is okay. One QND,
+what is it saying? 4 to sorry, 4040,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/125-1
+00:11:29.939 --> 00:11:32.562
+<v Viswanath Chidambaram>60 days where is the real time?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/124-0
+00:11:31.562 --> 00:11:32.042
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/126-0
+00:11:34.322 --> 00:11:37.175
+<v Viswanath Chidambaram>Okay,
+this one is actually cardio is not even 9</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/126-1
+00:11:37.175 --> 00:11:38.482
+<v Viswanath Chidambaram>piece, it is 09 piece.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/127-0
+00:11:40.482 --> 00:11:43.762
+<v Viswanath Chidambaram>So like we don't have to go for separate
+review, we can go for audio.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/129-0
+00:11:47.602 --> 00:11:52.101
+<v Viswanath Chidambaram>Instead of HTT and GTS because actually
+it cost extra similar if not less and the</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/128-0
+00:11:51.802 --> 00:11:52.042
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/129-1
+00:11:52.101 --> 00:11:53.362
+<v Viswanath Chidambaram>latency is also better.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/130-0
+00:11:54.122 --> 00:11:54.442
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/131-0
+00:11:56.162 --> 00:11:58.868
+<v Viswanath Chidambaram>Okay,
+but actually this one we have to figure</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/131-1
+00:11:58.868 --> 00:12:02.162
+<v Viswanath Chidambaram>out actually what is the reason for this
+initial delay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/132-0
+00:12:03.602 --> 00:12:06.802
+<v Viswanath Chidambaram>This agency is high on the Saudi team,
+right?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/134-0
+00:12:04.962 --> 00:12:11.704
+<v Sarooparam Chenaram Darji>But so we might have to go for separate
+because with the audio I don't get proper</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/134-1
+00:12:11.704 --> 00:12:15.897
+<v Sarooparam Chenaram Darji>results,
+but basically we still need to change the</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/133-0
+00:12:12.362 --> 00:12:12.642
+<v Viswanath Chidambaram>Hello.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/134-2
+00:12:15.897 --> 00:12:20.500
+<v Sarooparam Chenaram Darji>model for sure.
+So when I talk with the real time model</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/134-3
+00:12:20.500 --> 00:12:24.282
+<v Sarooparam Chenaram Darji>tool calling listing files giving me the
+out.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/138-0
+00:12:24.362 --> 00:12:31.263
+<v Sarooparam Chenaram Darji>Would like even like I told it to like
+copy the read me file from current folder</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/138-1
+00:12:31.263 --> 00:12:36.375
+<v Sarooparam Chenaram Darji>to a desktop folder.
+It was able to do it with no issues in</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/135-0
+00:12:31.522 --> 00:12:32.082
+<v Viswanath Chidambaram>Mhm.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/136-0
+00:12:33.842 --> 00:12:34.922
+<v Viswanath Chidambaram>Because that is a good.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/138-2
+00:12:36.375 --> 00:12:40.975
+<v Sarooparam Chenaram Darji>the real real time thing with audio and
+the separate.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/137-0
+00:12:37.842 --> 00:12:38.482
+<v Viswanath Chidambaram>Mhm.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/138-3
+00:12:40.975 --> 00:12:44.042
+<v Sarooparam Chenaram Darji>What happened was my they basically.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/140-0
+00:12:44.162 --> 00:12:50.253
+<v Sarooparam Chenaram Darji>Patient the STT part was kind of like
+lets say janky. Whatever I say,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/140-1
+00:12:50.253 --> 00:12:57.562
+<v Sarooparam Chenaram Darji>it was understanding it totally different.
+Even if I like speak slowly, I tried to.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/139-0
+00:12:57.962 --> 00:12:59.282
+<v Viswanath Chidambaram>What is the model that is being used?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/141-0
+00:13:00.482 --> 00:13:03.082
+<v Sarooparam Chenaram Darji>It is a GPT audio mini.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/142-0
+00:13:04.562 --> 00:13:07.362
+<v Viswanath Chidambaram>Okay, go for actually 1,00,000,
+something like it now.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/144-0
+00:13:07.962 --> 00:13:11.642
+<v Sarooparam Chenaram Darji>Yeah, we'll have to try. Yeah, they are.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/143-0
+00:13:08.602 --> 00:13:09.842
+<v Viswanath Chidambaram>Calendar will open.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/146-0
+00:13:15.602 --> 00:13:19.596
+<v Viswanath Chidambaram>Okay,
+and what about the so Audio model CRM,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/145-0
+00:13:16.042 --> 00:13:16.442
+<v Sarooparam Chenaram Darji>Thank you.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/146-1
+00:13:19.596 --> 00:13:21.282
+<v Viswanath Chidambaram>CRM, CRM available?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/148-0
+00:13:21.962 --> 00:13:27.807
+<v Sarooparam Chenaram Darji>Yeah, we have to figure out,
+we have to finalise like which model to</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/147-0
+00:13:23.762 --> 00:13:24.242
+<v Viswanath Chidambaram>Okay, then.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/148-1
+00:13:27.807 --> 00:13:30.602
+<v Sarooparam Chenaram Darji>use, which will be better for us.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/149-0
+00:13:29.602 --> 00:13:32.477
+<v Viswanath Chidambaram>So real time, actually,
+what is the cost it is talking about?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/149-1
+00:13:32.477 --> 00:13:33.682
+<v Viswanath Chidambaram>Like, could we check that?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/150-0
+00:13:34.682 --> 00:13:41.482
+<v Sarooparam Chenaram Darji>Meeting our 50 and this is real time
+written. What cost are you talking about?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/151-0
+00:13:39.682 --> 00:13:42.562
+<v Viswanath Chidambaram>We are real tennis actually cover 60
+minutes.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/152-0
+00:13:44.162 --> 00:13:46.002
+<v Viswanath Chidambaram>It was extremely charging for ₹50.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/154-0
+00:13:49.562 --> 00:13:53.965
+<v Sarooparam Chenaram Darji>It says Friday listening for 60 minutes
+and speaking for 10 minutes,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/153-0
+00:13:49.762 --> 00:13:50.322
+<v Viswanath Chidambaram>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/154-1
+00:13:53.965 --> 00:13:54.922
+<v Sarooparam Chenaram Darji>approximate 51.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/155-0
+00:13:58.482 --> 00:14:00.962
+<v Viswanath Chidambaram>Okay, approximately ₹1500.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/156-0
+00:14:05.122 --> 00:14:12.082
+<v Viswanath Chidambaram>₹51, so like for a day it is ₹400,
+for actual 28 days, it will be 10 K.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/157-0
+00:14:15.442 --> 00:14:17.014
+<v Viswanath Chidambaram>Well,
+that's actually we can check actually</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/157-1
+00:14:17.014 --> 00:14:19.442
+<v Viswanath Chidambaram>whether actually there are actually other
+cheaper models available.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/158-0
+00:14:20.042 --> 00:14:20.442
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/161-0
+00:14:21.042 --> 00:14:24.899
+<v Viswanath Chidambaram>Just try to change the models.
+It shouldn't be that cost claim, right?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/159-0
+00:14:24.162 --> 00:14:24.442
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/161-1
+00:14:24.899 --> 00:14:29.353
+<v Viswanath Chidambaram>Try to change the models and try to let's
+say like a just once again like there's</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/160-0
+00:14:28.842 --> 00:14:29.242
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/161-2
+00:14:29.353 --> 00:14:33.699
+<v Viswanath Chidambaram>just a like a create to try to create a
+report and instead of actually multiple</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/161-3
+00:14:33.699 --> 00:14:37.990
+<v Viswanath Chidambaram>Mds ask you to maintain the data in a CSV
+and then I'll digest it and show the</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/161-4
+00:14:37.990 --> 00:14:38.642
+<v Viswanath Chidambaram>result here.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/162-0
+00:14:39.482 --> 00:14:44.337
+<v Sarooparam Chenaram Darji>Okay,
+what kind of basically data points do you</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/162-1
+00:14:44.337 --> 00:14:44.842
+<v Sarooparam Chenaram Darji>want?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/166-0
+00:14:47.282 --> 00:14:51.884
+<v Viswanath Chidambaram>So like, let me do one thing,
+let me not tell you the data points. Okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/163-0
+00:14:50.762 --> 00:14:51.002
+<v Sarooparam Chenaram Darji>No.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/166-1
+00:14:51.884 --> 00:14:55.288
+<v Viswanath Chidambaram>let me tell you the requirement.
+So we want actually,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/164-0
+00:14:52.602 --> 00:14:53.082
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/165-0
+00:14:54.522 --> 00:14:55.562
+<v Sarooparam Chenaram Darji>OK, requirement.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/166-2
+00:14:55.288 --> 00:14:59.386
+<v Viswanath Chidambaram>we want to understand,
+we want to like to figure out actually an</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/166-3
+00:14:59.386 --> 00:15:04.240
+<v Viswanath Chidambaram>architecture and a model size. Basically,
+we have to build a system which is</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/166-4
+00:15:04.240 --> 00:15:05.122
+<v Viswanath Chidambaram>actually like.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/167-0
+00:15:06.322 --> 00:15:08.722
+<v Viswanath Chidambaram>Perceived by the user is responsive.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/168-0
+00:15:10.322 --> 00:15:13.375
+<v Viswanath Chidambaram>Okay, we are talking about this one.
+What is it?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/168-1
+00:15:13.375 --> 00:15:17.922
+<v Viswanath Chidambaram>I forgot what is the word we used to use
+by for actually early response.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/169-0
+00:15:20.162 --> 00:15:21.282
+<v Viswanath Chidambaram>Sorry, perceive me delay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/170-0
+00:15:21.882 --> 00:15:22.362
+<v Sarooparam Chenaram Darji>Mhm.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/172-0
+00:15:23.562 --> 00:15:27.904
+<v Viswanath Chidambaram>So the idea is to find like this is
+actually something we earlier,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/172-1
+00:15:27.904 --> 00:15:31.728
+<v Viswanath Chidambaram>we added earlier,
+we added on this actually yesterday too.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/171-0
+00:15:28.522 --> 00:15:28.922
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/172-2
+00:15:31.728 --> 00:15:37.042
+<v Viswanath Chidambaram>The goal is simply like how to actually
+get actually a good pursue delay for less</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/172-3
+00:15:37.042 --> 00:15:41.644
+<v Viswanath Chidambaram>money if she actually increase them
+basically like just actually as an</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/172-4
+00:15:41.644 --> 00:15:42.162
+<v Viswanath Chidambaram>example.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/173-0
+00:15:42.322 --> 00:15:46.863
+<v Viswanath Chidambaram>It might be okay for the money to
+actually increase by 1X and actually the</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/173-1
+00:15:46.863 --> 00:15:49.042
+<v Viswanath Chidambaram>perceived delay reduced would be 2X.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/175-0
+00:15:50.322 --> 00:15:53.683
+<v Viswanath Chidambaram>Basically, lets say the money doubles,
+okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/175-1
+00:15:53.683 --> 00:15:59.061
+<v Viswanath Chidambaram>but lets say like the impact is actually
+14, we still could go with it.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/175-2
+00:15:59.061 --> 00:16:05.035
+<v Viswanath Chidambaram>This is relative cost and absolute cost,
+lets say like so like the idea is this</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/174-0
+00:16:00.282 --> 00:16:00.602
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/175-3
+00:16:05.035 --> 00:16:08.023
+<v Viswanath Chidambaram>one,
+what is it this so like one way or</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/175-4
+00:16:08.023 --> 00:16:10.562
+<v Viswanath Chidambaram>another, there are 2 things, okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/176-0
+00:16:12.722 --> 00:16:16.382
+<v Viswanath Chidambaram>Okay, so like anyway,
+like if you are actually bundling this</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/176-1
+00:16:16.382 --> 00:16:17.282
+<v Viswanath Chidambaram>and selling it.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/177-0
+00:16:18.762 --> 00:16:22.482
+<v Viswanath Chidambaram>We cannot actually like expect actually
+use it to like spend 24,000 on this.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/178-0
+00:16:23.002 --> 00:16:23.402
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/179-0
+00:16:25.322 --> 00:16:27.718
+<v Viswanath Chidambaram>Okay,
+so like we have to either figure out</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/179-1
+00:16:27.718 --> 00:16:30.447
+<v Viswanath Chidambaram>actually real time model which is cheaper,
+okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/179-2
+00:16:30.447 --> 00:16:34.402
+<v Viswanath Chidambaram>and which actually does whatever you are
+already like asking it to do.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/180-0
+00:16:35.802 --> 00:16:39.123
+<v Viswanath Chidambaram>OK, what was the best thing I did?
+Could you actually help me actually</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/180-1
+00:16:39.123 --> 00:16:41.602
+<v Viswanath Chidambaram>recollect actually what it told me and
+have a sleep?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/181-0
+00:16:42.602 --> 00:16:45.562
+<v Sarooparam Chenaram Darji>Good. Even now I.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/182-0
+00:16:47.042 --> 00:16:50.877
+<v Viswanath Chidambaram>Okay, so the cost but okay,
+so if it is actually 60,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/182-1
+00:16:50.877 --> 00:16:56.375
+<v Viswanath Chidambaram>so irrespective of actually where are we
+going to use actually Friday okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/182-2
+00:16:56.375 --> 00:17:02.163
+<v Viswanath Chidambaram>like expecting a user to pay let's say
+like around 10 K per month just on these</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/182-3
+00:17:02.163 --> 00:17:03.682
+<v Viswanath Chidambaram>models is not viable.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/183-0
+00:17:02.882 --> 00:17:06.830
+<v Sarooparam Chenaram Darji>And this is specifically only talking
+about, let's say,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/183-1
+00:17:06.830 --> 00:17:11.130
+<v Sarooparam Chenaram Darji>where when there is single instance of
+Friday, not multiple,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/183-2
+00:17:11.130 --> 00:17:12.962
+<v Sarooparam Chenaram Darji>multiple meetings and all.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/184-0
+00:17:15.402 --> 00:17:16.442
+<v Sarooparam Chenaram Darji>It's 10 K.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/186-0
+00:17:16.962 --> 00:17:20.642
+<v Viswanath Chidambaram>Not about multiple meeting like just
+actually we are talking only one instance.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/185-0
+00:17:18.682 --> 00:17:18.922
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/187-0
+00:17:21.002 --> 00:17:21.402
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/188-0
+00:17:22.242 --> 00:17:23.642
+<v Viswanath Chidambaram>I'm talking about Indian Coast.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/189-0
+00:17:24.122 --> 00:17:24.522
+<v Sarooparam Chenaram Darji>OK.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/190-0
+00:17:24.962 --> 00:17:27.066
+<v Viswanath Chidambaram>Yeah,
+since that actually we are actually</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/190-1
+00:17:27.066 --> 00:17:31.122
+<v Viswanath Chidambaram>providing actually Friday for a month and
+somebody is using it like an employee.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/192-0
+00:17:32.642 --> 00:17:37.137
+<v Viswanath Chidambaram>Okay, with the current approach,
+actually if you go with live model,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/192-1
+00:17:37.137 --> 00:17:41.761
+<v Viswanath Chidambaram>you like we might be easily chilling
+around, say like the simple text.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/192-2
+00:17:41.761 --> 00:17:46.907
+<v Viswanath Chidambaram>Friday is going to be the meeting for 8
+hours a day and 25 days a month. Okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/191-0
+00:17:43.722 --> 00:17:44.042
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/192-3
+00:17:46.907 --> 00:17:51.922
+<v Viswanath Chidambaram>we are talking about at this date,
+first actually 18 to 20 will be how much?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/193-0
+00:17:52.002 --> 00:17:53.002
+<v Viswanath Chidambaram>It is actually 200.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/194-0
+00:17:53.722 --> 00:17:54.042
+<v Sarooparam Chenaram Darji>Haan.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/198-0
+00:17:54.962 --> 00:17:59.541
+<v Viswanath Chidambaram>Okay, and this is ₹50 per minute.
+We are talking about extra ₹50 per hour.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/195-0
+00:17:57.402 --> 00:17:57.642
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/198-1
+00:17:59.541 --> 00:18:04.242
+<v Viswanath Chidambaram>We are talking about $200 per month.
+So we are looking at a bill of ₹10,000.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/196-0
+00:18:02.202 --> 00:18:02.682
+<v Sarooparam Chenaram Darji>Haan.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/197-0
+00:18:05.442 --> 00:18:05.642
+<v Sarooparam Chenaram Darji>Haan.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/199-0
+00:18:06.882 --> 00:18:09.344
+<v Viswanath Chidambaram>Okay, on the other hand,
+this hard even other things might be</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/199-1
+00:18:09.344 --> 00:18:11.091
+<v Viswanath Chidambaram>cheaper,
+but if it is not actually working,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/199-2
+00:18:11.091 --> 00:18:12.322
+<v Viswanath Chidambaram>there is no burden being cheap.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/201-0
+00:18:14.642 --> 00:18:18.813
+<v Viswanath Chidambaram>So like we have to figure out a way in
+which actually people have can actually</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/201-1
+00:18:18.813 --> 00:18:22.402
+<v Viswanath Chidambaram>spend let's say around 800 or ₹900 for a
+full time voice assistant.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/200-0
+00:18:23.082 --> 00:18:23.482
+<v Sarooparam Chenaram Darji>Haan.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/202-0
+00:18:24.562 --> 00:18:27.214
+<v Viswanath Chidambaram>Okay,
+like we might actually try to improve the</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/202-1
+00:18:27.214 --> 00:18:29.756
+<v Viswanath Chidambaram>architecture and so on and so forth later
+on,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/202-2
+00:18:29.756 --> 00:18:34.397
+<v Viswanath Chidambaram>but we'll try to actually initially we'll
+try to plug the lowering fruits by trying</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/202-3
+00:18:34.397 --> 00:18:34.562
+<v Viswanath Chidambaram>to.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/203-0
+00:18:36.802 --> 00:18:38.402
+<v Viswanath Chidambaram>Identify the right models.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/204-0
+00:18:38.762 --> 00:18:39.162
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/209-0
+00:18:40.322 --> 00:18:44.108
+<v Viswanath Chidambaram>That is just happening,
+you already have the numbers. Basically,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/205-0
+00:18:42.282 --> 00:18:42.682
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/206-0
+00:18:44.042 --> 00:18:44.362
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/209-1
+00:18:44.108 --> 00:18:47.603
+<v Viswanath Chidambaram>you are going to you don't even have to
+tell me the models.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/207-0
+00:18:47.402 --> 00:18:47.722
+<v Sarooparam Chenaram Darji>Oh.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/209-2
+00:18:47.603 --> 00:18:52.496
+<v Viswanath Chidambaram>Just actually look at the internet, okay,
+try to identify actually what may be cost</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/209-3
+00:18:52.496 --> 00:18:56.690
+<v Viswanath Chidambaram>cost effective model and actually try it
+and let me know. And this one.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/208-0
+00:18:54.042 --> 00:18:54.442
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/209-4
+00:18:56.690 --> 00:18:59.602
+<v Viswanath Chidambaram>So apart from this,
+so now actually the thing is.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/210-0
+00:18:59.722 --> 00:19:01.962
+<v Viswanath Chidambaram>Actually, we are actually married to open.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/211-0
+00:19:03.162 --> 00:19:03.562
+<v Sarooparam Chenaram Darji>Wow.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/212-0
+00:19:03.282 --> 00:19:05.448
+<v Viswanath Chidambaram>Okay,
+but actually if you can actually get</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/212-1
+00:19:05.448 --> 00:19:07.362
+<v Viswanath Chidambaram>actually like access of this Navanati.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/214-0
+00:19:09.362 --> 00:19:13.202
+<v Viswanath Chidambaram>No, actually things may be cheaper.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/213-0
+00:19:10.682 --> 00:19:11.082
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/215-0
+00:19:13.882 --> 00:19:14.202
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/216-0
+00:19:14.802 --> 00:19:16.848
+<v Viswanath Chidambaram>OK,
+so try to first actually ask it to</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/216-1
+00:19:16.848 --> 00:19:20.991
+<v Viswanath Chidambaram>actually identify actually the better
+cost of the models on OpenRouter and try</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/216-2
+00:19:20.991 --> 00:19:22.722
+<v Viswanath Chidambaram>to implement it and benchmark it.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/220-0
+00:19:24.402 --> 00:19:28.758
+<v Viswanath Chidambaram>That should be benchmark in the sense
+cost and quality. Okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/217-0
+00:19:26.922 --> 00:19:27.242
+<v Sarooparam Chenaram Darji>Wow.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/218-0
+00:19:28.522 --> 00:19:28.842
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/220-1
+00:19:28.758 --> 00:19:34.239
+<v Viswanath Chidambaram>but first actually since actually we do
+not have lets say like proper virtual</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/220-2
+00:19:34.239 --> 00:19:39.789
+<v Viswanath Chidambaram>proper models for these things are the
+other 2 things but from real time audio</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/219-0
+00:19:39.082 --> 00:19:39.202
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/220-3
+00:19:39.789 --> 00:19:40.562
+<v Viswanath Chidambaram>and mix it.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/221-0
+00:19:43.522 --> 00:19:47.154
+<v Viswanath Chidambaram>R1stt plus TTS thing.
+I forgot actually what was the name that</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/221-1
+00:19:47.154 --> 00:19:49.402
+<v Viswanath Chidambaram>we gave. Okay, try to get those things.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/222-0
+00:19:47.962 --> 00:19:53.962
+<v Sarooparam Chenaram Darji>Audio, TTS, and separate, Sir,
+real time audio and separate.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/223-0
+00:19:54.562 --> 00:19:57.922
+<v Viswanath Chidambaram>Separately, okay, so.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/224-0
+00:19:56.602 --> 00:20:02.373
+<v Sarooparam Chenaram Darji>Basically,
+there STTTTS and reasoning all 3 models</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/224-1
+00:20:02.373 --> 00:20:04.522
+<v Sarooparam Chenaram Darji>as separate models.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/225-0
+00:20:24.282 --> 00:20:24.682
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/226-0
+00:20:25.722 --> 00:20:30.443
+<v Viswanath Chidambaram>Which are like which are actually like it
+doesn't have to be really precise, okay,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/226-1
+00:20:30.443 --> 00:20:35.278
+<v Viswanath Chidambaram>but it should be definitely be like let's
+say good. It doesn't have to be excellent,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/226-2
+00:20:35.278 --> 00:20:39.942
+<v Viswanath Chidambaram>okay, whenever it should be good, okay.
+We can ask actually 5 to like provide you</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/226-3
+00:20:39.942 --> 00:20:42.842
+<v Viswanath Chidambaram>let's say other model options with an
+open router.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/228-0
+00:20:44.762 --> 00:20:49.962
+<v Viswanath Chidambaram>It does it and see like what is the cost
+and what's the quality of like other</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/227-0
+00:20:47.402 --> 00:20:47.722
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/232-0
+00:20:49.482 --> 00:20:53.026
+<v Sarooparam Chenaram Darji>Okay,
+and this basically I should try with this</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/228-1
+00:20:49.962 --> 00:20:50.362
+<v Viswanath Chidambaram>items.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/230-0
+00:20:52.202 --> 00:20:52.522
+<v Viswanath Chidambaram>All.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/232-1
+00:20:53.026 --> 00:20:57.455
+<v Sarooparam Chenaram Darji>one like swapping the models.
+If there's a real time model,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/232-2
+00:20:57.455 --> 00:21:02.991
+<v Sarooparam Chenaram Darji>I try to swap the real time model and try
+to check. If it's a audio model,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/232-3
+00:21:02.991 --> 00:21:05.722
+<v Sarooparam Chenaram Darji>I try to check with the other models.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/231-0
+00:21:03.802 --> 00:21:04.922
+<v Viswanath Chidambaram>Yeah, of course, yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/236-0
+00:21:06.682 --> 00:21:09.372
+<v Viswanath Chidambaram>So the idea is you currently have a set
+of models, OK,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/236-1
+00:21:09.372 --> 00:21:12.746
+<v Viswanath Chidambaram>the real time model might be costly.
+So simply because it is costly,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/233-0
+00:21:09.722 --> 00:21:10.042
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/234-0
+00:21:11.482 --> 00:21:11.802
+<v Sarooparam Chenaram Darji>Mm.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/236-2
+00:21:12.746 --> 00:21:16.218
+<v Viswanath Chidambaram>we might have to look for an alternative.
+On the other hand, this one,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/236-3
+00:21:16.218 --> 00:21:19.984
+<v Viswanath Chidambaram>what is it for actually this audio and
+the STT, the cost might not be there,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/236-4
+00:21:19.984 --> 00:21:21.402
+<v Viswanath Chidambaram>but the quality is not there.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/237-0
+00:21:23.402 --> 00:21:26.374
+<v Viswanath Chidambaram>So far that we might have to look for a
+what is it?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/237-1
+00:21:26.374 --> 00:21:28.602
+<v Viswanath Chidambaram>We might have to look for alternatives.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/238-0
+00:21:31.242 --> 00:21:33.612
+<v Viswanath Chidambaram>That's it.
+Try to actually identify them all and see</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/238-1
+00:21:33.612 --> 00:21:34.282
+<v Viswanath Chidambaram>where do we go.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/239-0
+00:21:34.922 --> 00:21:35.242
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/242-0
+00:21:36.682 --> 00:21:41.007
+<v Viswanath Chidambaram>Say look at basically ask it to let's say
+like a collate current actually run data</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/242-1
+00:21:41.007 --> 00:21:44.602
+<v Viswanath Chidambaram>as a THC field because actually you're
+planning to run similar runs.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/240-0
+00:21:41.962 --> 00:21:42.282
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/241-0
+00:21:45.002 --> 00:21:45.562
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/243-0
+00:21:46.282 --> 00:21:48.303
+<v Viswanath Chidambaram>Okay,
+you can even actually give an example to</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/243-1
+00:21:48.303 --> 00:21:51.440
+<v Viswanath Chidambaram>it. This is what next I'm going to do.
+So basically, in a similar sense,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/245-0
+00:21:50.602 --> 00:21:55.504
+<v Sarooparam Chenaram Darji>And already have like JSON files,
+it will be able to, I think,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/243-2
+00:21:51.440 --> 00:21:52.042
+<v Viswanath Chidambaram>you can click.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/245-1
+00:21:55.504 --> 00:21:59.082
+<v Sarooparam Chenaram Darji>move them into CSV and give us a proper
+data.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/244-0
+00:21:57.682 --> 00:21:59.362
+<v Viswanath Chidambaram>CSN So we are talking about CSN.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/246-0
+00:22:03.162 --> 00:22:03.562
+<v Sarooparam Chenaram Darji>Add.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/247-0
+00:22:04.602 --> 00:22:07.471
+<v Viswanath Chidambaram>Yeah, we're talking about CSV.
+Why for this one? Yeah,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/247-1
+00:22:07.471 --> 00:22:11.853
+<v Viswanath Chidambaram>it doesn't have to be CSV. If it is JSON,
+there is no issues as long as the data is</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/247-2
+00:22:11.853 --> 00:22:12.322
+<v Viswanath Chidambaram>with you.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/248-0
+00:22:13.762 --> 00:22:14.202
+<v Viswanath Chidambaram>It's fine.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/249-0
+00:22:14.962 --> 00:22:15.162
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/251-0
+00:22:16.122 --> 00:22:19.909
+<v Viswanath Chidambaram>I will even account due to coming these
+things under a separate hold level</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/250-0
+00:22:18.362 --> 00:22:22.042
+<v Sarooparam Chenaram Darji>It's already come at under like results.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/251-1
+00:22:19.909 --> 00:22:23.696
+<v Viswanath Chidambaram>benchlock, okay, including the numbers,
+including JSNPL and whatnot. Yeah,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/251-2
+00:22:23.696 --> 00:22:27.634
+<v Viswanath Chidambaram>so try to actually go with actually like
+one other new run and let's see like</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/251-3
+00:22:27.634 --> 00:22:28.442
+<v Viswanath Chidambaram>other things go.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/252-0
+00:22:34.762 --> 00:22:36.442
+<v Viswanath Chidambaram>Okay, portals.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/253-0
+00:22:37.962 --> 00:22:40.442
+<v Sarooparam Chenaram Darji>Yeah, that's it on this one.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/254-0
+00:22:41.802 --> 00:22:42.082
+<v Viswanath Chidambaram>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/256-0
+00:22:43.642 --> 00:22:47.249
+<v Viswanath Chidambaram>Try to like work this out.
+Let's say like a ask it to like a</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/256-1
+00:22:47.249 --> 00:22:52.157
+<v Viswanath Chidambaram>perspective, ask it to suggest models, OK,
+and then ask it to test it and then ask</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/256-2
+00:22:52.157 --> 00:22:53.162
+<v Viswanath Chidambaram>it to measure it.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/255-0
+00:22:53.882 --> 00:22:54.202
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/257-0
+00:22:55.802 --> 00:22:57.797
+<v Viswanath Chidambaram>Okay,
+and then we will try to actually do for</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/257-1
+00:22:57.797 --> 00:22:59.922
+<v Viswanath Chidambaram>other model,
+so and we will try to try the right</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/257-2
+00:22:59.922 --> 00:23:00.442
+<v Viswanath Chidambaram>combination.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/258-0
+00:23:01.002 --> 00:23:01.402
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/259-0
+00:23:01.842 --> 00:23:04.887
+<v Viswanath Chidambaram>First, actually, even before that,
+actually make it actually work on these 2</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/259-1
+00:23:04.887 --> 00:23:05.322
+<v Viswanath Chidambaram>approaches.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/260-0
+00:23:06.682 --> 00:23:07.762
+<v Viswanath Chidambaram>It has affected the cast.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/261-0
+00:23:08.842 --> 00:23:11.322
+<v Sarooparam Chenaram Darji>Work on approaches in the sense.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/262-0
+00:23:12.362 --> 00:23:13.882
+<v Viswanath Chidambaram>The 2 approaches that are not working.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/263-0
+00:23:16.202 --> 00:23:19.277
+<v Sarooparam Chenaram Darji>Okay,
+basically you are talking about this</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/263-1
+00:23:19.277 --> 00:23:22.852
+<v Sarooparam Chenaram Darji>audience separate like a real time it is
+working,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/263-2
+00:23:22.852 --> 00:23:27.642
+<v Sarooparam Chenaram Darji>but audio and separate models are not
+working correctly that part.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/266-0
+00:23:29.482 --> 00:23:34.041
+<v Viswanath Chidambaram>Real time is working or? Yeah, you are.
+Are you on this one? Yes, separate. Yeah,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/266-1
+00:23:34.041 --> 00:23:36.709
+<v Viswanath Chidambaram>you are.
+Just actually get those things working</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/264-0
+00:23:35.162 --> 00:23:35.722
+<v Sarooparam Chenaram Darji>There.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/266-2
+00:23:36.709 --> 00:23:37.042
+<v Viswanath Chidambaram>first.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/265-0
+00:23:37.482 --> 00:23:37.962
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/267-0
+00:23:38.842 --> 00:23:42.471
+<v Viswanath Chidambaram>Until then, we cannot measure them,
+so first I should get them working by</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/270-0
+00:23:40.842 --> 00:23:46.097
+<v Sarooparam Chenaram Darji>Yeah, working in this sense,
+which part are you referring to working</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/267-1
+00:23:42.471 --> 00:23:43.402
+<v Viswanath Chidambaram>varying the models.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/268-0
+00:23:45.002 --> 00:23:45.242
+<v Viswanath Chidambaram>Hello.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/270-1
+00:23:46.097 --> 00:23:50.362
+<v Sarooparam Chenaram Darji>working in the sense they are working but
+not properly.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/269-0
+00:23:48.602 --> 00:23:49.562
+<v Viswanath Chidambaram>It should be able to.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/271-0
+00:23:51.882 --> 00:23:55.322
+<v Viswanath Chidambaram>Ambai test to properly work. Basically,
+the only difference.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/272-0
+00:23:52.202 --> 00:23:58.362
+<v Sarooparam Chenaram Darji>Properly like the DTS,
+it is not getting properly and all.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/273-0
+00:23:59.202 --> 00:24:02.753
+<v Viswanath Chidambaram>Okay, I will tell you what.
+So they should actually make so when</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/273-1
+00:24:02.753 --> 00:24:06.468
+<v Viswanath Chidambaram>compared to real time model,
+the latency and proceed delay might be</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/273-2
+00:24:06.468 --> 00:24:08.762
+<v Viswanath Chidambaram>higher currently, the data will sit later.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/274-0
+00:24:10.042 --> 00:24:13.562
+<v Viswanath Chidambaram>Okay, but the result should be the same,
+the same similar in quality.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/275-0
+00:24:14.282 --> 00:24:14.602
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/276-0
+00:24:14.922 --> 00:24:16.394
+<v Viswanath Chidambaram>So the output is actually similar in
+quality,</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/276-1
+00:24:16.394 --> 00:24:18.122
+<v Viswanath Chidambaram>the input actually should be read, right?
+Am I right?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/277-0
+00:24:18.522 --> 00:24:18.922
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/278-0
+00:24:20.042 --> 00:24:21.322
+<v Viswanath Chidambaram>I like you try to do that.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/281-0
+00:24:22.522 --> 00:24:26.292
+<v Viswanath Chidambaram>And then we'll actually measure measure
+for it just to like ask if you'll just</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/279-0
+00:24:24.842 --> 00:24:25.322
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/281-1
+00:24:26.292 --> 00:24:30.061
+<v Viswanath Chidambaram>actually come out with some estimates of
+actually this much time we'll it will</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/281-2
+00:24:30.061 --> 00:24:33.162
+<v Viswanath Chidambaram>have we'll discuss that and then we'll
+take it to the next step.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/280-0
+00:24:33.882 --> 00:24:34.442
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/282-0
+00:24:36.042 --> 00:24:36.682
+<v Viswanath Chidambaram>Hotels.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/283-0
+00:24:37.642 --> 00:24:41.242
+<v Sarooparam Chenaram Darji>Yeah, that's there's forum going on.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/284-0
+00:24:42.602 --> 00:24:43.962
+<v Viswanath Chidambaram>Samatpuram, right?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/285-0
+00:24:44.122 --> 00:24:46.682
+<v Sarooparam Chenaram Darji>Yeah, I generally don't join that.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/286-0
+00:24:47.242 --> 00:24:50.282
+<v Viswanath Chidambaram>Okay,
+could you like ask offset me to pull?</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/287-0
+00:24:51.042 --> 00:24:53.802
+<v Sarooparam Chenaram Darji>Yeah, stop this recording.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/291-0
+00:24:53.962 --> 00:24:58.031
+<v Viswanath Chidambaram>Just actually send some estimates for me.
+It is actually around actually 2 hours in</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/288-0
+00:24:56.762 --> 00:24:57.242
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/291-1
+00:24:58.031 --> 00:25:00.598
+<v Viswanath Chidambaram>total. Go ahead now. Jis,
+you don't need to tell me.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/291-2
+00:25:00.598 --> 00:25:02.922
+<v Viswanath Chidambaram>If you think it is more than that,
+let me know.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/289-0
+00:25:01.162 --> 00:25:01.602
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/290-0
+00:25:03.722 --> 00:25:04.122
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/292-0
+00:25:05.242 --> 00:25:05.642
+<v Viswanath Chidambaram>Never.</v>
+
+fba61c3d-4b87-4552-b29d-16bc31023404/294-0
+00:25:06.362 --> 00:25:06.682
+<v Sarooparam Chenaram Darji>Right.</v>

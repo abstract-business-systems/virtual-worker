@@ -39,6 +39,7 @@ When a new recording `N.vtt` is added:
 | M6 | [`6.vtt`](recordings/6.vtt) | 2026-10-29* | 9m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Follow-up 1:1: voice-model cost research, conversation-layer plan alignment, and a Pipecat demo experiment | [`next-steps.md`](next-steps.md), [`conversation-layer-plan.md`](conversation-layer-plan.md) |
 | M7 | [`7.vtt`](recordings/7.vtt) | 2026-10-30* | 2m† | Viswanath Chidambaram; Sarooparam Chenaram Darji | POC scope: Pipecat and the OpenAI audio model — quality, cost, conversation memory, two-hour timebox | [`next-steps.md`](next-steps.md) |
 | M8 | [`8.vtt`](recordings/8.vtt) | 2026-11-02‡ | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | POC results review, layering (conversation vs tooling), next scope: a talking document-summaries agent with shell access, time estimate first | [`next-steps.md`](next-steps.md), [`architecture-discussion.md`](architecture-discussion.md) |
+| M9 | [`9.vtt`](recordings/9.vtt) | 2026-11-03§ | 25m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Cost review against product viability; audio-vs-separate cost comparison (no final drop decision); get audio+separate quality to parity first; benchmark cheaper/better models toward a ~₹800–900/month target | [`next-steps.md`](next-steps.md), [`poc-cost-results.md`](poc-cost-results.md) |
 
 *The transcripts do not state their recording dates; 2026-10-28 is the M3
 recording file's added date, 2026-10-29 is the M4–M6 file-added date, and
@@ -46,7 +47,9 @@ recording file's added date, 2026-10-29 is the M4–M6 file-added date, and
 †M7's recording started late; earlier discussion is not captured.
 ‡2026-11-02 is the M8 recording file's added date. M8's audio dropped
 repeatedly on both sides (Bluetooth issues); the transcript is fragmentary
-and the summary is best-effort.*
+and the summary is best-effort.
+§2026-11-03 is the M9 recording file's added date. The transcript is noisy
+(Bluetooth drops again); summaries are cross-checked against the raw text.*
 
 ## 3. Meeting summaries
 
@@ -191,12 +194,63 @@ fragmentary transcript.*
   build; integrating with the already-building worker backend (or the
   universal-UI backend) is the following step.
 
+### M9 — Cost review and model-benchmark scope (`9.vtt`)
+
+Review of the cost/latency tables and the next scope. *Transcript noisy
+(Bluetooth drops); quotes cross-checked against the raw text.*
+
+- The cache finding was presented (realtime cached ~58% of input tokens on
+  turn 2, text and audio).
+- Viswanath asked for **monetary cost, not token tables**: dollars per
+  session and **per minute of conversation** ("what would it cost to talk
+  to it for 10 minutes") for each of the three approaches — computable
+  from the data already collected.
+- Latency: he wants the **perceived delay** number (user stops speaking →
+  first response) and a clear end-to-end definition. He also asked to
+  check **where the models are hosted** (resolve the endpoint IPs; location
+  may account for ~200 ms).
+- **Audio vs separate (not a drop decision):** comparing the cost table,
+  Viswanath noted audio costs similar if not less than separate (STT+TTS)
+  with better latency ("we can go for audio… instead of STT and TTS").
+  Sarooparam pushed back that audio does not yet give proper results —
+  `gpt-audio-mini` misheard speech even when spoken slowly — and the model
+  must be changed. The closing instruction settled it: **first get BOTH
+  audio and separate working properly** ("the 2 approaches that are not
+  working") — until then they cannot be measured. Both stay in scope.
+- **Cost viability verdict:** realtime at ~₹51/meeting-hour → ~₹10K/month
+  for ONE instance is **not viable** for a product ("users can't pay that
+  just for the models"). Target: **~₹800–900/month for a full-time voice
+  assistant** — pick the low-hanging fruit first by choosing the right
+  models; architecture improvements come later.
+- **Next scope agreed:** not married to OpenAI — identify cost-effective
+  alternative models (asking OpenRouter for candidates is fine), swap them
+  into the POCs, and **benchmark cost AND quality**; try alternative
+  realtime models too if any exist.
+- **Data format:** collate all run data (results JSONs) into a CSV/JSON
+  benchmark dataset under a dedicated folder so future runs append; format
+  doesn't matter as long as the data is retained.
+- Process: send a **time estimate first** (Viswanath suggested ~2 hours
+  total; flag if more) before starting.
+
 ## 4. Journal
 
 Newest entries appear first.
 
 *The recording dates are not stated in the transcripts; the dates shown above
 are the recording file-added dates.*
+
+### 2026-11-03 — M9 cost review and model benchmark scope
+
+- Added M9: cost tables reviewed; Viswanath ruled realtime's ~₹10K/month
+  not viable for one instance and set a ~₹800–900/month target.
+- Recorded the audio-vs-separate comparison (Viswanath leaned audio:
+  similar-or-less cost, better latency) — explicitly NOT a drop decision;
+  both audio and separate stay in scope and must be made to work properly
+  (voice model to be replaced) before benchmarking, per the closing
+  instruction.
+- Recorded the next scope: per-minute/per-session monetary costs, model
+  location check, alternative-model research and cost+quality benchmarks,
+  and a CSV/JSON benchmark dataset that future runs append to.
 
 ### 2026-11-02 — M8 review and next scope
 
@@ -312,6 +366,12 @@ are the recording file-added dates.*
 | 14 | Run the POCs: Pipecat demo and/or the OpenAI audio-model probe — mimic current behavior, answer questions, conversation memory ideally; measure output quality and cost | M7 | Engineering | Complete — all three modes built as talkable CLIs with measured latency/cost; results in [`architecture-discussion.md`](architecture-discussion.md) |
 | 15 | Give a time estimate (hours) for the talking document-summaries agent (talk to it; it gathers/summarizes docs in a folder; can call bash/shell; carries conversation context) | M8 | Engineering | Complete — ~3 h build + 30 min user test, recorded in [`implementation-plan.md`](implementation-plan.md) |
 | 16 | Build the talking document-summaries agent — easiest working path, updating the existing Pipecat POC is acceptable; then integrate with the worker backend as the following step | M8 | Engineering | Complete — fulfilled by the existing bash tool (verified live: "read any file in the current directory and summarize it"); no specialized agent needed. Worker-backend integration remains the following step |
+| 17 | Make audio and separate modes work properly (quality parity with realtime): replace the janky gpt-audio-mini voice (misheard speech even when spoken slowly) and fix misrecognition — required BEFORE any benchmarking | M9 | Engineering | Open — first priority per M9 ("first get those things working") |
+| 18 | Collate all POC run data (results JSONs) into a CSV/JSON benchmark dataset under a dedicated folder so future runs append; format flexible as long as data is retained | M9 | Engineering | Open |
+| 19 | Report monetary cost per minute of conversation and per session (e.g. 10-minute talk) for each approach, from existing data — not token tables | M9 | Engineering | Open — computable from data already collected |
+| 20 | Identify cost-effective alternative models (cheaper realtime alternative if any; better voice model for audio; not married to OpenAI — OpenRouter candidates welcome), swap into the POCs and benchmark cost AND quality; target ~₹800–900/month for a full-time voice assistant | M9 | Engineering | Open — blocked by #17 |
+| 21 | Check where the models are hosted (resolve endpoint IPs / regions); location may account for ~200 ms of latency | M9 | Engineering | Open |
+| 22 | Send a time estimate for #17–#21 before starting (~2 hours suggested by Viswanath; flag if more) | M9 | Engineering | Open |
 
 ## 6. Document map
 
