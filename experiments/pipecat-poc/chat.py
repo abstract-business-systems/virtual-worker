@@ -421,6 +421,9 @@ class TurnMetrics(FrameProcessor):
             total = sum(t["cost"] for t in self.tokens.turns)
             tok_s = (f"in {tok['in']:,} ({tok['in_audio']:,} audio) · "
                      f"out {tok['out']:,} ({tok['out_audio']:,} audio)")
+            if tok["cached"]:
+                tok_s += (f" · cached {tok['cached']:,} "
+                          f"({tok['cached_text']:,} text/{tok['cached_audio']:,} audio)")
             cost = tok["cost"]
         else:
             # no usage frame yet for this turn (e.g. report fired mid-tool-

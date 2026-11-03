@@ -1,0 +1,97 @@
+{
+  "turns": 7,
+  "total_cost_usd": 0.0,
+  "wall_total_s": 76.7,
+  "tokens": {
+    "totals": {
+      "in": 5312,
+      "in_text": 4174,
+      "in_audio": 882,
+      "cached": 256,
+      "out": 1883,
+      "out_text": 509,
+      "out_audio": 1374,
+      "calls": 7,
+      "cost": 0.04002599999999999
+    },
+    "per_turn": [
+      {
+        "in": 498,
+        "in_text": 449,
+        "in_audio": 49,
+        "cached": 0,
+        "out": 212,
+        "out_text": 62,
+        "out_audio": 150,
+        "calls": 1,
+        "cost": 0.0039082000000000006
+      },
+      {
+        "in": 579,
+        "in_text": 494,
+        "in_audio": 85,
+        "cached": 0,
+        "out": 427,
+        "out_text": 99,
+        "out_audio": 328,
+        "calls": 1,
+        "cost": 0.007944
+      },
+      {
+        "in": 661,
+        "in_text": 502,
+        "in_audio": 95,
+        "cached": 64,
+        "out": 231,
+        "out_text": 69,
+        "out_audio": 162,
+        "calls": 1,
+        "cost": 0.0046568
+      },
+      {
+        "in": 756,
+        "in_text": 548,
+        "in_audio": 144,
+        "cached": 64,
+        "out": 333,
+        "out_text": 101,
+        "out_audio": 232,
+        "calls": 1,
+        "cost": 0.0066511999999999995
+      },
+      {
+        "in": 861,
+        "in_text": 707,
+        "in_audio": 154,
+        "cached": 0,
+        "out": 301,
+        "out_text": 82,
+        "out_audio": 219,
+        "calls": 1,
+        "cost": 0.006541
+      },
+      {
+        "in": 947,
+        "in_text": 783,
+        "in_audio": 164,
+        "cached": 0,
+        "out": 110,
+        "out_text": 35,
+        "out_audio": 75,
+        "calls": 1,
+        "cost": 0.0036938
+      },
+      {
+        "in": 1010,
+        "in_text": 691,
+        "in_audio": 191,
+        "cached": 128,
+        "out": 269,
+        "out_text": 61,
+        "out_audio": 208,
+        "calls": 1,
+        "cost": 0.006631
+      }
+    ]
+  }
+}

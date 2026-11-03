@@ -645,9 +645,12 @@ async def run():
                 print(_you_c(f"You: {yt}"), flush=True)
         print(friday(f"Friday: {transcript}"), flush=True)
         total = sum(t["cost"] for t in tokens.turns)
+        cache_s = (f" · cached {tok['cached']:,} "
+                   f"({tok['cached_text']:,} text/{tok['cached_audio']:,} audio)"
+                   if tok["cached"] else "")
         print(dim(f"── turn {turns} · first audio {lat:.2f}s{stages_c} · "
                   f"in {tok['in']:,} ({tok['in_audio']:,} audio) · "
-                  f"out {tok['out']:,} ({tok['out_audio']:,} audio) · "
+                  f"out {tok['out']:,} ({tok['out_audio']:,} audio){cache_s} · "
                   f"~${tok['cost']:.4f} (total ~${total:.4f})"), flush=True)
 
     try:

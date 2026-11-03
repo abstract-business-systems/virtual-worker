@@ -23,6 +23,12 @@ AUDIO_IN_USD_PER_M = 10.0
 AUDIO_OUT_USD_PER_M = 20.0
 TEXT_IN_USD_PER_M = 0.60   # assumption: mini text-family rate (see module doc)
 TEXT_OUT_USD_PER_M = 2.40
+# Cached input bills at a discount, not free. OpenAI's published cache
+# discount for the mini family is 50% (e.g. gpt-4o-mini text: \$0.15 ->
+# \$0.075); applied here to both text and audio cached input. Reconcile
+# with the actual bill. OpenRouter usage already prices cache exactly in
+# its provider cost, so this only affects bucket-priced (realtime) usage.
+CACHE_DISCOUNT = 0.5
 
 
 def normalize_usage(u) -> dict | None:
@@ -46,25 +52,36 @@ def normalize_usage(u) -> dict | None:
         # LLMTokenUsage also has prompt_tokens but keeps audio buckets in
         # dedicated flat fields
         shape = "pipecat"
+        cached_audio = g(u, "cache_read_input_audio_tokens")
+        cached_total = g(u, "cache_read_input_tokens") or cached_audio
         d = {"in": g(u, "prompt_tokens"), "out": g(u, "completion_tokens"),
              "in_audio": g(u, "input_audio_tokens"),
-             "cached": g(u, "cache_read_input_audio_tokens") or g(u, "cache_read_input_tokens"),
+             "cached": cached_total,
+             "cached_text": max(0, cached_total - cached_audio),
+             "cached_audio": cached_audio,
              "out_audio": g(u, "output_audio_tokens")}
     elif g(u, "prompt_tokens") or g(u, "completion_tokens"):
         shape = "openai_compat"
         det_in = g(u, "prompt_tokens_details") or {}
         det_out = g(u, "completion_tokens_details") or {}
+        cached = g(det_in, "cached_tokens")
         d = {"in": g(u, "prompt_tokens"), "out": g(u, "completion_tokens"),
              "in_audio": g(det_in, "audio_tokens"),
-             "cached": g(det_in, "cached_tokens"),
+             "cached": cached,
+             "cached_text": cached,   # OpenRouter reports cache as one number
+             "cached_audio": 0,
              "out_audio": g(det_out, "audio_tokens")}
     elif g(u, "input_tokens") or g(u, "output_tokens"):
         shape = "openai"
         det_in = g(u, "input_token_details") or {}
         det_out = g(u, "output_token_details") or {}
+        det_cached = g(det_in, "cached_tokens_details") or {}
+        cached = g(det_in, "cached_tokens")
         d = {"in": g(u, "input_tokens"), "out": g(u, "output_tokens"),
              "in_audio": g(det_in, "audio_tokens"),
-             "cached": g(det_in, "cached_tokens"),
+             "cached": cached,
+             "cached_text": g(det_cached, "text_tokens"),
+             "cached_audio": g(det_cached, "audio_tokens"),
              "out_audio": g(det_out, "audio_tokens")}
     else:
         return None
@@ -76,8 +93,8 @@ def normalize_usage(u) -> dict | None:
     return d
 
 
-BUCKETS = ("in", "in_text", "in_audio", "cached", "out", "out_text",
-           "out_audio")
+BUCKETS = ("in", "in_text", "in_audio", "cached", "cached_text",
+           "cached_audio", "out", "out_text", "out_audio")
 
 
 class TokenAccount:
@@ -111,7 +128,11 @@ class TokenAccount:
             est = ((n["in_audio"] * AUDIO_IN_USD_PER_M
                     + n["out_audio"] * AUDIO_OUT_USD_PER_M
                     + n["in_text"] * TEXT_IN_USD_PER_M
-                    + n["out_text"] * TEXT_OUT_USD_PER_M) / 1e6)
+                    + n["out_text"] * TEXT_OUT_USD_PER_M
+                    + (n.get("cached_audio", 0) * AUDIO_IN_USD_PER_M
+                       * CACHE_DISCOUNT)
+                    + (n.get("cached_text", 0) * TEXT_IN_USD_PER_M
+                       * CACHE_DISCOUNT)) / 1e6)
             self.cur["cost"] += est
             self.cur["priced_by"].add("bucket-price")
         return n
@@ -136,9 +157,11 @@ class TokenAccount:
 
     def line(self) -> str:
         t = self.totals()
-        cache = f" (cached {t['cached']})" if t["cached"] else ""
-        return (f"tokens: in {t['in']:,} ({t['in_audio']:,} audio{cache}) · "
-                f"out {t['out']:,} ({t['out_audio']:,} audio) · "
+        cache = f" · cached {t['cached']:,}" \
+            f" ({t['cached_text']:,} text / {t['cached_audio']:,} audio)" \
+            if t["cached"] else ""
+        return (f"tokens: in {t['in']:,} ({t['in_audio']:,} audio) · "
+                f"out {t['out']:,} ({t['out_audio']:,} audio){cache} · "
                 f"{t['calls']} calls · ~${t['cost']:.4f}")
 
     def report(self) -> dict:
