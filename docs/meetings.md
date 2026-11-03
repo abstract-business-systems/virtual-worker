@@ -275,11 +275,11 @@ effective discussion ~16 minutes.*
 - **Next:** once voice cost/minute and round-trip latency exist for one
   model set per approach, prepare a **template so the agent can
   automatically swap models and test cost + round-trip latency**.
-- **Model candidates:** check the cost difference of two suggested models
-  on OpenRouter — names garbled in the transcript ("Sol 596 and Sol 6",
-  likely gpt-oss variants; confirm exact names with Viswanath).
 - Recording stopped as the topic shifted ("we are talking about
-  different, different context").
+  different, different context"). A brief model-cost comparison followed
+  ("Soul 5.6" vs "Soul 6" on OpenRouter) — per Sarooparam that discussion
+  belongs to a different context, **not** Virtual Worker; recorded here
+  only for completeness.
 
 ## 4. Journal
 
@@ -441,7 +441,7 @@ are the recording file-added dates.*
 | 23 | Report voice-only cost per minute (STT+TTS, excluding inference) for all 3 approaches; for realtime/audio first check whether a third inference model can be used alongside the voice model via Pipecat, so inference cost is constant across approaches and discounted | M10 | Engineering | Open |
 | 24 | Measure round-trip response latency (user stops speaking → first audio word heard; connection already established; excluding inference), averaged over ~5 minutes of interactions, for all 3 approaches with one working model set each | M10 | Engineering | Open |
 | 25 | Prepare a template that lets the agent automatically swap models and test cost + round-trip latency across model sets | M10 | Engineering | Open — after #23/#24 |
-| 26 | Check the cost difference of the two suggested models on OpenRouter (names garbled in the transcript — "Sol 596 and Sol 6", likely gpt-oss variants; confirm exact names with Viswanath) | M10 | Engineering | Open |
+| 26 | ~~Check the cost difference of the two suggested models on OpenRouter~~ | M10 | Engineering | Dropped — the "Soul 5.6 vs Soul 6" discussion belongs to a different context, not Virtual Worker (clarified by Sarooparam) |
 | 27 | Identify the provenance of the "25-minute session" assumption used in cost scenarios | M10 | Viswanath | Open — Viswanath took it ("I will take care of it") |
 
 ## 6. Document map
