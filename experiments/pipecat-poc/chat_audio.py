@@ -179,10 +179,14 @@ def openai_transcribe(pcm24: bytes, model: str = "gpt-4o-mini-transcribe") -> st
         headers={"Authorization": f"Bearer {OPENAI_KEY}",
                  "Content-Type": f"multipart/form-data; boundary={boundary}"})
     with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.load(resp)["text"].strip()
+        body = json.load(resp)
+    # gpt-4o-mini-transcribe returns usage: {type: tokens, input_tokens,
+    # output_tokens, input_token_details{audio_tokens, text_tokens}} —
+    # captured so STT cost is in the token report (was silently dropped)
+    return body["text"].strip(), body.get("usage")
 
 
-def transcribe_utterance(pcm24: bytes, quiet: bool = False) -> str:
+def transcribe_utterance(pcm24: bytes, quiet: bool = False) -> tuple:
     """Dispatch on STT_CFG:
       whisper:<size>        local faster-whisper (offline fallback)
       openai[:<model>]      OpenAI transcription API (default;
@@ -196,7 +200,7 @@ def transcribe_utterance(pcm24: bytes, quiet: bool = False) -> str:
         return openai_transcribe(pcm24, model)
     # STT_CFG "provider/model" should never reach here (openrouter path);
     # whisper:* or None -> local faster-whisper
-    return whisper_transcribe(pcm24, quiet)
+    return whisper_transcribe(pcm24, quiet), None
 
 
 def whisper_transcribe(pcm24: bytes, quiet: bool = False) -> str:
@@ -509,7 +513,7 @@ async def run():
             # what the agent is getting: local whisper runs while the
             # request is in flight; printed with the turn report below
             disp = asyncio.create_task(
-                asyncio.to_thread(transcribe_utterance, utt, True))
+                asyncio.to_thread(transcribe_utterance, utt, True))  # (txt, usage)
             audio_user_msg = {"role": "user", "content": [
                 {"type": "text", "text": "Answer my spoken question."},
                 {"type": "input_audio",
@@ -564,8 +568,8 @@ async def run():
             else:
                 # online OpenAI API (stt = openai[:model]) or local whisper
                 # (stt = whisper:<size>) — no OpenRouter call, zero tokens
-                user_text = await asyncio.to_thread(transcribe_utterance, utt)
-                u = None
+                user_text, u = await asyncio.to_thread(
+                    transcribe_utterance, utt)
             t_stt = time.perf_counter() - t0
             tokens.add(u)  # local whisper: u is None, zero tokens
             print(stage(f"[stage] stt {t_stt:.2f}s:") + " " + _you_c(f"You: {user_text}"), flush=True)
@@ -638,7 +642,7 @@ async def run():
         stages_c = f" · {stages.strip(' |')}" if stages else ""
         if not THINK_MODEL:
             try:
-                yt = (await disp).strip()
+                yt = (await disp)[0].strip()
             except Exception:
                 yt = ""
             if yt:
