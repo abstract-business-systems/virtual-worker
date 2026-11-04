@@ -389,3 +389,46 @@ Open items:
    recorded fixtures; confirm against a live multi-turn session and a real
    bill. Realtime text-token pricing assumes the mini text-family rate
    ($0.60/$2.40 per M) — reconcile with OpenAI's actual list price.
+
+## M11 roadmap — shared thinking model, comparison, and integration
+
+Source: [`recordings/11.vtt`](recordings/11.vtt), added 4 November 2026;
+[meeting summary and action items](meetings.md). The transcript does not state
+its recording date. These are requirements for upcoming work, not completed
+features or authorization to start implementations during transcript ingestion.
+
+The agreed engineering sequence is:
+
+1. **Common thinking model first** (00:06–00:25): use the same reasoning model
+   across realtime, audio and separate. Make it configurable if practical;
+   hard-coding is acceptable if configuration would add significant effort.
+   This makes M10's common-inference investigation an explicit implementation
+   requirement. The current native inference-separation gap remains open.
+2. **Compare full audio against audio mini** (00:25–01:33): try mini to reduce
+   response latency and audio cost, ask questions, and retain completion and
+   latency results. Roughly two-second latency is an expectation to test,
+   not an established measurement. This reopens mini as an experiment after
+   the full-model quality baseline; it does not silently replace that baseline
+   or drop separate mode.
+3. **Finalize and measure three candidates** (01:33–01:56): keep the thinking
+   model common and use the existing agent test to measure response latency
+   and monetary cost per minute of conversation. Retain M10's measurement
+   definitions and disclose any inference that cannot actually be separated.
+4. **Integrate with Friday**, preserving existing capabilities while reducing
+   latency (01:56–02:24; 04:17–04:31).
+5. **Integrate with Pi** (01:56–04:17): a spoken request should create a simple
+   game, start it, and provide a usable link or open the page in the browser.
+   Planning/task execution should remain usable through Pi. Text need not
+   originate from Pipecat; the surrounding orchestration can provide it.
+
+**Steps 4 and 5 can be done in either order.** Viswanath treats them as the same
+priority and leaves the choice to engineering; Pi-first may be simpler and
+provide hands-on experience with the voice approaches. The example game name
+is inconsistent in the raw transcript, so no exact game type is mandated.
+
+After integration, prepare a meeting demo of coding and follow-up changes,
+plus operating Excel Online in a browser according to spoken instructions
+(04:39–05:39). Use only authorized accounts and keep credentials out of source
+control. Screen sharing was suggested, not made a required acceptance test.
+Provide a rough timeline for this roadmap (05:46–06:02); the transcript contains
+no agreed duration or delivery date.

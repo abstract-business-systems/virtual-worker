@@ -41,6 +41,7 @@ When a new recording `N.vtt` is added:
 | M8 | [`8.vtt`](recordings/8.vtt) | 2026-11-02‡ | 12m | Viswanath Chidambaram; Sarooparam Chenaram Darji | POC results review, layering (conversation vs tooling), next scope: a talking document-summaries agent with shell access, time estimate first | [`next-steps.md`](next-steps.md), [`architecture-discussion.md`](architecture-discussion.md) |
 | M9 | [`9.vtt`](recordings/9.vtt) | 2026-11-03§ | 25m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Cost review against product viability; audio-vs-separate cost comparison (no final drop decision); get audio+separate quality to parity first; benchmark cheaper/better models toward a ~₹800–900/month target | [`next-steps.md`](next-steps.md), [`poc-cost-results.md`](poc-cost-results.md) |
 | M10 | [`10.vtt`](recordings/10.vtt) | 2026-11-03¶ | 26m‖ | Viswanath Chidambaram; Sarooparam Chenaram Darji | Cost and latency decomposition: voice-only cost per minute (excluding inference), round-trip response latency definition, latency/cost thresholds, and an agent-driven model-swap benchmark template | [`next-steps.md`](next-steps.md), [`money-per-minute.md`](money-per-minute.md) |
+| M11 | [`11.vtt`](recordings/11.vtt) | 2026-11-04 (added) | 6m 10s | Viswanath Chidambaram; Sarooparam Chenaram Darji | Shared thinking model across all three approaches; full-vs-mini audio experiment; cost/latency comparison; Pi and Friday integration acceptance criteria and demo timeline | [`next-steps.md`](next-steps.md#m11-roadmap--shared-thinking-model-comparison-and-integration) |
 
 *The transcripts do not state their recording dates; 2026-10-28 is the M3
 recording file's added date, 2026-10-29 is the M4–M6 file-added date, and
@@ -290,9 +291,55 @@ effective discussion ~16 minutes.*
   belongs to a different context, **not** Virtual Worker; recorded here
   only for completeness.
 
+### M11 — Shared thinking model, audio experiment, and integration roadmap (`11.vtt`)
+
+A new six-minute follow-up sets an explicit roadmap. The date above
+is the file-added date; the transcript does not state the meeting date.
+
+1. **Use the same thinking model in all three approaches first** (00:06–00:25).
+   Prefer configuration; hard-coding is acceptable if making it configurable
+   would be costly. This strengthens M10's proposed common-inference setup
+   into the first implementation step; it is not yet reported as implemented.
+2. **Experiment with audio mini instead of full audio** (00:25–01:33), asking
+   questions and recording latency and completed conversations. The aim is
+   lower audio-path latency and cost. Viswanath's suggestion of roughly two
+   seconds is a hypothesis, not a measured result or an approved final model
+   choice. Separate mode remains a candidate.
+3. **Finalize three candidates with the common thinking model**, then measure
+   response latency and cost per minute of conversation using the existing
+   agent test (01:33–01:56).
+4. **Integrate the POC with Pi and Friday** (01:56–04:31), in either order:
+   - **Pi:** a spoken request should result in a simple game being created
+     and launched, with a link returned or the page opened in a browser.
+     Text output may come from the surrounding orchestration rather than
+     Pipecat. The transcript inconsistently names the example game; no
+     specific game type is required here.
+   - **Friday:** preserve its existing behavior while reducing latency.
+     Pi-first may be simpler and help evaluate the models in real work, but
+     Viswanath explicitly leaves the order to engineering.
+5. **Prepare a demo and a rough timeline** (04:39–06:02). Invite others to a
+   meeting and demonstrate coding/change requests and operating Excel Online
+   through the browser based on spoken instructions. Screen sharing was
+   suggested as a possibility, not a committed acceptance criterion. Browser
+   credentials must remain outside the repository.
+
+Implementation and acceptance details are recorded in
+[`next-steps.md`](next-steps.md#m11-roadmap--shared-thinking-model-comparison-and-integration).
+These are new work items, not evidence that the integrations or demo are done.
+
 ## 4. Journal
 
 Newest entries appear first.
+
+### 2026-11-04 — M11 roadmap captured
+
+- Added the new, nonduplicate transcript without altering its contents.
+- Recorded the order: shared thinking model across all three approaches;
+  compare full audio with mini; finalize candidates and measure latency and
+  cost per conversation-minute; then integrate with Pi and Friday.
+- Recorded integration acceptance examples and the proposed coding/Excel
+  demo. Engineering chooses the integration order and provides a rough
+  timeline; no timeline or implementation completion is claimed here.
 
 ### 2026-11-04 — POC repairs and controlled baseline work (engineering update)
 
@@ -469,13 +516,20 @@ are the recording file-added dates.*
 | 25 | Prepare a template that lets the agent automatically swap models and test cost + round-trip latency across model sets | M10 | Engineering | Open — fixed-model fixture harness exists, but automatic model swapping is not built; after #23/#24 |
 | 26 | ~~Check the cost difference of the two suggested models on OpenRouter~~ | M10 | Engineering | Dropped — the "Soul 5.6 vs Soul 6" discussion belongs to a different context, not Virtual Worker (clarified by Sarooparam) |
 | 27 | Identify the provenance of the "25-minute session" assumption used in cost scenarios | M10 | Viswanath | Open — Viswanath took it ("I will take care of it") |
+| 28 | Make all three approaches use the same thinking model; configurable preferred, hard-coded acceptable if necessary | M11, 00:06–00:25 | Engineering | Open — first roadmap step; strengthens #23's common-inference requirement |
+| 29 | Experiment with full audio vs audio mini; ask questions and compare latency, completed conversations and cost | M11, 00:25–01:33 | Engineering | Open — after #28; not a final model choice |
+| 30 | Finalize three candidates with the common thinking model and measure response latency and cost per minute of conversation using the existing test | M11, 01:33–01:56 | Engineering | Open — after #28/#29; complements #23/#24 |
+| 31 | Integrate the POC with Pi: spoken request creates and launches a simple game, returning a link or opening it in the browser; text may come from orchestration | M11, 01:56–04:17 | Engineering | Open — after comparison; integration order is engineering's choice |
+| 32 | Integrate the POC with Friday, preserving existing behavior with reduced latency | M11, 04:17–04:31 | Engineering | Open — after comparison; same priority as #31 |
+| 33 | Prepare a meeting demo covering coding/change requests and spoken browser operation of Excel Online | M11, 04:39–05:39 | Engineering | Open — after integrations; screen sharing remains a suggestion |
+| 34 | Provide a rough timeline for the M11 roadmap | M11, 05:46–06:02 | Engineering | Open — estimate not supplied in the transcript |
 
 ## 6. Document map
 
 | Document | Purpose |
 |---|---|
 | `meetings.md` | Living index, summaries, journal, and action items |
-| `recordings/1.vtt` … `recordings/8.vtt` | Immutable meeting source transcripts |
+| `recordings/1.vtt` … `recordings/11.vtt` | Immutable meeting source transcripts |
 | `requirements.md` | Product requirements from M1 |
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |
