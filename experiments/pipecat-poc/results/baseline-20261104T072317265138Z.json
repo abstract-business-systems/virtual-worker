@@ -1,0 +1,15 @@
+{
+  "kind": "baseline_index",
+  "smoke": false,
+  "human_quality_review": "pending",
+  "runs": [
+    {
+      "mode": "audio",
+      "exit_code": 0,
+      "reports": [
+        "session-audio-20261104T072317171677Z.json"
+      ],
+      "log": "results/logs/audio-20261104T071811599329Z.log"
+    }
+  ]
+}

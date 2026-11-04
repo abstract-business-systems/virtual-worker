@@ -27,25 +27,39 @@ show_usage() {
   cat <<'EOF'
 Friday — three conversation modes (pipecat POC):
 
-  realtime   one OpenAI realtime model — listens, thinks, speaks (fastest)
-  audio      one audio-model call per turn via OpenRouter (cheapest)
-  separate   local Whisper STT → think model → voice model (best answers)
+  realtime   one OpenAI realtime model — listens, thinks, speaks
+  audio      one audio-model call per turn via OpenRouter (full quality baseline)
+  separate   online STT → think model → dedicated TTS
 
 Usage: ./run.sh <mode> [-d] [--model <name>] [--folder <path>]
   -d             debug: mic levels, VAD events, api errors
   --model <n>    override the voice/realtime model for this run
   --folder <p>   working directory for the bash tool (default: launch dir)
+  --plan <json>  replay a fixture plan without opening the microphone
 EOF
 }
 
 MODE=""
+ARGS=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     realtime|audio|separate) MODE="$1"; shift ;;
     --pipecat) ARGS+=("$1"); shift ;;
+    --plan|--model|--folder)
+      if [[ $# -lt 2 || "$2" == --* ]]; then
+        echo "missing value for $1" >&2; exit 2
+      fi
+      case "$1" in
+        --model) export CHAT_MODEL="$2" ;;
+        --plan|--folder)
+          VALUE="$2"
+          [[ "$VALUE" == /* ]] || VALUE="$INVOKED_FROM/$VALUE"
+          VALUE="$(realpath -m -- "$VALUE")"
+          if [[ "$1" == --plan ]]; then export CHAT_TEST_PLAN="$VALUE"
+          else export CHAT_WORKDIR="$VALUE"; fi ;;
+      esac
+      shift 2 ;;
     -d|--debug) export CHAT_DEBUG=1 PIPECAT_DEBUG=1; shift ;;
-    --model) export CHAT_MODEL="$2"; shift 2 ;;
-    --folder) export CHAT_WORKDIR="$2"; shift 2 ;;
     *) echo "unknown option or mode: $1" >&2; show_usage; exit 1 ;;
   esac
 done
@@ -56,14 +70,12 @@ fi
 export CHAT_WORKDIR="${CHAT_WORKDIR:-$INVOKED_FROM}"
 # keys live in .env (git-ignored): OPENAI_API_KEY (realtime) and
 # OPENROUTER_API_KEY (audio/separate), like the other POCs
-if [[ -f .env ]]; then
-  set -a; source .env; set +a
-fi
+# Python loaders preserve explicit environment overrides over local secrets.
 case "$MODE" in
   realtime) exec uv run chat.py ;;
   audio)    export CHAT_PRESET=audio;    exec uv run chat_audio.py ;;
   separate)
-    if [[ " ${ARGS[*]} " == *" --pipecat "* ]] || [[ -n "$CHAT_SEP_PIPECAT" ]]; then
+    if [[ " ${ARGS[*]} " == *" --pipecat "* ]] || [[ -n "${CHAT_SEP_PIPECAT:-}" ]]; then
       export CHAT_PRESET=separate; exec uv run chat_sep.py
     fi
     export CHAT_PRESET=separate; exec uv run chat_audio.py ;;

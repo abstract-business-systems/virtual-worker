@@ -1,0 +1,15 @@
+{
+  "kind": "baseline_index",
+  "smoke": false,
+  "human_quality_review": "pending",
+  "runs": [
+    {
+      "mode": "separate",
+      "exit_code": 0,
+      "reports": [
+        "session-separate-20261104T072826419831Z.json"
+      ],
+      "log": "results/logs/separate-20261104T072317436039Z.log"
+    }
+  ]
+}

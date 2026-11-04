@@ -1,0 +1,15 @@
+{
+  "kind": "baseline_index",
+  "smoke": false,
+  "human_quality_review": "pending",
+  "runs": [
+    {
+      "mode": "realtime",
+      "exit_code": 0,
+      "reports": [
+        "session-realtime-20261104T071801140582Z.json"
+      ],
+      "log": "results/logs/realtime-20261104T071245138462Z.log"
+    }
+  ]
+}

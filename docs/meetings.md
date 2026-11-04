@@ -294,6 +294,23 @@ effective discussion ~16 minutes.*
 
 Newest entries appear first.
 
+### 2026-11-04 — POC repairs and controlled baseline work (engineering update)
+
+- Fixed launcher, HTTP tool-loop/stream handling, missing-usage treatment and
+  the benchmark's per-minute calculation; refreshed the dataset without
+  changing historical reports or transcripts.
+- Added versioned stage-cost/timing reports and a repeatable six-task fixture
+  harness. Audio uses the full model as a quality baseline; separate uses
+  online STT and dedicated Coral TTS.
+- Recorded roughly five-minute audio/separate samples. Realtime's longer
+  tests exposed failed arithmetic checks and turn-policy problems; those
+  runs are retained as failures, not accepted baselines.
+- The final explicit realtime stop strategy passed a three-request pause
+  regression, but still needs a full-length confirmation run.
+- **M10 remains open:** native inference separation, verified voice-only
+  numbers across all three paths, pricing review and human quality review
+  are not complete. Details: [`poc-baseline-status.md`](poc-baseline-status.md).
+
 ### 2026-11-03 — M10 measurement spec captured
 
 - Cost/latency numbers were redefined: voice-only cost per minute
@@ -441,15 +458,15 @@ are the recording file-added dates.*
 | 14 | Run the POCs: Pipecat demo and/or the OpenAI audio-model probe — mimic current behavior, answer questions, conversation memory ideally; measure output quality and cost | M7 | Engineering | Complete — all three modes built as talkable CLIs with measured latency/cost; results in [`architecture-discussion.md`](architecture-discussion.md) |
 | 15 | Give a time estimate (hours) for the talking document-summaries agent (talk to it; it gathers/summarizes docs in a folder; can call bash/shell; carries conversation context) | M8 | Engineering | Complete — ~3 h build + 30 min user test, recorded in [`implementation-plan.md`](implementation-plan.md) |
 | 16 | Build the talking document-summaries agent — easiest working path, updating the existing Pipecat POC is acceptable; then integrate with the worker backend as the following step | M8 | Engineering | Complete — fulfilled by the existing bash tool (verified live: "read any file in the current directory and summarize it"); no specialized agent needed. Worker-backend integration remains the following step |
-| 17 | Make audio and separate modes work properly (quality parity with realtime): replace the janky gpt-audio-mini voice (misheard speech even when spoken slowly) and fix misrecognition — required BEFORE any benchmarking | M9 | Engineering | Open — first priority per M9 ("first get those things working") |
-| 18 | Collate all POC run data (results JSONs) into a CSV/JSON benchmark dataset under a dedicated folder so future runs append; format flexible as long as data is retained | M9 | Engineering | Complete |
+| 17 | Make audio and separate modes work properly (quality parity with realtime): replace the janky gpt-audio-mini voice (misheard speech even when spoken slowly) and fix misrecognition — required BEFORE any benchmarking | M9 | Engineering | In progress — full-audio and dedicated STT/TTS repairs have controlled runs; human quality parity is not verified. Realtime also needs full-length confirmation after its stop-policy fix; see [`poc-baseline-status.md`](poc-baseline-status.md) |
+| 18 | Collate all POC run data (results JSONs) into a CSV/JSON benchmark dataset under a dedicated folder so future runs append; format flexible as long as data is retained | M9 | Engineering | Complete — refreshed 4 November; units corrected, unknown models retained as unrecorded and invalid reports surfaced |
 | 19 | Report monetary cost per minute of conversation and per session (e.g. 10-minute talk) for each approach, from existing data — not token tables | M9 | Engineering | Complete — [`money-per-minute.md`](money-per-minute.md); M10 refines this into a voice-only vs inference decomposition (#23) |
 | 20 | Identify cost-effective alternative models (cheaper realtime alternative if any; better voice model for audio; not married to OpenAI — OpenRouter candidates welcome), swap into the POCs and benchmark cost AND quality; target ~₹800–900/month for a full-time voice assistant | M9 | Engineering | Open — blocked by #17 |
 | 21 | Check where the models are hosted (resolve endpoint IPs / regions); location may account for ~200 ms of latency | M9 | Engineering | Complete |
 | 22 | Send a time estimate for #17–#21 before starting (~2 hours suggested by Viswanath; flag if more) | M9 | Engineering | Complete — estimate sent to Viswanath and agreed |
-| 23 | Report voice-only cost per minute (STT+TTS, excluding inference) for all 3 approaches; for realtime/audio first check whether a third inference model can be used alongside the voice model via Pipecat, so inference cost is constant across approaches and discounted | M10 | Engineering | Open |
-| 24 | Measure round-trip response latency (user stops speaking → first audio word heard; connection already established; excluding inference), averaged over ~5 minutes of interactions, for all 3 approaches with one working model set each | M10 | Engineering | Open |
-| 25 | Prepare a template that lets the agent automatically swap models and test cost + round-trip latency across model sets | M10 | Engineering | Open — after #23/#24 |
+| 23 | Report voice-only cost per minute (STT+TTS, excluding inference) for all 3 approaches; for realtime/audio first check whether a third inference model can be used alongside the voice model via Pipecat, so inference cost is constant across approaches and discounted | M10 | Engineering | In progress — separate-mode component estimate exists; native inference is still bundled and an external-inference arrangement is not live-verified. Pricing review pending; see [`poc-baseline-status.md`](poc-baseline-status.md) |
+| 24 | Measure round-trip response latency (user stops speaking → first audio word heard; connection already established; excluding inference), averaged over ~5 minutes of interactions, for all 3 approaches with one working model set each | M10 | Engineering | In progress — controlled audio/separate samples recorded with DAC-estimated playback timing; final realtime strategy has only a short regression. Native inference exclusion and human verification remain open |
+| 25 | Prepare a template that lets the agent automatically swap models and test cost + round-trip latency across model sets | M10 | Engineering | Open — fixed-model fixture harness exists, but automatic model swapping is not built; after #23/#24 |
 | 26 | ~~Check the cost difference of the two suggested models on OpenRouter~~ | M10 | Engineering | Dropped — the "Soul 5.6 vs Soul 6" discussion belongs to a different context, not Virtual Worker (clarified by Sarooparam) |
 | 27 | Identify the provenance of the "25-minute session" assumption used in cost scenarios | M10 | Viswanath | Open — Viswanath took it ("I will take care of it") |
 

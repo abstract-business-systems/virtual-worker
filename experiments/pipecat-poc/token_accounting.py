@@ -86,7 +86,9 @@ def normalize_usage(u) -> dict | None:
     else:
         return None
 
-    d["in_text"] = max(0, d["in"] - d["in_audio"] - d["cached"])
+    # Audio totals already include cached audio; only cached TEXT belongs
+    # in this subtraction. Keep total buckets and priced buckets distinct.
+    d["in_text"] = max(0, d["in"] - d["in_audio"] - d["cached_text"])
     d["out_text"] = max(0, d["out"] - d["out_audio"])
     d["shape"] = shape
     d["cost"] = float(cost)
@@ -121,11 +123,13 @@ class TokenAccount:
         for k in BUCKETS:
             self.cur[k] += n[k]
         self.cur["calls"] += 1
-        if n["cost"]:
+        provider_cost = (usage.get("cost") if isinstance(usage, dict)
+                         else getattr(usage, "cost", None))
+        if provider_cost is not None:
             self.cur["cost"] += n["cost"]
             self.cur["priced_by"].add("provider")
         else:
-            est = ((n["in_audio"] * AUDIO_IN_USD_PER_M
+            est = ((max(0, n["in_audio"] - n["cached_audio"]) * AUDIO_IN_USD_PER_M
                     + n["out_audio"] * AUDIO_OUT_USD_PER_M
                     + n["in_text"] * TEXT_IN_USD_PER_M
                     + n["out_text"] * TEXT_OUT_USD_PER_M

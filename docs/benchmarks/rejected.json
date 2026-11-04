@@ -1,0 +1,214 @@
+[
+  {
+    "src": "experiments/audio-model-poc/results/run-20261030T074034Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/audio-model-poc/results/run-20261030T074049Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/audio-model-poc/results/run-20261030T124139Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/audio-model-poc/results/run-20261030T124201Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/audio-20261103T122348Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T070425249680Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T070642821943Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T070811696959Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T071008066358Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T071801309893Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T072317265138Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T072826508832Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T074456396997Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T101822Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T101849Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T101936Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T123607Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T124049Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T134003Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T134215Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T134247Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T140037Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T140644Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T141926Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T142434Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T151520Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T151547Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T151651Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T151707Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261030T151946Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261102T133949Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261102T134242Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261102T135516Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261102T135708Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261102T135718Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/chat-20261103T054804Z.json",
+    "reason": "legacy_zero_turn_debug_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T084120Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T084222Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T084321Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T084430Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T084528Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T085335Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T085449Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T085609Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T085813Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T085909Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T090047Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T090109Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/run-20261030T090133Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/sep-pipecat-20261103T130234Z.json",
+    "reason": "invalid_report: Extra data: line 38 column 2 (char 595)"
+  },
+  {
+    "src": "experiments/realtime-model-poc/results/run-20261030T080105Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/realtime-model-poc/results/run-20261030T080246Z.json",
+    "reason": "legacy_probe_not_a_session"
+  },
+  {
+    "src": "experiments/realtime-model-poc/results/run-20261030T080302Z.json",
+    "reason": "legacy_probe_not_a_session"
+  }
+]

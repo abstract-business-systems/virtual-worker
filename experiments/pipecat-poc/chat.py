@@ -65,6 +65,11 @@ from pipecat.workers.runner import WorkerRunner
 HERE = Path(__file__).parent
 from cli_ui import banner, dim, err, friday, hdr, tool, warn as _warn_c, you as _you_c
 import token_accounting as ta
+from poc_report import SessionReport, load_environment, endpoint_silence
+from poc_pricing import usage_cost
+from poc_fixtures import fixture_plan, feed_plan
+from poc_pipeline import SessionBoundary, realtime_user_params
+load_environment(HERE)
 from pipecat.frames.frames import MetricsFrame
 from pipecat.metrics.metrics import LLMTokenUsage
 
@@ -85,26 +90,25 @@ TOK_PER_SEC_OUT = 15.0
 
 
 def load_env() -> dict:
-    cfg = {}
-    for line in (HERE / ".env").read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            k, v = line.split("=", 1)
-            cfg[k.strip()] = v.strip()
-    if not cfg.get("OPENAI_API_KEY"):
-        sys.exit("Missing OPENAI_API_KEY in experiments/pipecat-poc/.env")
-    return {
-        "api_key": cfg["OPENAI_API_KEY"],
-                "model": (os.environ.get("CHAT_MODEL")
-                  or cfg.get("OPENAI_REALTIME_MODEL", "gpt-realtime-2.1-mini")),
-    }
+    import configparser
+    presets = configparser.ConfigParser()
+    presets.read(HERE / "models.ini")
+    key = os.environ.get("OPENAI_API_KEY")
+    if not key:
+        raise SystemExit("OPENAI_API_KEY is required")
+    return {"api_key": key, "model": os.environ.get("CHAT_MODEL")
+            or presets.get("realtime", "model")}
+
 
 
 class MicInput(FrameProcessor):
     """sounddevice mic → 16 kHz InputAudioRawFrame."""
 
-    def __init__(self):
+    def __init__(self, session=None):
         super().__init__()
+        self.session = session
+        self.fixture_stop = None
+        self.fixture_ready = lambda: True
         # NOTE: the reader MUST yield to the event loop — a blocking
         # queue.Queue.get here starved the loop completely and downstream
         # processors never ran (root cause of the "CLI never responds" bug).
@@ -132,48 +136,23 @@ class MicInput(FrameProcessor):
             self._loop = asyncio.get_running_loop()
             self._q = asyncio.Queue(maxsize=200)
             self._resampler = create_stream_resampler()
-            dev = sd.query_devices(kind="input")
-            self._device_rate = int(dev["default_samplerate"])
-            if self._debug:
-                print(f"[mic] opening '{dev['name']}' at {self._device_rate} Hz", flush=True)
-            if os.getenv("CHAT_TEST_WAV"):
-                print("[test] feeder mode — wav replaces mic", flush=True)
-                async def _feeder():
-                    try:
-                        await asyncio.sleep(1.0)
-                        with wave.open(os.environ["CHAT_TEST_WAV"]) as w:
-                            pcm = w.readframes(w.getnframes()); wsr = w.getframerate()
-                        r = create_stream_resampler()
-                        up = await r.resample(pcm, wsr, self._device_rate)
-                        chunk = int(self._device_rate / 10) * 2
-                        silence = b"\x00\x00" * int(self._device_rate * 1.5)
-                        for b in [up[i:i+chunk] for i in range(0, len(up), chunk)] + [silence]:
-                            if self._q:
-                                self._q.put_nowait(b)
-                            await asyncio.sleep(0.1)
-                        print("[test] utterance fed", flush=True)
-                    except Exception as e:
-                        import traceback
-                        print(f"[test error] {type(e).__name__}: {e}", flush=True)
-                        traceback.print_exc()
+            plan = fixture_plan()
+            if plan:
+                self._device_rate = IN_RATE
             else:
+                dev = sd.query_devices(int(os.environ["CHAT_INPUT_DEVICE"])
+                                       if os.getenv("CHAT_INPUT_DEVICE") else None, kind="input")
+                self._device_rate = int(dev["default_samplerate"])
                 self._stream = sd.RawInputStream(
-                    samplerate=self._device_rate,
-                    blocksize=int(self._device_rate / 10),  # 100 ms blocks — batching matters:
-                    # per-10ms SOXR VHQ resampling starves the event loop and the
-                    # downstream pipeline never processes frames (verified)
-                    dtype="int16",
-                    channels=1,
-                    device=int(os.environ["CHAT_INPUT_DEVICE"])
-                    if os.getenv("CHAT_INPUT_DEVICE")
-                    else None,
-                    callback=self._callback,
-                )
+                    samplerate=self._device_rate, blocksize=int(self._device_rate/10),
+                    dtype="int16", channels=1, device=dev["index"], callback=self._callback)
                 self._stream.start()
             self._running = True
             self._task = self.create_task(self._reader())
-            if os.getenv("CHAT_TEST_WAV"):
-                self.create_task(_feeder())
+            if plan:
+                self.create_task(feed_plan(plan, self.session, self._q.put_nowait,
+                    self._device_rate, self.fixture_playing, self.fixture_stop,
+                    ready=self.fixture_ready))
         await self.push_frame(frame, direction)
 
     async def _reader(self):
@@ -201,6 +180,8 @@ class MicInput(FrameProcessor):
                 audio = await self._resampler.resample(pcm.tobytes(), self._device_rate, IN_RATE)
             else:
                 audio = pcm.tobytes()
+            if self.session is not None:
+                self.session.observe_input(audio, IN_RATE)
             MicInput.frames_pushed += 1
             await self.push_frame(
                 InputAudioRawFrame(audio=audio, sample_rate=IN_RATE, num_channels=1)
@@ -226,12 +207,18 @@ class MicInput(FrameProcessor):
 class SpeakerOutput(FrameProcessor):
     """TTSAudioRawFrame (24 kHz) → resampled 44.1 kHz playback via sounddevice."""
 
-    def __init__(self):
+    def __init__(self, session=None):
         super().__init__()
+        self.session = session
+        self._last_feed = 0.0
         self._q: queue.Queue[bytes] = queue.Queue()
         self._stream = None
         self._resampler = None
         self._playing = False
+
+    @property
+    def playing(self):
+        return not self._q.empty() or time.monotonic()-self._last_feed < .3
 
     def _callback(self, outdata, frames, t, status):
         # Fill outdata from queued audio; tolerate odd-length chunks and
@@ -251,6 +238,9 @@ class SpeakerOutput(FrameProcessor):
                 self._q.queue.appendleft(d[take:])
         data = b"".join(chunks)
         outdata[:] = data.ljust(frames * 2, b"\x00")
+        if data and self.session is not None:
+            self.session.playback(data, OUT_RATE,
+                delay_s=float(t.outputBufferDacTime-t.currentTime))
 
     async def process_frame(self, frame: Frame, direction: FrameDirection):
         await super().process_frame(frame, direction)
@@ -265,11 +255,14 @@ class SpeakerOutput(FrameProcessor):
             )
             self._stream.start()
         elif isinstance(frame, TTSAudioRawFrame):
+            if self.session is not None:
+                self.session.audio_received(frame.audio, frame.sample_rate)
             if frame.sample_rate != OUT_RATE:
                 audio = await self._resampler.resample(frame.audio, frame.sample_rate, OUT_RATE)
             else:
                 audio = frame.audio
             self._q.put(audio)
+            self._last_feed = time.monotonic()
             self._playing = True
         elif isinstance(frame, InterruptionFrame):
             # barge-in: drop queued audio immediately
@@ -279,6 +272,7 @@ class SpeakerOutput(FrameProcessor):
                 except queue.Empty:
                     break
             self._playing = False
+            self._last_feed = 0.0
         await self.push_frame(frame, direction)
 
     async def cleanup(self):
@@ -294,8 +288,9 @@ class TurnMetrics(FrameProcessor):
     realtime service emits MetricsFrame(LLMTokenUsage) at each
     response.done — that is the actual billed usage."""
 
-    def __init__(self, tokens: ta.TokenAccount):
+    def __init__(self, tokens: ta.TokenAccount, session=None):
         super().__init__()
+        self.session = session
         self.tokens = tokens
         self.t_turn_end: float | None = None
         self.first_audio_latency: float | None = None
@@ -317,6 +312,7 @@ class TurnMetrics(FrameProcessor):
     async def process_frame(self, frame: Frame, direction: FrameDirection):
         await super().process_frame(frame, direction)
         if direction != FrameDirection.DOWNSTREAM:
+            await self.push_frame(frame, direction)
             return
         if isinstance(frame, MetricsFrame):
             for m in frame.data:
@@ -350,6 +346,8 @@ class TurnMetrics(FrameProcessor):
                 self.first_audio_latency = time.perf_counter() - self.t_turn_end
             self.audio_secs_out += len(frame.audio) / 2 / frame.sample_rate
         elif isinstance(frame, ErrorFrame):
+            if self.session is not None:
+                self.session.error(str(frame))
             print(err(f"\n[error] {frame}"), flush=True)
         await self.push_frame(frame, direction)
 
@@ -373,6 +371,8 @@ class TurnMetrics(FrameProcessor):
         utt = bytes(self._utt)
         rate = self._utt_rate
         self._utt = bytearray()
+        if fixture_plan() or os.getenv("CHAT_NO_TRANSCRIPT"):
+            return
         if len(utt) / 2 / rate < 0.4:
             return  # too short to be speech
 
@@ -407,6 +407,8 @@ class TurnMetrics(FrameProcessor):
         TTSTextFrame inside LLMAssistantAggregator, so this is the only
         reliable per-turn hook downstream — the old frame-based report
         never fired, which is why every saved session had turns: 0.)"""
+        if self.session is not None and (text or interrupted):
+            self.session.finish_turn(text, interrupted=interrupted)
         if interrupted:
             print(dim("— interrupted"), flush=True)
             self._in_secs = 0.0
@@ -469,9 +471,10 @@ class Spy(FrameProcessor):
 class SDTransport(BaseTransport):
     def __init__(self, metrics: TurnMetrics):
         super().__init__()
-        self._mic = MicInput()
+        self._mic = MicInput(metrics.session)
         self._metrics = metrics
-        self._spk = SpeakerOutput()
+        self._spk = SpeakerOutput(metrics.session)
+        self._mic.fixture_playing = lambda: self._spk.playing
 
     def input(self) -> FrameProcessor:
         return self._mic
@@ -480,10 +483,15 @@ class SDTransport(BaseTransport):
         return self._metrics
 
 
-async def run() -> dict:
+async def run() -> SessionReport:
     cfg = load_env()
     tokens = TOKENS
-    metrics = TurnMetrics(tokens)
+    session = SessionReport("realtime", "pipecat", {"realtime": cfg["model"]})
+    end_silence = endpoint_silence()
+    session.settings = {"vad_stop_secs": end_silence, "vad_start_secs": 0.2,
+                        "turn_stop_strategy": "speech_timeout_no_transcript",
+                        "additional_speech_timeout_s": 0.0}
+    metrics = TurnMetrics(tokens, session)
 
     async def get_meeting_context(params: FunctionCallParams):
         # pipecat >= 1.x: deliver results via result_callback (params.result is gone)
@@ -570,25 +578,50 @@ async def run() -> dict:
     service.register_function("get_meeting_context", get_meeting_context)
     service.register_function("bash", bash)
 
+    # Fixture-only diagnostic: retain exactly the audio surviving server buffer
+    # clear/append/commit, plus event types (never keys or private live mic audio).
+    if os.getenv("CHAT_TRACE_WIRE") and fixture_plan():
+        import base64
+        wire_audio = bytearray()
+        wire_events = []
+        original_send = service._ws_send
+        async def traced_send(message):
+            event_type = message.get("type")
+            if event_type == "input_audio_buffer.append":
+                wire_audio.extend(base64.b64decode(message["audio"]))
+            else:
+                wire_events.append({"at_s": session.now(), "type": event_type})
+            if event_type == "input_audio_buffer.clear":
+                wire_audio.clear()
+            if event_type == "input_audio_buffer.commit":
+                folder = HERE / ".fixtures" / "wire"
+                folder.mkdir(parents=True, exist_ok=True)
+                with wave.open(str(folder / f"input-{len(wire_events)}.wav"), "wb") as wav:
+                    wav.setnchannels(1); wav.setsampwidth(2); wav.setframerate(24000)
+                    wav.writeframes(bytes(wire_audio))
+                wire_audio.clear()
+            await original_send(message)
+            if event_type != "input_audio_buffer.append":
+                from poc_report import atomic_json
+                atomic_json(HERE / ".fixtures" / "wire-events.json", wire_events)
+        service._ws_send = traced_send
+
     # pipecat computes the per-response LLMTokenUsage at response.done but
     # never pushes the metrics frame downstream — shadow the hook on this
     # instance so the real billed usage lands in our token account
     async def _capture_llm_usage(usage: LLMTokenUsage):
         tokens.add(usage)
+        raw = usage.model_dump()
+        cost, basis = usage_cost(raw, cfg["model"])
+        session.stage("voice_and_inference", cfg["model"],
+                      session.current["endpoint_s"] if session.current else session.now(),
+                      usage=raw, cost_usd=cost, pricing=basis)
 
     service.start_llm_usage_metrics = _capture_llm_usage
 
     pair = LLMContextAggregatorPair(
         LLMContext(),
-        user_params=LLMUserAggregatorParams(
-            vad_analyzer=SileroVADAnalyzer(
-                params=VADParams(
-                    min_volume=float(os.getenv("CHAT_MIN_VOLUME", "0.15")),
-                    start_secs=0.2,
-                    stop_secs=0.3,
-                )
-            )
-        ),
+        user_params=realtime_user_params(),
         realtime_service_mode=True,
     )
 
@@ -601,7 +634,7 @@ async def run() -> dict:
         parts += [spy_in, pair.user(), spy_out]
     else:
         parts += [pair.user()]
-    parts += [service, pair.assistant(), transport.output(), transport._spk]
+    parts += [SessionBoundary(session), service, pair.assistant(), transport.output(), transport._spk]
 
     # Turn reports fire from the assistant aggregator's turn-stopped event:
     # the aggregator consumes LLMFullResponseEndFrame/TTSTextFrame, so no
@@ -616,19 +649,29 @@ async def run() -> dict:
     )
     runner = WorkerRunner()
     await runner.add_workers(worker)
+    transport._mic.fixture_stop = lambda: asyncio.create_task(runner.cancel())
+    transport._mic.fixture_ready = lambda: service._api_session_ready
     run_task = asyncio.create_task(runner.run())
+
+    async def mark_ready():
+        while not run_task.done():
+            if service._api_session_ready:
+                session.ready()
+                return
+            await asyncio.sleep(.05)
+    ready_task = asyncio.create_task(mark_ready())
 
     # Ctrl+C: the runner installs its own SIGINT handler when run() starts,
     # which waits for a graceful end that can hang on an active realtime
     # session. Re-install ours AFTER it starts (0.5 s later): cancel the
-    # runner, and hard-exit after 3 s if shutdown stalls.
+    # runner without hard-exiting before the session report is written.
     loop = asyncio.get_running_loop()
     import signal as _signal
 
     def _on_sigint():
         print(dim("— closing"), flush=True)
         asyncio.create_task(runner.cancel())
-        loop.call_later(3.0, lambda: os._exit(0))
+        # Let cleanup finish so the report is not lost to a forced os._exit.
 
     def _on_hup():
         # terminal closed — exit immediately, never linger in the background
@@ -647,11 +690,11 @@ async def run() -> dict:
         await run_task
     except asyncio.CancelledError:
         pass
-    return {
-        "turns": metrics.turns,
-        "total_cost_usd": round(metrics.total_cost_usd, 4),
-        "wall_total_s": round(time.perf_counter() - metrics._t0, 1),
-    }
+    except Exception as exc:
+        session.error(f'{type(exc).__name__}: {exc}')
+    finally:
+        ready_task.cancel()
+    return session
 
 
 async def main():
@@ -670,14 +713,9 @@ async def main():
                 pass
             return _orig(msg)
         _ev.parse_server_event = _spy
-    result = await run()
-    result["tokens"] = TOKENS.report()
-    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    out = HERE / "results" / f"chat-{stamp}.json"
-    out.write_text(json.dumps(result, indent=2))
-    print(dim(f"session: {result.get('turns', 0)} turns · "
-              f"{TOKENS.line()} · {result.get('wall_total_s', 0)}s "
-              f"→ {out.name}"), flush=True)
+    session = await run()
+    out = session.write(HERE / "results")
+    print(dim(f"session report → {out.name}"), flush=True)
 
 
 if __name__ == "__main__":

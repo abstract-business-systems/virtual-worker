@@ -1,95 +1,107 @@
 #!/usr/bin/env python3
-"""Benchmark dataset collator (M9 #18).
+"""Collate reports without inventing models, durations, missing usage or quality.
 
-Scans every session report under experiments/*/results/*.json, normalizes
-the four report shapes (realtime chat-*, chat_audio audio-/separate-,
-pipecat sep-pipecat-*, early probe run-*), and writes:
-
-    docs/benchmarks/sessions.csv   (append-friendly flat CSV)
-    docs/benchmarks/sessions.json  (same rows, structured)
-
-Append-friendly: just keep running sessions — rerun this script and the
-CSV is refreshed from the JSON sources. Per-turn latency probes
-(step1/step2 shape) are intentionally excluded; they are latency
-measurements, not sessions.
-
-Usage: uv run python experiments/pipecat-poc/benchmark.py
+Raw historical reports stay untouched. Invalid JSON is surfaced in rejected.json.
+This is a dataset collator, NOT the model-swap runner (baseline.py replays tests).
 """
 from __future__ import annotations
-
 import csv
-import glob
 import json
-import os
+from pathlib import Path
+from poc_report import atomic_json
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-EXP = os.path.join(ROOT, "experiments")
-OUT_DIR = os.path.join(ROOT, "docs", "benchmarks")
-
-# Mode + model per report family. Models reflect the preset in effect at
-# the time (models.ini); new sessions should record models in their JSON.
-FAMILIES = {
-    "chat-": dict(mode="realtime", engine="pipecat", model="gpt-realtime-2.1-mini"),
-    "audio-": dict(mode="audio", engine="chat_audio", model="gpt-audio-mini"),
-    "separate-": dict(mode="separate", engine="chat_audio", model="whisper-local + gpt-4o-mini + piper"),
-    "sep-pipecat-": dict(mode="separate", engine="pipecat", model="gpt-4o-mini-transcribe + gpt-4o-mini + gpt-4o-mini-tts"),
-}
-SKIP_PREFIXES = ("run-",)  # latency probes, not sessions
+ROOT = Path(__file__).resolve().parents[2]
+OUT_DIR = ROOT/'docs/benchmarks'
+FAMILIES = {'chat-': ('realtime', 'pipecat'), 'audio-': ('audio', 'chat_audio'),
+            'separate-': ('separate', 'chat_audio'), 'sep-pipecat-': ('separate', 'pipecat')}
 
 
-def row_from(path: str) -> dict | None:
-    name = os.path.basename(path)
-    if any(name.startswith(p) for p in SKIP_PREFIXES):
-        return None
-    fam = next((v for k, v in FAMILIES.items() if name.startswith(k)), None)
-    if fam is None:
-        return None
+def read_row(path: Path):
     try:
-        d = json.load(open(path))
-    except Exception:
-        return None
-    if d.get("turns", 0) == 0:  # crashed/debug session
-        return None
-    if "step1" in d and "turns" not in d:  # probe shape
-        return None
-    t = d.get("tokens", {}).get("totals") or {}
-    cost = d.get("total_cost_usd") or t.get("cost") or 0.0
-    wall = d.get("wall_total_s")
+        d = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError) as exc:
+        return None, f'invalid_report: {exc}'
+    if not isinstance(d, dict):
+        return None, 'report_is_not_an_object'
+    if d.get('kind') == 'baseline_index':
+        return None, 'baseline_index_not_a_session'
+    if path.name.startswith('run-'):
+        return None, 'legacy_probe_not_a_session'
+    family = next((v for prefix, v in FAMILIES.items() if path.name.startswith(prefix)), None)
+    modern = d.get('schema_version') == 2
+    if not modern and not family:
+        return None, 'unknown_report_family'
+    if not modern and not d.get('turns'):
+        return None, 'legacy_zero_turn_debug_session'
+    warnings = []
+    tokens = (d.get('tokens') or {}).get('totals') or {}
+    cost = d.get('total_cost_usd')
+    token_cost = tokens.get('cost')
+    if not modern and token_cost is not None:
+        if cost is not None and abs(cost-token_cost) > 1e-6:
+            warnings.append('conflicting_cost_totals; using_token_total')
+        cost = token_cost
+    duration = d.get('measurement_duration_s') if modern else d.get('wall_total_s')
+    if not modern:
+        warnings.extend(['legacy_models_or_pricing_not_verified', 'legacy_latency_not_M10_comparable'])
+    if duration is None:
+        warnings.append('duration_missing; no_per_minute_number')
+    model_data = d.get('models') or d.get('model')
+    if not model_data:
+        warnings.append('model_not_recorded; do_not_infer_from_filename')
+    mode, engine = (d.get('mode'), d.get('engine')) if modern else family
+    if modern and d.get('errors'):
+        warnings.append('session_has_errors')
+    if modern and any(r.get('heuristic_keyword_match') is False for r in d.get('fixture_results', [])):
+        warnings.append('fixture_keyword_check_failed; not_a_validated_baseline')
+    if modern and not d.get('pricing_verified'):
+        warnings.append('pricing_not_bill_verified')
+    rel = str(path.resolve().relative_to(ROOT))
     return {
-        "ts": d.get("started_utc", name.split("-")[-1].removesuffix(".json").replace("T", " ").replace("Z", "")),
-        "mode": fam["mode"],
-        "engine": d.get("engine") or fam["engine"],
-        "model": fam["model"],
-        "turns": d.get("turns", 0),
-        "wall_s": round(wall, 1) if wall else "",
-        "tok_in": t.get("in", ""),
-        "tok_in_audio": t.get("in_audio", ""),
-        "tok_cached": t.get("cached", ""),
-        "tok_out": t.get("out", ""),
-        "tok_out_audio": t.get("out_audio", ""),
-        "cost_usd": round(cost, 6) if cost else "",
-        "cost_per_turn_usd": round(cost / d["turns"], 6) if cost and d.get("turns") else "",
-        "cost_per_min_usd": round(cost / wall, 6) if cost and wall else "",
-        "src": os.path.relpath(path, ROOT),
-    }
+        'ts': d.get('started_utc') or path.stem.rsplit('-', 1)[-1],
+        'schema_version': d.get('schema_version', 1), 'mode': mode,
+        'engine': d.get('engine') or engine,
+        'model': json.dumps(model_data, sort_keys=True) if model_data else 'unrecorded',
+        'turns': d.get('turns', 0), 'completed_turns': d.get('completed_turns'),
+        'wall_s': duration, 'tok_in': tokens.get('in'),
+        'tok_in_audio': tokens.get('in_audio'), 'tok_cached': tokens.get('cached'),
+        'tok_out': tokens.get('out'), 'tok_out_audio': tokens.get('out_audio'),
+        'cost_usd': cost,
+        'cost_per_turn_usd': cost/d['turns'] if cost is not None and d.get('turns') else None,
+        'cost_per_min_usd': cost*60/duration if cost is not None and duration and duration > 0 else None,
+        'voice_cost_per_min_usd': d.get('voice_cost_per_min_usd') if modern else None,
+        'round_trip_mean_s': (d.get('round_trip') or {}).get('mean_s') if modern else None,
+        'round_trip_samples': (d.get('round_trip') or {}).get('samples') if modern else None,
+        'voice_latency_mean_s': (d.get('voice_latency') or {}).get('mean_s') if modern else None,
+        'quality_verified': d.get('quality_verified', False),
+        'pricing_verified': d.get('pricing_verified', False),
+        'warnings': '; '.join(warnings), 'src': rel,
+    }, None
 
 
-def main() -> None:
-    rows = []
-    for path in sorted(glob.glob(os.path.join(EXP, "*", "results", "*.json"))):
-        r = row_from(path)
-        if r:
-            rows.append(r)
-    os.makedirs(OUT_DIR, exist_ok=True)
-    cols = list(rows[0].keys()) if rows else []
-    with open(os.path.join(OUT_DIR, "sessions.csv"), "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=cols)
-        w.writeheader()
-        w.writerows(rows)
-    with open(os.path.join(OUT_DIR, "sessions.json"), "w") as f:
-        json.dump(rows, f, indent=1)
-    print(f"{len(rows)} sessions → docs/benchmarks/sessions.{{csv,json}}")
+def row_from(path):
+    """Compatibility for callers; main() also retains rejection reasons."""
+    return read_row(Path(path))[0]
 
 
-if __name__ == "__main__":
+def main():
+    rows, rejected = [], []
+    for path in sorted((ROOT/'experiments').glob('*/results/*.json')):
+        row, reason = read_row(path)
+        if row is not None:
+            rows.append(row)
+        else:
+            rejected.append({'src': str(path.relative_to(ROOT)), 'reason': reason})
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    atomic_json(OUT_DIR/'sessions.json', rows)
+    atomic_json(OUT_DIR/'rejected.json', rejected)
+    columns = list(rows[0]) if rows else ['src']
+    with (OUT_DIR/'sessions.csv').open('w', newline='') as stream:
+        writer = csv.DictWriter(stream, fieldnames=columns, lineterminator='\n')
+        writer.writeheader()
+        writer.writerows(rows)
+    print(f'{len(rows)} sessions, {len(rejected)} excluded/invalid reports → docs/benchmarks/')
+
+
+if __name__ == '__main__':
     main()

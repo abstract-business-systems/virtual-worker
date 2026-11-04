@@ -1,0 +1,211 @@
+{
+  "schema_version": 2,
+  "mode": "realtime",
+  "engine": "pipecat",
+  "models": {
+    "realtime": "gpt-realtime-2.1-mini"
+  },
+  "settings": {
+    "vad_stop_secs": 0.8,
+    "vad_start_secs": 0.2,
+    "turn_stop_strategy": "speech_timeout_no_transcript",
+    "additional_speech_timeout_s": 0.0
+  },
+  "started_utc": "2026-11-04T07:48:29.709428+00:00",
+  "wall_total_s": 29.479081847937778,
+  "measurement_duration_s": 28.33617127290927,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 3,
+  "completed_turns": 3,
+  "input_audio_s": 16.75424999999997,
+  "total_cost_usd": 0.006863800000000001,
+  "known_cost_usd": 0.006863800000000001,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": 0.01453365015455448,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": 1.9611802847611968,
+    "samples": 3
+  },
+  "voice_latency": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "to_audio_received": {
+    "mean_s": 1.8406293443103008,
+    "samples": 3
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "native model inference is bundled; not independently measurable",
+  "errors": [],
+  "fixture_results": [
+    {
+      "id": "pause-regression-1",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "pause-regression-2",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "pause-regression-3",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    }
+  ],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": "pause-regression-1",
+      "speech_end_s": 4.9177196690104905,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 5.762496577925049,
+      "first_audio_received_s": 6.758876409963705,
+      "first_playback_s": 6.911233954423956,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.15,
+      "input_text": null,
+      "reply": "Seven plus five equals twelve.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 5.762496577925049,
+          "end_s": 7.1349603469716385,
+          "usage": {
+            "prompt_tokens": 499,
+            "completion_tokens": 101,
+            "total_tokens": 600,
+            "cache_read_input_tokens": 448,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 46,
+            "output_audio_tokens": 63,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0019486000000000002,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 7.1367032589623705,
+      "round_trip_s": 1.9935142854134655,
+      "to_audio_received_s": 1.8411567409532141,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0019486000000000002,
+      "cost_usd": 0.0019486000000000002,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 2,
+      "fixture": "pause-regression-2",
+      "speech_end_s": 14.220370772014371,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 15.063923434005119,
+      "first_audio_received_s": 16.15921318694018,
+      "first_playback_s": 16.252207245088886,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.4,
+      "input_text": null,
+      "reply": "Seven plus five equals twelve.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 15.063923434005119,
+          "end_s": 16.612570683006197,
+          "usage": {
+            "prompt_tokens": 567,
+            "completion_tokens": 89,
+            "total_tokens": 656,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 94,
+            "output_audio_tokens": 48,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0022822000000000003,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 16.614195856964216,
+      "round_trip_s": 2.031836473074515,
+      "to_audio_received_s": 1.9388424149258068,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0022822000000000003,
+      "cost_usd": 0.0022822000000000003,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 3,
+      "fixture": "pause-regression-3",
+      "speech_end_s": 22.794650929932484,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 23.642841847031377,
+      "first_audio_received_s": 24.536539806984365,
+      "first_playback_s": 24.652841025728094,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.1,
+      "input_text": null,
+      "reply": "Seven plus five equals twelve.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 23.642841847031377,
+          "end_s": 24.948833663016558,
+          "usage": {
+            "prompt_tokens": 636,
+            "completion_tokens": 70,
+            "total_tokens": 706,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 143,
+            "output_audio_tokens": 42,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.002633,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 24.95055126596708,
+      "round_trip_s": 1.8581900957956101,
+      "to_audio_received_s": 1.7418888770518812,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.002633,
+      "cost_usd": 0.002633,
+      "voice_cost_usd": null
+    }
+  ]
+}

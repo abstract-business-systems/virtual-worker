@@ -1,15 +1,21 @@
-# Pipecat POC (M8) — three conversation-layer modes in one pipeline
+# Pipecat POC — three conversation-layer modes
 
-Isolated POC: one talkable CLI in three **typed** conversation modes (M8
-naming), after the M7 realtime probe established the latency/feel baseline.
+**Current repair/measurement status (4 November):**
+[baseline status and remaining M10 work](../../docs/poc-baseline-status.md).
+The M10 quality/measurement gate is **not complete**; historical numbers below
+are not the latest validated comparison.
 
-## Modes — `./run.sh <mode>` (default: realtime)
+One talkable CLI exposes three **typed** conversation modes. Realtime and the
+optional native separate engine use full Pipecat pipelines; audio and default
+separate share the HTTP engine plus Pipecat's VAD utilities.
 
-| Mode | Pipeline | First audio (measured) | Cost/turn |
-|---|---|---|---|
-| `realtime` | one OpenAI realtime model listens, thinks, speaks (Pipecat pipeline) | ~1–3 s | ~$0.0025–0.005 |
-| `audio` | one audio-model call per turn, OpenRouter (`chat_audio.py`) | ~3 s | ~$0.0006 |
-| `separate` | local faster-whisper STT → think model (tools) → voice model TTS (`chat_audio.py`) | ~6 s | ~$0.0012 |
+## Modes — `./run.sh <mode>` (no arguments prints the menu)
+
+| Mode | Configured quality baseline | Engine |
+|---|---|---|
+| `realtime` | `gpt-realtime-2.1-mini` | Pipecat, explicit client-side turn strategy |
+| `audio` | full `openai/gpt-audio` (more expensive than mini) | HTTP audio in/out and tool follow-up |
+| `separate` | online `gpt-4o-mini-transcribe` → `gpt-4o-mini` → dedicated Coral TTS | Serial HTTP; `--pipecat` selects native streaming |
 
 Models per mode live in `models.ini` (`[realtime] / [audio] / [separate]`);
 `--model <name>` overrides the voice/realtime model for one run.
@@ -21,11 +27,14 @@ Usage:
 uv run python benchmark.py            # refresh docs/benchmarks/sessions.{csv,json}
 ./run.sh realtime -d                   # debug (mic levels, VAD, pipecat logs)
 ./run.sh audio --model openai/gpt-audio
-CHAT_TEST_WAV=fixtures/question.wav ./run.sh realtime   # self-test (no mic)
+uv run python baseline.py --prepare-only --smoke       # local synthetic fixtures
+uv run python baseline.py --mode realtime --smoke      # paid six-task test; no mic
+uv run python baseline.py --mode realtime              # paid ~5-minute interactions
 ```
 
-Keys in git-ignored `.env`: `OPENAI_API_KEY` (realtime),
-`OPENROUTER_API_KEY` (audio/separate).
+Keys in git-ignored `.env`: `OPENAI_API_KEY` (realtime/STT/TTS),
+`OPENROUTER_API_KEY` (audio/inference). Separate mode needs both. Explicit
+environment overrides win over `.env`; model presets come from `models.ini`.
 
 ## Tools (M8 scope)
 
@@ -43,7 +52,7 @@ in this folder"*.
 | `You: …` (cyan) | what you spoke (local Whisper transcription of the mic capture — the same audio the agent receives) |
 | `Friday: …` (green) | the agent's spoken reply |
 | `[tool] name(args) -> result` (magenta) | a tool call the agent made |
-| `── turn N · first audio Xs · ~$cost` (dim) | per-turn latency and estimated cost; separate mode adds `stt/think/tts` stage times |
+| `── turn N …` (dim) | operational feedback; the versioned JSON has full timing boundaries and pricing provenance |
 | `[warn]` / `[error]` | yellow / red problems |
 
 Mic/VAD chatter, frame counts, and the pipecat banner are suppressed —
@@ -64,7 +73,7 @@ Environment is project-level via `uv` (venv at `.venv`, Python 3.11 via
 uv run --project experiments/pipecat-poc experiments/pipecat-poc/probe.py
 ```
 
-## Results (2026-10-30, Pipecat 1.15.0, `gpt-realtime-2.1-mini`)
+## Historical results (2026-10-30, Pipecat 1.15.0, `gpt-realtime-2.1-mini`)
 
 Two runs (`results/run-20261030T090109Z.json`, `run-20261030T090150Z.json`).
 Comparison measured the same way as the raw probe: **first audio chunk after
@@ -122,14 +131,31 @@ per-turn latency and cost printed after every exchange. Run it from inside
 this folder:
 
 ```bash
-./run.sh           # or ./run.sh -d for mic levels, VAD events, logs
-./run.sh --model gpt-realtime-2.1   # full model instead of mini
+./run.sh realtime           # add -d for mic levels, VAD events, logs
+./run.sh realtime --model gpt-realtime-2.1   # model override
 ```
 
 Env overrides: `CHAT_INPUT_DEVICE` (mic index), `CHAT_MIN_VOLUME`
 (VAD loudness threshold, default 0.15 — this machine's mic reads a loud
 noise floor, so tune if VAD never fires). Headphones recommended:
 no echo cancellation, so speaker bleed triggers barge-in.
+`CHAT_END_SILENCE` controls realtime pause tolerance (default 0.8 s). The stop
+strategy is explicitly silence-based and does not wait for transcripts; changing
+this setting trades pause tolerance for endpointing delay.
+
+## Reports and verification
+
+New sessions write atomic, timestamped `session-*.json` reports with schema version
+2. They retain model IDs, raw per-stage usage, estimated/provider cost basis,
+transcripts, tool results, missing measurements and failures. Native model
+inference is bundled and is **not** silently counted as zero or subtracted from
+text/audio token buckets. Playback timing is a PortAudio DAC estimate, not a Teams
+or acoustic measurement. See the linked baseline status for limits and review steps.
+
+The collator writes `docs/benchmarks/sessions.{csv,json}` and `rejected.json`.
+Old reports remain untouched; invalid JSON is surfaced and absent model IDs stay
+`unrecorded`. `baseline.py` checks operational/keyword results but never marks
+human quality or pricing as verified.
 
 ## Timebox
 
