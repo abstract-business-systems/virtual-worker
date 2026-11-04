@@ -1,0 +1,405 @@
+{
+  "schema_version": 2,
+  "mode": "audio",
+  "engine": "chat_audio",
+  "models": {
+    "voice": "openai/gpt-audio",
+    "think": null,
+    "stt": null
+  },
+  "settings": {},
+  "started_utc": "2026-11-04T08:10:46.859843+00:00",
+  "wall_total_s": 79.25112651893869,
+  "measurement_duration_s": 79.19820586894639,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 7,
+  "completed_turns": 5,
+  "input_audio_s": 33.400000000000205,
+  "total_cost_usd": null,
+  "known_cost_usd": 0.08443800000000001,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": null,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": 2.4049543378846137,
+    "samples": 5
+  },
+  "voice_latency": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "to_audio_received": {
+    "mean_s": 2.19224055102095,
+    "samples": 5
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "native model inference is bundled; not independently measurable",
+  "errors": [],
+  "fixture_results": [],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": null,
+      "speech_end_s": 2.6207744629355147,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 2.7247034769970924,
+      "first_audio_received_s": 4.475784805952571,
+      "first_playback_s": 4.886108897424202,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 5.6,
+      "input_text": null,
+      "reply": "Hello! It's great to connect with you. What question would you like me to answer for you today?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 2.724843966891058,
+          "end_s": 5.1966465269215405,
+          "usage": {
+            "prompt_tokens": 259,
+            "completion_tokens": 146,
+            "total_tokens": 405,
+            "cost": 0.008657,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 17,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.008657,
+              "upstream_inference_prompt_cost": 0.001149,
+              "upstream_inference_completions_cost": 0.007508
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 112
+            }
+          },
+          "cost_usd": 0.008657,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 5.196733266930096,
+      "round_trip_s": 2.265334434488687,
+      "to_audio_received_s": 1.8550103430170566,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.008657,
+      "cost_usd": 0.008657,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 2,
+      "fixture": null,
+      "speech_end_s": 12.434115738957189,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 12.435287703992799,
+      "first_audio_received_s": 15.112473943969235,
+      "first_playback_s": 15.404546807459534,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 6.05,
+      "input_text": null,
+      "reply": "Got it. The color of the ball is pink. Let me know if you need any more help or details!",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 12.435610575950705,
+          "end_s": 15.884261618950404,
+          "usage": {
+            "prompt_tokens": 416,
+            "completion_tokens": 157,
+            "total_tokens": 573,
+            "cost": 0.0111795,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 69,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0111795,
+              "upstream_inference_prompt_cost": 0.0030755,
+              "upstream_inference_completions_cost": 0.008104
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 121
+            }
+          },
+          "cost_usd": 0.0111795,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 15.884364429977722,
+      "round_trip_s": 2.9704310685023447,
+      "to_audio_received_s": 2.678358205012046,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0111795,
+      "cost_usd": 0.0111795,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 3,
+      "fixture": null,
+      "speech_end_s": 24.42344276199583,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 24.527376496000215,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 24.85155664291233,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 4,
+      "fixture": null,
+      "speech_end_s": 26.556779606966302,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 26.558445133967325,
+      "first_audio_received_s": 28.425071830977686,
+      "first_playback_s": 28.51823049155632,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 13.65,
+      "input_text": null,
+      "reply": "I'm here to help, but I want to be clear that I can\u2019t provide copyrighted material, including full content or direct quotes from Harry Potter movies. I can summarize them, share general facts, or answer questions about the series. Let me know what you'd like to know!",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 26.558624014956877,
+          "end_s": 31.030489169992507,
+          "usage": {
+            "prompt_tokens": 527,
+            "completion_tokens": 349,
+            "total_tokens": 876,
+            "cost": 0.0223225,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 94,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0223225,
+              "upstream_inference_prompt_cost": 0.0040905,
+              "upstream_inference_completions_cost": 0.018232
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 273
+            }
+          },
+          "cost_usd": 0.0223225,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 31.030683470889926,
+      "round_trip_s": 1.9614508845900183,
+      "to_audio_received_s": 1.868292224011384,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0223225,
+      "cost_usd": 0.0223225,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 5,
+      "fixture": null,
+      "speech_end_s": 42.85545109398663,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 42.85641968797427,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 43.02763635595329,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 6,
+      "fixture": null,
+      "speech_end_s": 44.22088543791324,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 44.3257234939374,
+      "first_audio_received_s": 46.37664326792583,
+      "first_playback_s": 46.501556895432564,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 18.3,
+      "input_text": null,
+      "reply": "Sure! In the Harry Potter movies, Dumbledore is the wise and kind headmaster of Hogwarts School of Witchcraft and Wizardry. He's known for guiding Harry and his friends, and for his crucial role in the fight against Voldemort. Did you want more details on a specific scene or character interaction?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 44.32590362499468,
+          "end_s": 49.963574188994244,
+          "usage": {
+            "prompt_tokens": 668,
+            "completion_tokens": 452,
+            "total_tokens": 1120,
+            "cost": 0.0294645,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 119,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0294645,
+              "upstream_inference_prompt_cost": 0.0051805,
+              "upstream_inference_completions_cost": 0.024284
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 366
+            }
+          },
+          "cost_usd": 0.0294645,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 49.96379721991252,
+      "round_trip_s": 2.2806714575193254,
+      "to_audio_received_s": 2.1557578300125897,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0294645,
+      "cost_usd": 0.0294645,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 7,
+      "fixture": null,
+      "speech_end_s": 67.43145774491131,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 67.53494741790928,
+      "first_audio_received_s": 69.83524189796299,
+      "first_playback_s": 69.978341589234,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 4.7,
+      "input_text": null,
+      "reply": "The color of the ball is pink, as you mentioned earlier. That's what we're going with.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 67.53517246898264,
+          "end_s": 70.67688431590796,
+          "usage": {
+            "prompt_tokens": 794,
+            "completion_tokens": 124,
+            "total_tokens": 918,
+            "cost": 0.0128145,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 153,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0128145,
+              "upstream_inference_prompt_cost": 0.0064985,
+              "upstream_inference_completions_cost": 0.006316
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 94
+            }
+          },
+          "cost_usd": 0.0128145,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 70.6769465059042,
+      "round_trip_s": 2.546883844322693,
+      "to_audio_received_s": 2.4037841530516744,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0128145,
+      "cost_usd": 0.0128145,
+      "voice_cost_usd": null
+    }
+  ]
+}

@@ -1,0 +1,644 @@
+WEBVTT
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/5-0
+00:00:04.515 --> 00:00:05.075
+<v Sarooparam Chenaram Darji>Started.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/7-0
+00:00:06.515 --> 00:00:09.098
+<v Viswanath Chidambaram>OK,
+the first thing is to lets say like make</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/7-1
+00:00:09.098 --> 00:00:13.806
+<v Viswanath Chidambaram>sure all the 3 approaches use the same
+thinking model or same model for thinking.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/7-2
+00:00:13.806 --> 00:00:17.767
+<v Viswanath Chidambaram>OK, ideally it should be configurable.
+Ideally, OK, if it is costly,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/7-3
+00:00:17.767 --> 00:00:20.407
+<v Viswanath Chidambaram>you can actually hard code it.
+Not a problem,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/6-0
+00:00:18.915 --> 00:00:19.155
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/7-4
+00:00:20.407 --> 00:00:24.426
+<v Viswanath Chidambaram>but I don't think it should be costly.
+So this is the first step. OK,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/7-5
+00:00:24.426 --> 00:00:25.115
+<v Viswanath Chidambaram>second step.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/8-0
+00:00:25.595 --> 00:00:29.595
+<v Viswanath Chidambaram>Is to try actually try to replace audio
+fully with audio mini.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/9-0
+00:00:30.395 --> 00:00:30.595
+<v Sarooparam Chenaram Darji>No.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/13-0
+00:00:31.595 --> 00:00:34.638
+<v Viswanath Chidambaram>Okay,
+and actually like ask them questions and</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/13-1
+00:00:34.638 --> 00:00:39.884
+<v Viswanath Chidambaram>actually basically just actually measure
+the latency part latency part and water</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/11-0
+00:00:37.835 --> 00:00:38.035
+<v Sarooparam Chenaram Darji>2.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/13-2
+00:00:39.884 --> 00:00:44.416
+<v Viswanath Chidambaram>whatever this is 17 conversations
+complete that kind of metric. Okay,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/12-0
+00:00:43.155 --> 00:00:43.475
+<v Sarooparam Chenaram Darji>Oh.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/13-3
+00:00:44.416 --> 00:00:49.273
+<v Viswanath Chidambaram>the idea is to like 2 things primarily
+reduce the latency. Okay, Secondly,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/13-4
+00:00:49.273 --> 00:00:50.115
+<v Viswanath Chidambaram>reducing the.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/14-0
+00:00:50.475 --> 00:00:51.755
+<v Viswanath Chidambaram>Asked for the audio approach.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/15-0
+00:00:52.355 --> 00:00:52.595
+<v Sarooparam Chenaram Darji>No.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/18-0
+00:00:53.155 --> 00:00:57.441
+<v Viswanath Chidambaram>OK, because actually the separate thing,
+I don't think we can actually do much</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/18-1
+00:00:57.441 --> 00:01:00.968
+<v Viswanath Chidambaram>improvement there. OK,
+because there is a lot of tones involved.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/18-2
+00:01:00.968 --> 00:01:04.061
+<v Viswanath Chidambaram>But if the only thing we might actually
+if you use mini,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/18-3
+00:01:04.061 --> 00:01:08.511
+<v Viswanath Chidambaram>I believe we might actually end up with
+some 2 second latency really close to the</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/18-4
+00:01:08.511 --> 00:01:11.386
+<v Viswanath Chidambaram>live model. OK,
+because actually it is not doing any</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/16-0
+00:01:09.475 --> 00:01:09.795
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/18-5
+00:01:11.386 --> 00:01:11.875
+<v Viswanath Chidambaram>thinking.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/17-0
+00:01:12.595 --> 00:01:12.915
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/22-0
+00:01:13.195 --> 00:01:18.356
+<v Viswanath Chidambaram>Thinking actually anyway we will be
+considerable and this what this actually</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/19-0
+00:01:15.635 --> 00:01:15.955
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/22-1
+00:01:18.356 --> 00:01:22.780
+<v Viswanath Chidambaram>separation might actually help us like
+get a cost efficiency too.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/22-2
+00:01:22.780 --> 00:01:28.075
+<v Viswanath Chidambaram>So that will be the second step okay like
+experimenting between audio full and</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/20-0
+00:01:23.475 --> 00:01:23.795
+<v Sarooparam Chenaram Darji>No.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/22-3
+00:01:28.075 --> 00:01:31.895
+<v Viswanath Chidambaram>audio mini okay.
+The 3rd step is once again you finalize</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/21-0
+00:01:29.715 --> 00:01:29.875
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/22-4
+00:01:31.895 --> 00:01:33.035
+<v Viswanath Chidambaram>the 3 candidates.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/25-0
+00:01:33.475 --> 00:01:38.189
+<v Viswanath Chidambaram>OK, with the common thinking model,
+the 3rd step would be measuring the</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/25-1
+00:01:38.189 --> 00:01:41.921
+<v Viswanath Chidambaram>latency and cost.
+Latency is anyway already the library.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/25-2
+00:01:41.921 --> 00:01:46.504
+<v Viswanath Chidambaram>You just have to measure the cost,
+basically how much for a minute of</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/23-0
+00:01:42.755 --> 00:01:43.075
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/25-3
+00:01:46.504 --> 00:01:47.355
+<v Viswanath Chidambaram>conversation.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/24-0
+00:01:48.035 --> 00:01:48.315
+<v Sarooparam Chenaram Darji>Thank you.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/27-0
+00:01:49.195 --> 00:01:53.755
+<v Viswanath Chidambaram>They like whatever actually like a test
+actually the agent is using now we will</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/27-1
+00:01:53.755 --> 00:01:56.376
+<v Viswanath Chidambaram>actually measure measure based on itself.
+OK,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/26-0
+00:01:55.715 --> 00:01:56.035
+<v Sarooparam Chenaram Darji>Oh.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/27-2
+00:01:56.376 --> 00:02:00.708
+<v Viswanath Chidambaram>that will be the 3rd thing the 4th and
+the 4th and 5th are integrating with</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/27-3
+00:02:00.708 --> 00:02:02.475
+<v Viswanath Chidambaram>Friday and integrating with Pi.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/29-0
+00:02:03.755 --> 00:02:10.875
+<v Sarooparam Chenaram Darji>Integrating the this pipe cat with a
+Friday and.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/28-0
+00:02:04.475 --> 00:02:05.035
+<v Viswanath Chidambaram>Between.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/30-0
+00:02:07.915 --> 00:02:11.970
+<v Viswanath Chidambaram>Your current POC, yeah,
+your current POC with actually Friday and</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/30-1
+00:02:11.970 --> 00:02:12.155
+<v Viswanath Chidambaram>Pi.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/33-0
+00:02:13.835 --> 00:02:16.469
+<v Viswanath Chidambaram>OK,
+you can like I hear you at yeah Friday</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/32-0
+00:02:14.035 --> 00:02:17.395
+<v Sarooparam Chenaram Darji>Friday and 5 the there's some.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/33-1
+00:02:16.469 --> 00:02:19.593
+<v Viswanath Chidambaram>and Pai,
+but actually the order you decide 4 could</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/33-2
+00:02:19.593 --> 00:02:23.575
+<v Viswanath Chidambaram>be Friday, 5 could be Pai,
+or 4 could be Pai, 5 could be Friday.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/33-3
+00:02:23.575 --> 00:02:24.555
+<v Viswanath Chidambaram>It is up to you.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/34-0
+00:02:24.995 --> 00:02:28.835
+<v Sarooparam Chenaram Darji>Pie can be simple,
+basically I think I can integrate pi.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/36-0
+00:02:27.675 --> 00:02:30.103
+<v Viswanath Chidambaram>Yeah,
+like you choose by I don't know na to me</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/36-1
+00:02:30.103 --> 00:02:34.081
+<v Viswanath Chidambaram>actually they are the same priority
+because actually we are going to test it</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/36-2
+00:02:34.081 --> 00:02:38.266
+<v Viswanath Chidambaram>like but actually originally like before
+sometime I started saying that it might</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/36-3
+00:02:38.266 --> 00:02:42.295
+<v Viswanath Chidambaram>be better if you start with Pi because
+actually you can actually get a better</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/36-4
+00:02:42.295 --> 00:02:46.635
+<v Viswanath Chidambaram>feel of how these models are by actually
+using Pi with actually like this approach.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/35-0
+00:02:43.235 --> 00:02:43.595
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/37-0
+00:02:47.275 --> 00:02:48.715
+<v Viswanath Chidambaram>To actually do the task itself.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/38-0
+00:02:49.235 --> 00:02:49.475
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/41-0
+00:02:50.235 --> 00:02:52.137
+<v Viswanath Chidambaram>But again,
+you can see you don't have to</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/41-1
+00:02:52.137 --> 00:02:54.967
+<v Viswanath Chidambaram>continuously use it.
+I'm not entirely sure how convenient it</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/41-2
+00:02:54.967 --> 00:02:58.075
+<v Viswanath Chidambaram>is. We will figure it out.
+But if you still think even without the</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/39-0
+00:02:56.115 --> 00:02:56.395
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/41-3
+00:02:58.075 --> 00:03:01.462
+<v Viswanath Chidambaram>reason if you think actually like
+integrating Pi is simpler, go with it.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/41-4
+00:03:01.462 --> 00:03:05.220
+<v Viswanath Chidambaram>So the Pi integration can actually the
+success criteria of Pi integration is you</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/40-0
+00:03:01.475 --> 00:03:01.715
+<v Sarooparam Chenaram Darji>Oh.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/41-5
+00:03:05.220 --> 00:03:08.003
+<v Viswanath Chidambaram>should be able to ask it for let's say a
+simple stack game.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/41-6
+00:03:08.003 --> 00:03:10.555
+<v Viswanath Chidambaram>You should be able to start it and
+provide you a link.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/42-0
+00:03:12.795 --> 00:03:16.235
+<v Viswanath Chidambaram>Okay, so this one actually even this one,
+it's not agree fully audio thing.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/44-0
+00:03:18.155 --> 00:03:20.466
+<v Viswanath Chidambaram>OK,
+it should be able to give you some text</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/44-1
+00:03:20.466 --> 00:03:23.512
+<v Viswanath Chidambaram>like last of no,
+it seems this to be a multi model agent,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/44-2
+00:03:23.512 --> 00:03:26.663
+<v Viswanath Chidambaram>not just an audio agent.
+If the text part was not possible,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/43-0
+00:03:26.035 --> 00:03:26.355
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/44-3
+00:03:26.663 --> 00:03:30.235
+<v Viswanath Chidambaram>we'll actually figure it out actually
+what to do for it separately.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/45-0
+00:03:34.595 --> 00:03:34.915
+<v Sarooparam Chenaram Darji>Got it.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/46-0
+00:03:35.275 --> 00:03:35.755
+<v Viswanath Chidambaram>Shahrukh.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/48-0
+00:03:37.355 --> 00:03:39.431
+<v Viswanath Chidambaram>So,
+like the text actually doesn't have to be</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/48-1
+00:03:39.431 --> 00:03:42.636
+<v Viswanath Chidambaram>from actually this pipe cat thing,
+maybe it can be from a like overall</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/48-2
+00:03:42.636 --> 00:03:45.435
+<v Viswanath Chidambaram>orchestra or some underlying structure
+that we'll figure out.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/47-0
+00:03:46.115 --> 00:03:46.275
+<v Sarooparam Chenaram Darji>Ha.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/52-0
+00:03:47.195 --> 00:03:51.351
+<v Viswanath Chidambaram>If PyGet is not able to have output text,
+no issues. But in that case,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/52-1
+00:03:51.351 --> 00:03:55.566
+<v Viswanath Chidambaram>your PyI integration is complete when
+actually you ask it to, lets say,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/52-2
+00:03:55.566 --> 00:03:59.195
+<v Viswanath Chidambaram>like create a simple string game and
+actually like launch it,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/49-0
+00:03:58.035 --> 00:03:58.355
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/52-3
+00:03:59.195 --> 00:04:02.590
+<v Viswanath Chidambaram>just start the back end,
+at least any PyLDS computer use,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/52-4
+00:04:02.590 --> 00:04:05.517
+<v Viswanath Chidambaram>am I right?
+So it can actually open the UL in the</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/50-0
+00:04:04.435 --> 00:04:04.835
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/52-5
+00:04:05.517 --> 00:04:06.395
+<v Viswanath Chidambaram>browser itself.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/51-0
+00:04:06.995 --> 00:04:07.355
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/53-0
+00:04:08.075 --> 00:04:08.795
+<v Viswanath Chidambaram>This is today.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/56-0
+00:04:10.795 --> 00:04:13.772
+<v Viswanath Chidambaram>And actually,
+we are able to use Pi along with this</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/56-1
+00:04:13.772 --> 00:04:17.207
+<v Viswanath Chidambaram>plannings and stuff.
+That is the completion criteria for Pi</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/54-0
+00:04:14.515 --> 00:04:14.835
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/56-2
+00:04:17.207 --> 00:04:20.013
+<v Viswanath Chidambaram>for actually the completion criteria for
+Friday.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/56-3
+00:04:20.013 --> 00:04:22.933
+<v Viswanath Chidambaram>Is it like Friday was already working?
+Am I right?</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/56-4
+00:04:22.933 --> 00:04:25.452
+<v Viswanath Chidambaram>It should at least still work the same
+day,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/56-5
+00:04:25.452 --> 00:04:28.716
+<v Viswanath Chidambaram>but without the latency or with a reduced
+latency. Okay,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/55-0
+00:04:27.875 --> 00:04:28.275
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/56-6
+00:04:28.716 --> 00:04:31.235
+<v Viswanath Chidambaram>that is the completion criteria for
+Friday.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/57-0
+00:04:32.075 --> 00:04:36.986
+<v Viswanath Chidambaram>Once these things are there, actually,
+we'll try to actually like improve it as</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/57-1
+00:04:36.986 --> 00:04:37.355
+<v Viswanath Chidambaram>we go.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/58-0
+00:04:37.955 --> 00:04:38.195
+<v Sarooparam Chenaram Darji>No.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/59-0
+00:04:39.115 --> 00:04:41.016
+<v Viswanath Chidambaram>Like one second,
+all of these things are done.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/59-1
+00:04:41.016 --> 00:04:42.795
+<v Viswanath Chidambaram>We should be able to show a demo to
+others.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/60-0
+00:04:43.235 --> 00:04:43.635
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/61-0
+00:04:44.275 --> 00:04:49.237
+<v Viswanath Chidambaram>We will simply actually invite them into
+one of the meetings and we will actually</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/61-1
+00:04:49.237 --> 00:04:54.077
+<v Viswanath Chidambaram>ask actually Friday to do some stuff,
+we will ask you to like change something,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/61-2
+00:04:54.077 --> 00:04:56.861
+<v Viswanath Chidambaram>okay?
+And then we will ask you to what is it,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/61-3
+00:04:56.861 --> 00:04:58.555
+<v Viswanath Chidambaram>ask them to ask for changes.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/63-0
+00:05:00.435 --> 00:05:05.955
+<v Sarooparam Chenaram Darji>Maybe Friday even might be able to like
+share the screen and demo things to them.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/62-0
+00:05:00.715 --> 00:05:01.755
+<v Viswanath Chidambaram>Relax, do you?</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/64-0
+00:05:04.875 --> 00:05:08.348
+<v Viswanath Chidambaram>Yeah, most probably. Yeah.
+And like this one Friday,</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/64-1
+00:05:08.348 --> 00:05:13.786
+<v Viswanath Chidambaram>I actually apart from conversation thing
+we were talking about actually this Excel</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/64-2
+00:05:13.786 --> 00:05:17.587
+<v Viswanath Chidambaram>thing, am I right?
+I forgot Friday should be able to like</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/64-3
+00:05:17.587 --> 00:05:22.239
+<v Viswanath Chidambaram>one section like the browser also
+credentials Friday should be able to</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/64-4
+00:05:22.239 --> 00:05:24.795
+<v Viswanath Chidambaram>let's say like log into let's say like.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/65-0
+00:05:25.835 --> 00:05:29.454
+<v Viswanath Chidambaram>Microsoft Excel online and make some
+changes based on what you actually tell</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/65-1
+00:05:29.454 --> 00:05:29.595
+<v Viswanath Chidambaram>it.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/66-0
+00:05:30.195 --> 00:05:30.515
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/67-0
+00:05:31.915 --> 00:05:32.395
+<v Viswanath Chidambaram>OK.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/68-0
+00:05:33.835 --> 00:05:38.955
+<v Viswanath Chidambaram>So the demo will be 2 things: writing
+code as well as operating 2 like Excel.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/69-0
+00:05:39.555 --> 00:05:39.875
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/70-0
+00:05:41.195 --> 00:05:41.755
+<v Viswanath Chidambaram>We'll figure out.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/71-0
+00:05:42.595 --> 00:05:42.915
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/72-0
+00:05:43.235 --> 00:05:44.635
+<v Viswanath Chidambaram>No, this is.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/73-0
+00:05:45.395 --> 00:05:45.715
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/74-0
+00:05:46.155 --> 00:05:48.569
+<v Viswanath Chidambaram>Once this is done,
+like we can go to the next items and I</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/74-1
+00:05:48.569 --> 00:05:51.275
+<v Viswanath Chidambaram>would actually recommend you to come with
+the timeline for this.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/76-0
+00:05:52.955 --> 00:05:57.271
+<v Viswanath Chidambaram>Road map I have provided you basically
+you have provided the destinations.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/75-0
+00:05:54.835 --> 00:05:55.115
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/76-1
+00:05:57.271 --> 00:05:59.515
+<v Viswanath Chidambaram>I am not sure about the time to travel.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/77-0
+00:06:00.275 --> 00:06:00.595
+<v Sarooparam Chenaram Darji>Right.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/78-0
+00:06:00.875 --> 00:06:02.395
+<v Viswanath Chidambaram>Try to actually come up with a rough idea.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/79-0
+00:06:02.915 --> 00:06:03.235
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/80-0
+00:06:04.475 --> 00:06:06.115
+<v Viswanath Chidambaram>Okay, anything else go ahead?</v>
+
+f3e9fdba-7c16-467a-9b26-f5261efa393c/81-0
+00:06:09.595 --> 00:06:10.395
+<v Viswanath Chidambaram>What's the time now?</v>

@@ -1,0 +1,421 @@
+{
+  "schema_version": 2,
+  "mode": "audio",
+  "engine": "chat_audio",
+  "models": {
+    "voice": "openai/gpt-audio",
+    "think": null,
+    "stt": null
+  },
+  "settings": {},
+  "started_utc": "2026-11-04T09:01:02.642867+00:00",
+  "wall_total_s": 71.12621221400332,
+  "measurement_duration_s": 71.07189470191952,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 7,
+  "completed_turns": 3,
+  "input_audio_s": 50.20000000000044,
+  "total_cost_usd": null,
+  "known_cost_usd": 0.072552,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": null,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": 3.3593238313583957,
+    "samples": 3
+  },
+  "voice_latency": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "to_audio_received": {
+    "mean_s": 3.2281144590039426,
+    "samples": 3
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "native model inference is bundled; not independently measurable",
+  "errors": [],
+  "fixture_results": [],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": null,
+      "speech_end_s": 8.32049165200442,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 8.321617871057242,
+      "first_audio_received_s": 10.044334277044982,
+      "first_playback_s": 10.22952795555643,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 12.3,
+      "input_text": null,
+      "reply": "Yes, I do have a bash tool at my disposal. I can run commands in the working directory to list files, read their contents, or summarize them. If you need any information about the files or want to run a specific command, just let me know.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 8.321962377987802,
+          "end_s": 12.533489536028355,
+          "usage": {
+            "prompt_tokens": 299,
+            "completion_tokens": 318,
+            "total_tokens": 617,
+            "cost": 0.018893,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 57,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.018893,
+              "upstream_inference_prompt_cost": 0.002429,
+              "upstream_inference_completions_cost": 0.016464
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 246
+            }
+          },
+          "cost_usd": 0.018893,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 12.53375716402661,
+      "round_trip_s": 1.9090363035520088,
+      "to_audio_received_s": 1.723842625040561,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.018893,
+      "cost_usd": 0.018893,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 2,
+      "fixture": null,
+      "speech_end_s": 21.419120299979113,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 21.420174441067502,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 22.743460261030123,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 3,
+      "fixture": null,
+      "speech_end_s": 25.51516845205333,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 25.516641987022012,
+      "first_audio_received_s": 27.88727128703613,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 1.0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 28.033225613064133,
+      "round_trip_s": null,
+      "to_audio_received_s": 2.3721028349827975,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 4,
+      "fixture": null,
+      "speech_end_s": 33.10985674301628,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 33.21346641005948,
+      "first_audio_received_s": 37.82883860298898,
+      "first_playback_s": 37.9334141759762,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 7.7,
+      "input_text": null,
+      "reply": "It looks like the 'pipecat' package isn't installed on this system. You might need to install it first before we can check its version or details.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 33.213732777978294,
+          "end_s": 35.48005858703982,
+          "usage": {
+            "prompt_tokens": 476,
+            "completion_tokens": 25,
+            "total_tokens": 501,
+            "cost": 0.0043015,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 97,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0043015,
+              "upstream_inference_prompt_cost": 0.0040515,
+              "upstream_inference_completions_cost": 0.00025
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0043015,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 36.195110290078446,
+          "end_s": 40.192962583038025,
+          "usage": {
+            "prompt_tokens": 466,
+            "completion_tokens": 200,
+            "total_tokens": 666,
+            "cost": 0.0143425,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 97,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0143425,
+              "upstream_inference_prompt_cost": 0.0040265,
+              "upstream_inference_completions_cost": 0.010316
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 154
+            }
+          },
+          "cost_usd": 0.0143425,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{  \n  \"command\": \"pip show pipecat\" \n}  \n",
+          "result": {
+            "returncode": 1,
+            "output": "WARNING: Package(s) not found: pipecat"
+          }
+        }
+      ],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 40.193053942057304,
+      "round_trip_s": 4.823557432959923,
+      "to_audio_received_s": 4.7189818599727005,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.018644,
+      "cost_usd": 0.018644,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 5,
+      "fixture": null,
+      "speech_end_s": 45.73910835396964,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 45.74057267000899,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 45.82594152202364,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 6,
+      "fixture": null,
+      "speech_end_s": 48.725879947072826,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 48.72733554407023,
+      "first_audio_received_s": 51.96739883907139,
+      "first_playback_s": 52.07125770463608,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 17.55,
+      "input_text": null,
+      "reply": "Pipecat is not fully installed on this machine. The error indicates that the optional dependencies for the Pipecat CLI are missing. To fix this, you'll need to install it with the `cli` extra using either `uv tool install \"pipecat-ai[cli]\"` or `pipx install \"pipecat-ai[cli]\"`.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 48.72760845103767,
+          "end_s": 50.326746464008465,
+          "usage": {
+            "prompt_tokens": 581,
+            "completion_tokens": 25,
+            "total_tokens": 606,
+            "cost": 0.005803,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 139,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.005803,
+              "upstream_inference_prompt_cost": 0.005553,
+              "upstream_inference_completions_cost": 0.00025
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.005803,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "openai/gpt-audio",
+          "start_s": 50.4593674200587,
+          "end_s": 55.405707139056176,
+          "usage": {
+            "prompt_tokens": 687,
+            "completion_tokens": 444,
+            "total_tokens": 1131,
+            "cost": 0.029212,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 139,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.029212,
+              "upstream_inference_prompt_cost": 0.005818,
+              "upstream_inference_completions_cost": 0.023394
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 351
+            }
+          },
+          "cost_usd": 0.029212,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{  \n  \"command\": \"pipecat --version\"  \n}  \n",
+          "result": {
+            "returncode": 1,
+            "output": "The Pipecat CLI needs its optional dependencies (the `cli` extra), which aren't installed.\n\nInstall the extra wherever you want the `pipecat` command:\n\n  \u2022 As a global tool (on your PATH):\n        uv tool install \"pipecat-ai[cli]\"     # or: pipx install \"pipecat-ai[cli]\"\n\n  \u2022 In your current project or virtualenv:\n        uv pip install \"pipecat-ai[cli]\"      # or: pip install \"pipecat-ai[cli]\""
+          }
+        }
+      ],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 55.40589066699613,
+      "round_trip_s": 3.3453777575632557,
+      "to_audio_received_s": 3.2415188919985667,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.035015,
+      "cost_usd": 0.035015,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 7,
+      "fixture": null,
+      "speech_end_s": 62.933920989977196,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 62.93547022505663,
+      "first_audio_received_s": 64.82762485207058,
+      "first_playback_s": 65.07039082886419,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 4.5,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 69.71804324898403,
+      "round_trip_s": 2.1364698388869954,
+      "to_audio_received_s": 1.893703862093389,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    }
+  ]
+}
