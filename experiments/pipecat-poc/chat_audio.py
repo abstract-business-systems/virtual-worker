@@ -107,16 +107,22 @@ turn_seq = 0  # bumped on barge-in; in-flight turn audio with an older token is 
 # speakers -> client mic) picks up the playback. Frames during playback are
 # never buffered as user speech; barge-in requires louder-than-bleed speech.
 BARGE_RMS = int(os.environ.get("CHAT_BARGE_RMS", "2500"))
+# Teams/transport echo of Friday's own voice arrives AFTER playback ends
+# (network delay > the playback gate). Ignore mic input for this long after
+# playback and discard the preroll, or Friday converses with itself.
+ECHO_COOLDOWN = float(os.environ.get("CHAT_ECHO_COOLDOWN", "1.5"))
 
 # ---- local Whisper STT (separate mode, stt = whisper:<size>) ----
 _whisper = None
 
 
 def openai_transcribe(pcm24: bytes, model: str = "gpt-4o-mini-transcribe") -> str:
-    """Online STT via OpenAI /v1/audio/transcriptions (online model, as the
-    separate mode intends; gpt-audio-mini itself proved an unreliable
-    transcriber). pcm24: 24 kHz int16 PCM."""
+    """Online STT via an /audio/transcriptions endpoint. Base URL and key are
+    environment-overridable so OpenRouter-hosted models (e.g. ElevenLabs
+    Scribe) use the identical request shape. pcm24: 24 kHz int16 PCM."""
     import io
+    api_base = os.getenv("CHAT_STT_API_BASE", "https://api.openai.com/v1")
+    api_key = os.getenv("CHAT_STT_API_KEY") or OPENAI_KEY
     buf = io.BytesIO()
     with wave.open(buf, "wb") as w:
         w.setnchannels(1)
@@ -133,8 +139,8 @@ def openai_transcribe(pcm24: bytes, model: str = "gpt-4o-mini-transcribe") -> st
             f'--{boundary}--\r\n').encode()
     import urllib.request
     req = urllib.request.Request(
-        "https://api.openai.com/v1/audio/transcriptions", data=body,
-        headers={"Authorization": f"Bearer {OPENAI_KEY}",
+        api_base.rstrip('/') + "/audio/transcriptions", data=body,
+        headers={"Authorization": f"Bearer {api_key}",
                  "Content-Type": f"multipart/form-data; boundary={boundary}"})
     with urllib.request.urlopen(req, timeout=60) as resp:
         body = json.load(resp)
@@ -144,22 +150,84 @@ def openai_transcribe(pcm24: bytes, model: str = "gpt-4o-mini-transcribe") -> st
     return body["text"].strip(), body.get("usage")
 
 
-def openai_tts(text: str, voice: str, on_pcm=None) -> float:
-    """Stream PCM before the complete utterance has downloaded."""
+def openai_tts(text: str, voice: str = "coral", on_pcm=None, model: str | None = None) -> float:
+    """Stream speech before the complete utterance has downloaded.
+
+    gpt-4o-mini-tts at OpenAI returns raw 24 kHz PCM. OpenRouter-hosted
+    models (e.g. elevenlabs/eleven-v4-turbo) return encoded audio; ffmpeg
+    decodes it to 24 kHz mono PCM16 so the playback path is unchanged.
+    Returns seconds of 24 kHz PCM produced."""
+    import shutil
+    import subprocess as _sp
+    import urllib.error
     import urllib.request
-    body = json.dumps({"model": "gpt-4o-mini-tts", "voice": voice,
-                       "input": text, "response_format": "pcm"}).encode()
+    model = model or os.getenv("CHAT_TTS_MODEL", "gpt-4o-mini-tts")
+    api_base = os.getenv("CHAT_TTS_API_BASE", "https://api.openai.com/v1")
+    api_key = os.getenv("CHAT_TTS_API_KEY") or OPENAI_KEY
+    voice = os.getenv("CHAT_TTS_VOICE", voice)
+    body = {"model": model, "input": text}
+    if voice:
+        body["voice"] = voice
+    fmt = os.getenv("CHAT_TTS_FORMAT") or "pcm"
+    body["response_format"] = fmt
     req = urllib.request.Request(
-        "https://api.openai.com/v1/audio/speech", data=body,
-        headers={"Authorization": f"Bearer {OPENAI_KEY}", "Content-Type": "application/json"})
-    count = 0
-    with urllib.request.urlopen(req, timeout=60) as response:
-        while True:
-            chunk = response.read(4800)
-            if not chunk: break
-            count += len(chunk)
-            if on_pcm: on_pcm(chunk)
-    return count/2/24000
+        api_base.rstrip('/') + "/audio/speech", data=json.dumps(body).encode(),
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"})
+
+    def emit(pcm: bytes):
+        if on_pcm and pcm:
+            on_pcm(pcm)
+        return len(pcm)
+
+    def stream_pcm(response) -> int:
+        count = 0
+        with response:
+            while True:
+                chunk = response.read(4800)
+                if not chunk:
+                    break
+                count += emit(chunk)
+        return count
+
+    try:
+        count = stream_pcm(urllib.request.urlopen(req, timeout=60))
+        return count/2/24000
+    except urllib.error.HTTPError as exc:
+        if fmt != "pcm" or exc.code not in (400, 404, 415, 422):
+            raise
+        # Endpoint rejects raw PCM: fall back to encoded audio + ffmpeg decode.
+        body["response_format"] = "mp3"
+        req = urllib.request.Request(
+            api_base.rstrip('/') + "/audio/speech", data=json.dumps(body).encode(),
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=60) as response:
+            audio = response.read()
+    if not audio:
+        raise RuntimeError('TTS endpoint returned no audio')
+    ffmpeg = shutil.which('ffmpeg')
+    if ffmpeg:
+        proc = _sp.run([ffmpeg, '-loglevel', 'error', '-i', 'pipe:0',
+                        '-f', 's16le', '-ar', '24000', '-ac', '1', 'pipe:1'],
+                       input=audio, capture_output=True)
+        if proc.returncode == 0 and proc.stdout:
+            pcm = proc.stdout
+        else:
+            raise RuntimeError('TTS decode failed: ' + proc.stderr.decode(errors='replace')[:200])
+    else:
+        import io as _io
+        buf = _io.BytesIO(audio)
+        with wave.open(buf, 'rb') as w:
+            rate, frames = w.getframerate(), w.readframes(w.getnframes())
+        samples = np.frombuffer(frames, dtype=np.int16)
+        if rate != 24000:
+            count = max(1, int(len(samples) * 24000 / rate))
+            samples = np.interp(np.linspace(0, len(samples) - 1, count),
+                                np.arange(len(samples)), samples.astype(np.float64))
+        pcm = samples.astype(np.int16).tobytes()
+    total = 0
+    for offset in range(0, len(pcm), 4800):
+        total += emit(pcm[offset:offset + 4800])
+    return total/2/24000
 
 
 def transcribe_utterance(pcm24: bytes, quiet: bool = False) -> tuple:
@@ -461,6 +529,31 @@ async def run():
     last_level_print = time.monotonic()
     preroll = bytearray()
 
+    # Replayed/echoed speech (own TTS looping back, mic re-capturing speakers)
+    # made Friday re-answer old questions. Suppress near-identical repeats of
+    # recently ANSWERED requests instead of paying to answer them again.
+    import re as _re
+    from difflib import SequenceMatcher as _Seq
+    repeat_window = float(os.getenv("CHAT_REPEAT_SUPPRESS_SECONDS", "600"))
+    repeat_ratio = float(os.getenv("CHAT_REPEAT_SUPPRESS_RATIO", "0.8"))
+    answered_norm: list[tuple[str, float]] = []
+
+    def _norm(text):
+        return _re.sub(r"[^a-z0-9]", "", (text or "").lower())
+
+    def is_repeat(text):
+        norm = _norm(text)
+        if len(norm) < 8:
+            return False
+        now = time.monotonic()
+        answered_norm[:] = [(t, ts) for t, ts in answered_norm if now - ts <= repeat_window]
+        return any(_Seq(None, norm, prev).ratio() >= repeat_ratio for prev, _ in answered_norm)
+
+    def remember(text):
+        norm = _norm(text)
+        if len(norm) >= 8:
+            answered_norm.append((norm, time.monotonic()))
+
     async def do_turn(utt: bytes):
         """Run one bounded turn; failed/empty responses remain visible failures."""
         nonlocal turns
@@ -507,6 +600,12 @@ async def run():
                 if len(calls) != 1 or calls[0].get('name') != 'reason':
                     raise RuntimeError('Audio frontend must delegate exactly once to shared reasoning')
                 question = _repair_tool_args(calls[0].get('arguments')).get('question')
+                if is_repeat(question):
+                    print(_warn_c("[repeat] suppressed replayed/duplicate request"), flush=True)
+                    remember(question)
+                    session.finish_turn('')
+                    return
+                remember(question)
                 answer = await reasoner.ask(question, session, tokens)
                 # Audio providers reject role:tool here. Synthesize only the
                 # authorized answer in a fresh, tools-disabled text/audio request.
@@ -543,15 +642,23 @@ async def run():
                 print(_you_c(f"You: {user_text}"), flush=True)
                 if not user_text:
                     raise RuntimeError("STT returned no text")
+                if is_repeat(user_text):
+                    print(_warn_c("[repeat] suppressed replayed/duplicate request"), flush=True)
+                    remember(user_text)
+                    session.finish_turn('')
+                    return
+                remember(user_text)
                 transcript = await reasoner.ask(user_text, session, tokens)
                 started = session.now()
                 if MODEL.startswith("openai-tts:"):
+                    tts_model = MODEL.split(":", 1)[1] or "gpt-4o-mini-tts"
                     seconds = await asyncio.to_thread(
-                        openai_tts, transcript, MODEL.split(":", 1)[1] or "coral",
+                        openai_tts, transcript, os.getenv("CHAT_TTS_VOICE", "coral"),
                         lambda pcm: loop.call_soon_threadsafe(
-                            on_audio, base64.b64encode(pcm).decode()))
-                    cost, basis = tts_cost(seconds)
-                    session.stage("tts", "gpt-4o-mini-tts", started,
+                            on_audio, base64.b64encode(pcm).decode()),
+                        model=tts_model)
+                    cost, basis = tts_cost(seconds, tts_model)
+                    session.stage("tts", tts_model, started,
                                   cost_usd=cost, pricing=basis)
                 else:
                     text_parts = []
@@ -589,6 +696,7 @@ async def run():
             session.next_input()  # fixture feeder already assigned the next input
 
     was_playing = False
+    echo_until = 0.0
     try:
         while not stopping.is_set():
             # timeout tick: the commit check must run even when no mic
@@ -666,12 +774,19 @@ async def run():
                 was_playing = True
                 continue
             if was_playing:
-                # playback ended without barge-in: drop anything buffered
-                # during it and start listening fresh
+                # playback ended without barge-in: its echo is still in
+                # flight, so drop anything buffered during it AND ignore the
+                # mic for the cooldown window, then start listening fresh
                 was_playing = False
+                echo_until = time.monotonic() + ECHO_COOLDOWN
                 state = "quiet"
                 utter24.clear()
+                preroll.clear()
                 quiet_since = None
+                lvl_buf.clear()
+                continue
+            if time.monotonic() < echo_until:
+                continue  # echo of our own playback; never treat it as user speech
 
             st = await vad.analyze_audio(raw16)
 
