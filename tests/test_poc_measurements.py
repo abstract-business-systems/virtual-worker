@@ -235,6 +235,13 @@ class TestBaselineGate(unittest.TestCase):
         data['fixture_results'][0]['heuristic_keyword_match'] = False
         self.assertFalse(check_report(data))
 
+    def test_expected_interruption_requires_verified_tool_cancellation(self):
+        data = self.sample()
+        data['fixture_results'].insert(0, {'completed': False, 'expected_interruption': True})
+        self.assertFalse(check_report(data))
+        data['fixture_results'][0]['interruption_verified'] = True
+        self.assertTrue(check_report(data))
+
     def test_missing_playback_sample_does_not_pass(self):
         data = self.sample()
         data['round_trip']['samples'] = 0

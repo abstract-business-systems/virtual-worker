@@ -38,6 +38,7 @@ async def feed_plan(plan, session, enqueue, rate, is_playing, stop, *, ready=lam
         return
     session.ready()
     test_start = time.perf_counter()
+    interrupted_cases = []
     try:
         import itertools
         cases = plan['cases']
@@ -74,6 +75,24 @@ async def feed_plan(plan, session, enqueue, rate, is_playing, stop, *, ready=lam
             for _ in range(15):
                 enqueue(b'\0\0'*int(rate/10))
                 await asyncio.sleep(.1)
+            if case.get('interrupt_on_tool'):
+                deadline = time.perf_counter()+15
+                while time.perf_counter() < deadline:
+                    row = session.current or {}
+                    if any(t.get('status') == 'running' for t in row.get('tools', [])):
+                        break
+                    if row.get('status') in ('failed', 'completed'):
+                        raise RuntimeError('Interruption fixture did not start a long-running tool')
+                    await asyncio.sleep(.05)
+                else:
+                    raise RuntimeError('No running tool to interrupt within 15s')
+                await asyncio.sleep(.2)  # allow the actual bash child to start
+                result = {'id': case['id'], 'completed': False,
+                          'expected_interruption': True, 'interruption_verified': False,
+                          'heuristic_keyword_match': None, 'human_quality_review': 'pending'}
+                session.fixture_results.append(result)
+                interrupted_cases.append((row, result))
+                continue  # next input must cancel this task, not wait for its answer
             try:
                 await asyncio.wait_for(session.turn_done.wait(), timeout=60)
             except asyncio.TimeoutError:
@@ -103,4 +122,14 @@ async def feed_plan(plan, session, enqueue, rate, is_playing, stop, *, ready=lam
     except Exception as exc:
         session.error(f'Fixture failure: {type(exc).__name__}: {exc}')
     finally:
+        for row, result in interrupted_cases:
+            tools = row.get('tools', [])
+            result['interruption_verified'] = (
+                row.get('status') == 'interrupted'
+                and any(t.get('status') == 'cancelled' for t in tools)
+                and not any(t.get('status') == 'running' for t in tools)
+                and row.get('inference_end_s') is not None
+                and row.get('first_audio_received_s') is None)
+            if not result['interruption_verified']:
+                session.error('Interrupted tool did not cancel cleanly')
         stop()

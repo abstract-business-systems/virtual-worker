@@ -1,0 +1,36 @@
+{
+  "kind": "baseline_index",
+  "smoke": true,
+  "pause_regression": false,
+  "interrupt_regression": true,
+  "human_quality_review": "pending",
+  "runs": [
+    {
+      "mode": "realtime",
+      "exit_code": 0,
+      "fixture_checks_passed": true,
+      "reports": [
+        "session-realtime-20261105T063758071818Z.json"
+      ],
+      "log": "results/logs/realtime-20261105T063732524141Z.log"
+    },
+    {
+      "mode": "audio",
+      "exit_code": 0,
+      "fixture_checks_passed": true,
+      "reports": [
+        "session-audio-20261105T063824311340Z.json"
+      ],
+      "log": "results/logs/audio-20261105T063758221326Z.log"
+    },
+    {
+      "mode": "separate",
+      "exit_code": 0,
+      "fixture_checks_passed": true,
+      "reports": [
+        "session-separate-20261105T063847948763Z.json"
+      ],
+      "log": "results/logs/separate-20261105T063824371735Z.log"
+    }
+  ]
+}

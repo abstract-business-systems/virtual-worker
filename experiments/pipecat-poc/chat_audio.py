@@ -584,7 +584,8 @@ async def run():
         if active_turn and not active_turn.done():
             active_turn.cancel()
             await asyncio.gather(active_turn, return_exceptions=True)
-        session.next_input()
+        if not plan:
+            session.next_input()  # fixture feeder already assigned the next input
 
     was_playing = False
     try:
@@ -686,7 +687,7 @@ async def run():
 
             if st in (VADState.SPEAKING, VADState.STARTING):
                 if state == "quiet":
-                    if not plan:
+                    if not plan or plan.get('allow_interruptions'):
                         await begin_input()
                     state = "recording"
                     utter24.clear()

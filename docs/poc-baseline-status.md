@@ -6,7 +6,54 @@ one six-task replay through the common model. Human quality review, a fresh
 longer comparison, native speech-processing costs and bill verification remain
 open. No model-swap sweep or worker-backend implementation was started.
 
-## Latest: common task reasoning (M11)
+## Latest stability fix — 5 November: interrupting long-running work
+
+The user's live realtime report (`session-realtime-20261105T055127416950Z.json`)
+answered four requests, then stopped answering after an indefinite-counting
+request. Later speech was transcribed but never started reasoning. A background
+reasoning task retained the conversation lock; the realtime interruption path
+cancelled voice output but not that task. The exact unfinished bash command was
+not recorded, so it cannot be inferred from that report.
+
+Checkpoint `d4ad8f5` preserves the pre-fix implementation and user reports.
+The fix cancels background reasoning on both interruption and new speech,
+awaits cleanup, and releases the lock. Bash now uses a cancellable subprocess
+and kills/reaps its process group on cancellation or its 60-second timeout.
+Pending tools are recorded before execution, including final cancellation status.
+The default shared-reasoner turn deadline is 90 seconds (`CHAT_TURN_TIMEOUT`);
+realtime prepares a spoken recovery message on timeout/failure. The optional
+native separate adapter also uses cancellable bash, but its streaming service
+does not use the shared reasoner's whole-turn deadline.
+
+The reasoning prompt now explains that this request/response CLI is not an
+indefinite-counting/background scheduler and should offer a finite alternative.
+This is not background-task orchestration. Existing side effects cannot be
+undone, detached jobs are not managed, and a provider HTTP request already sent
+may still complete/be billed even though the local waiter is cancelled.
+
+A new real-provider regression starts a finite 30-second bash sleep, feeds a
+second spoken question while it is running, verifies tool cancellation and
+checks the spoken arithmetic answer **in the same process without a restart**:
+
+| Primary mode | Report | Result |
+|---|---|---|
+| Realtime | `session-realtime-20261105T063758071818Z.json` | Tool cancelled; next answer correct |
+| Audio | `session-audio-20261105T063824311340Z.json` | Tool cancelled; next answer correct |
+| Separate | `session-separate-20261105T063847948763Z.json` | Tool cancelled; next answer correct |
+
+The replay is approximately 25 seconds per mode, not a five-minute performance
+baseline. Offline regressions also exercise real bash plus child-process death,
+cancellation during spawn, lock release, provider-waiter cancellation, deadlines,
+and both realtime cancellation hooks. The optional native separate adapter was
+not live-retested. Natural-microphone/echo quality still needs user review.
+
+Reproduce from the POC directory (paid API calls):
+
+```bash
+uv run python baseline.py --interrupt-regression
+```
+
+## Common task reasoning (M11)
 
 All modes resolve `[reasoning] model = openai/gpt-4o-mini` from `models.ini`,
 with a single global `CHAT_THINK_MODEL` override. Default HTTP audio/separate
@@ -194,6 +241,6 @@ checks; echo cancellation and reconnect/resume are not solved here.
 5. Follow the M11 integration/demo roadmap. Pi-through-bash already works per
    the user; check its task-level acceptance rather than assume a new SDK is needed.
 
-Offline verification: repository suite **51 passed, 12 skipped** (audio interpreter
-needed for those twelve); all **12** HTTP/configuration tests pass using the POC
+Offline verification: repository suite **58 passed, 15 skipped** (audio interpreter
+needed for those fifteen); all **15** HTTP/configuration tests pass using the POC
 interpreter. Python syntax checks pass. No new meeting requirements were invented.

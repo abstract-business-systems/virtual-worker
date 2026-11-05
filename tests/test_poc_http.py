@@ -147,6 +147,75 @@ class TestHTTP(unittest.TestCase):
                 self.assertIsNone(service._current_audio_response)
         asyncio.run(exercise())
 
+    def test_new_realtime_speech_cancels_bash_and_answers_followup(self):
+        import tempfile
+        from unittest.mock import AsyncMock
+        from chat import DelegatedRealtimeService
+        from poc_reasoning import SharedReasoner
+        from poc_report import SessionReport
+        async def exercise():
+            with tempfile.TemporaryDirectory() as folder:
+                session = SessionReport('realtime', 'test', {})
+                reasoner = SharedReasoner(folder, model='test/shared', api_key='test')
+                service = DelegatedRealtimeService(api_key='test', reason_session=session, reasoner=reasoner)
+                def respond(messages):
+                    if messages[-1]['content'] == 'Can you hear me?':
+                        return 'Yes, I can hear you.', [], {'cost': .001}
+                    return '', [{'id': 'long', 'name': 'bash', 'arguments': {'command': 'echo ready > ready; sleep 60'}}], {'cost': .001}
+                with patch.object(reasoner, '_request', side_effect=respond), patch.object(service, '_create_response', new=AsyncMock()) as create:
+                    old = session.endpoint()
+                    task = asyncio.create_task(service._reason_and_speak(old, 'Run a long task.'))
+                    service._reason_tasks.add(task)
+                    try:
+                        async def wait_ready():
+                            while not (Path(folder)/'ready').exists():
+                                await asyncio.sleep(.01)
+                        await asyncio.wait_for(wait_ready(), 3)
+                        session.next_input()
+                        await asyncio.wait_for(service._handle_user_started_speaking(None), 2)
+                        self.assertTrue(task.cancelled())
+                        self.assertFalse(reasoner._lock.locked())
+                        self.assertEqual(old['tools'][0]['status'], 'cancelled')
+                        new = session.endpoint()
+                        await asyncio.wait_for(service._reason_and_speak(new, 'Can you hear me?'), 2)
+                        self.assertEqual(new['reasoning_answer'], 'Yes, I can hear you.')
+                        self.assertIs(service.answer_row, new)
+                        create.assert_awaited_once()
+                    finally:
+                        await service._cancel_reasoning()
+        asyncio.run(exercise())
+
+    def test_realtime_interruption_frame_cancels_background_reasoning(self):
+        from unittest.mock import AsyncMock
+        from chat import DelegatedRealtimeService, OpenAIRealtimeLLMService
+        from poc_report import SessionReport
+        service = DelegatedRealtimeService(api_key='test', reason_session=SessionReport('realtime', 'test', {}))
+        async def exercise():
+            task = asyncio.create_task(asyncio.sleep(60))
+            service._reason_tasks.add(task)
+            with patch.object(OpenAIRealtimeLLMService, '_handle_interruption', new=AsyncMock()) as parent:
+                await service._handle_interruption()
+                self.assertTrue(task.cancelled())
+                parent.assert_awaited_once()
+        asyncio.run(exercise())
+
+    def test_realtime_deadline_prepares_spoken_recovery(self):
+        from types import SimpleNamespace
+        from unittest.mock import AsyncMock
+        from chat import DelegatedRealtimeService
+        from poc_report import SessionReport
+        session = SessionReport('realtime', 'test', {})
+        row = session.endpoint()
+        service = DelegatedRealtimeService(api_key='test', reason_session=session,
+            reasoner=SimpleNamespace(ask=AsyncMock(side_effect=asyncio.TimeoutError())))
+        async def exercise():
+            with patch.object(service, '_create_response', new=AsyncMock()) as create:
+                await service._reason_and_speak(row, 'Long request')
+                self.assertIn('too long', row['reasoning_answer'])
+                self.assertTrue(row['errors'])
+                create.assert_awaited_once()
+        asyncio.run(exercise())
+
     def test_realtime_manual_commit_does_not_auto_answer(self):
         from unittest.mock import AsyncMock
         from chat import DelegatedRealtimeService, rt_events

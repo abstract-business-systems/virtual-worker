@@ -1,6 +1,7 @@
 """Shared POC tools. Bash runs as the current user: NOT a security sandbox.
 Only use trusted working folders and authorized test instructions.
 """
+import asyncio
 import json
 import os
 import signal
@@ -49,6 +50,54 @@ def run_tool(name, arguments, workdir):
             return {'returncode': -1, 'output': '(command timed out after 60s)'}
         return {'returncode': proc.returncode,
                 'output': output.strip()[:4000] or '(no output)'}
+    except OSError as exc:
+        return {'returncode': -1, 'output': str(exc)}
+
+
+async def run_tool_async(name, arguments, workdir, *, timeout=60):
+    """Cancellable bash: terminate our process group, not just its Python waiter.
+
+    SIGKILL is deliberate on cancellation/timeout; completed side effects cannot
+    be rolled back. This is process cleanup, not a sandbox against hostile code.
+    """
+    try:
+        args = repair_tool_args(arguments)
+    except ValueError as exc:
+        return {'error': str(exc)}
+    if name != 'bash':
+        return {'error': f'unknown tool {name}'}
+    cmd = args.get('command')
+    if not isinstance(cmd, str) or not cmd.strip():
+        return {'returncode': -1, 'output': '(empty command)'}
+
+    proc = None
+    spawn = asyncio.create_task(asyncio.create_subprocess_exec(
+        'bash', '-c', cmd, cwd=workdir, stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.STDOUT, start_new_session=True))
+
+    async def terminate():
+        nonlocal proc
+        if proc is None:
+            proc = await spawn
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        await proc.communicate()  # drain pipes and reap the direct child
+
+    try:
+        # Shield creation so interruption during spawn cannot orphan the child.
+        proc = await asyncio.shield(spawn)
+        output, _ = await asyncio.wait_for(proc.communicate(), timeout=timeout)
+        return {'returncode': proc.returncode,
+                'output': output.decode(errors='replace').strip()[:4000] or '(no output)'}
+    except asyncio.CancelledError:
+        await terminate()
+        raise
+    except asyncio.TimeoutError:
+        await terminate()
+        return {'returncode': -1, 'output': f'(command timed out after {timeout:g}s)',
+                'timed_out': True}
     except OSError as exc:
         return {'returncode': -1, 'output': str(exc)}
 

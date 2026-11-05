@@ -331,6 +331,22 @@ These are new work items, not evidence that the integrations or demo are done.
 
 Newest entries appear first.
 
+### 2026-11-05 — Long-running task cancellation repaired (engineering update)
+
+- User live testing found realtime stopped answering after an indefinite
+  counting request, although it still transcribed later speech. Reasoning
+  remained locked behind old work; the previous fixture suite never interrupted
+  a running task and missed this failure.
+- Saved the existing implementation and live reports in checkpoint `d4ad8f5`.
+- Added cancellation on new speech/interruption, real bash process-group cleanup,
+  pending-tool diagnostics and a bounded shared-reasoner turn deadline.
+- A focused real-provider voice replay passed in all three primary modes:
+  interrupt an active 30-second bash sleep, then answer the next question
+  correctly without restarting. Real-process offline regressions also passed.
+- This does not provide indefinite/background-task scheduling, undo side effects,
+  verify echo handling, or finish the cost/latency comparison. Receipts and
+  limitations: [`poc-baseline-status.md`](poc-baseline-status.md).
+
 ### 2026-11-04 — Common reasoning model implemented (M11 follow-up)
 
 - The user confirmed Pi already works through bash; preserve that workflow.

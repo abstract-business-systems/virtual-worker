@@ -36,7 +36,7 @@ from cli_ui import banner, dim, tool, you
 from poc_pipeline import SessionBoundary
 from poc_pricing import usage_cost, tts_cost
 from poc_report import SessionReport, load_environment
-from poc_tools import run_tool
+from poc_tools import run_tool_async
 from poc_reasoning import reasoning_model, reasoning_prompt, BASH_TOOL
 
 load_environment(HERE)
@@ -126,7 +126,7 @@ async def run():
             await params.result_callback({'error': 'Tool limit reached; stop and explain the failure'})
             return
         name = params.function_name
-        result = await asyncio.to_thread(run_tool, name, params.arguments, WORKDIR)
+        result = await run_tool_async(name, params.arguments, WORKDIR)
         row['tools'].append({'name': name, 'arguments': params.arguments, 'result': result})
         print(tool(f'[tool] {name} -> {json.dumps(result)[:160]}'), flush=True)
         await params.result_callback(result)

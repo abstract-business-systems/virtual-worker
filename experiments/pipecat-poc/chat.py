@@ -504,6 +504,24 @@ class DelegatedRealtimeService(OpenAIRealtimeLLMService):
         self.answer_row = None
         self._requested_row = None
 
+    async def _cancel_reasoning(self):
+        tasks = [task for task in self._reason_tasks if task is not asyncio.current_task()]
+        for task in tasks:
+            if not task.done() and not task.cancelling():
+                task.cancel()
+        if tasks:
+            await asyncio.gather(*tasks, return_exceptions=True)
+        self._reason_tasks.difference_update(tasks)
+
+    async def _handle_interruption(self):
+        await self._cancel_reasoning()
+        await super()._handle_interruption()
+
+    async def _handle_user_started_speaking(self, frame):
+        # Also cancel when speech begins before any assistant audio exists.
+        await self._cancel_reasoning()
+        await super()._handle_user_started_speaking(frame)
+
     async def _truncate_current_audio_response(self):
         # Synthesis uses conversation:none: its item does not exist in the
         # server conversation and cannot be truncated there. Parent interruption
@@ -559,12 +577,15 @@ class DelegatedRealtimeService(OpenAIRealtimeLLMService):
         except Exception as exc:
             if row is self.reason_session.current:
                 self.reason_session.error(f'Shared reasoning failed: {type(exc).__name__}: {exc}')
-                self.reason_session.finish_turn()
+                row['reasoning_answer'] = (
+                    'That request took too long, so I stopped it. What would you like to do next?'
+                    if isinstance(exc, asyncio.TimeoutError) else
+                    'I could not complete that request. Please try again.')
+                self.answer_row = row
+                await self._create_response()
 
     async def cleanup(self):
-        for task in list(self._reason_tasks):
-            task.cancel()
-        await asyncio.gather(*self._reason_tasks, return_exceptions=True)
+        await self._cancel_reasoning()
         await super().cleanup()
 
     async def _create_response(self):

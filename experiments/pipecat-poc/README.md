@@ -42,6 +42,32 @@ Native speech processing is still not independently observable; realtime's
 transcription events expose no billable usage here, so total cost stays unknown
 rather than silently omitting STT. See the baseline status for the run receipts.
 
+## Interruption and long-running requests
+
+New speech cancels the previous task as well as voice playback. Foreground bash
+uses cancellable process groups: cancellation/timeout kills its children and
+releases the reasoning lock before handling the next request. Pending tool calls
+and their cancellation status are retained in session reports.
+
+The shared reasoner has a default **90-second whole-turn deadline**, configurable
+with `CHAT_TURN_TIMEOUT`; individual bash commands remain bounded to 60 seconds.
+Realtime speaks a recovery message on reasoning timeout/failure. The optional
+native separate streaming adapter has cancellable bash but not this whole-turn
+deadline. This CLI is not a background scheduler: indefinite counting should
+be replaced with a finite alternative. Cancellation cannot undo completed side
+effects, manage detached jobs, or guarantee a provider stops billing an HTTP
+request already sent.
+
+Paid functional regression (about 25 seconds per primary mode):
+
+```bash
+uv run python baseline.py --interrupt-regression
+```
+
+It starts a real sleeping bash task, interrupts with another spoken question,
+verifies cancellation, and checks the next answer without restarting. This is
+not a five-minute baseline or a human/echo-quality test.
+
 ## Modes — `./run.sh <mode>` (no arguments prints the menu)
 
 | Mode | Configured quality baseline | Engine |

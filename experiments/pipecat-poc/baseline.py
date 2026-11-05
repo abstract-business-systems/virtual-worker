@@ -54,7 +54,9 @@ def check_report(data):
     """Operational/keyword gate only, never a substitute for human quality review."""
     fixtures = data.get('fixture_results') or []
     return (bool(fixtures) and not data.get('errors')
-            and all(r.get('completed') and r.get('heuristic_keyword_match') is not False for r in fixtures)
+            and all((r.get('interruption_verified') is True if r.get('expected_interruption') else
+                     r.get('completed') and r.get('heuristic_keyword_match') is not False)
+                    for r in fixtures)
             and data.get('round_trip', {}).get('samples') == data.get('completed_turns'))
 
 
@@ -94,14 +96,30 @@ def main():
     parser.add_argument('--prepare-only', action='store_true')
     parser.add_argument('--pause-regression', action='store_true', help='three realtime repetitions of the naturally paused arithmetic request')
     parser.add_argument('--native-separate', action='store_true')
+    parser.add_argument('--interrupt-regression', action='store_true',
+                        help='interrupt a real sleeping bash task, then ask a question')
     args = parser.parse_args()
-    short_run = args.smoke or args.pause_regression
+    if args.pause_regression and args.interrupt_regression:
+        parser.error('Choose only one regression suite')
+    short_run = args.smoke or args.pause_regression or args.interrupt_regression
     plan, workdir = prepare(HERE/'.fixtures', 0 if short_run else 300)
     if args.pause_regression:
         if args.mode not in ('all', 'realtime'):
             parser.error('--pause-regression is a realtime test')
         data = json.loads(plan.read_text())
         data['cases'] = [dict(data['cases'][0], id=f'pause-regression-{n}') for n in (1, 2, 3)]
+        atomic_json(plan, data)
+    if args.interrupt_regression:
+        question = ('Use bash to run sleep thirty, then echo finished. '
+                    'This is a finite test command. Run it before answering.')
+        synth = shutil.which('espeak-ng') or shutil.which('espeak')
+        wav = plan.parent/'interrupt-long-task.wav'
+        subprocess.run([synth, '-s', '155', '-w', str(wav), question], check=True)
+        data = json.loads(plan.read_text())
+        data['allow_interruptions'] = True
+        data['cases'] = [
+            {'id': 'interrupt-long-task', 'wav': wav.name, 'question': question,
+             'interrupt_on_tool': True}, data['cases'][0]]
         atomic_json(plan, data)
     print(f'Fixture plan: {plan}', flush=True)
     if args.prepare_only:
@@ -117,6 +135,7 @@ def main():
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     atomic_json(HERE/'results'/f'baseline-{stamp}.json', {
         'kind': 'baseline_index', 'smoke': short_run, 'pause_regression': args.pause_regression,
+        'interrupt_regression': args.interrupt_regression,
         'human_quality_review': 'pending', 'runs': results})
     if any(r['exit_code'] != 0 or not r['fixture_checks_passed'] for r in results):
         raise SystemExit('At least one run failed; inspect its log and reports before comparing numbers.')

@@ -18,6 +18,7 @@
 #   CHAT_INPUT_DEVICE=<index>   pick a mic
 #   CHAT_MODEL=<name>           voice-model override (same as --model)
 #   CHAT_THINK_MODEL=<name>     shared reasoning-model override for ALL modes
+#   CHAT_TURN_TIMEOUT=<seconds> shared-reasoner deadline (default 90)
 #   CHAT_MIN_VOLUME=<0..1>      VAD loudness threshold (default 0.15)
 #   CHAT_TEST_WAV=<path>        self-test: feed a wav instead of the mic
 set -euo pipefail

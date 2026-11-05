@@ -80,6 +80,10 @@
     "reason": "baseline_index_not_a_session"
   },
   {
+    "src": "experiments/pipecat-poc/results/baseline-20261105T063848020388Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
     "src": "experiments/pipecat-poc/results/chat-20261030T101822Z.json",
     "reason": "legacy_zero_turn_debug_session"
   },
