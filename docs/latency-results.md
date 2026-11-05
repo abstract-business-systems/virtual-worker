@@ -5,7 +5,16 @@
 | # | Configuration | Env | Pause wait | Speech-to-text | Thinking | Voice | First word | Avg over 20 q |
 |---|---|---|---:|---|---|---|---:|---:|
 | 1 | Original worker | CLI | 2.01 s | Whisper (local)<br>1.54 s | gpt-4o-mini<br>1.93 s | local<br>2.45 s | 7.77 s | 20.32 s (whole reply, not first word) |
-| 2 | Realtime | CLI | one connection does all three | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | 1.13 s | 4.30 s |
+| 2 | Realtime | CLI + Teams | one connection does all three | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | CLI 1.13 s; Teams 10.87 s | CLI 4.30 s; Teams not separable |
+
+Row 2 live source: 5 Nov, 6 turns over 4.9 min in a real Teams meeting, zero
+errors, transcript heard correctly 6/6, bash tools worked live
+(`session-realtime-20261105T153546881500Z.json`). Stage means: wait for
+silence 0.56 s → transcription 7.54 s → thinking 1.29 s → first word. Cost
+$0.0237 ≈ ₹1.99 for the session (~₹0.41 per listening-minute). The 6.6 s gap
+vs the CLI bench is almost entirely the transcription call from the abs-worker
+host (7.54 s there vs ~1.5 s from the dev machine) — not the Teams meeting
+itself, whose transport and silence wait together cost well under 1.5 s.
 | 3 | One audio model, full | CLI | 0.7 s | gpt-audio<br>0 s, inside same call | gpt-audio<br>inside same call | gpt-audio<br>2.6 s | 3.28 s | 5.85 s |
 | 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none |
 | 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s |
@@ -29,9 +38,10 @@ briefly in the first live build before the PCM switch.
 - "none" in the Avg column = that configuration was never run through a full 20-question session.
 - Same model in all three stage columns = one model that listens, thinks, and speaks by itself.
 
-Gap: rows 1–5 were never tested in Teams, row 6 never at the CLI; row 7 is
-benched at the CLI but its live Teams delay is not yet timed — so the Teams
-overhead is estimated, not measured both ways.
+Gap: rows 1, 3–5 were never tested in Teams, row 6 never at the CLI; rows 2
+and 7 now have CLI numbers and live Teams evidence (row 2 fully timed live,
+row 7's live delay still component-estimated). Teams transport is small;
+host-side network calls dominate.
 
 Bench note: the repeat-suppression meant for live meetings misfires on the
 fixture plan (it repeats similar questions on purpose); it was disabled for
