@@ -1,0 +1,683 @@
+{
+  "schema_version": 2,
+  "mode": "realtime",
+  "engine": "pipecat",
+  "models": {
+    "realtime": "gpt-realtime-2.1-mini",
+    "think": "openai/gpt-4o-mini",
+    "stt": "gpt-4o-mini-transcribe"
+  },
+  "settings": {
+    "vad_stop_secs": 0.8,
+    "vad_start_secs": 0.2,
+    "turn_stop_strategy": "speech_timeout_no_transcript",
+    "additional_speech_timeout_s": 0.0,
+    "task_reasoning": "shared_external_model",
+    "native_voice_processing": "still_bundled_not_free"
+  },
+  "started_utc": "2026-11-05T15:30:51.011650+00:00",
+  "wall_total_s": 295.8698496760044,
+  "measurement_duration_s": 294.6768290600012,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 6,
+  "completed_turns": 6,
+  "input_audio_s": 293.43075000000005,
+  "total_cost_usd": null,
+  "known_cost_usd": 0.023704849999999996,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": null,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": 10.871765444185266,
+    "samples": 6
+  },
+  "voice_latency": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "to_audio_received": {
+    "mean_s": 10.672775937332375,
+    "samples": 6
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "external task inference recorded separately; native voice processing remains bundled",
+  "background_jobs": [],
+  "cost_scope": "instrumented speech and shared reasoning calls; API spend inside bash/Pi is not measured",
+  "errors": [],
+  "fixture_results": [],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": null,
+      "speech_end_s": 138.95557372899518,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 139.6014686599956,
+      "first_audio_received_s": 145.90018298799987,
+      "first_playback_s": 146.0473693422688,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.35,
+      "audio_pcm_peak_abs": 22604,
+      "input_text": "Hello friend.",
+      "reply": "Hello! How can I assist you today?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 139.6014686599956,
+          "end_s": 144.2238812620053,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 144.22431059900555,
+          "end_s": 145.0629207479942,
+          "usage": {
+            "prompt_tokens": 590,
+            "completion_tokens": 10,
+            "total_tokens": 600,
+            "cost": 9.45e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.45e-05,
+              "upstream_inference_prompt_cost": 8.85e-05,
+              "upstream_inference_completions_cost": 6e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 9.45e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 139.6014686599956,
+          "end_s": 146.2770831480011,
+          "usage": {
+            "prompt_tokens": 65,
+            "completion_tokens": 81,
+            "total_tokens": 146,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 47,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0010605999999999999,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 144.22417453999515,
+      "inference_end_s": 145.0629477879993,
+      "inference_isolatable": false,
+      "reasoning_answer": "Hello! How can I assist you today?",
+      "finished_s": 146.2802178050042,
+      "round_trip_s": 7.091795613273632,
+      "to_audio_received_s": 6.944609259004693,
+      "inference_with_tools_s": 0.838773248004145,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.0011550999999999998,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 2,
+      "fixture": null,
+      "speech_end_s": 153.23050053200708,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 153.89393429200572,
+      "first_audio_received_s": 161.3994618059951,
+      "first_playback_s": 161.51441568185618,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.3,
+      "audio_pcm_peak_abs": 24173,
+      "input_text": "I just wanted to chat with you.",
+      "reply": "I'm here for that! What's on your mind?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 153.89393429200572,
+          "end_s": 159.47223235899583,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 159.4727181860071,
+          "end_s": 160.5395826120075,
+          "usage": {
+            "prompt_tokens": 615,
+            "completion_tokens": 11,
+            "total_tokens": 626,
+            "cost": 9.885e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.885e-05,
+              "upstream_inference_prompt_cost": 9.225e-05,
+              "upstream_inference_completions_cost": 6.6e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 9.885e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 153.89393429200572,
+          "end_s": 161.83764327700192,
+          "usage": {
+            "prompt_tokens": 67,
+            "completion_tokens": 99,
+            "total_tokens": 166,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 46,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0010874,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 159.47259661699354,
+      "inference_end_s": 160.53961314199842,
+      "inference_isolatable": false,
+      "reasoning_answer": "I'm here for that! What's on your mind?",
+      "finished_s": 161.83854587000678,
+      "round_trip_s": 8.283915149849093,
+      "to_audio_received_s": 8.168961273988003,
+      "inference_with_tools_s": 1.067016525004874,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.00118625,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 3,
+      "fixture": null,
+      "speech_end_s": 169.18599155800533,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 169.8090875390044,
+      "first_audio_received_s": 176.0647268580069,
+      "first_playback_s": 176.17231617154977,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 5.7,
+      "audio_pcm_peak_abs": 25437,
+      "input_text": "Can you list out projects in your network folder?",
+      "reply": "There's one project in the folder: snake_game.py. Would you like to know more about it?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 169.8090875390044,
+          "end_s": 173.02561654700548,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 173.02611456300656,
+          "end_s": 174.20546746099717,
+          "usage": {
+            "prompt_tokens": 643,
+            "completion_tokens": 26,
+            "total_tokens": 669,
+            "cost": 0.00011205,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011205,
+              "upstream_inference_prompt_cost": 9.645e-05,
+              "upstream_inference_completions_cost": 1.56e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011205,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 174.20817906199954,
+          "end_s": 175.20231633599906,
+          "usage": {
+            "prompt_tokens": 691,
+            "completion_tokens": 21,
+            "total_tokens": 712,
+            "cost": 0.00011625,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011625,
+              "upstream_inference_prompt_cost": 0.00010365,
+              "upstream_inference_completions_cost": 1.26e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011625,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 169.8090875390044,
+          "end_s": 176.66049114000634,
+          "usage": {
+            "prompt_tokens": 87,
+            "completion_tokens": 165,
+            "total_tokens": 252,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 114,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0024546,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"ls /home/abs-worker/vw-data/poc-workdir\"}",
+          "result": {
+            "returncode": 0,
+            "output": "snake_game.py"
+          },
+          "status": "completed",
+          "started_s": 174.20550214100513,
+          "finished_s": 174.20816987199942
+        }
+      ],
+      "inference_start_s": 173.02595236399793,
+      "inference_end_s": 175.2023458659969,
+      "inference_isolatable": false,
+      "reasoning_answer": "There's one project in the folder: snake_game.py. Would you like to know more about it?",
+      "finished_s": 176.66142272400612,
+      "round_trip_s": 6.98632461354444,
+      "to_audio_received_s": 6.87873530000158,
+      "inference_with_tools_s": 2.176393501998973,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.0026828999999999998,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 4,
+      "fixture": null,
+      "speech_end_s": 185.11197194299487,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 185.5960752779938,
+      "first_audio_received_s": 200.28557414599345,
+      "first_playback_s": 200.39097138629242,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 10.050000000000004,
+      "audio_pcm_peak_abs": 28979,
+      "input_text": "Explain me that project.",
+      "reply": "I don't have specific information about the contents of the snake_game.py file. If you'd like, I can open the file or run a command to inspect its contents. Would you like me to do that?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 185.5960752779938,
+          "end_s": 198.18208507100644,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 198.18274227599613,
+          "end_s": 199.52247165699373,
+          "usage": {
+            "prompt_tokens": 724,
+            "completion_tokens": 42,
+            "total_tokens": 766,
+            "cost": 0.0001338,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001338,
+              "upstream_inference_prompt_cost": 0.0001086,
+              "upstream_inference_completions_cost": 2.52e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001338,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 185.5960752779938,
+          "end_s": 201.21911039500264,
+          "usage": {
+            "prompt_tokens": 129,
+            "completion_tokens": 278,
+            "total_tokens": 407,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 201,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0042822,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 198.1825130280049,
+      "inference_end_s": 199.52251402600086,
+      "inference_isolatable": false,
+      "reasoning_answer": "I don't have specific information about the contents of the snake_game.py file. If you'd like, I can open the file or run a command to inspect its contents. Would you like me to do that?",
+      "finished_s": 201.21984121999412,
+      "round_trip_s": 15.27899944329755,
+      "to_audio_received_s": 15.17360220299858,
+      "inference_with_tools_s": 1.3400009979959577,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.004416,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 5,
+      "fixture": null,
+      "speech_end_s": 218.46562820099376,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 219.00359787499474,
+      "first_audio_received_s": 224.47248751900042,
+      "first_playback_s": 224.79951133556796,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 28.449999999999964,
+      "audio_pcm_peak_abs": 21701,
+      "input_text": "You know, just ask why to explain it to you, and you have a coding tool.",
+      "reply": "The snake_game.py project is a simple text-based implementation of the classic Snake game using the curses library in Python. It initializes a game window, creates a snake that moves based on user input, generates food items for the snake to consume, and keeps track of the score. The game runs in a loop, continuously updating the display as the snake moves and grows. Would you like me to help with anything specific regarding this project?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 219.00359787499474,
+          "end_s": 220.0331279469974,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 220.0335340140009,
+          "end_s": 221.65816554200137,
+          "usage": {
+            "prompt_tokens": 792,
+            "completion_tokens": 52,
+            "total_tokens": 844,
+            "cost": 0.00015,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00015,
+              "upstream_inference_prompt_cost": 0.0001188,
+              "upstream_inference_completions_cost": 3.12e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00015,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 221.66192836599657,
+          "end_s": 223.65712698000425,
+          "usage": {
+            "prompt_tokens": 1235,
+            "completion_tokens": 87,
+            "total_tokens": 1322,
+            "cost": 0.00023745,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00023745,
+              "upstream_inference_prompt_cost": 0.00018525,
+              "upstream_inference_completions_cost": 5.22e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00023745,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 219.00359787499474,
+          "end_s": 227.36997019400587,
+          "usage": {
+            "prompt_tokens": 219,
+            "completion_tokens": 716,
+            "total_tokens": 935,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 569,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.011864199999999998,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"cat /home/abs-worker/vw-data/poc-workdir/snake_game.py\"}",
+          "result": {
+            "returncode": 0,
+            "output": "import random\nimport curses\n\nstdscr = curses.initscr()\ncurses.curs_set(0)\nheight, width = stdscr.getmaxyx()\nsnake = [[height // 2, width // 4]]\ndirection = [0, 1]  # start moving right\nfood = [height // 2, width // 2]\nstscr.addch(int(food[0]), int(food[1]), curses.ACS_PI)\nscore = 0\n\nwhile True:\n    next_key = stdscr.getch()\n    direction[0] = (next_key == ord(w) and -1) or (next_key == ord(s) and 1) or direction[0]\n    direction[1] = (next_key == ord(d) and 1) or (next_key == ord(a) and -1) or direction[1]\n\n    new_head = [snake[0][0] + direction[0], snake[0][1] + direction[1]]\n    snake.insert(0, new_head)\n\n    if snake[0] == food:\n        score += 1\n        food = [random.randint(1, height - 1), random.randint(1, width - 1)]\n        stdscr.addch(int(food[0]), int(food[1]), curses.ACS_PI)\n    else:\n        snake.pop()\n\n    stdscr.clear()\n    for s in snake:\n        stdscr.addch(int(s[0]), int(s[1]), curses.ACS_CKBOARD)\n    stdscr.addstr(0, 2, Score:  + str(score))\n    stdscr.refresh()\n\ncurses.endwin()"
+          },
+          "status": "completed",
+          "started_s": 221.65821324200078,
+          "finished_s": 221.66191376600182
+        }
+      ],
+      "inference_start_s": 220.0333850349998,
+      "inference_end_s": 223.65715769999952,
+      "inference_isolatable": false,
+      "reasoning_answer": "The snake_game.py project is a simple text-based implementation of the classic Snake game using the curses library in Python. It initializes a game window, creates a snake that moves based on user input, generates food items for the snake to consume, and keeps track of the score. The game runs in a loop, continuously updating the display as the snake moves and grows. Would you like me to help with anything specific regarding this project?",
+      "finished_s": 227.37087547799456,
+      "round_trip_s": 6.333883134574194,
+      "to_audio_received_s": 6.006859318006661,
+      "inference_with_tools_s": 3.6237726649997057,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.012251649999999998,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 6,
+      "fixture": null,
+      "speech_end_s": 258.3934738710027,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 258.81290149899723,
+      "first_audio_received_s": 279.25736214099743,
+      "first_playback_s": 279.6491485815754,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 4.3,
+      "audio_pcm_peak_abs": 19845,
+      "input_text": "No, that's it. Just wanted to chat with you.",
+      "reply": "That's perfectly fine! I'm here for the chat. What else would you like to talk about?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 258.81290149899723,
+          "end_s": 277.00757564400556,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 277.00824379900587,
+          "end_s": 278.3036918870057,
+          "usage": {
+            "prompt_tokens": 1341,
+            "completion_tokens": 20,
+            "total_tokens": 1361,
+            "cost": 0.00011715,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011715,
+              "upstream_inference_prompt_cost": 0.00010515,
+              "upstream_inference_completions_cost": 1.2e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011715,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 258.81290149899723,
+          "end_s": 279.5659637570061,
+          "usage": {
+            "prompt_tokens": 85,
+            "completion_tokens": 138,
+            "total_tokens": 223,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 86,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0018958,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 277.0079914210073,
+      "inference_end_s": 278.3037365469936,
+      "inference_isolatable": false,
+      "reasoning_answer": "That's perfectly fine! I'm here for the chat. What else would you like to talk about?",
+      "finished_s": 279.5678085539985,
+      "round_trip_s": 21.25567471057269,
+      "to_audio_received_s": 20.86388826999473,
+      "inference_with_tools_s": 1.2957451259862864,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.00201295,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    }
+  ]
+}

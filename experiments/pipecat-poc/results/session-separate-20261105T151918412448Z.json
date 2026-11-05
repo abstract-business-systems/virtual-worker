@@ -1,0 +1,769 @@
+{
+  "schema_version": 2,
+  "mode": "separate",
+  "engine": "chat_audio",
+  "models": {
+    "voice": "openai-tts:elevenlabs/eleven-v4-turbo",
+    "think": "openai/gpt-6-luna",
+    "stt": "openai:elevenlabs/scribe-v2"
+  },
+  "settings": {
+    "task_reasoning": "shared_external_model",
+    "native_voice_processing": "still_bundled_not_free"
+  },
+  "started_utc": "2026-11-05T15:17:35.184072+00:00",
+  "wall_total_s": 103.22837323400017,
+  "measurement_duration_s": 103.18587699200725,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 7,
+  "completed_turns": 6,
+  "input_audio_s": 47.11175000000039,
+  "total_cost_usd": null,
+  "known_cost_usd": 0.0034470513888884154,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": null,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": 6.577897255080079,
+    "samples": 6
+  },
+  "voice_latency": {
+    "mean_s": 4.030892835747225,
+    "samples": 6
+  },
+  "to_audio_received": {
+    "mean_s": 6.406383995496182,
+    "samples": 6
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "explicit text inference window (includes tool time)",
+  "background_jobs": [],
+  "cost_scope": "instrumented speech and shared reasoning calls; API spend inside bash/Pi is not measured",
+  "errors": [
+    "Fixture run stopped after a failed interaction"
+  ],
+  "fixture_results": [
+    {
+      "id": "answer",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "memory-set",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "memory-recall",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "files",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "summary",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "context",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "answer",
+      "completed": false,
+      "heuristic_keyword_match": false,
+      "human_quality_review": "pending"
+    }
+  ],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": "answer",
+      "speech_end_s": 3.815433375999215,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 4.761304004001431,
+      "first_audio_received_s": 9.135721611994086,
+      "first_playback_s": 9.256795146870429,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.480000000000001,
+      "audio_pcm_peak_abs": 17532,
+      "input_text": "What is seven plus five? Answer in one short sentence.",
+      "reply": "Seven plus five is twelve.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 4.761779669992393,
+          "end_s": 6.543094654989545,
+          "usage": {
+            "seconds": 4.7,
+            "cost": 0.00028722222222217
+          },
+          "cost_usd": 0.00028722222222217,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 6.543339041993022,
+          "end_s": 8.19083068499458,
+          "usage": {
+            "prompt_tokens": 612,
+            "completion_tokens": 10,
+            "total_tokens": 622,
+            "cost": 6.62e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 6.62e-05,
+              "upstream_inference_prompt_cost": 6.12e-05,
+              "upstream_inference_completions_cost": 5e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 6.62e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 8.190861454990227,
+          "end_s": 9.155438841000432,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 6.54327605299477,
+      "inference_end_s": 8.190855904991622,
+      "inference_isolatable": true,
+      "reasoning_answer": "Seven plus five is twelve.",
+      "finished_s": 9.155519259991706,
+      "round_trip_s": 5.4413617708712145,
+      "to_audio_received_s": 5.320288235994871,
+      "inference_with_tools_s": 1.647579851996852,
+      "voice_latency_s": 3.7937819188743624,
+      "cost_complete": false,
+      "known_cost_usd": 0.00035342222222216997,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 2,
+      "fixture": "memory-set",
+      "speech_end_s": 18.383961058991495,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 19.32257688799291,
+      "first_audio_received_s": 24.249192995994235,
+      "first_playback_s": 24.421321482079797,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.0400000000000014,
+      "audio_pcm_peak_abs": 14561,
+      "input_text": "Remember this for our conversation. The project code name is Copperfinch. Say the code name",
+      "reply": "The project code name is Copperfinch.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 19.32322287200077,
+          "end_s": 21.134580227997503,
+          "usage": {
+            "seconds": 7.45,
+            "cost": 0.000455277777777695
+          },
+          "cost_usd": 0.000455277777777695,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 21.13498421398981,
+          "end_s": 22.324905913003022,
+          "usage": {
+            "prompt_tokens": 647,
+            "completion_tokens": 13,
+            "total_tokens": 660,
+            "cost": 7.12e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 7.12e-05,
+              "upstream_inference_prompt_cost": 6.47e-05,
+              "upstream_inference_completions_cost": 6.5e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 7.12e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 22.32494065198989,
+          "end_s": 24.280240104999393,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 21.134918704992742,
+      "inference_end_s": 22.324935081996955,
+      "inference_isolatable": true,
+      "reasoning_answer": "The project code name is Copperfinch.",
+      "finished_s": 24.28034447399841,
+      "round_trip_s": 6.037360423088302,
+      "to_audio_received_s": 5.86523193700274,
+      "inference_with_tools_s": 1.1900163770042127,
+      "voice_latency_s": 4.847344046084089,
+      "cost_complete": false,
+      "known_cost_usd": 0.0005264777777776949,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 3,
+      "fixture": "memory-recall",
+      "speech_end_s": 30.418355940002833,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 31.264763696992304,
+      "first_audio_received_s": 34.70661362799001,
+      "first_playback_s": 34.87194518179047,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.9600000000000013,
+      "audio_pcm_peak_abs": 13570,
+      "input_text": "What project codename did I just give you?",
+      "reply": "You gave the project codename Copperfinch.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 31.264957755993237,
+          "end_s": 32.451586041992414,
+          "usage": {
+            "seconds": 3.80625,
+            "cost": 0.00023260416666662437
+          },
+          "cost_usd": 0.00023260416666662437,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 32.4521289379918,
+          "end_s": 33.72460970199609,
+          "usage": {
+            "prompt_tokens": 676,
+            "completion_tokens": 25,
+            "total_tokens": 701,
+            "cost": 8.01e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 8.01e-05,
+              "upstream_inference_prompt_cost": 6.76e-05,
+              "upstream_inference_completions_cost": 1.25e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 9,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 8.01e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 33.72465502099658,
+          "end_s": 34.734742610002286,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 32.452030699001625,
+      "inference_end_s": 33.724648960997,
+      "inference_isolatable": true,
+      "reasoning_answer": "You gave the project codename Copperfinch.",
+      "finished_s": 34.73482863999379,
+      "round_trip_s": 4.45358924178764,
+      "to_audio_received_s": 4.288257687987176,
+      "inference_with_tools_s": 1.272618261995376,
+      "voice_latency_s": 3.1809709797922636,
+      "cost_complete": false,
+      "known_cost_usd": 0.00031270416666662437,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 4,
+      "fixture": "files",
+      "speech_end_s": 43.591174322000704,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 44.45904356599203,
+      "first_audio_received_s": 49.691739691988914,
+      "first_playback_s": 49.90059290518037,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 4.080000000000002,
+      "audio_pcm_peak_abs": 19576,
+      "input_text": "Use bash to list the files in the current working directory. Tell me the file names.",
+      "reply": "The file is `benchmark-notes.txt`.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 44.4594855329924,
+          "end_s": 46.30836331700266,
+          "usage": {
+            "seconds": 6.55625,
+            "cost": 0.00040065972222214937
+          },
+          "cost_usd": 0.00040065972222214937,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 46.30879182399076,
+          "end_s": 47.53505735199724,
+          "usage": {
+            "prompt_tokens": 714,
+            "completion_tokens": 20,
+            "total_tokens": 734,
+            "cost": 8.14e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 8.14e-05,
+              "upstream_inference_prompt_cost": 7.14e-05,
+              "upstream_inference_completions_cost": 1e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 8.14e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 47.53876014199341,
+          "end_s": 48.786992117995396,
+          "usage": {
+            "prompt_tokens": 761,
+            "completion_tokens": 13,
+            "total_tokens": 774,
+            "cost": 8.26e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 8.26e-05,
+              "upstream_inference_prompt_cost": 7.61e-05,
+              "upstream_inference_completions_cost": 6.5e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 8.26e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 48.78702349799278,
+          "end_s": 49.713655974002904,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"ls -1\"}",
+          "result": {
+            "returncode": 0,
+            "output": "benchmark-notes.txt"
+          },
+          "status": "completed",
+          "started_s": 47.5351112819917,
+          "finished_s": 47.53874546199222
+        }
+      ],
+      "inference_start_s": 46.308742034001625,
+      "inference_end_s": 48.78701887799252,
+      "inference_isolatable": true,
+      "reasoning_answer": "The file is `benchmark-notes.txt`.",
+      "finished_s": 49.71376254298957,
+      "round_trip_s": 6.309418583179664,
+      "to_audio_received_s": 6.10056536998821,
+      "inference_with_tools_s": 2.4782768439908978,
+      "voice_latency_s": 3.831141739188766,
+      "cost_complete": false,
+      "known_cost_usd": 0.0005646597222221494,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 5,
+      "fixture": "summary",
+      "speech_end_s": 60.244627320990546,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 61.082016768996255,
+      "first_audio_received_s": 71.1882225189911,
+      "first_playback_s": 71.38030349609676,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 7.599999999999989,
+      "audio_pcm_peak_abs": 18091,
+      "input_text": "Use Bash to read benchmark notes.txt in the current directory and summarize its contents",
+      "reply": "The notes say the onboarding review is Wednesday, Ravi will prepare the checklist, and the training room still needs to be confirmed.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 61.08236485699308,
+          "end_s": 63.004587483999785,
+          "usage": {
+            "seconds": 7.0375,
+            "cost": 0.00043006944444436623
+          },
+          "cost_usd": 0.00043006944444436623,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 63.00545126698853,
+          "end_s": 64.23398261399416,
+          "usage": {
+            "prompt_tokens": 795,
+            "completion_tokens": 23,
+            "total_tokens": 818,
+            "cost": 9.1e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.1e-05,
+              "upstream_inference_prompt_cost": 7.95e-05,
+              "upstream_inference_completions_cost": 1.15e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 9.1e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 64.23672705198987,
+          "end_s": 67.57924029500282,
+          "usage": {
+            "prompt_tokens": 853,
+            "completion_tokens": 93,
+            "total_tokens": 946,
+            "cost": 0.0001318,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001318,
+              "upstream_inference_prompt_cost": 8.53e-05,
+              "upstream_inference_completions_cost": 4.65e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 69,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001318,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 67.5822036210011,
+          "end_s": 69.22287160198903,
+          "usage": {
+            "prompt_tokens": 922,
+            "completion_tokens": 53,
+            "total_tokens": 975,
+            "cost": 0.0001187,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001187,
+              "upstream_inference_prompt_cost": 9.22e-05,
+              "upstream_inference_completions_cost": 2.65e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 22,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001187,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 69.22291503100132,
+          "end_s": 71.26041899099073,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"cat 'benchmark notes.txt'\"}",
+          "result": {
+            "returncode": 1,
+            "output": "cat: 'benchmark notes.txt': No such file or directory"
+          },
+          "status": "failed",
+          "started_s": 64.23402249399805,
+          "finished_s": 64.2367163119925
+        },
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"cat benchmark-notes.txt\"}",
+          "result": {
+            "returncode": 0,
+            "output": "The onboarding review is on Wednesday. Ravi will prepare the checklist.\nThe remaining action is to confirm the training room."
+          },
+          "status": "completed",
+          "started_s": 67.5792761240009,
+          "finished_s": 67.58219593099784
+        }
+      ],
+      "inference_start_s": 63.0053606369911,
+      "inference_end_s": 69.2229092209891,
+      "inference_isolatable": true,
+      "reasoning_answer": "The notes say the onboarding review is Wednesday, Ravi will prepare the checklist, and the training room still needs to be confirmed.",
+      "finished_s": 71.26061040899367,
+      "round_trip_s": 11.135676175106212,
+      "to_audio_received_s": 10.943595198000551,
+      "inference_with_tools_s": 6.217548583997996,
+      "voice_latency_s": 4.918127591108217,
+      "cost_complete": false,
+      "known_cost_usd": 0.0007715694444443662,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 6,
+      "fixture": "context",
+      "speech_end_s": 86.13540537799756,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 86.95320158699178,
+      "first_audio_received_s": 92.0557709220011,
+      "first_playback_s": 92.225382714445,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.840000000000002,
+      "audio_pcm_peak_abs": 14198,
+      "input_text": "According to benchmark notes.txt, which room related action is still open? Use bash if needed.",
+      "reply": "The open room-related action is to confirm the training room.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 86.95357037399663,
+          "end_s": 88.51236918799987,
+          "usage": {
+            "seconds": 8,
+            "cost": 0.0004888888888888
+          },
+          "cost_usd": 0.0004888888888888,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 88.51356992799265,
+          "end_s": 90.98938850799459,
+          "usage": {
+            "prompt_tokens": 976,
+            "completion_tokens": 47,
+            "total_tokens": 1023,
+            "cost": 0.0001211,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001211,
+              "upstream_inference_prompt_cost": 9.76e-05,
+              "upstream_inference_completions_cost": 2.35e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 29,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001211,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 90.98942095699022,
+          "end_s": 92.13599681400228,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 88.51342918998853,
+      "inference_end_s": 90.98941578700033,
+      "inference_isolatable": true,
+      "reasoning_answer": "The open room-related action is to confirm the training room.",
+      "finished_s": 92.13611108298937,
+      "round_trip_s": 6.089977336447447,
+      "to_audio_received_s": 5.920365544003545,
+      "inference_with_tools_s": 2.475986597011797,
+      "voice_latency_s": 3.61399073943565,
+      "cost_complete": false,
+      "known_cost_usd": 0.0006099888888887999,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 7,
+      "fixture": "answer",
+      "speech_end_s": 100.2230798819908,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 101.16813902999274,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": "What is seven plus five? Answer in one short sentence.",
+      "reply": "",
+      "status": "failed",
+      "errors": [
+        "Fixture run stopped after a failed interaction"
+      ],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 101.16841341799591,
+          "end_s": 102.66249522200087,
+          "usage": {
+            "seconds": 5.04375,
+            "cost": 0.0003082291666666106
+          },
+          "cost_usd": 0.0003082291666666106,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": true,
+      "finished_s": 102.66272583098907,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0003082291666666106,
+      "cost_usd": 0.0003082291666666106,
+      "voice_cost_usd": null
+    }
+  ]
+}
