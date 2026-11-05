@@ -18,6 +18,12 @@ includes turns that ran bash tools. The thinking model (2.82 s) is now the
 biggest single chunk of the first-word delay; the ElevenLabs voice is the
 smallest (1.15 s).
 
+Voice-stage note: the measured path streams raw PCM straight from OpenRouter's
+ElevenLabs endpoint (confirmed `audio/pcm` 5 Nov) — no ffmpeg in it. ffmpeg
+decode exists only as a fallback for endpoints that reject PCM and adds
+~0.2 s decode plus a full-download wait when it triggers; it was in the path
+briefly in the first live build before the PCM switch.
+
 - Env "CLI" = command line with a recorded test voice, no Teams call.
 - Env "Teams" = inside a real Teams meeting, which adds ~0.5–1 s of travel.
 - "none" in the Avg column = that configuration was never run through a full 20-question session.
