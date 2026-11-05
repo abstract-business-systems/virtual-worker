@@ -1,0 +1,35 @@
+{
+  "kind": "baseline_index",
+  "smoke": true,
+  "pause_regression": false,
+  "human_quality_review": "pending",
+  "runs": [
+    {
+      "mode": "realtime",
+      "exit_code": 0,
+      "fixture_checks_passed": false,
+      "reports": [
+        "session-realtime-20261104T131843690459Z.json"
+      ],
+      "log": "results/logs/realtime-20261104T131732096447Z.log"
+    },
+    {
+      "mode": "audio",
+      "exit_code": 0,
+      "fixture_checks_passed": true,
+      "reports": [
+        "session-audio-20261104T132020682243Z.json"
+      ],
+      "log": "results/logs/audio-20261104T131843817259Z.log"
+    },
+    {
+      "mode": "separate",
+      "exit_code": 0,
+      "fixture_checks_passed": true,
+      "reports": [
+        "session-separate-20261104T132154978512Z.json"
+      ],
+      "log": "results/logs/separate-20261104T132020731176Z.log"
+    }
+  ]
+}

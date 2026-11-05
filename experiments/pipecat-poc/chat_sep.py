@@ -37,6 +37,7 @@ from poc_pipeline import SessionBoundary
 from poc_pricing import usage_cost, tts_cost
 from poc_report import SessionReport, load_environment
 from poc_tools import run_tool
+from poc_reasoning import reasoning_model, reasoning_prompt, BASH_TOOL
 
 load_environment(HERE)
 WORKDIR = os.environ.get('CHAT_WORKDIR', os.getcwd())
@@ -45,7 +46,7 @@ WORKDIR = os.environ.get('CHAT_WORKDIR', os.getcwd())
 async def run():
     presets = configparser.ConfigParser()
     presets.read(HERE/'models.ini')
-    think = os.getenv('CHAT_THINK_MODEL') or presets.get('separate', 'think')
+    think = reasoning_model()
     voice = os.getenv('CHAT_TTS_VOICE') or presets.get('separate', 'voice').split(':')[-1]
     stt_model = os.getenv('CHAT_STT_MODEL', 'gpt-4o-mini-transcribe')
     if os.getenv('CHAT_MODEL'):
@@ -57,8 +58,10 @@ async def run():
         raise SystemExit('OPENAI_API_KEY and OPENROUTER_API_KEY are required')
     session = SessionReport('separate', 'pipecat',
         {'stt': stt_model, 'think': think, 'tts': 'gpt-4o-mini-tts', 'voice': voice})
+    session.settings = {'task_reasoning': 'shared_external_model'}
     tokens = ta.TokenAccount()
     metrics = TurnMetrics(tokens, session)
+    metrics._show_you = lambda: None  # MeasuredSTT prints the actual recognition result
 
     class MeasuredSTT(OpenAISTTService):
         async def _transcribe(self, audio):
@@ -128,19 +131,13 @@ async def run():
         print(tool(f'[tool] {name} -> {json.dumps(result)[:160]}'), flush=True)
         await params.result_callback(result)
 
-    schemas = [
-        FunctionSchema(name='get_meeting_context', description='Get stub meeting/calendar context.',
-                       properties={}, required=[]),
-        FunctionSchema(name='bash', description='Run bash in the working directory to inspect documents.',
-                       properties={'command': {'type': 'string'}}, required=['command']),
-    ]
+    bash = BASH_TOOL['function']
+    schemas = [FunctionSchema(name=bash['name'], description=bash['description'],
+        properties=bash['parameters']['properties'], required=bash['parameters']['required'])]
     for schema in schemas:
         llm.register_function(schema.name, execute)
     context = LLMContext(tools=ToolsSchema(standard_tools=schemas))
-    context.add_message({'role': 'system', 'content':
-        'You are Friday. Keep spoken answers brief. Your working directory is '+WORKDIR+
-        '. Use bash to inspect files when asked about documents. Use get_meeting_context '
-        'for calendar questions; it is demonstration data, not a real calendar.'})
+    context.add_message({'role': 'system', 'content': reasoning_prompt(WORKDIR)})
     pair = LLMContextAggregatorPair(context)
 
     @pair.assistant().event_handler('on_assistant_turn_stopped')

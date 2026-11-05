@@ -32,9 +32,6 @@ def run_tool(name, arguments, workdir):
         args = repair_tool_args(arguments)
     except ValueError as exc:
         return {'error': str(exc)}
-    if name == 'get_meeting_context':
-        return {'stub': True, 'recent_meeting': 'M7 POC scoping',
-                'next_event': 'Friday demo review'}
     if name != 'bash':
         return {'error': f'unknown tool {name}'}
     cmd = args.get('command')

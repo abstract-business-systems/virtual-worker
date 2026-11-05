@@ -1,0 +1,702 @@
+{
+  "schema_version": 2,
+  "mode": "realtime",
+  "engine": "pipecat",
+  "models": {
+    "realtime": "gpt-realtime-2.1-mini",
+    "think": "openai/gpt-4o-mini",
+    "stt": "gpt-4o-mini-transcribe"
+  },
+  "settings": {
+    "vad_stop_secs": 0.8,
+    "vad_start_secs": 0.2,
+    "turn_stop_strategy": "speech_timeout_no_transcript",
+    "additional_speech_timeout_s": 0.0,
+    "task_reasoning": "shared_external_model",
+    "native_voice_processing": "still_bundled_not_free"
+  },
+  "started_utc": "2026-11-05T05:48:58.679589+00:00",
+  "wall_total_s": 148.73735540000052,
+  "measurement_duration_s": 146.61306014000002,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 11,
+  "completed_turns": 4,
+  "input_audio_s": 148.56912500000112,
+  "total_cost_usd": null,
+  "known_cost_usd": 0.0174714,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": null,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": 2.7986352146348485,
+    "samples": 4
+  },
+  "voice_latency": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "to_audio_received": {
+    "mean_s": 2.679849084250236,
+    "samples": 4
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "external task inference recorded separately; native voice processing remains bundled",
+  "errors": [],
+  "fixture_results": [],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": null,
+      "speech_end_s": 3.882214899000246,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 3.885596275998978,
+      "first_audio_received_s": 6.479948649997823,
+      "first_playback_s": 6.666865391402525,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.75,
+      "input_text": "Hello there.",
+      "reply": "Hello! How can I assist you today?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 3.885596275998978,
+          "end_s": 4.568928340995626,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 4.5692451099967,
+          "end_s": 5.806250367000757,
+          "usage": {
+            "prompt_tokens": 170,
+            "completion_tokens": 10,
+            "total_tokens": 180,
+            "cost": 3.15e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 3.15e-05,
+              "upstream_inference_prompt_cost": 2.55e-05,
+              "upstream_inference_completions_cost": 6e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 3.15e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 3.885596275998978,
+          "end_s": 6.930723833997035,
+          "usage": {
+            "prompt_tokens": 65,
+            "completion_tokens": 88,
+            "total_tokens": 153,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 55,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0012182,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 4.569224549995852,
+      "inference_end_s": 5.806257996999193,
+      "inference_isolatable": false,
+      "reasoning_answer": "Hello! How can I assist you today?",
+      "finished_s": 6.933145684997726,
+      "round_trip_s": 2.784650492402279,
+      "to_audio_received_s": 2.597733750997577,
+      "inference_with_tools_s": 1.2370334470033413,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.0012497,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 2,
+      "fixture": null,
+      "speech_end_s": 15.359418935993745,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 15.361840135999955,
+      "first_audio_received_s": 18.169561404996784,
+      "first_playback_s": 18.258609468883908,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 10.300000000000004,
+      "input_text": "Can you tell me something about yourself?",
+      "reply": "I\u2019m Friday, a virtual worker here to assist you with tasks and provide information. I can run commands in bash, handle files, and support your workflow. Let me know what you need help with!",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 15.361840135999955,
+          "end_s": 16.092891849999432,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 16.093332617994747,
+          "end_s": 17.39869070900022,
+          "usage": {
+            "prompt_tokens": 195,
+            "completion_tokens": 42,
+            "total_tokens": 237,
+            "cost": 5.445e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 5.445e-05,
+              "upstream_inference_prompt_cost": 2.925e-05,
+              "upstream_inference_completions_cost": 2.52e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 5.445e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 15.361840135999955,
+          "end_s": 19.112478347000433,
+          "usage": {
+            "prompt_tokens": 132,
+            "completion_tokens": 293,
+            "total_tokens": 425,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 206,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.004408,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 16.0932932479991,
+      "inference_end_s": 17.398702588994638,
+      "inference_isolatable": false,
+      "reasoning_answer": "I\u2019m Friday, a virtual worker here to assist you with tasks and provide information. I can run commands in bash, handle files, and support your workflow. Let me know what you need help with!",
+      "finished_s": 19.113455762999365,
+      "round_trip_s": 2.899190532890163,
+      "to_audio_received_s": 2.81014246900304,
+      "inference_with_tools_s": 1.3054093409955385,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.00446245,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 3,
+      "fixture": null,
+      "speech_end_s": 37.460801686997,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 37.463426205998985,
+      "first_audio_received_s": 40.142253416997846,
+      "first_playback_s": 40.22415149148525,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 18.3,
+      "input_text": "Can you start counting till twenty every second using bash?",
+      "reply": "I can help you create a bash command to do that, but I can't run long-running commands directly. Here's a command you can use:\n\n```bash\nfor i in {1..20}; do echo $i; sleep 1; done\n```\n\nYou can run this in your terminal to count to twenty every second.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 37.463426205998985,
+          "end_s": 38.1809318539963,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 38.18143774199416,
+          "end_s": 39.34752728499734,
+          "usage": {
+            "prompt_tokens": 255,
+            "completion_tokens": 67,
+            "total_tokens": 322,
+            "cost": 7.845e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 7.845e-05,
+              "upstream_inference_prompt_cost": 3.825e-05,
+              "upstream_inference_completions_cost": 4.02e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 7.845e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 37.463426205998985,
+          "end_s": 41.911348314999486,
+          "usage": {
+            "prompt_tokens": 183,
+            "completion_tokens": 486,
+            "total_tokens": 669,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 366,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0077178,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 38.181402321999485,
+      "inference_end_s": 39.3475362149984,
+      "inference_isolatable": false,
+      "reasoning_answer": "I can help you create a bash command to do that, but I can't run long-running commands directly. Here's a command you can use:\n\n```bash\nfor i in {1..20}; do echo $i; sleep 1; done\n```\n\nYou can run this in your terminal to count to twenty every second.",
+      "finished_s": 41.912181182000495,
+      "round_trip_s": 2.76334980448825,
+      "to_audio_received_s": 2.6814517300008447,
+      "inference_with_tools_s": 1.1661338929989142,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.00779625,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 4,
+      "fixture": null,
+      "speech_end_s": 62.378054742999666,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 62.380068074999144,
+      "first_audio_received_s": 65.00812312999915,
+      "first_playback_s": 65.12540477175837,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 9.000000000000002,
+      "input_text": "You have access to Bash. Can you run any process in the background?",
+      "reply": "Yes, I can run processes in the background using bash. What specific command or task would you like me to execute in the background?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 62.380068074999144,
+          "end_s": 63.14170477899461,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 63.14214980699762,
+          "end_s": 64.25011009299487,
+          "usage": {
+            "prompt_tokens": 344,
+            "completion_tokens": 28,
+            "total_tokens": 372,
+            "cost": 6.84e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 6.84e-05,
+              "upstream_inference_prompt_cost": 5.16e-05,
+              "upstream_inference_completions_cost": 1.68e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 6.84e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 62.380068074999144,
+          "end_s": 65.81334383999638,
+          "usage": {
+            "prompt_tokens": 101,
+            "completion_tokens": 245,
+            "total_tokens": 346,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 180,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0038166,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 63.142112076995545,
+      "inference_end_s": 64.25012027299817,
+      "inference_isolatable": false,
+      "reasoning_answer": "Yes, I can run processes in the background using bash. What specific command or task would you like me to execute in the background?",
+      "finished_s": 65.81432665600005,
+      "round_trip_s": 2.747350028758703,
+      "to_audio_received_s": 2.6300683869994828,
+      "inference_with_tools_s": 1.1080081960026291,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.003885,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 5,
+      "fixture": null,
+      "speech_end_s": 97.364847246997,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 97.3680931649942,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 97.7506619689957,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 6,
+      "fixture": null,
+      "speech_end_s": 105.04475882199768,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 105.04670349399385,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": "Or let's do one thing, keep counting indefinitely every second. Can you do that?",
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 105.04670349399385,
+          "end_s": 105.82797864299937,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 105.8284204409938,
+          "end_s": 107.30195228199591,
+          "usage": {
+            "prompt_tokens": 396,
+            "completion_tokens": 31,
+            "total_tokens": 427,
+            "cost": 7.8e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 7.8e-05,
+              "upstream_inference_prompt_cost": 5.94e-05,
+              "upstream_inference_completions_cost": 1.86e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 7.8e-05,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 105.82838433099823,
+      "inference_end_s": 148.7362769350002,
+      "inference_isolatable": false,
+      "finished_s": 120.9646335169964,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": 42.90789260400197,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 7.8e-05,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 7,
+      "fixture": null,
+      "speech_end_s": 122.15438972599804,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 122.15681055599998,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": "\u092b\u094d\u0930\u093e\u092f\u0921\u0947",
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 122.15681055599998,
+          "end_s": 122.8772884200007,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 125.95715858799667,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 8,
+      "fixture": null,
+      "speech_end_s": 127.14621911699942,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 127.14953063400026,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": "\u53f0\u5357",
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 127.14953063400026,
+          "end_s": 127.82295945399528,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 129.5809251269966,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 9,
+      "fixture": null,
+      "speech_end_s": 131.58348160500032,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 131.58749881899712,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": "Friday",
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 131.58749881899712,
+          "end_s": 132.25172384399775,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 134.6586891179977,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 10,
+      "fixture": null,
+      "speech_end_s": 136.2766160329953,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 136.27952054199704,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": "Ne meyadbud?",
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 136.27952054199704,
+          "end_s": 136.96710227299627,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "finished_s": 139.47937303399522,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 11,
+      "fixture": null,
+      "speech_end_s": 140.8847866319993,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 140.88827915900038,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "input_text": "Can you hear me?",
+      "reply": null,
+      "status": "incomplete",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 140.88827915900038,
+          "end_s": 141.59078063799825,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": false,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    }
+  ]
+}

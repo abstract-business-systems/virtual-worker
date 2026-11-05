@@ -331,6 +331,20 @@ These are new work items, not evidence that the integrations or demo are done.
 
 Newest entries appear first.
 
+### 2026-11-04 — Common reasoning model implemented (M11 follow-up)
+
+- The user confirmed Pi already works through bash; preserve that workflow.
+- Added one reasoning-model configuration shared by all three modes; task
+  reasoning, memory and bash decisions use `openai/gpt-4o-mini` by default.
+- Removed the dummy meeting-context tool and replaced its fixture with a
+  follow-up about a real supplied document.
+- Each primary mode passed a six-task real-provider replay. Realtime uses
+  actual input transcription and isolated answer synthesis after intermediate
+  native handoff failures; failed reports are retained. This is functional
+  evidence, not human quality or final cost/latency approval.
+- Full-vs-mini comparison, longer measurements, pricing and demo acceptance
+  remain open. Receipts: [`poc-baseline-status.md`](poc-baseline-status.md).
+
 ### 2026-11-04 — M11 roadmap captured
 
 - Added the new, nonduplicate transcript without altering its contents.
@@ -511,15 +525,15 @@ are the recording file-added dates.*
 | 20 | Identify cost-effective alternative models (cheaper realtime alternative if any; better voice model for audio; not married to OpenAI — OpenRouter candidates welcome), swap into the POCs and benchmark cost AND quality; target ~₹800–900/month for a full-time voice assistant | M9 | Engineering | Open — blocked by #17 |
 | 21 | Check where the models are hosted (resolve endpoint IPs / regions); location may account for ~200 ms of latency | M9 | Engineering | Complete |
 | 22 | Send a time estimate for #17–#21 before starting (~2 hours suggested by Viswanath; flag if more) | M9 | Engineering | Complete — estimate sent to Viswanath and agreed |
-| 23 | Report voice-only cost per minute (STT+TTS, excluding inference) for all 3 approaches; for realtime/audio first check whether a third inference model can be used alongside the voice model via Pipecat, so inference cost is constant across approaches and discounted | M10 | Engineering | In progress — separate-mode component estimate exists; native inference is still bundled and an external-inference arrangement is not live-verified. Pricing review pending; see [`poc-baseline-status.md`](poc-baseline-status.md) |
+| 23 | Report voice-only cost per minute (STT+TTS, excluding inference) for all 3 approaches; for realtime/audio first check whether a third inference model can be used alongside the voice model via Pipecat, so inference cost is constant across approaches and discounted | M10 | Engineering | In progress — shared external task reasoning now works across all three modes; native speech processing is still bundled and realtime STT usage is unavailable. Voice-only isolation and pricing review remain open; see [`poc-baseline-status.md`](poc-baseline-status.md) |
 | 24 | Measure round-trip response latency (user stops speaking → first audio word heard; connection already established; excluding inference), averaged over ~5 minutes of interactions, for all 3 approaches with one working model set each | M10 | Engineering | In progress — controlled audio/separate samples recorded with DAC-estimated playback timing; final realtime strategy has only a short regression. Native inference exclusion and human verification remain open |
 | 25 | Prepare a template that lets the agent automatically swap models and test cost + round-trip latency across model sets | M10 | Engineering | Open — fixed-model fixture harness exists, but automatic model swapping is not built; after #23/#24 |
 | 26 | ~~Check the cost difference of the two suggested models on OpenRouter~~ | M10 | Engineering | Dropped — the "Soul 5.6 vs Soul 6" discussion belongs to a different context, not Virtual Worker (clarified by Sarooparam) |
 | 27 | Identify the provenance of the "25-minute session" assumption used in cost scenarios | M10 | Viswanath | Open — Viswanath took it ("I will take care of it") |
-| 28 | Make all three approaches use the same thinking model; configurable preferred, hard-coded acceptable if necessary | M11, 00:06–00:25 | Engineering | Open — first roadmap step; strengthens #23's common-inference requirement |
+| 28 | Make all three approaches use the same thinking model; configurable preferred, hard-coded acceptable if necessary | M11, 00:06–00:25 | Engineering | Implemented — one shared model setting and six-task functional pass per primary mode; human quality review remains pending. See [`poc-baseline-status.md`](poc-baseline-status.md) |
 | 29 | Experiment with full audio vs audio mini; ask questions and compare latency, completed conversations and cost | M11, 00:25–01:33 | Engineering | Open — after #28; not a final model choice |
 | 30 | Finalize three candidates with the common thinking model and measure response latency and cost per minute of conversation using the existing test | M11, 01:33–01:56 | Engineering | Open — after #28/#29; complements #23/#24 |
-| 31 | Integrate the POC with Pi: spoken request creates and launches a simple game, returning a link or opening it in the browser; text may come from orchestration | M11, 01:56–04:17 | Engineering | Open — after comparison; integration order is engineering's choice |
+| 31 | Integrate the POC with Pi: spoken request creates and launches a simple game, returning a link or opening it in the browser; text may come from orchestration | M11, 01:56–04:17 | Engineering | In progress — user confirms Pi works through bash; no new SDK integration needed. Specific game-launch/link acceptance remains unverified |
 | 32 | Integrate the POC with Friday, preserving existing behavior with reduced latency | M11, 04:17–04:31 | Engineering | Open — after comparison; same priority as #31 |
 | 33 | Prepare a meeting demo covering coding/change requests and spoken browser operation of Excel Online | M11, 04:39–05:39 | Engineering | Open — after integrations; screen sharing remains a suggestion |
 | 34 | Provide a rough timeline for the M11 roadmap | M11, 05:46–06:02 | Engineering | Open — estimate not supplied in the transcript |

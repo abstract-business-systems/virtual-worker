@@ -1,0 +1,17 @@
+{
+  "kind": "baseline_index",
+  "smoke": true,
+  "pause_regression": false,
+  "human_quality_review": "pending",
+  "runs": [
+    {
+      "mode": "realtime",
+      "exit_code": 0,
+      "fixture_checks_passed": false,
+      "reports": [
+        "session-realtime-20261104T133338425493Z.json"
+      ],
+      "log": "results/logs/realtime-20261104T133201188079Z.log"
+    }
+  ]
+}

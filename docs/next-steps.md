@@ -397,6 +397,13 @@ Source: [`recordings/11.vtt`](recordings/11.vtt), added 4 November 2026;
 its recording date. These are requirements for upcoming work, not completed
 features or authorization to start implementations during transcript ingestion.
 
+**Implementation follow-up:** the shared reasoning-model step now has a
+six-task functional pass in each primary mode; see
+[`poc-baseline-status.md`](poc-baseline-status.md) for receipts and remaining
+measurement limits. The user also confirmed Pi works through bash, so retain
+that workflow instead of assuming a separate SDK integration is necessary.
+The specific game-launch acceptance example has not yet been verified.
+
 The agreed engineering sequence is:
 
 1. **Common thinking model first** (00:06–00:25): use the same reasoning model

@@ -124,8 +124,8 @@ class SessionReport:
             row['playback_measurement'] = 'portaudio_dac_estimate_not_acoustic'
 
     def stage(self, component: str, model: str, started: float, *, usage=None,
-              cost_usd: float | None = None, pricing: str = 'unavailable'):
-        row = self.endpoint()
+              cost_usd: float | None = None, pricing: str = 'unavailable', row=None):
+        row = self.endpoint() if row is None else row
         row['stages'].append({
             'component': component, 'model': model, 'start_s': started,
             'end_s': self.now(), 'usage': usage, 'cost_usd': cost_usd,
@@ -210,7 +210,10 @@ class SessionReport:
             'to_audio_received': avg('to_audio_received_s'),
             'quality_verified': False, 'pricing_verified': False,
             'inference_isolation': ('explicit text inference window (includes tool time)'
-                if self.mode == 'separate' else 'native model inference is bundled; not independently measurable'),
+                if self.mode == 'separate' else
+                'external task inference recorded separately; native voice processing remains bundled'
+                if self.settings.get('task_reasoning') == 'shared_external_model' else
+                'native model inference is bundled; not independently measurable'),
             'errors': self.errors, 'fixture_results': self.fixture_results,
             'interactions': rows,
         }

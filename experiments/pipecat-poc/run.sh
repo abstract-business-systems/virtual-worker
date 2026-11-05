@@ -10,13 +10,14 @@
 #                      (default: the directory you launched run.sh from)
 #
 # Modes (models.ini sections, typed pipelines):
-#   realtime — one OpenAI realtime model listens, thinks, speaks (live session)
-#   audio    — one audio-model call per turn, OpenRouter (HTTP per turn)
-#   separate — separate models: local Whisper STT -> think model -> voice model
+#   realtime — realtime transcript -> shared reasoning -> realtime speech
+#   audio    — audio frontend -> shared reasoning -> audio speech (HTTP)
+#   separate — dedicated STT -> shared reasoning -> dedicated TTS
 #
 # Env overrides:
 #   CHAT_INPUT_DEVICE=<index>   pick a mic
-#   CHAT_MODEL=<name>           model override (same as --model)
+#   CHAT_MODEL=<name>           voice-model override (same as --model)
+#   CHAT_THINK_MODEL=<name>     shared reasoning-model override for ALL modes
 #   CHAT_MIN_VOLUME=<0..1>      VAD loudness threshold (default 0.15)
 #   CHAT_TEST_WAV=<path>        self-test: feed a wav instead of the mic
 set -euo pipefail
@@ -27,9 +28,9 @@ show_usage() {
   cat <<'EOF'
 Friday — three conversation modes (pipecat POC):
 
-  realtime   one OpenAI realtime model — listens, thinks, speaks
-  audio      one audio-model call per turn via OpenRouter (full quality baseline)
-  separate   online STT → think model → dedicated TTS
+  realtime   realtime speech → shared thinking model → realtime speech
+  audio      audio model → shared thinking model → audio model speech
+  separate   online STT → shared thinking model → dedicated TTS
 
 Usage: ./run.sh <mode> [-d] [--model <name>] [--folder <path>]
   -d             debug: mic levels, VAD events, api errors

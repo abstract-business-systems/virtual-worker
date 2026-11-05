@@ -25,7 +25,7 @@ CASES = [
     ('memory-recall', 'What project code name did I just give you?', ['copper', 'finch']),
     ('files', 'Use bash to list the files in the current working directory. Tell me the file names.', ['benchmark-notes']),
     ('summary', 'Use bash to read benchmark-notes dot txt in the current directory and summarize its contents.', ['wednesday', 'onboarding', 'ravi']),
-    ('context', 'Use the meeting context tool. What is the next calendar event in the demonstration data?', ['friday', 'demo', 'review']),
+    ('context', 'According to benchmark-notes dot txt, which room-related action is still open? Use bash if needed.', ['training room', 'confirm the room']),
 ]
 
 

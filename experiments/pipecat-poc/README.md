@@ -9,6 +9,39 @@ One talkable CLI exposes three **typed** conversation modes. Realtime and the
 optional native separate engine use full Pipecat pipelines; audio and default
 separate share the HTTP engine plus Pipecat's VAD utilities.
 
+## Shared thinking model (M11)
+
+All three modes now use **the same task-reasoning model**, configured once:
+
+```ini
+[reasoning]
+model = openai/gpt-4o-mini
+```
+
+`CHAT_THINK_MODEL` overrides this value for every mode. `--model` still changes
+only the voice frontend. Realtime now needs **both** API keys.
+
+- **Realtime:** stream input over the realtime connection, use its actual
+  `gpt-4o-mini-transcribe` transcript for shared reasoning, then synthesize
+  the answer in an isolated realtime response. The original audio question
+  is excluded from synthesis so the voice model cannot re-answer it.
+- **Audio:** require a `reason` handoff carrying the complete request; the
+  shared model answers and owns bash; the audio model reads that answer with
+  tools disabled. Direct answers that bypass the handoff are rejected.
+- **Separate:** dedicated STT → the same shared reasoning implementation →
+  dedicated TTS. The optional native pipeline uses the same model setting,
+  reasoning prompt and bash schema through Pipecat's streaming LLM service.
+
+The dummy meeting/calendar tool was removed. **Bash is the only task tool**;
+Pi can continue to be invoked through bash, as the user has already verified.
+There is no new Pi-specific integration or tool in this change.
+
+All three primary modes passed one six-task functional replay with real API
+requests. These are not five-minute comparisons or human quality approval.
+Native speech processing is still not independently observable; realtime's
+transcription events expose no billable usage here, so total cost stays unknown
+rather than silently omitting STT. See the baseline status for the run receipts.
+
 ## Modes — `./run.sh <mode>` (no arguments prints the menu)
 
 | Mode | Configured quality baseline | Engine |
@@ -33,12 +66,12 @@ uv run python baseline.py --mode realtime              # paid ~5-minute interact
 ```
 
 Keys in git-ignored `.env`: `OPENAI_API_KEY` (realtime/STT/TTS),
-`OPENROUTER_API_KEY` (audio/inference). Separate mode needs both. Explicit
+`OPENROUTER_API_KEY` (audio/shared inference). Realtime and separate need both. Explicit
 environment overrides win over `.env`; model presets come from `models.ini`.
 
 ## Tools (M8 scope)
 
-All modes have two tools: `get_meeting_context` (stub) and `bash` — runs a
+All modes' shared thinking model has one task tool, `bash` — runs a
 bash command in the **workdir** and returns stdout/stderr (60 s timeout,
 output capped at 4 KB). The workdir is the directory `run.sh` was launched
 from, or `--folder <path>`; it is shown in the banner as `[workdir]` and in

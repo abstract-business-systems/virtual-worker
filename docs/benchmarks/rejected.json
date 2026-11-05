@@ -52,6 +52,34 @@
     "reason": "baseline_index_not_a_session"
   },
   {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T132155055250Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T132445386166Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T132750524442Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T133123860630Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T133338529927Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T133645364899Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261104T134217582290Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
     "src": "experiments/pipecat-poc/results/chat-20261030T101822Z.json",
     "reason": "legacy_zero_turn_debug_session"
   },
