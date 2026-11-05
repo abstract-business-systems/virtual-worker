@@ -18,6 +18,7 @@ Ctrl+C to quit.
 """
 
 import asyncio
+import base64
 import json
 import os
 import queue
@@ -67,7 +68,7 @@ from pipecat.workers.runner import WorkerRunner
 HERE = Path(__file__).parent
 from cli_ui import banner, dim, err, friday, hdr, tool, warn as _warn_c, you as _you_c
 import token_accounting as ta
-from poc_report import SessionReport, load_environment, endpoint_silence
+from poc_report import SessionReport, load_environment, endpoint_silence, first_signal
 from poc_pricing import usage_cost
 from poc_fixtures import fixture_plan, feed_plan
 from poc_pipeline import SessionBoundary, realtime_user_params
@@ -503,6 +504,8 @@ class DelegatedRealtimeService(OpenAIRealtimeLLMService):
         self._reason_tasks = set()
         self.answer_row = None
         self._requested_row = None
+        self._signal_response_id = None
+        self._response_has_signal = False
 
     async def _cancel_reasoning(self):
         tasks = [task for task in self._reason_tasks if task is not asyncio.current_task()]
@@ -555,9 +558,17 @@ class DelegatedRealtimeService(OpenAIRealtimeLLMService):
         task.add_done_callback(self._reason_tasks.discard)
 
     async def _handle_evt_response_created(self, event):
+        self._signal_response_id = event.response.id
+        self._response_has_signal = False
         await super()._handle_evt_response_created(event)
         # Out-of-band audio has no conversation.item.added assistant event.
         await self.push_frame(LLMFullResponseStartFrame())
+
+    async def _handle_evt_audio_delta(self, event):
+        if event.response_id == getattr(self, '_signal_response_id', None):
+            if first_signal(base64.b64decode(event.delta)) is not None:
+                self._response_has_signal = True
+        await super()._handle_evt_audio_delta(event)
 
     async def _handle_evt_response_done(self, event):
         if event.response.status in ('failed', 'incomplete') and self.reason_session.current is self._requested_row:
@@ -565,6 +576,15 @@ class DelegatedRealtimeService(OpenAIRealtimeLLMService):
                                       str(event.response.status_details)[:600])
             self.reason_session.finish_turn()
         await super()._handle_evt_response_done(event)
+        if (event.response.status == 'completed'
+                and event.response.id == getattr(self, '_signal_response_id', None)
+                and not self._response_has_signal
+                and self._requested_row is not None
+                and self.reason_session.current is self._requested_row):
+            message = 'Realtime speech completed without audible PCM; request failed, please retry'
+            self.reason_session.error(message)
+            self.reason_session.finish_turn()
+            print(err(message), flush=True)
 
     async def _reason_and_speak(self, row, transcript):
         try:
@@ -586,6 +606,8 @@ class DelegatedRealtimeService(OpenAIRealtimeLLMService):
 
     async def cleanup(self):
         await self._cancel_reasoning()
+        if self.reasoner is not None:
+            await self.reasoner.close(self.reason_session)
         await super().cleanup()
 
     async def _create_response(self):
@@ -765,13 +787,14 @@ async def run() -> SessionReport:
         # Let cleanup finish so the report is not lost to a forced os._exit.
 
     def _on_hup():
-        # terminal closed — exit immediately, never linger in the background
-        os._exit(0)
+        # Graceful cancellation must reap owned background process groups too.
+        _on_sigint()
 
     async def _install_signals():
         await asyncio.sleep(0.5)  # after the runner installs its own handlers
         loop.add_signal_handler(_signal.SIGINT, _on_sigint)
         loop.add_signal_handler(_signal.SIGHUP, _on_hup)
+        loop.add_signal_handler(_signal.SIGTERM, _on_sigint)
 
     asyncio.create_task(_install_signals())
 
@@ -785,6 +808,7 @@ async def run() -> SessionReport:
         session.error(f'{type(exc).__name__}: {exc}')
     finally:
         ready_task.cancel()
+        await reasoner.close(session)
     return session
 
 

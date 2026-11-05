@@ -416,7 +416,8 @@ async def run():
     # (session report) runs — asyncio.run does NOT gracefully cancel the
     # task on a bare KeyboardInterrupt
     stopping = asyncio.Event()
-    loop.add_signal_handler(signal.SIGINT, stopping.set)
+    for sig in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP):
+        loop.add_signal_handler(sig, stopping.set)
 
     dev = (sd.query_devices(int(os.environ["CHAT_INPUT_DEVICE"])
                             if os.getenv("CHAT_INPUT_DEVICE") else sd.default.device[0])
@@ -725,6 +726,7 @@ async def run():
         if feeder_task and not feeder_task.done():
             feeder_task.cancel()
             await asyncio.gather(feeder_task, return_exceptions=True)
+        await reasoner.close(session)
         speaker.stop()
         if not plan:
             mic.stop()
@@ -741,7 +743,4 @@ def main():
 
 
 if __name__ == "__main__":
-    def _hup(*_):
-        os._exit(0)
-    signal.signal(signal.SIGHUP, _hup)
     main()

@@ -6,7 +6,20 @@ one six-task replay through the common model. Human quality review, a fresh
 longer comparison, native speech-processing costs and bill verification remain
 open. No model-swap sweep or worker-backend implementation was started.
 
-## Latest stability fix — 5 November: interrupting long-running work
+## Current checkpoint — 5 November autonomous pass
+
+Managed background jobs now run independently of foreground conversation; all
+three primary voice modes passed numeric counting → unrelated question → status
+→ explicit cancellation. The automatic full/mini/separate/realtime sweep was
+also executed; mini failed task checks, and realtime needed a bounded recheck.
+A read-only Friday context bridge and backend meeting-context ACL regressions
+were added. Spoken Pi acceptance remains partial/failed, not a completed demo.
+
+See [`autonomous-wrap-up.md`](autonomous-wrap-up.md) for exact receipts, measured
+values, current limits and parked work. It supersedes the earlier checkpoint's
+blanket rule that new speech cancels all work. No worker services were deployed.
+
+## Earlier stability fix — 5 November: interrupting long-running work
 
 The user's live realtime report (`session-realtime-20261105T055127416950Z.json`)
 answered four requests, then stopped answering after an indefinite-counting
@@ -25,9 +38,10 @@ realtime prepares a spoken recovery message on timeout/failure. The optional
 native separate adapter also uses cancellable bash, but its streaming service
 does not use the shared reasoner's whole-turn deadline.
 
-The reasoning prompt now explains that this request/response CLI is not an
-indefinite-counting/background scheduler and should offer a finite alternative.
-This is not background-task orchestration. Existing side effects cannot be
+At that earlier checkpoint the reasoning prompt explained that the CLI was not
+an indefinite-counting/background scheduler and should offer a finite alternative.
+That checkpoint did not provide background-task orchestration; managed jobs were
+added in the subsequent autonomous pass described above. Existing side effects cannot be
 undone, detached jobs are not managed, and a provider HTTP request already sent
 may still complete/be billed even though the local waiter is cancelled.
 
@@ -230,17 +244,17 @@ checks; echo cancellation and reconnect/resume are not solved here.
 
 ## Remaining work, in order
 
-1. Compare full audio with mini, as requested by M11; shared reasoning stays
-   fixed. Do not claim mini quality or a cost/latency improvement in advance.
-2. Run a fresh longer comparison of the selected three candidates using the
-   shared model. Resolve realtime transcription usage/pricing and disclose any
-   native processing that cannot be separated.
-3. Verify the applicable rates/cache treatment against provider pricing/billing.
-4. User tests the updated paths with natural speech; Viswanath reviews the
-   comparison. Controlled keyword checks are not a replacement for that review.
-5. Follow the M11 integration/demo roadmap. Pi-through-bash already works per
-   the user; check its task-level acceptance rather than assume a new SDK is needed.
+1. Review the controlled comparison and realtime recheck in the autonomous
+   checkpoint. Mini is not qualified; no human-quality winner has been selected.
+2. User tests natural speech/noise; Viswanath reviews provisional accounting.
+   Public rates/cache prices were checked, but missing realtime transcription
+   usage and TTS duration-based estimates are not bill reconciliation.
+3. Unblock reliable spoken Pi/background orchestration. Partial game creation
+   through Friday/Pi is recorded; follow-up changes and full acceptance failed.
+4. Finish worker voice routing and permissions after the review gate, then the
+   real meeting and authorized Excel Online demo. The read-only context bridge
+   is not a complete deployed-worker integration.
 
-Offline verification: repository suite **58 passed, 15 skipped** (audio interpreter
-needed for those fifteen); all **15** HTTP/configuration tests pass using the POC
+Offline verification: repository suite **70 passed, 16 skipped** (audio interpreter
+needed for those sixteen); all **16** HTTP/configuration tests pass using the POC
 interpreter. Python syntax checks pass. No new meeting requirements were invented.

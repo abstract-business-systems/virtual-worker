@@ -300,6 +300,15 @@ class Backend:
             return {"url": None}
         return {"url": meeting["join_url"] or None}
 
+    def _allowed_meeting_id(self, meeting_id, allowed):
+        if meeting_id is not None:
+            with self.kb.lock, self.kb._conn() as c:
+                target = c.execute('SELECT team_id FROM meetings WHERE id=?',
+                                   (meeting_id,)).fetchone()
+            if target is None or target['team_id'] not in allowed:
+                return None
+        return meeting_id
+
     def h_context_get(self, msg):
         """Assembled, ACL-checked context for the streaming answer path:
         recent transcript + relevant past segments + KB hits for the question.
@@ -327,6 +336,10 @@ class Backend:
         if not allowed:
             return finish({"transcript": [], "kb_hits": [],
                            "segment_hits": [], "allowed": False})
+        # A trusted operator outside the meeting must not inherit another
+        # team's active transcript merely because they belong to some team.
+        # Apply the same ACL to explicitly selected meeting IDs and summaries.
+        meeting_id = self._allowed_meeting_id(meeting_id, allowed)
         # Only questions that explicitly reference the past ("what did we
         # discuss last meeting", "do you remember") may pull stored documents
         # or OTHER meetings' transcripts. Everything else is grounded in the
@@ -403,6 +416,7 @@ class Backend:
         # member of the meeting's team (the host admitted them).
         if meeting_team is not None and msg.get("in_meeting"):
             self.kb.ensure_member_of_team(requester, meeting_team)
+        meeting_id = self._allowed_meeting_id(meeting_id, self.kb.allowed_team_ids(requester))
         # Rolling, bounded working context: recent CURRENT-meeting transcript
         # only. Stored memories stay out unless the request names the past.
         ctx = []
@@ -439,6 +453,7 @@ class Backend:
             return {"answer": "I am sorry, I do not have access to any "
                               "information for you.", "allowed": False}
 
+        meeting_id = self._allowed_meeting_id(meeting_id, allowed)
         recent = self.kb.recent_transcript(meeting_id) if meeting_id else []
         # Past-looking questions may consult stored memory; current-meeting
         # questions never do (no quoting of other sessions).

@@ -14,21 +14,19 @@ per-turn and session totals, and computes cost:
 
 Prices for the realtime endpoint (list, verified this session):
   audio in $10/M, audio out $20/M.
-  Text on gpt-realtime-2.1-mini is assumed at the mini text-family rate
-  (gpt-audio-mini's: $0.60/M in, $2.40/M out) — adjust TEXT_IN/TEXT_OUT
-  if OpenAI's realtime text list price differs.
+  text in $0.60/M, text out $2.40/M; cached audio $0.30/M and text $0.06/M.
+  Public list source retrieved 2026-11-05; not bill reconciliation. These legacy
+  CLI buckets assume the default realtime model; per-model session stages are
+  authoritative, especially when overriding models.
 """
 
 AUDIO_IN_USD_PER_M = 10.0
 AUDIO_OUT_USD_PER_M = 20.0
-TEXT_IN_USD_PER_M = 0.60   # assumption: mini text-family rate (see module doc)
+TEXT_IN_USD_PER_M = 0.60
 TEXT_OUT_USD_PER_M = 2.40
-# Cached input bills at a discount, not free. OpenAI's published cache
-# discount for the mini family is 50% (e.g. gpt-4o-mini text: \$0.15 ->
-# \$0.075); applied here to both text and audio cached input. Reconcile
-# with the actual bill. OpenRouter usage already prices cache exactly in
-# its provider cost, so this only affects bucket-priced (realtime) usage.
-CACHE_DISCOUNT = 0.5
+# Model-specific cached rates, not the unrelated text-mini 50% discount.
+CACHED_AUDIO_USD_PER_M = 0.30
+CACHED_TEXT_USD_PER_M = 0.06
 
 
 def normalize_usage(u) -> dict | None:
@@ -133,10 +131,8 @@ class TokenAccount:
                     + n["out_audio"] * AUDIO_OUT_USD_PER_M
                     + n["in_text"] * TEXT_IN_USD_PER_M
                     + n["out_text"] * TEXT_OUT_USD_PER_M
-                    + (n.get("cached_audio", 0) * AUDIO_IN_USD_PER_M
-                       * CACHE_DISCOUNT)
-                    + (n.get("cached_text", 0) * TEXT_IN_USD_PER_M
-                       * CACHE_DISCOUNT)) / 1e6)
+                    + n.get("cached_audio", 0) * CACHED_AUDIO_USD_PER_M
+                    + n.get("cached_text", 0) * CACHED_TEXT_USD_PER_M) / 1e6)
             self.cur["cost"] += est
             self.cur["priced_by"].add("bucket-price")
         return n

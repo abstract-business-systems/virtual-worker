@@ -1,7 +1,8 @@
 # Pipecat POC — three conversation-layer modes
 
-**Current repair/measurement status (4 November):**
-[baseline status and remaining M10 work](../../docs/poc-baseline-status.md).
+**Current implementation/measurement status (5 November):**
+[autonomous checkpoint, results and parked blockers](../../docs/autonomous-wrap-up.md),
+plus [historical baseline status](../../docs/poc-baseline-status.md).
 The M10 quality/measurement gate is **not complete**; historical numbers below
 are not the latest validated comparison.
 
@@ -32,9 +33,11 @@ only the voice frontend. Realtime now needs **both** API keys.
   dedicated TTS. The optional native pipeline uses the same model setting,
   reasoning prompt and bash schema through Pipecat's streaming LLM service.
 
-The dummy meeting/calendar tool was removed. **Bash is the only task tool**;
-Pi can continue to be invoked through bash, as the user has already verified.
-There is no new Pi-specific integration or tool in this change.
+The dummy meeting/calendar tool was removed. Bash and managed job tools are
+available; Pi is still invoked through bash, not an SDK. The shared-reasoner
+frontends also have an opt-in read-only Friday context bridge, described below.
+Complex spoken Pi/background orchestration is only partially verified; do not
+mistake a standalone coding test for Friday's end-to-end acceptance.
 
 All three primary modes passed one six-task functional replay with real API
 requests. These are not five-minute comparisons or human quality approval.
@@ -44,24 +47,34 @@ rather than silently omitting STT. See the baseline status for the run receipts.
 
 ## Interruption and long-running requests
 
-New speech cancels the previous task as well as voice playback. Foreground bash
-uses cancellable process groups: cancellation/timeout kills its children and
-releases the reasoning lock before handling the next request. Pending tool calls
-and their cancellation status are retained in session reports.
+New speech cancels previous **foreground** work and voice playback, but managed
+background jobs keep running. Foreground cancellation/timeout kills the bash
+process group and releases the reasoning lock. Pending calls, cancellation status
+and final background job records are retained in session reports.
 
 The shared reasoner has a default **90-second whole-turn deadline**, configurable
 with `CHAT_TURN_TIMEOUT`; individual bash commands remain bounded to 60 seconds.
 Realtime speaks a recovery message on reasoning timeout/failure. The optional
 native separate streaming adapter has cancellable bash but not this whole-turn
-deadline. This CLI is not a background scheduler: indefinite counting should
-be replaced with a finite alternative. Cancellation cannot undo completed side
-effects, manage detached jobs, or guarantee a provider stops billing an HTTP
-request already sent.
+deadline. `background_start` returns a job ID immediately; `job_status` reads
+progress/output and `job_cancel` explicitly stops it. One job runs at a time,
+with a 600-second default deadline (`CHAT_JOB_TIMEOUT`, maximum 3600 seconds).
+Counting can run in a managed background loop within that deadline.
+
+Completion notices appear in the CLI, and Friday can speak status when asked;
+proactive spoken completion announcements are not implemented. Graceful exit,
+Ctrl+C, SIGTERM and hangup stop owned jobs. This is not a restart-persistent
+scheduler, multi-writer coordinator or sandbox against detached/hostile commands.
+Cancellation cannot undo completed side effects or guarantee a provider stops
+billing a request already sent. Hard crashes/SIGKILL are not managed.
 
 Paid functional regression (about 25 seconds per primary mode):
 
 ```bash
 uv run python baseline.py --interrupt-regression
+uv run python baseline.py --background-regression
+uv run python compare_models.py                      # paid sequential model sweep
+uv run python compare_models.py --candidate audio-mini --smoke
 ```
 
 It starts a real sleeping bash task, interrupts with another spoken question,
@@ -97,12 +110,40 @@ environment overrides win over `.env`; model presets come from `models.ini`.
 
 ## Tools (M8 scope)
 
-All modes' shared thinking model has one task tool, `bash` — runs a
-bash command in the **workdir** and returns stdout/stderr (60 s timeout,
-output capped at 4 KB). The workdir is the directory `run.sh` was launched
-from, or `--folder <path>`; it is shown in the banner as `[workdir]` and in
-the system prompt, so you can ask Friday things like *"summarize the files
-in this folder"*.
+The common task tools are:
+
+- `bash`: short foreground commands (60 s, 4 KB bounded output tail).
+- `background_start`: long/background bash work, returning a managed job ID.
+- `job_status`: current state and recent output, or recent-job list.
+- `job_cancel`: explicit cancellation; ordinary conversation does not stop jobs.
+
+The **workdir** is the directory `run.sh` was launched from, or `--folder <path>`;
+it is shown in the banner and reasoning prompt. Bash runs as the current user,
+not in a security sandbox. Only use trusted folders and authorized instructions.
+
+### Optional Friday context connection (trusted operator only)
+
+Set both `CHAT_WORKER_SOCKET` and `CHAT_WORKER_REQUESTER` to expose
+`worker_context` to the shared-reasoner frontends. It reads existing ACL-checked
+context without auto-enrolling the requester or exposing administrative RPCs.
+There is no default socket/identity and no speaker authentication here. This is
+not full deployed meeting integration; do not connect unrestricted bash to an
+untrusted meeting. The optional native separate adapter has no context bridge.
+See the [checkpoint](../../docs/autonomous-wrap-up.md) for integration limits.
+
+### Pi acceptance, not a prebuilt game
+
+`task_acceptance.py` supplies spoken requests to Friday and uses an isolated
+browser to check what Friday/Pi produce. It never calls Pi or writes game code.
+Run it with the repository interpreter (Playwright required):
+
+```bash
+../../.venv/bin/python task_acceptance.py --mode separate
+```
+
+This is currently a **known failing/partial** acceptance test: Pi created a
+working game from speech, but correct background orchestration/follow-up is not
+qualified. Failed receipts are retained. No sample game was substituted.
 
 ## Reading the terminal
 

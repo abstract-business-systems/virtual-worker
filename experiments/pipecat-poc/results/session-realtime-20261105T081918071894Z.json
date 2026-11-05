@@ -1,0 +1,154 @@
+{
+  "schema_version": 2,
+  "mode": "realtime",
+  "engine": "pipecat",
+  "models": {
+    "realtime": "gpt-realtime-2.1-mini",
+    "think": "openai/gpt-4o-mini",
+    "stt": "gpt-4o-mini-transcribe"
+  },
+  "settings": {
+    "vad_stop_secs": 0.8,
+    "vad_start_secs": 0.2,
+    "turn_stop_strategy": "speech_timeout_no_transcript",
+    "additional_speech_timeout_s": 0.0,
+    "task_reasoning": "shared_external_model",
+    "native_voice_processing": "still_bundled_not_free"
+  },
+  "started_utc": "2026-11-05T08:18:07.699536+00:00",
+  "wall_total_s": 70.37235618999694,
+  "measurement_duration_s": 68.48063517899573,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 1,
+  "completed_turns": 0,
+  "input_audio_s": 5.584749999999996,
+  "total_cost_usd": null,
+  "known_cost_usd": 0.00195745,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": null,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "voice_latency": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "to_audio_received": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "external task inference recorded separately; native voice processing remains bundled",
+  "background_jobs": [],
+  "cost_scope": "instrumented speech and shared reasoning calls; API spend inside bash/Pi is not measured",
+  "errors": [
+    "No completed response within 60s: answer",
+    "Fixture run stopped after a failed interaction"
+  ],
+  "fixture_results": [
+    {
+      "id": "answer",
+      "completed": false,
+      "heuristic_keyword_match": false,
+      "human_quality_review": "pending"
+    }
+  ],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": "answer",
+      "speech_end_s": 5.717939637997712,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 6.563820440998825,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 4.3,
+      "input_text": "What is 7 plus 5? Answer in one short sentence.",
+      "reply": "",
+      "status": "failed",
+      "errors": [
+        "No completed response within 60s: answer",
+        "Fixture run stopped after a failed interaction"
+      ],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 6.563820440998825,
+          "end_s": 7.31430188199738,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "realtime_transcription_usage_unavailable"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 7.314865945998463,
+          "end_s": 8.662580320000416,
+          "usage": {
+            "prompt_tokens": 495,
+            "completion_tokens": 9,
+            "total_tokens": 504,
+            "cost": 7.965e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 7.965e-05,
+              "upstream_inference_prompt_cost": 7.425e-05,
+              "upstream_inference_completions_cost": 5.4e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 7.965e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_and_inference",
+          "model": "gpt-realtime-2.1-mini",
+          "start_s": 6.563820440998825,
+          "end_s": 9.804896146000829,
+          "usage": {
+            "prompt_tokens": 63,
+            "completion_tokens": 136,
+            "total_tokens": 199,
+            "cache_read_input_tokens": 0,
+            "cache_creation_input_tokens": null,
+            "reasoning_tokens": null,
+            "input_audio_tokens": 0,
+            "output_audio_tokens": 86,
+            "cache_read_input_audio_tokens": 0
+          },
+          "cost_usd": 0.0018778,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 7.314726878001238,
+      "inference_end_s": 8.662606528996548,
+      "inference_isolatable": false,
+      "reasoning_answer": "7 plus 5 equals 12.",
+      "finished_s": 67.56804177999584,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": 1.34787965099531,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.00195745,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    }
+  ]
+}

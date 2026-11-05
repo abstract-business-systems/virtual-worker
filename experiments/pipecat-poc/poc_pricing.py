@@ -1,8 +1,8 @@
-"""Explicit provisional rates; never silently price an unknown model as mini.
+"""Published list rates, not bill reconciliation; unknown models stay unknown.
 
-Provider-computed OpenRouter costs take precedence. OpenAI rates below are
-ASSUMPTIONS for engineering estimates, not bill-verified prices. Reports retain
-raw usage and the pricing basis so they can be recalculated after review.
+Public sources retrieved 2026-11-05: docs/benchmarks/pricing-20261105.json.
+Provider-computed OpenRouter costs take precedence. TTS token density is still
+an estimate; native missing usage is never silently priced as zero.
 """
 from token_accounting import normalize_usage
 
@@ -11,6 +11,13 @@ RATES = {
     'gpt-realtime-2.1-mini': (10.0, 0.60, 20.0, 2.40),
     'gpt-4o-mini-transcribe': (1.25, 2.50, 0.0, 5.0),
     'openai/gpt-4o-mini': (0.0, 0.15, 0.0, 0.60),
+    'openai/gpt-4.1-mini': (0.0, 0.40, 0.0, 1.60),
+}
+# Cached audio/text USD per million; not a universal fifty-percent discount.
+CACHED_RATES = {
+    'gpt-realtime-2.1-mini': (0.30, 0.06),
+    'openai/gpt-4o-mini': (0.0, 0.075),
+    'openai/gpt-4.1-mini': (0.0, 0.10),
 }
 
 
@@ -30,11 +37,14 @@ def usage_cost(usage, model):
     if n is None or rates is None:
         return None, 'unknown_model_or_usage; not priced'
     ai, ti, ao, to = rates
-    # Cache rates deliberately marked assumptions too, not a verified discount.
+    if n['cached'] and (model not in CACHED_RATES or
+                        n['cached_audio']+n['cached_text'] != n['cached']):
+        return None, 'cached_usage_or_price_unknown'
+    ca, ct = CACHED_RATES.get(model, (0.0, 0.0))
     cost = (max(0, n['in_audio']-n['cached_audio'])*ai + n['in_text']*ti
             + n['out_audio']*ao + n['out_text']*to
-            + .5*(n['cached_audio']*ai+n['cached_text']*ti))/1e6
-    return cost, 'assumed_model_token_rates; cache_50pct; NOT_bill_verified'
+            + n['cached_audio']*ca+n['cached_text']*ct)/1e6
+    return cost, 'published_list_rates_2026-11-05; NOT_bill_verified'
 
 
 def tts_cost(seconds, model='gpt-4o-mini-tts'):

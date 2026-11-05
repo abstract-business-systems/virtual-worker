@@ -7,6 +7,14 @@ exposes meeting information to authorized users.
 - Requirements: [`docs/requirements.md`](docs/requirements.md)
 - Design: [`docs/design.md`](docs/design.md)
 
+## Experimental voice work
+
+The three-mode voice CLI, managed background jobs and automatic model sweep
+live in [`experiments/pipecat-poc`](experiments/pipecat-poc/README.md).
+See the [5 November checkpoint](docs/autonomous-wrap-up.md) for measured results,
+partial Pi acceptance and the exact integration work still pending. These are
+not deployed as a replacement for the worker below.
+
 ## Quick start (isolated environment: `ssh abs-worker@localhost`)
 
 The worker runs directly on this host as the separate Linux user `abs-worker`

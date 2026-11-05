@@ -1,0 +1,2343 @@
+{
+  "schema_version": 2,
+  "mode": "audio",
+  "engine": "chat_audio",
+  "models": {
+    "voice": "openai/gpt-audio-mini",
+    "think": "openai/gpt-4o-mini",
+    "stt": null
+  },
+  "settings": {
+    "task_reasoning": "shared_external_model",
+    "native_voice_processing": "still_bundled_not_free"
+  },
+  "started_utc": "2026-11-05T08:24:27.639182+00:00",
+  "wall_total_s": 312.7254475590016,
+  "measurement_duration_s": 312.6842966090044,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 16,
+  "completed_turns": 16,
+  "input_audio_s": 108.26756249999814,
+  "total_cost_usd": 0.025024650000000002,
+  "known_cost_usd": 0.025024650000000002,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": 0.004801900883041538,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": 5.519805423180926,
+    "samples": 16
+  },
+  "voice_latency": {
+    "mean_s": null,
+    "samples": 0
+  },
+  "to_audio_received": {
+    "mean_s": 5.411158291874853,
+    "samples": 16
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "external task inference recorded separately; native voice processing remains bundled",
+  "background_jobs": [],
+  "cost_scope": "instrumented speech and shared reasoning calls; API spend inside bash/Pi is not measured",
+  "errors": [],
+  "fixture_results": [
+    {
+      "id": "answer",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "memory-set",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "memory-recall",
+      "completed": true,
+      "heuristic_keyword_match": false,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "files",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "summary",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "context",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "answer",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "memory-set",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "memory-recall",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "files",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "summary",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "context",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "answer",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "memory-set",
+      "completed": true,
+      "heuristic_keyword_match": false,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "memory-recall",
+      "completed": true,
+      "heuristic_keyword_match": false,
+      "human_quality_review": "pending"
+    },
+    {
+      "id": "files",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending"
+    }
+  ],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": "answer",
+      "speech_end_s": 3.816499926000484,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 4.761624392995145,
+      "first_audio_received_s": 8.407388842999353,
+      "first_playback_s": 8.544665896360462,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.65,
+      "input_text": "What is 7 plus 5?",
+      "reply": "7 plus 5 equals 12.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 4.7618563910000375,
+          "end_s": 6.107020923998789,
+          "usage": {
+            "prompt_tokens": 302,
+            "completion_tokens": 16,
+            "total_tokens": 318,
+            "cost": 0.0002196,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 47,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0002196,
+              "upstream_inference_prompt_cost": 0.0001812,
+              "upstream_inference_completions_cost": 3.84e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0002196,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 6.107121023997024,
+          "end_s": 7.052881825999066,
+          "usage": {
+            "prompt_tokens": 489,
+            "completion_tokens": 9,
+            "total_tokens": 498,
+            "cost": 7.875e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 7.875e-05,
+              "upstream_inference_prompt_cost": 7.335e-05,
+              "upstream_inference_completions_cost": 5.4e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 7.875e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 7.052914635998604,
+          "end_s": 8.75167152799986,
+          "usage": {
+            "prompt_tokens": 41,
+            "completion_tokens": 69,
+            "total_tokens": 110,
+            "cost": 0.0001902,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001902,
+              "upstream_inference_prompt_cost": 2.46e-05,
+              "upstream_inference_completions_cost": 0.0001656
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 53
+            }
+          },
+          "cost_usd": 0.0001902,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 6.10705670400057,
+      "inference_end_s": 7.05290600599983,
+      "inference_isolatable": false,
+      "reasoning_answer": "7 plus 5 equals 12.",
+      "finished_s": 8.751752637996105,
+      "round_trip_s": 4.728165970359978,
+      "to_audio_received_s": 4.590888916998869,
+      "inference_with_tools_s": 0.9458493019992602,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00048855,
+      "cost_usd": 0.00048855,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 2,
+      "fixture": "memory-set",
+      "speech_end_s": 17.782037395996973,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 18.718860016997496,
+      "first_audio_received_s": 22.601593084000342,
+      "first_playback_s": 22.717560132379692,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 10.500000000000004,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what I heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. Remember this for our conversation: the project code name is CopperFinch. Say the code name.",
+      "reply": "Understood. The project code name is CopperFinch. If you'd like help with something specific related to the project, like brainstorming or next steps, I'm here to assist. Just let me know what you need.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 18.719291142995644,
+          "end_s": 20.37837799599947,
+          "usage": {
+            "prompt_tokens": 353,
+            "completion_tokens": 110,
+            "total_tokens": 463,
+            "cost": 0.0004758,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 74,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0004758,
+              "upstream_inference_prompt_cost": 0.0002118,
+              "upstream_inference_completions_cost": 0.000264
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0004758,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 20.378478635000647,
+          "end_s": 21.526598822994856,
+          "usage": {
+            "prompt_tokens": 607,
+            "completion_tokens": 36,
+            "total_tokens": 643,
+            "cost": 0.00011265,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011265,
+              "upstream_inference_prompt_cost": 9.105e-05,
+              "upstream_inference_completions_cost": 2.16e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011265,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 21.526639372998034,
+          "end_s": 23.738334787994972,
+          "usage": {
+            "prompt_tokens": 68,
+            "completion_tokens": 269,
+            "total_tokens": 337,
+            "cost": 0.0006864,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0006864,
+              "upstream_inference_prompt_cost": 4.08e-05,
+              "upstream_inference_completions_cost": 0.0006456
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 210
+            }
+          },
+          "cost_usd": 0.0006864,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 20.378410715995415,
+      "inference_end_s": 21.52662969299854,
+      "inference_isolatable": false,
+      "reasoning_answer": "The project code name is CopperFinch. However, I can't access the reason tool or transcribe your request. If you need assistance with something specific, let me know!",
+      "finished_s": 23.738427167001646,
+      "round_trip_s": 4.935522736382719,
+      "to_audio_received_s": 4.819555688003369,
+      "inference_with_tools_s": 1.1482189770031255,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0012748500000000001,
+      "cost_usd": 0.0012748500000000001,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 3,
+      "fixture": "memory-recall",
+      "speech_end_s": 36.304466291001766,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 37.15191751199745,
+      "first_audio_received_s": 41.33721612899535,
+      "first_playback_s": 41.45264630969886,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 10.600000000000003,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what you heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. What project code name did I just give you?",
+      "reply": "Understood. If you're having trouble, could you clarify what you\u2019re trying to input into the reason tool? For example, what task or detail you need to transcribe? That way, I can help guide you more effectively.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 37.152289509002,
+          "end_s": 38.65333805199771,
+          "usage": {
+            "prompt_tokens": 454,
+            "completion_tokens": 100,
+            "total_tokens": 554,
+            "cost": 0.0005124,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 38,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0005124,
+              "upstream_inference_prompt_cost": 0.0002724,
+              "upstream_inference_completions_cost": 0.00024
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0005124,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 38.65342476099613,
+          "end_s": 39.82116071199562,
+          "usage": {
+            "prompt_tokens": 742,
+            "completion_tokens": 41,
+            "total_tokens": 783,
+            "cost": 0.0001359,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001359,
+              "upstream_inference_prompt_cost": 0.0001113,
+              "upstream_inference_completions_cost": 2.46e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001359,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 39.82119960199634,
+          "end_s": 42.528009982001095,
+          "usage": {
+            "prompt_tokens": 73,
+            "completion_tokens": 274,
+            "total_tokens": 347,
+            "cost": 0.0007014,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0007014,
+              "upstream_inference_prompt_cost": 4.38e-05,
+              "upstream_inference_completions_cost": 0.0006576
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 212
+            }
+          },
+          "cost_usd": 0.0007014,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 38.65336199200101,
+      "inference_end_s": 39.82119126199541,
+      "inference_isolatable": false,
+      "reasoning_answer": "The project code name you just gave me is CopperFinch. However, I can't transcribe your request into the reason tool. If you have a specific task or question, feel free to ask!",
+      "finished_s": 42.5281072009966,
+      "round_trip_s": 5.148180018697097,
+      "to_audio_received_s": 5.032749837993585,
+      "inference_with_tools_s": 1.1678292699943995,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0013497000000000001,
+      "cost_usd": 0.0013497000000000001,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 4,
+      "fixture": "files",
+      "speech_end_s": 57.820579050001804,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 58.69157722000091,
+      "first_audio_received_s": 63.67996029799542,
+      "first_playback_s": 63.807500675011774,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 7.000000000000002,
+      "input_text": "You asked: 'Please list the files in the current working directory and tell me the file names. Glossary of names/terms: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar.'",
+      "reply": "Got it! The file is named \"benchmark-notes.txt.\" If you need help opening it, reading it, or anything else, just let me know.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 58.69201778600109,
+          "end_s": 60.26956906000123,
+          "usage": {
+            "prompt_tokens": 586,
+            "completion_tokens": 74,
+            "total_tokens": 660,
+            "cost": 0.0005292,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 65,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0005292,
+              "upstream_inference_prompt_cost": 0.0003516,
+              "upstream_inference_completions_cost": 0.0001776
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0005292,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 60.26966746999824,
+          "end_s": 61.35965247199783,
+          "usage": {
+            "prompt_tokens": 855,
+            "completion_tokens": 18,
+            "total_tokens": 873,
+            "cost": 0.00013905,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00013905,
+              "upstream_inference_prompt_cost": 0.00012825,
+              "upstream_inference_completions_cost": 1.08e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00013905,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 61.362586707000446,
+          "end_s": 62.472262668998155,
+          "usage": {
+            "prompt_tokens": 896,
+            "completion_tokens": 27,
+            "total_tokens": 923,
+            "cost": 0.0001506,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001506,
+              "upstream_inference_prompt_cost": 0.0001344,
+              "upstream_inference_completions_cost": 1.62e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001506,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 62.4723157490007,
+          "end_s": 64.44788389899622,
+          "usage": {
+            "prompt_tokens": 59,
+            "completion_tokens": 187,
+            "total_tokens": 246,
+            "cost": 0.0004842,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0004842,
+              "upstream_inference_prompt_cost": 3.54e-05,
+              "upstream_inference_completions_cost": 0.0004488
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 140
+            }
+          },
+          "cost_usd": 0.0004842,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"ls\", \"background\": false}",
+          "result": {
+            "returncode": 0,
+            "output": "benchmark-notes.txt"
+          },
+          "status": "completed",
+          "started_s": 61.35969184200076,
+          "finished_s": 61.3625742669974
+        }
+      ],
+      "inference_start_s": 60.26959666000039,
+      "inference_end_s": 62.472305588999006,
+      "inference_isolatable": false,
+      "reasoning_answer": "In the current working directory, the file is named \"benchmark-notes.txt.\" If you need anything else, let me know!",
+      "finished_s": 64.44796158900135,
+      "round_trip_s": 5.98692162500997,
+      "to_audio_received_s": 5.859381247993618,
+      "inference_with_tools_s": 2.202708928998618,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00130305,
+      "cost_usd": 0.00130305,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 5,
+      "fixture": "summary",
+      "speech_end_s": 77.19508406599634,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 78.0323988780001,
+      "first_audio_received_s": 83.50261811300152,
+      "first_playback_s": 83.59857241753278,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 11.300000000000004,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what you heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. Use 'slash read benchmark-notes.txt' in the current directory and summarize its contents.",
+      "reply": "Understood. I'll summarize what you've mentioned: the onboarding review is on Wednesday, Ravi will prepare the checklist, and the remaining action is to confirm the training room. Let me know if you need help with anything else.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 78.03279863499483,
+          "end_s": 79.64559492999979,
+          "usage": {
+            "prompt_tokens": 650,
+            "completion_tokens": 108,
+            "total_tokens": 758,
+            "cost": 0.0006492,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 70,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0006492,
+              "upstream_inference_prompt_cost": 0.00039,
+              "upstream_inference_completions_cost": 0.0002592
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0006492,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 79.64570087999891,
+          "end_s": 80.67774649900093,
+          "usage": {
+            "prompt_tokens": 1030,
+            "completion_tokens": 22,
+            "total_tokens": 1052,
+            "cost": 0.0001677,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001677,
+              "upstream_inference_prompt_cost": 0.0001545,
+              "upstream_inference_completions_cost": 1.32e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001677,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 80.68041088600148,
+          "end_s": 82.20283263299643,
+          "usage": {
+            "prompt_tokens": 1095,
+            "completion_tokens": 47,
+            "total_tokens": 1142,
+            "cost": 0.00011565,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011565,
+              "upstream_inference_prompt_cost": 8.745e-05,
+              "upstream_inference_completions_cost": 2.82e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011565,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 82.20287360299699,
+          "end_s": 84.53940936699655,
+          "usage": {
+            "prompt_tokens": 79,
+            "completion_tokens": 286,
+            "total_tokens": 365,
+            "cost": 0.0007338,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0007338,
+              "upstream_inference_prompt_cost": 4.74e-05,
+              "upstream_inference_completions_cost": 0.0006864
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 226
+            }
+          },
+          "cost_usd": 0.0007338,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"cat benchmark-notes.txt\", \"background\": false}",
+          "result": {
+            "returncode": 0,
+            "output": "The onboarding review is on Wednesday. Ravi will prepare the checklist.\nThe remaining action is to confirm the training room."
+          },
+          "status": "completed",
+          "started_s": 80.6777789389962,
+          "finished_s": 80.68040029599797
+        }
+      ],
+      "inference_start_s": 79.64562720999675,
+      "inference_end_s": 82.20286611299525,
+      "inference_isolatable": false,
+      "reasoning_answer": "The contents of \"benchmark-notes.txt\" summarize that the onboarding review is on Wednesday, Ravi will prepare the checklist, and the remaining action is to confirm the training room. If you need further assistance, just let me know!",
+      "finished_s": 84.53948839700024,
+      "round_trip_s": 6.4034883515364385,
+      "to_audio_received_s": 6.307534047005177,
+      "inference_with_tools_s": 2.557238902998506,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00166635,
+      "cost_usd": 0.00166635,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 6,
+      "fixture": "context",
+      "speech_end_s": 102.22848311299796,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 103.04763226499927,
+      "first_audio_received_s": 106.96100971099804,
+      "first_playback_s": 107.06455299157575,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 7.600000000000002,
+      "input_text": "According to benchmark-notes.txt, which room-related action is still open? Use 'slash' if needed. Glossary of names/terms: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar.",
+      "reply": "Understood! I'll confirm the training room now. If you have any specific details you'd like to add or need further assistance, let me know!",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 103.0484579269978,
+          "end_s": 104.47300673800055,
+          "usage": {
+            "prompt_tokens": 788,
+            "completion_tokens": 75,
+            "total_tokens": 863,
+            "cost": 0.0006528,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 80,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0006528,
+              "upstream_inference_prompt_cost": 0.0004728,
+              "upstream_inference_completions_cost": 0.00018
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0006528,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 104.47311371700198,
+          "end_s": 105.65787767100119,
+          "usage": {
+            "prompt_tokens": 1216,
+            "completion_tokens": 29,
+            "total_tokens": 1245,
+            "cost": 0.000123,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000123,
+              "upstream_inference_prompt_cost": 0.0001056,
+              "upstream_inference_completions_cost": 1.74e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.000123,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 105.65791107100085,
+          "end_s": 107.85127670799557,
+          "usage": {
+            "prompt_tokens": 61,
+            "completion_tokens": 195,
+            "total_tokens": 256,
+            "cost": 0.0005046,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0005046,
+              "upstream_inference_prompt_cost": 3.66e-05,
+              "upstream_inference_completions_cost": 0.000468
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 152
+            }
+          },
+          "cost_usd": 0.0005046,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 104.47302690799552,
+      "inference_end_s": 105.6579038609998,
+      "inference_isolatable": false,
+      "reasoning_answer": "The open room-related action is to confirm the training room. If you need more information or help with something else, feel free to ask!",
+      "finished_s": 107.8515216559972,
+      "round_trip_s": 4.8360698785777885,
+      "to_audio_received_s": 4.732526598000078,
+      "inference_with_tools_s": 1.1848769530042773,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0012804000000000001,
+      "cost_usd": 0.0012804000000000001,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 7,
+      "fixture": "answer",
+      "speech_end_s": 118.85347752099531,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 119.7990342330013,
+      "first_audio_received_s": 123.47447815899795,
+      "first_playback_s": 123.58896438294794,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 4.35,
+      "input_text": "What is 7 plus 5? Answering in one short sentence.",
+      "reply": "You're absolutely right, 7 plus 5 equals 12. Great job!",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 119.79933032099507,
+          "end_s": 121.19093322599656,
+          "usage": {
+            "prompt_tokens": 815,
+            "completion_tokens": 23,
+            "total_tokens": 838,
+            "cost": 0.0005442,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 50,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0005442,
+              "upstream_inference_prompt_cost": 0.000489,
+              "upstream_inference_completions_cost": 5.52e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0005442,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 121.19108803499694,
+          "end_s": 122.15652499499993,
+          "usage": {
+            "prompt_tokens": 1267,
+            "completion_tokens": 9,
+            "total_tokens": 1276,
+            "cost": 0.00010905,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00010905,
+              "upstream_inference_prompt_cost": 0.00010365,
+              "upstream_inference_completions_cost": 5.4e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00010905,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 122.15656476400181,
+          "end_s": 124.17077893099486,
+          "usage": {
+            "prompt_tokens": 41,
+            "completion_tokens": 115,
+            "total_tokens": 156,
+            "cost": 0.0003006,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0003006,
+              "upstream_inference_prompt_cost": 2.46e-05,
+              "upstream_inference_completions_cost": 0.000276
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 87
+            }
+          },
+          "cost_usd": 0.0003006,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 121.19095122599538,
+      "inference_end_s": 122.15655657399475,
+      "inference_isolatable": false,
+      "reasoning_answer": "7 plus 5 equals 12.",
+      "finished_s": 124.17083268999704,
+      "round_trip_s": 4.735486861952623,
+      "to_audio_received_s": 4.621000638002641,
+      "inference_with_tools_s": 0.9656053479993716,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00095385,
+      "cost_usd": 0.00095385,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 8,
+      "fixture": "memory-set",
+      "speech_end_s": 134.60564388400084,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 135.54588169600174,
+      "first_audio_received_s": 139.646639296996,
+      "first_playback_s": 139.7640916281861,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 8.200000000000001,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what you heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. Remember this for our conversation: the project code name is CopperFinch. Say the code name.",
+      "reply": "Understood! If you need help with something specific related to CopperFinch or anything else, feel free to share more details, and I'll do my best to assist you.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 135.54673236799863,
+          "end_s": 137.20677700099623,
+          "usage": {
+            "prompt_tokens": 842,
+            "completion_tokens": 110,
+            "total_tokens": 952,
+            "cost": 0.0007692,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 74,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0007692,
+              "upstream_inference_prompt_cost": 0.0005052,
+              "upstream_inference_completions_cost": 0.000264
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0007692,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 137.20690114999888,
+          "end_s": 138.34845973899792,
+          "usage": {
+            "prompt_tokens": 1385,
+            "completion_tokens": 36,
+            "total_tokens": 1421,
+            "cost": 0.00014295,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1152,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00014295,
+              "upstream_inference_prompt_cost": 0.00012135,
+              "upstream_inference_completions_cost": 2.16e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00014295,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 138.34849993800162,
+          "end_s": 140.75096358599694,
+          "usage": {
+            "prompt_tokens": 68,
+            "completion_tokens": 213,
+            "total_tokens": 281,
+            "cost": 0.000552,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000552,
+              "upstream_inference_prompt_cost": 4.08e-05,
+              "upstream_inference_completions_cost": 0.0005112
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 164
+            }
+          },
+          "cost_usd": 0.000552,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 137.20679895099602,
+      "inference_end_s": 138.3484911380001,
+      "inference_isolatable": false,
+      "reasoning_answer": "The project code name is CopperFinch. However, I cannot transcribe your request into the reason tool. If you have another question or need assistance, let me know!",
+      "finished_s": 140.75103687599767,
+      "round_trip_s": 5.158447744185253,
+      "to_audio_received_s": 5.040995412995159,
+      "inference_with_tools_s": 1.1416921870040824,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00146415,
+      "cost_usd": 0.00146415,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 9,
+      "fixture": "memory-recall",
+      "speech_end_s": 150.91009637099913,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 151.75599795699964,
+      "first_audio_received_s": 156.00797153399617,
+      "first_playback_s": 156.10121133395452,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 12.900000000000006,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what you heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. What project code name did I just give you?",
+      "reply": "Understood. Noted that the project code name is CopperFinch. Let's try approaching this from another angle\u2014could you describe the specific part of the request that's causing the issue? That way, we can adjust and find a way forward.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 151.75619373600057,
+          "end_s": 153.20971271999588,
+          "usage": {
+            "prompt_tokens": 943,
+            "completion_tokens": 100,
+            "total_tokens": 1043,
+            "cost": 0.0008058,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 38,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0008058,
+              "upstream_inference_prompt_cost": 0.0005658,
+              "upstream_inference_completions_cost": 0.00024
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0008058,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 153.2098175689971,
+          "end_s": 154.57340940799622,
+          "usage": {
+            "prompt_tokens": 1520,
+            "completion_tokens": 39,
+            "total_tokens": 1559,
+            "cost": 0.0001554,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1280,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001554,
+              "upstream_inference_prompt_cost": 0.000132,
+              "upstream_inference_completions_cost": 2.34e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001554,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 154.57344567799737,
+          "end_s": 157.18967041599535,
+          "usage": {
+            "prompt_tokens": 71,
+            "completion_tokens": 325,
+            "total_tokens": 396,
+            "cost": 0.0008226,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0008226,
+              "upstream_inference_prompt_cost": 4.26e-05,
+              "upstream_inference_completions_cost": 0.00078
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 258
+            }
+          },
+          "cost_usd": 0.0008226,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 153.2097304400013,
+      "inference_end_s": 154.57343994799885,
+      "inference_isolatable": false,
+      "reasoning_answer": "The project code name you just gave me is CopperFinch. However, I can't transcribe your request into the reason tool. If there's something else you need, feel free to ask!",
+      "finished_s": 157.18976930499775,
+      "round_trip_s": 5.191114962955396,
+      "to_audio_received_s": 5.097875162997042,
+      "inference_with_tools_s": 1.3637095079975552,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0017837999999999999,
+      "cost_usd": 0.0017837999999999999,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 10,
+      "fixture": "files",
+      "speech_end_s": 174.78957032799588,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 175.66060355900117,
+      "first_audio_received_s": 181.72284389800188,
+      "first_playback_s": 181.82590035074296,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 9.950000000000003,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what you heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. Use slash to list the files in the current working directory. Tell me the file names.",
+      "reply": "Understood! The file is named \"benchmark-notes.txt\" in the current working directory. If you'd like to open it, read from it, or do anything else with it, just let me know how you'd like to proceed.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 175.66090994700062,
+          "end_s": 177.43627177600138,
+          "usage": {
+            "prompt_tokens": 1073,
+            "completion_tokens": 108,
+            "total_tokens": 1181,
+            "cost": 0.000903,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 65,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000903,
+              "upstream_inference_prompt_cost": 0.0006438,
+              "upstream_inference_completions_cost": 0.0002592
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.000903,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 177.43639962399902,
+          "end_s": 178.65616082499764,
+          "usage": {
+            "prompt_tokens": 1666,
+            "completion_tokens": 18,
+            "total_tokens": 1684,
+            "cost": 0.0001455,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1536,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001455,
+              "upstream_inference_prompt_cost": 0.0001347,
+              "upstream_inference_completions_cost": 1.08e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001455,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 178.6602906190019,
+          "end_s": 180.52896939999482,
+          "usage": {
+            "prompt_tokens": 1707,
+            "completion_tokens": 30,
+            "total_tokens": 1737,
+            "cost": 0.00014925,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00014925,
+              "upstream_inference_prompt_cost": 0.00013125,
+              "upstream_inference_completions_cost": 1.8e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00014925,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 180.5290197389986,
+          "end_s": 182.84381436799595,
+          "usage": {
+            "prompt_tokens": 62,
+            "completion_tokens": 262,
+            "total_tokens": 324,
+            "cost": 0.000666,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000666,
+              "upstream_inference_prompt_cost": 3.72e-05,
+              "upstream_inference_completions_cost": 0.0006288
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 199
+            }
+          },
+          "cost_usd": 0.000666,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"ls\", \"background\": false}",
+          "result": {
+            "returncode": 0,
+            "output": "benchmark-notes.txt"
+          },
+          "status": "completed",
+          "started_s": 178.65619107499515,
+          "finished_s": 178.6602823889989
+        }
+      ],
+      "inference_start_s": 177.43629515499924,
+      "inference_end_s": 180.52901225900132,
+      "inference_isolatable": false,
+      "reasoning_answer": "In the current working directory, the file is named \"benchmark-notes.txt.\" If you have any other questions or requests, let me know!",
+      "finished_s": 182.84390487700148,
+      "round_trip_s": 7.03633002274708,
+      "to_audio_received_s": 6.933273570006008,
+      "inference_with_tools_s": 3.0927171040020767,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00186375,
+      "cost_usd": 0.00186375,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 11,
+      "fixture": "summary",
+      "speech_end_s": 198.19326804599842,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 199.13213490799535,
+      "first_audio_received_s": 205.44255897199764,
+      "first_playback_s": 205.5532557936751,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 11.100000000000005,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what I heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. Use / to read benchmark-notes.txt in the current directory and summarize its contents.",
+      "reply": "Understood. The onboarding review is set for Wednesday, Ravi will prepare the checklist, and the remaining action is to confirm the training room. If you'd like to go over anything in more detail, just let me know.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 199.1325491940006,
+          "end_s": 200.96982728700095,
+          "usage": {
+            "prompt_tokens": 1178,
+            "completion_tokens": 107,
+            "total_tokens": 1285,
+            "cost": 0.0009636,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 71,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0009636,
+              "upstream_inference_prompt_cost": 0.0007068,
+              "upstream_inference_completions_cost": 0.0002568
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0009636,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 200.96998803599854,
+          "end_s": 202.49569865800004,
+          "usage": {
+            "prompt_tokens": 1843,
+            "completion_tokens": 22,
+            "total_tokens": 1865,
+            "cost": 0.00016485,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1664,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00016485,
+              "upstream_inference_prompt_cost": 0.00015165,
+              "upstream_inference_completions_cost": 1.32e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00016485,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 202.497891908999,
+          "end_s": 204.16366407700116,
+          "usage": {
+            "prompt_tokens": 1908,
+            "completion_tokens": 47,
+            "total_tokens": 1955,
+            "cost": 0.00018,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1792,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00018,
+              "upstream_inference_prompt_cost": 0.0001518,
+              "upstream_inference_completions_cost": 2.82e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00018,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 204.16370733599615,
+          "end_s": 206.46941450799932,
+          "usage": {
+            "prompt_tokens": 79,
+            "completion_tokens": 282,
+            "total_tokens": 361,
+            "cost": 0.0007242,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0007242,
+              "upstream_inference_prompt_cost": 4.74e-05,
+              "upstream_inference_completions_cost": 0.0006768
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 222
+            }
+          },
+          "cost_usd": 0.0007242,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"cat benchmark-notes.txt\", \"background\": false}",
+          "result": {
+            "returncode": 0,
+            "output": "The onboarding review is on Wednesday. Ravi will prepare the checklist.\nThe remaining action is to confirm the training room."
+          },
+          "status": "completed",
+          "started_s": 202.4957306369979,
+          "finished_s": 202.4978826689985
+        }
+      ],
+      "inference_start_s": 200.9698494769982,
+      "inference_end_s": 204.163700006,
+      "inference_isolatable": false,
+      "reasoning_answer": "The contents of \"benchmark-notes.txt\" summarize that the onboarding review is on Wednesday, Ravi will prepare the checklist, and the remaining action is to confirm the training room. If you need further assistance, just let me know!",
+      "finished_s": 206.46953244700126,
+      "round_trip_s": 7.3599877476766835,
+      "to_audio_received_s": 7.249290925999219,
+      "inference_with_tools_s": 3.193850529001793,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00203265,
+      "cost_usd": 0.00203265,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 12,
+      "fixture": "context",
+      "speech_end_s": 223.95805952800194,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 224.87884846499946,
+      "first_audio_received_s": 228.8799652749949,
+      "first_playback_s": 228.9840865673044,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 7.8000000000000025,
+      "input_text": "According to benchmark-notes.txt, which room-related action is still open? Use '/' if needed. Glossary of names/terms: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar.",
+      "reply": "Got it! The open room-related action is to confirm the training room. If you need any help or have more questions, just let me know!",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 224.8792425809952,
+          "end_s": 226.51427093299571,
+          "usage": {
+            "prompt_tokens": 1311,
+            "completion_tokens": 73,
+            "total_tokens": 1384,
+            "cost": 0.0009618,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 80,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0009618,
+              "upstream_inference_prompt_cost": 0.0007866,
+              "upstream_inference_completions_cost": 0.0001752
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0009618,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 226.51442387099814,
+          "end_s": 227.78966795299493,
+          "usage": {
+            "prompt_tokens": 2027,
+            "completion_tokens": 36,
+            "total_tokens": 2063,
+            "cost": 0.00018165,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00018165,
+              "upstream_inference_prompt_cost": 0.00016005,
+              "upstream_inference_completions_cost": 2.16e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00018165,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 227.78970955299883,
+          "end_s": 229.800147336995,
+          "usage": {
+            "prompt_tokens": 68,
+            "completion_tokens": 200,
+            "total_tokens": 268,
+            "cost": 0.0005208,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0005208,
+              "upstream_inference_prompt_cost": 4.08e-05,
+              "upstream_inference_completions_cost": 0.00048
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 156
+            }
+          },
+          "cost_usd": 0.0005208,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 226.51429074200132,
+      "inference_end_s": 227.78970326299896,
+      "inference_isolatable": false,
+      "reasoning_answer": "According to \"benchmark-notes.txt,\" the open room-related action is to confirm the training room. If you have any more questions or need assistance, feel free to ask!",
+      "finished_s": 229.80020756700105,
+      "round_trip_s": 5.026027039302448,
+      "to_audio_received_s": 4.921905746992962,
+      "inference_with_tools_s": 1.2754125209976337,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00166425,
+      "cost_usd": 0.00166425,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 13,
+      "fixture": "answer",
+      "speech_end_s": 240.90458664999804,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 241.74983103900013,
+      "first_audio_received_s": 245.7765145730009,
+      "first_playback_s": 245.87702209925862,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 7.250000000000002,
+      "input_text": "What is 7 plus 5? Answering in one short sentence. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what I heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar.",
+      "reply": "That's correct, 7 plus 5 does equal 12. If you'd like help with another math problem or anything else, let me know!",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 241.75017478600057,
+          "end_s": 243.11988812300115,
+          "usage": {
+            "prompt_tokens": 1342,
+            "completion_tokens": 90,
+            "total_tokens": 1432,
+            "cost": 0.0010212,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 49,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0010212,
+              "upstream_inference_prompt_cost": 0.0008052,
+              "upstream_inference_completions_cost": 0.000216
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0010212,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 243.12007544100197,
+          "end_s": 244.4695104739949,
+          "usage": {
+            "prompt_tokens": 2152,
+            "completion_tokens": 9,
+            "total_tokens": 2161,
+            "cost": 0.0001842,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1920,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001842,
+              "upstream_inference_prompt_cost": 0.0001788,
+              "upstream_inference_completions_cost": 5.4e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001842,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 244.46954586399806,
+          "end_s": 246.67615529899922,
+          "usage": {
+            "prompt_tokens": 41,
+            "completion_tokens": 188,
+            "total_tokens": 229,
+            "cost": 0.0004758,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0004758,
+              "upstream_inference_prompt_cost": 2.46e-05,
+              "upstream_inference_completions_cost": 0.0004512
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 145
+            }
+          },
+          "cost_usd": 0.0004758,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 243.11991041199508,
+      "inference_end_s": 244.46954015400115,
+      "inference_isolatable": false,
+      "reasoning_answer": "7 plus 5 equals 12.",
+      "finished_s": 246.67623748899496,
+      "round_trip_s": 4.972435449260587,
+      "to_audio_received_s": 4.871927923002858,
+      "inference_with_tools_s": 1.3496297420060728,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0016812,
+      "cost_usd": 0.0016812,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 14,
+      "fixture": "memory-set",
+      "speech_end_s": 259.718618762998,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 260.5559458229982,
+      "first_audio_received_s": 264.9748970669971,
+      "first_playback_s": 265.07439484321634,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 10.400000000000004,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what you heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. Remember this for our conversation: the project code name is CopperFinch. Say the code name.",
+      "reply": "Understood. It sounds like you want to transcribe the name into the reason tool. Could you clarify what exactly you're trying to achieve, or what kind of assistance you need? That way, I can guide you more effectively.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 260.5563642689958,
+          "end_s": 262.56140814899845,
+          "usage": {
+            "prompt_tokens": 1429,
+            "completion_tokens": 110,
+            "total_tokens": 1539,
+            "cost": 0.0011214,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 73,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0011214,
+              "upstream_inference_prompt_cost": 0.0008574,
+              "upstream_inference_completions_cost": 0.000264
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0011214,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 262.561566477998,
+          "end_s": 263.8663830840014,
+          "usage": {
+            "prompt_tokens": 2270,
+            "completion_tokens": 36,
+            "total_tokens": 2306,
+            "cost": 0.0002085,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2048,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0002085,
+              "upstream_inference_prompt_cost": 0.0001869,
+              "upstream_inference_completions_cost": 2.16e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0002085,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 263.86644160300057,
+          "end_s": 265.96682284699637,
+          "usage": {
+            "prompt_tokens": 68,
+            "completion_tokens": 270,
+            "total_tokens": 338,
+            "cost": 0.0006888,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0006888,
+              "upstream_inference_prompt_cost": 4.08e-05,
+              "upstream_inference_completions_cost": 0.000648
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 208
+            }
+          },
+          "cost_usd": 0.0006888,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 262.5614281989983,
+      "inference_end_s": 263.86643303299934,
+      "inference_isolatable": false,
+      "reasoning_answer": "The project code name is CopperFinch. However, I can't transcribe your request into the reason tool. If you have another question or need assistance, let me know!",
+      "finished_s": 265.9669029159995,
+      "round_trip_s": 5.355776080218334,
+      "to_audio_received_s": 5.256278303999068,
+      "inference_with_tools_s": 1.3050048340010107,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0020187,
+      "cost_usd": 0.0020187,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 15,
+      "fixture": "memory-recall",
+      "speech_end_s": 278.5337655179958,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 279.37944475599943,
+      "first_audio_received_s": 283.6536238990011,
+      "first_playback_s": 283.76518402270074,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 8.450000000000003,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what you heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. What project code name did I just give you?",
+      "reply": "Understood! If you'd like to walk through more details about the reason tool or need help transcribing it, I\u2019m here to help. Just let me know what specific information you need.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 279.37968516399997,
+          "end_s": 281.17821914699744,
+          "usage": {
+            "prompt_tokens": 1531,
+            "completion_tokens": 100,
+            "total_tokens": 1631,
+            "cost": 0.0011586,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 38,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0011586,
+              "upstream_inference_prompt_cost": 0.0009186,
+              "upstream_inference_completions_cost": 0.00024
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0011586,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 281.17838341600145,
+          "end_s": 282.5327234569995,
+          "usage": {
+            "prompt_tokens": 2405,
+            "completion_tokens": 39,
+            "total_tokens": 2444,
+            "cost": 0.00022095,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2176,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00022095,
+              "upstream_inference_prompt_cost": 0.00019755,
+              "upstream_inference_completions_cost": 2.34e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00022095,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 282.53276372699474,
+          "end_s": 284.55302069799654,
+          "usage": {
+            "prompt_tokens": 71,
+            "completion_tokens": 221,
+            "total_tokens": 292,
+            "cost": 0.000573,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000573,
+              "upstream_inference_prompt_cost": 4.26e-05,
+              "upstream_inference_completions_cost": 0.0005304
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 169
+            }
+          },
+          "cost_usd": 0.000573,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 281.1782400969969,
+      "inference_end_s": 282.5327578569995,
+      "inference_isolatable": false,
+      "reasoning_answer": "The project code name you just gave me is CopperFinch. I can't transcribe your request into the reason tool, though. If there's anything else you need, just let me know!",
+      "finished_s": 284.55309334799676,
+      "round_trip_s": 5.231418504704948,
+      "to_audio_received_s": 5.119858381005315,
+      "inference_with_tools_s": 1.3545177600026364,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00195255,
+      "cost_usd": 0.00195255,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 16,
+      "fixture": "files",
+      "speech_end_s": 297.9276594889983,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 298.7985662649953,
+      "first_audio_received_s": 304.051149758001,
+      "first_playback_s": 304.13917326632577,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 8.050000000000002,
+      "input_text": "Transcribe my complete request into the reason tool. Answer my spoken question. Glossary of names/terms you may hear \u2014 if the audio is unclear, map what you heard to these and use these exact spellings: pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter, OpenAI, benchmark dataset, meeting notes, action items, calendar. Use slash to list the files in the current working directory. Tell me the file names.",
+      "reply": "Got it! The file is called \"benchmark-notes.txt\" and it's in the current working directory. If you need help with anything related to that file, just let me know!",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "voice_frontend",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 298.79895792200114,
+          "end_s": 300.62068360800185,
+          "usage": {
+            "prompt_tokens": 1661,
+            "completion_tokens": 108,
+            "total_tokens": 1769,
+            "cost": 0.0012558,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 65,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0012558,
+              "upstream_inference_prompt_cost": 0.0009966,
+              "upstream_inference_completions_cost": 0.0002592
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0012558,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 300.6208496370018,
+          "end_s": 301.70602217399573,
+          "usage": {
+            "prompt_tokens": 2551,
+            "completion_tokens": 18,
+            "total_tokens": 2569,
+            "cost": 0.00022065,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2304,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00022065,
+              "upstream_inference_prompt_cost": 0.00020985,
+              "upstream_inference_completions_cost": 1.08e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00022065,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 301.709064208997,
+          "end_s": 302.8371358029981,
+          "usage": {
+            "prompt_tokens": 2592,
+            "completion_tokens": 30,
+            "total_tokens": 2622,
+            "cost": 0.0002244,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2432,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0002244,
+              "upstream_inference_prompt_cost": 0.0002064,
+              "upstream_inference_completions_cost": 1.8e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0002244,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "voice_output",
+          "model": "openai/gpt-audio-mini",
+          "start_s": 302.83718181199947,
+          "end_s": 304.9989473569949,
+          "usage": {
+            "prompt_tokens": 62,
+            "completion_tokens": 212,
+            "total_tokens": 274,
+            "cost": 0.000546,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000546,
+              "upstream_inference_prompt_cost": 3.72e-05,
+              "upstream_inference_completions_cost": 0.0005088
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 161
+            }
+          },
+          "cost_usd": 0.000546,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"ls\", \"background\": false}",
+          "result": {
+            "returncode": 0,
+            "output": "benchmark-notes.txt"
+          },
+          "status": "completed",
+          "started_s": 301.7060539140002,
+          "finished_s": 301.70905435899476
+        }
+      ],
+      "inference_start_s": 300.6207049079967,
+      "inference_end_s": 302.83717473199795,
+      "inference_isolatable": false,
+      "reasoning_answer": "In the current working directory, the file is named \"benchmark-notes.txt.\" If you have any other questions or requests, let me know!",
+      "finished_s": 304.99901584599866,
+      "round_trip_s": 6.211513777327468,
+      "to_audio_received_s": 6.123490269002673,
+      "inference_with_tools_s": 2.2164698240012513,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.00224685,
+      "cost_usd": 0.00224685,
+      "voice_cost_usd": null
+    }
+  ]
+}

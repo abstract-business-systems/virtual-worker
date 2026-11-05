@@ -9,11 +9,37 @@ import csv
 import json
 from pathlib import Path
 from poc_report import atomic_json
+from poc_pricing import usage_cost
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT_DIR = ROOT/'docs/benchmarks'
 FAMILIES = {'chat-': ('realtime', 'pipecat'), 'audio-': ('audio', 'chat_audio'),
             'separate-': ('separate', 'chat_audio'), 'sep-pipecat-': ('separate', 'pipecat')}
+
+
+def repriced_estimates(data):
+    """Sidecar values only: never rewrite historical receipts or fill missing usage."""
+    values = {'repriced_known_cost_usd': None, 'repriced_total_cost_usd': None,
+              'repriced_cost_per_min_usd': None,
+              'repricing_basis': '2026-11-05 public list rates; provider costs preferred; carried TTS duration estimates; instrumented calls only, NOT bill verified'}
+    if data.get('schema_version') != 2:
+        return values
+    stages = [s for r in data.get('interactions', []) for s in r.get('stages', [])]
+    if not stages:
+        return values
+    costs = []
+    for stage in stages:
+        cost, _ = usage_cost(stage.get('usage'), stage.get('model'))
+        if cost is None and (stage.get('pricing', '').startswith('estimated_15_audio_tokens')
+                             or stage.get('pricing') == 'local_no_provider_charge'):
+            cost = stage.get('cost_usd')  # explicitly labelled estimate/local charge
+        costs.append(cost)
+    known = sum(c for c in costs if c is not None)
+    total = known if all(c is not None for c in costs) else None
+    duration = data.get('measurement_duration_s')
+    values.update(repriced_known_cost_usd=known, repriced_total_cost_usd=total,
+        repriced_cost_per_min_usd=total*60/duration if total is not None and duration and duration > 0 else None)
+    return values
 
 
 def read_row(path: Path):
@@ -75,6 +101,7 @@ def read_row(path: Path):
         'voice_latency_mean_s': (d.get('voice_latency') or {}).get('mean_s') if modern else None,
         'quality_verified': d.get('quality_verified', False),
         'pricing_verified': d.get('pricing_verified', False),
+        **repriced_estimates(d),
         'warnings': '; '.join(warnings), 'src': rel,
     }, None
 

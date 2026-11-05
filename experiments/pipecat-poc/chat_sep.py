@@ -36,8 +36,8 @@ from cli_ui import banner, dim, tool, you
 from poc_pipeline import SessionBoundary
 from poc_pricing import usage_cost, tts_cost
 from poc_report import SessionReport, load_environment
-from poc_tools import run_tool_async
-from poc_reasoning import reasoning_model, reasoning_prompt, BASH_TOOL
+from poc_jobs import JobManager
+from poc_reasoning import reasoning_model, reasoning_prompt, REASONING_TOOLS
 
 load_environment(HERE)
 WORKDIR = os.environ.get('CHAT_WORKDIR', os.getcwd())
@@ -59,6 +59,9 @@ async def run():
     session = SessionReport('separate', 'pipecat',
         {'stt': stt_model, 'think': think, 'tts': 'gpt-4o-mini-tts', 'voice': voice})
     session.settings = {'task_reasoning': 'shared_external_model'}
+    jobs = JobManager(WORKDIR, notify=lambda job: print(
+        f"[background] {job['job_id']}: {job['status']}", flush=True))
+    session.job_manager = jobs
     tokens = ta.TokenAccount()
     metrics = TurnMetrics(tokens, session)
     metrics._show_you = lambda: None  # MeasuredSTT prints the actual recognition result
@@ -126,14 +129,20 @@ async def run():
             await params.result_callback({'error': 'Tool limit reached; stop and explain the failure'})
             return
         name = params.function_name
-        result = await run_tool_async(name, params.arguments, WORKDIR)
-        row['tools'].append({'name': name, 'arguments': params.arguments, 'result': result})
+        entry = {'name': name, 'arguments': params.arguments, 'result': None, 'status': 'running'}
+        row['tools'].append(entry)
+        try:
+            result = await jobs.execute(name, params.arguments)
+            entry.update(result=result, status='failed' if result.get('error') else 'completed')
+        except asyncio.CancelledError:
+            entry.update(status='cancelled', result={'error': 'Foreground tool interrupted'})
+            raise
         print(tool(f'[tool] {name} -> {json.dumps(result)[:160]}'), flush=True)
         await params.result_callback(result)
 
-    bash = BASH_TOOL['function']
-    schemas = [FunctionSchema(name=bash['name'], description=bash['description'],
-        properties=bash['parameters']['properties'], required=bash['parameters']['required'])]
+    schemas = [FunctionSchema(name=f['name'], description=f['description'],
+        properties=f['parameters']['properties'], required=f['parameters'].get('required', []))
+        for f in (tool['function'] for tool in REASONING_TOOLS)]
     for schema in schemas:
         llm.register_function(schema.name, execute)
     context = LLMContext(tools=ToolsSchema(standard_tools=schemas))
@@ -161,6 +170,7 @@ async def run():
         await asyncio.sleep(.5)
         loop.add_signal_handler(signal.SIGINT, mic.fixture_stop)
         loop.add_signal_handler(signal.SIGTERM, mic.fixture_stop)
+        loop.add_signal_handler(signal.SIGHUP, mic.fixture_stop)
     signal_task = asyncio.create_task(signals())
     print(banner('Friday (separate · pipecat) — speak, then pause. Ctrl+C to quit.'))
     print(dim(f'workdir: {WORKDIR} · stt {stt_model} · think {think} · voice {voice}'), flush=True)
@@ -173,6 +183,8 @@ async def run():
         raise
     finally:
         signal_task.cancel()
+        await jobs.close()
+        session.background_jobs = jobs.status()['jobs']
         out = session.write(HERE/'results')
         print(dim(f'session report → {out.name}'), flush=True)
 

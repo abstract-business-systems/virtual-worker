@@ -59,7 +59,7 @@ class TestSharedReasoning(unittest.TestCase):
         with patch('urllib.request.urlopen', side_effect=opener):
             asyncio.run(exercise())
         self.assertTrue(all(p['model'] == 'test/shared' for p in payloads))
-        self.assertTrue(all([t['function']['name'] for t in p['tools']] == ['bash'] for p in payloads))
+        self.assertTrue(all([t['function']['name'] for t in p['tools']] == ['bash', 'background_start', 'job_status', 'job_cancel'] for p in payloads))
 
     def test_empty_answer_or_provider_error_does_not_enter_history(self):
         for response in ({'choices': [{'message': {'content': ''}}]}, {'error': 'unavailable'}):

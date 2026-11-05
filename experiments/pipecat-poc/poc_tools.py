@@ -54,7 +54,7 @@ def run_tool(name, arguments, workdir):
         return {'returncode': -1, 'output': str(exc)}
 
 
-async def run_tool_async(name, arguments, workdir, *, timeout=60):
+async def run_tool_async(name, arguments, workdir, *, timeout=60, on_output=None):
     """Cancellable bash: terminate our process group, not just its Python waiter.
 
     SIGKILL is deliberate on cancellation/timeout; completed side effects cannot
@@ -88,9 +88,18 @@ async def run_tool_async(name, arguments, workdir, *, timeout=60):
     try:
         # Shield creation so interruption during spawn cannot orphan the child.
         proc = await asyncio.shield(spawn)
-        output, _ = await asyncio.wait_for(proc.communicate(), timeout=timeout)
+        output = bytearray()
+        async def drain():
+            while chunk := await proc.stdout.read(4096):
+                output.extend(chunk)
+                del output[:-4000]  # bounded tail, including continuously chatty jobs
+                if on_output is not None:
+                    on_output(bytes(output).decode(errors='replace'))
+        async def collect():
+            await asyncio.gather(drain(), proc.wait())
+        await asyncio.wait_for(collect(), timeout=timeout)
         return {'returncode': proc.returncode,
-                'output': output.decode(errors='replace').strip()[:4000] or '(no output)'}
+                'output': bytes(output).decode(errors='replace').strip() or '(no output)'}
     except asyncio.CancelledError:
         await terminate()
         raise
@@ -99,7 +108,12 @@ async def run_tool_async(name, arguments, workdir, *, timeout=60):
         return {'returncode': -1, 'output': f'(command timed out after {timeout:g}s)',
                 'timed_out': True}
     except OSError as exc:
+        if proc is not None:
+            await terminate()
         return {'returncode': -1, 'output': str(exc)}
+    except Exception:
+        await terminate()
+        raise
 
 
 async def tool_rounds(messages, request, execute, *, max_rounds=4):

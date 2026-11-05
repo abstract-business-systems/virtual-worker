@@ -72,6 +72,7 @@ class SessionReport:
         self.fixture_label: str | None = None
         self.fixture_speech_end: float | None = None
         self.fixture_results: list[dict] = []
+        self.background_jobs: list[dict] = []
         self.turn_done = None  # optional asyncio.Event, installed by fixture feeder
 
     def now(self):
@@ -102,7 +103,7 @@ class SessionReport:
             'speech_end_s': speech_end, 'speech_end_source': source,
             'endpoint_s': self.now(), 'first_audio_received_s': None,
             'first_playback_s': None, 'playback_measurement': None,
-            'output_audio_s': 0.0, 'input_text': None, 'reply': None,
+            'output_audio_s': 0.0, 'audio_pcm_peak_abs': 0, 'input_text': None, 'reply': None,
             'status': 'running', 'errors': [], 'stages': [], 'tools': [],
             'inference_start_s': None, 'inference_end_s': None,
             'inference_isolatable': self.mode == 'separate',
@@ -115,6 +116,8 @@ class SessionReport:
         if row['first_audio_received_s'] is None and first_signal(pcm) is not None:
             row['first_audio_received_s'] = self.now()
         row['output_audio_s'] += len(pcm)/2/rate
+        peak = max((abs(v) for (v,) in struct.iter_unpack('<h', pcm[:len(pcm)//2*2])), default=0)
+        row['audio_pcm_peak_abs'] = max(row['audio_pcm_peak_abs'], peak)
 
     def playback(self, pcm: bytes, rate: int, *, delay_s: float = 0.0):
         row = self.current
@@ -214,6 +217,8 @@ class SessionReport:
                 'external task inference recorded separately; native voice processing remains bundled'
                 if self.settings.get('task_reasoning') == 'shared_external_model' else
                 'native model inference is bundled; not independently measurable'),
+            'background_jobs': self.background_jobs,
+            'cost_scope': 'instrumented speech and shared reasoning calls; API spend inside bash/Pi is not measured',
             'errors': self.errors, 'fixture_results': self.fixture_results,
             'interactions': rows,
         }

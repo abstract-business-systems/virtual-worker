@@ -1,0 +1,594 @@
+{
+  "schema_version": 2,
+  "mode": "separate",
+  "engine": "chat_audio",
+  "models": {
+    "voice": "openai-tts:coral",
+    "think": "openai/gpt-4o-mini",
+    "stt": "openai"
+  },
+  "settings": {
+    "task_reasoning": "shared_external_model",
+    "native_voice_processing": "still_bundled_not_free"
+  },
+  "started_utc": "2026-11-05T08:11:04.536843+00:00",
+  "wall_total_s": 103.00650533600128,
+  "measurement_duration_s": 102.96640290500363,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 4,
+  "completed_turns": 4,
+  "input_audio_s": 25.364875000000094,
+  "total_cost_usd": 0.01271005,
+  "known_cost_usd": 0.01271005,
+  "voice_cost_usd": 0.01142275,
+  "cost_per_min_usd": 0.007406328457483111,
+  "voice_cost_per_min_usd": 0.006656200281487106,
+  "round_trip": {
+    "mean_s": 5.443098121198049,
+    "samples": 4
+  },
+  "voice_latency": {
+    "mean_s": 3.6312487484492104,
+    "samples": 4
+  },
+  "to_audio_received": {
+    "mean_s": 5.286235813500228,
+    "samples": 4
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "explicit text inference window (includes tool time)",
+  "background_jobs": [
+    {
+      "job_id": "job-1",
+      "command": "while true; do echo $(date) - Count; sleep 1; done",
+      "status": "cancelled",
+      "timeout_s": 120.0,
+      "started_at": 57217.123511206,
+      "finished_at": 57302.810042228,
+      "output": "Thursday 05 November 2026 01:41:20 PM IST - Count\nThursday 05 November 2026 01:41:21 PM IST - Count\nThursday 05 November 2026 01:41:22 PM IST - Count\nThursday 05 November 2026 01:41:23 PM IST - Count\nThursday 05 November 2026 01:41:24 PM IST - Count\nThursday 05 November 2026 01:41:25 PM IST - Count\nThursday 05 November 2026 01:41:26 PM IST - Count\nThursday 05 November 2026 01:41:27 PM IST - Count\nThursday 05 November 2026 01:41:28 PM IST - Count\nThursday 05 November 2026 01:41:29 PM IST - Count\nThursday 05 November 2026 01:41:30 PM IST - Count\nThursday 05 November 2026 01:41:31 PM IST - Count\nThursday 05 November 2026 01:41:32 PM IST - Count\nThursday 05 November 2026 01:41:33 PM IST - Count\nThursday 05 November 2026 01:41:34 PM IST - Count\nThursday 05 November 2026 01:41:35 PM IST - Count\nThursday 05 November 2026 01:41:36 PM IST - Count\nThursday 05 November 2026 01:41:37 PM IST - Count\nThursday 05 November 2026 01:41:38 PM IST - Count\nThursday 05 November 2026 01:41:39 PM IST - Count\nThursday 05 November 2026 01:41:40 PM IST - Count\nThursday 05 November 2026 01:41:41 PM IST - Count\nThursday 05 November 2026 01:41:43 PM IST - Count\nThursday 05 November 2026 01:41:44 PM IST - Count\nThursday 05 November 2026 01:41:45 PM IST - Count\nThursday 05 November 2026 01:41:46 PM IST - Count\nThursday 05 November 2026 01:41:47 PM IST - Count\nThursday 05 November 2026 01:41:48 PM IST - Count\nThursday 05 November 2026 01:41:49 PM IST - Count\nThursday 05 November 2026 01:41:50 PM IST - Count\nThursday 05 November 2026 01:41:51 PM IST - Count\nThursday 05 November 2026 01:41:52 PM IST - Count\nThursday 05 November 2026 01:41:53 PM IST - Count\nThursday 05 November 2026 01:41:54 PM IST - Count\nThursday 05 November 2026 01:41:55 PM IST - Count\nThursday 05 November 2026 01:41:56 PM IST - Count\nThursday 05 November 2026 01:41:57 PM IST - Count\nThursday 05 November 2026 01:41:58 PM IST - Count\nThursday 05 November 2026 01:41:59 PM IST - Count\nThursday 05 November 2026 01:42:00 PM IST - Count\nThursday 05 November 2026 01:42:01 PM IST - Count\nThursday 05 November 2026 01:42:02 PM IST - Count\nThursday 05 November 2026 01:42:03 PM IST - Count\nThursday 05 November 2026 01:42:04 PM IST - Count\nThursday 05 November 2026 01:42:05 PM IST - Count\nThursday 05 November 2026 01:42:06 PM IST - Count\nThursday 05 November 2026 01:42:07 PM IST - Count\nThursday 05 November 2026 01:42:08 PM IST - Count\nThursday 05 November 2026 01:42:09 PM IST - Count\nThursday 05 November 2026 01:42:10 PM IST - Count\nThursday 05 November 2026 01:42:11 PM IST - Count\nThursday 05 November 2026 01:42:12 PM IST - Count\nThursday 05 November 2026 01:42:13 PM IST - Count\nThursday 05 November 2026 01:42:14 PM IST - Count\nThursday 05 November 2026 01:42:15 PM IST - Count\nThursday 05 November 2026 01:42:16 PM IST - Count\nThursday 05 November 2026 01:42:17 PM IST - Count\nThursday 05 November 2026 01:42:18 PM IST - Count\nThursday 05 November 2026 01:42:19 PM IST - Count\nThursday 05 November 2026 01:42:20 PM IST - Count\nThursday 05 November 2026 01:42:21 PM IST - Count\nThursday 05 November 2026 01:42:22 PM IST - Count\nThursday 05 November 2026 01:42:23 PM IST - Count\nThursday 05 November 2026 01:42:24 PM IST - Count\nThursday 05 November 2026 01:42:25 PM IST - Count\nThursday 05 November 2026 01:42:26 PM IST - Count\nThursday 05 November 2026 01:42:27 PM IST - Count\nThursday 05 November 2026 01:42:28 PM IST - Count\nThursday 05 November 2026 01:42:29 PM IST - Count\nThursday 05 November 2026 01:42:30 PM IST - Count\nThursday 05 November 2026 01:42:31 PM IST - Count\nThursday 05 November 2026 01:42:32 PM IST - Count\nThursday 05 November 2026 01:42:33 PM IST - Count\nThursday 05 November 2026 01:42:34 PM IST - Count\nThursday 05 November 2026 01:42:35 PM IST - Count\nThursday 05 November 2026 01:42:36 PM IST - Count\nThursday 05 November 2026 01:42:37 PM IST - Count\nThursday 05 November 2026 01:42:38 PM IST - Count\nThursday 05 November 2026 01:42:39 PM IST - Count\nThursday 05 November 2026 01:42:40 PM IST - Count\n",
+      "result": {
+        "error": "Explicit cancellation or session shutdown"
+      }
+    }
+  ],
+  "cost_scope": "instrumented speech and shared reasoning calls; API spend inside bash/Pi is not measured",
+  "errors": [],
+  "fixture_results": [
+    {
+      "id": "background-start",
+      "completed": true,
+      "heuristic_keyword_match": null,
+      "human_quality_review": "pending",
+      "background_state_verified": true
+    },
+    {
+      "id": "background-conversation",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending",
+      "background_state_verified": true
+    },
+    {
+      "id": "background-status",
+      "completed": true,
+      "heuristic_keyword_match": null,
+      "human_quality_review": "pending",
+      "background_state_verified": true
+    },
+    {
+      "id": "background-cancel",
+      "completed": true,
+      "heuristic_keyword_match": null,
+      "human_quality_review": "pending",
+      "background_state_verified": true
+    }
+  ],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": "background-start",
+      "speech_end_s": 7.214294631997007,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 8.0916942249969,
+      "first_audio_received_s": 12.483535526997002,
+      "first_playback_s": 12.750963028221179,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 9.799999999999981,
+      "input_text": "Do batch in the background to print a count every second for two minutes. Tell me the job ID and return immediately.",
+      "reply": "The background job to print a count every second for two minutes has been started with job ID: `job-1`. It will run for 120 seconds.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 8.092360039998312,
+          "end_s": 9.388844342000084,
+          "usage": {
+            "type": "tokens",
+            "total_tokens": 106,
+            "input_tokens": 80,
+            "input_token_details": {
+              "text_tokens": 0,
+              "audio_tokens": 80
+            },
+            "output_tokens": 26
+          },
+          "cost_usd": 0.00023,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 9.389072001002205,
+          "end_s": 10.381142972000816,
+          "usage": {
+            "prompt_tokens": 460,
+            "completion_tokens": 38,
+            "total_tokens": 498,
+            "cost": 9.18e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.18e-05,
+              "upstream_inference_prompt_cost": 6.9e-05,
+              "upstream_inference_completions_cost": 2.28e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 9.18e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 10.381311750999885,
+          "end_s": 11.288371007998649,
+          "usage": {
+            "prompt_tokens": 571,
+            "completion_tokens": 33,
+            "total_tokens": 604,
+            "cost": 0.00010545,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00010545,
+              "upstream_inference_prompt_cost": 8.565e-05,
+              "upstream_inference_completions_cost": 1.98e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00010545,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "gpt-4o-mini-tts",
+          "start_s": 11.288411768000515,
+          "end_s": 15.092013098997995,
+          "usage": null,
+          "cost_usd": 0.001764,
+          "pricing": "estimated_15_audio_tokens_per_second_at_12usd_per_million; NOT_bill_verified"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"while true; do echo $(date) - Count; sleep 1; done\", \"background\": true, \"timeout_seconds\": 120}",
+          "result": {
+            "job_id": "job-1",
+            "command": "while true; do echo $(date) - Count; sleep 1; done",
+            "status": "queued",
+            "timeout_s": 120.0,
+            "started_at": null,
+            "finished_at": null,
+            "output": "",
+            "result": null
+          },
+          "status": "completed",
+          "started_s": 10.381208161998075,
+          "finished_s": 10.381293150996498
+        }
+      ],
+      "inference_start_s": 9.38897966100194,
+      "inference_end_s": 11.288405038001656,
+      "inference_isolatable": true,
+      "reasoning_answer": "The background job to print a count every second for two minutes has been started with job ID: `job-1`. It will run for 120 seconds.",
+      "finished_s": 15.092313196997566,
+      "round_trip_s": 5.536668396224171,
+      "to_audio_received_s": 5.269240894999995,
+      "inference_with_tools_s": 1.8994253769997158,
+      "voice_latency_s": 3.6372430192244556,
+      "cost_complete": true,
+      "known_cost_usd": 0.00219125,
+      "cost_usd": 0.00219125,
+      "voice_cost_usd": 0.001994
+    },
+    {
+      "id": 2,
+      "fixture": "background-conversation",
+      "speech_end_s": 27.204988519999258,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 28.050650022996706,
+      "first_audio_received_s": 33.29041358899849,
+      "first_playback_s": 33.42295707206718,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.2500000000000013,
+      "input_text": "What is seven plus five? Answer in one short sentence.",
+      "reply": "Seven plus five is twelve.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 28.051157198999135,
+          "end_s": 31.130165171001863,
+          "usage": {
+            "type": "tokens",
+            "total_tokens": 63,
+            "input_tokens": 49,
+            "input_token_details": {
+              "text_tokens": 0,
+              "audio_tokens": 49
+            },
+            "output_tokens": 14
+          },
+          "cost_usd": 0.00013125,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 31.130354629000067,
+          "end_s": 31.879563987997244,
+          "usage": {
+            "prompt_tokens": 656,
+            "completion_tokens": 7,
+            "total_tokens": 663,
+            "cost": 0.0001026,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001026,
+              "upstream_inference_prompt_cost": 9.84e-05,
+              "upstream_inference_completions_cost": 4.2e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001026,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "gpt-4o-mini-tts",
+          "start_s": 31.879603538000083,
+          "end_s": 34.315305514996,
+          "usage": null,
+          "cost_usd": 0.000585,
+          "pricing": "estimated_15_audio_tokens_per_second_at_12usd_per_million; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 31.130247360000794,
+      "inference_end_s": 31.879595708000124,
+      "inference_isolatable": true,
+      "reasoning_answer": "Seven plus five is twelve.",
+      "finished_s": 34.31539499399514,
+      "round_trip_s": 6.217968552067919,
+      "to_audio_received_s": 6.085425068999232,
+      "inference_with_tools_s": 0.7493483479993301,
+      "voice_latency_s": 5.468620204068589,
+      "cost_complete": true,
+      "known_cost_usd": 0.00081885,
+      "cost_usd": 0.00081885,
+      "voice_cost_usd": 0.00071625
+    },
+    {
+      "id": 3,
+      "fixture": "background-status",
+      "speech_end_s": 41.09753825899615,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 42.007793869001034,
+      "first_audio_received_s": 46.46443197999906,
+      "first_playback_s": 46.59186613652216,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 42.40000000000033,
+      "input_text": "Check the background job status, and tell me its latest output.",
+      "reply": "The background job is currently running. Here is the latest output:\n\n```\nThursday 05 November 2026 01:41:44 PM IST - Count\nThursday 05 November 2026 01:41:45 PM IST - Count\nThursday 05 November 2026 01:41:46 PM IST - Count\nThursday 05 November 2026 01:41:47 PM IST - Count\nThursday 05 November 2026 01:41:48 PM IST - Count\n```",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 42.00816443599615,
+          "end_s": 42.90879100099846,
+          "usage": {
+            "type": "tokens",
+            "total_tokens": 66,
+            "input_tokens": 51,
+            "input_token_details": {
+              "text_tokens": 0,
+              "audio_tokens": 51
+            },
+            "output_tokens": 15
+          },
+          "cost_usd": 0.00013875,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 42.90901271899929,
+          "end_s": 43.735561804998724,
+          "usage": {
+            "prompt_tokens": 683,
+            "completion_tokens": 17,
+            "total_tokens": 700,
+            "cost": 0.00011265,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011265,
+              "upstream_inference_prompt_cost": 0.00010245,
+              "upstream_inference_completions_cost": 1.02e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011265,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 43.735665793996304,
+          "end_s": 45.46018342499883,
+          "usage": {
+            "prompt_tokens": 1393,
+            "completion_tokens": 107,
+            "total_tokens": 1500,
+            "cost": 0.00027315,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00027315,
+              "upstream_inference_prompt_cost": 0.00020895,
+              "upstream_inference_completions_cost": 6.42e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00027315,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "gpt-4o-mini-tts",
+          "start_s": 45.460236334998626,
+          "end_s": 52.24088122299872,
+          "usage": null,
+          "cost_usd": 0.007632,
+          "pricing": "estimated_15_audio_tokens_per_second_at_12usd_per_million; NOT_bill_verified"
+        }
+      ],
+      "tools": [
+        {
+          "name": "job_status",
+          "arguments": "{\"job_id\": \"job-1\"}",
+          "result": {
+            "job_id": "job-1",
+            "command": "while true; do echo $(date) - Count; sleep 1; done",
+            "status": "running",
+            "timeout_s": 120.0,
+            "started_at": 57217.123511206,
+            "finished_at": null,
+            "output": "Thursday 05 November 2026 01:41:14 PM IST - Count\nThursday 05 November 2026 01:41:15 PM IST - Count\nThursday 05 November 2026 01:41:16 PM IST - Count\nThursday 05 November 2026 01:41:17 PM IST - Count\nThursday 05 November 2026 01:41:18 PM IST - Count\nThursday 05 November 2026 01:41:19 PM IST - Count\nThursday 05 November 2026 01:41:20 PM IST - Count\nThursday 05 November 2026 01:41:21 PM IST - Count\nThursday 05 November 2026 01:41:22 PM IST - Count\nThursday 05 November 2026 01:41:23 PM IST - Count\nThursday 05 November 2026 01:41:24 PM IST - Count\nThursday 05 November 2026 01:41:25 PM IST - Count\nThursday 05 November 2026 01:41:26 PM IST - Count\nThursday 05 November 2026 01:41:27 PM IST - Count\nThursday 05 November 2026 01:41:28 PM IST - Count\nThursday 05 November 2026 01:41:29 PM IST - Count\nThursday 05 November 2026 01:41:30 PM IST - Count\nThursday 05 November 2026 01:41:31 PM IST - Count\nThursday 05 November 2026 01:41:32 PM IST - Count\nThursday 05 November 2026 01:41:33 PM IST - Count\nThursday 05 November 2026 01:41:34 PM IST - Count\nThursday 05 November 2026 01:41:35 PM IST - Count\nThursday 05 November 2026 01:41:36 PM IST - Count\nThursday 05 November 2026 01:41:37 PM IST - Count\nThursday 05 November 2026 01:41:38 PM IST - Count\nThursday 05 November 2026 01:41:39 PM IST - Count\nThursday 05 November 2026 01:41:40 PM IST - Count\nThursday 05 November 2026 01:41:41 PM IST - Count\nThursday 05 November 2026 01:41:43 PM IST - Count\nThursday 05 November 2026 01:41:44 PM IST - Count\nThursday 05 November 2026 01:41:45 PM IST - Count\nThursday 05 November 2026 01:41:46 PM IST - Count\nThursday 05 November 2026 01:41:47 PM IST - Count\nThursday 05 November 2026 01:41:48 PM IST - Count\n",
+            "result": null
+          },
+          "status": "completed",
+          "started_s": 43.73561168499873,
+          "finished_s": 43.735643594001886
+        }
+      ],
+      "inference_start_s": 42.908880429997225,
+      "inference_end_s": 45.46022566499596,
+      "inference_isolatable": true,
+      "reasoning_answer": "The background job is currently running. Here is the latest output:\n\n```\nThursday 05 November 2026 01:41:44 PM IST - Count\nThursday 05 November 2026 01:41:45 PM IST - Count\nThursday 05 November 2026 01:41:46 PM IST - Count\nThursday 05 November 2026 01:41:47 PM IST - Count\nThursday 05 November 2026 01:41:48 PM IST - Count\n```",
+      "finished_s": 52.24158843799523,
+      "round_trip_s": 5.494327877526004,
+      "to_audio_received_s": 5.36689372100291,
+      "inference_with_tools_s": 2.5513452349987347,
+      "voice_latency_s": 2.9429826425272694,
+      "cost_complete": true,
+      "known_cost_usd": 0.00815655,
+      "cost_usd": 0.00815655,
+      "voice_cost_usd": 0.00777075
+    },
+    {
+      "id": 4,
+      "fixture": "background-cancel",
+      "speech_end_s": 93.28234140800173,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 94.10960455099848,
+      "first_audio_received_s": 97.7057249770005,
+      "first_playback_s": 97.80576906697583,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 4.6,
+      "input_text": "Cancel the background job now and confirm it stopped.",
+      "reply": "The background job has been successfully cancelled. It is no longer running.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 94.10988602900034,
+          "end_s": 94.93501415899664,
+          "usage": {
+            "type": "tokens",
+            "total_tokens": 55,
+            "input_tokens": 43,
+            "input_token_details": {
+              "text_tokens": 0,
+              "audio_tokens": 43
+            },
+            "output_tokens": 12
+          },
+          "cost_usd": 0.00011375,
+          "pricing": "assumed_model_token_rates; cache_50pct; NOT_bill_verified"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 94.93523376799567,
+          "end_s": 96.0671485290004,
+          "usage": {
+            "prompt_tokens": 1517,
+            "completion_tokens": 17,
+            "total_tokens": 1534,
+            "cost": 0.00023775,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00023775,
+              "upstream_inference_prompt_cost": 0.00022755,
+              "upstream_inference_completions_cost": 1.02e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00023775,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 96.06807060199935,
+          "end_s": 96.98236797999562,
+          "usage": {
+            "prompt_tokens": 3070,
+            "completion_tokens": 15,
+            "total_tokens": 3085,
+            "cost": 0.0003639,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1408,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0003639,
+              "upstream_inference_prompt_cost": 0.0003549,
+              "upstream_inference_completions_cost": 9e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0003639,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "gpt-4o-mini-tts",
+          "start_s": 96.98240739999892,
+          "end_s": 98.73629714099661,
+          "usage": null,
+          "cost_usd": 0.000828,
+          "pricing": "estimated_15_audio_tokens_per_second_at_12usd_per_million; NOT_bill_verified"
+        }
+      ],
+      "tools": [
+        {
+          "name": "job_cancel",
+          "arguments": "{\"job_id\": \"job-1\"}",
+          "result": {
+            "job_id": "job-1",
+            "command": "while true; do echo $(date) - Count; sleep 1; done",
+            "status": "cancelled",
+            "timeout_s": 120.0,
+            "started_at": 57217.123511206,
+            "finished_at": 57302.810042228,
+            "output": "Thursday 05 November 2026 01:41:20 PM IST - Count\nThursday 05 November 2026 01:41:21 PM IST - Count\nThursday 05 November 2026 01:41:22 PM IST - Count\nThursday 05 November 2026 01:41:23 PM IST - Count\nThursday 05 November 2026 01:41:24 PM IST - Count\nThursday 05 November 2026 01:41:25 PM IST - Count\nThursday 05 November 2026 01:41:26 PM IST - Count\nThursday 05 November 2026 01:41:27 PM IST - Count\nThursday 05 November 2026 01:41:28 PM IST - Count\nThursday 05 November 2026 01:41:29 PM IST - Count\nThursday 05 November 2026 01:41:30 PM IST - Count\nThursday 05 November 2026 01:41:31 PM IST - Count\nThursday 05 November 2026 01:41:32 PM IST - Count\nThursday 05 November 2026 01:41:33 PM IST - Count\nThursday 05 November 2026 01:41:34 PM IST - Count\nThursday 05 November 2026 01:41:35 PM IST - Count\nThursday 05 November 2026 01:41:36 PM IST - Count\nThursday 05 November 2026 01:41:37 PM IST - Count\nThursday 05 November 2026 01:41:38 PM IST - Count\nThursday 05 November 2026 01:41:39 PM IST - Count\nThursday 05 November 2026 01:41:40 PM IST - Count\nThursday 05 November 2026 01:41:41 PM IST - Count\nThursday 05 November 2026 01:41:43 PM IST - Count\nThursday 05 November 2026 01:41:44 PM IST - Count\nThursday 05 November 2026 01:41:45 PM IST - Count\nThursday 05 November 2026 01:41:46 PM IST - Count\nThursday 05 November 2026 01:41:47 PM IST - Count\nThursday 05 November 2026 01:41:48 PM IST - Count\nThursday 05 November 2026 01:41:49 PM IST - Count\nThursday 05 November 2026 01:41:50 PM IST - Count\nThursday 05 November 2026 01:41:51 PM IST - Count\nThursday 05 November 2026 01:41:52 PM IST - Count\nThursday 05 November 2026 01:41:53 PM IST - Count\nThursday 05 November 2026 01:41:54 PM IST - Count\nThursday 05 November 2026 01:41:55 PM IST - Count\nThursday 05 November 2026 01:41:56 PM IST - Count\nThursday 05 November 2026 01:41:57 PM IST - Count\nThursday 05 November 2026 01:41:58 PM IST - Count\nThursday 05 November 2026 01:41:59 PM IST - Count\nThursday 05 November 2026 01:42:00 PM IST - Count\nThursday 05 November 2026 01:42:01 PM IST - Count\nThursday 05 November 2026 01:42:02 PM IST - Count\nThursday 05 November 2026 01:42:03 PM IST - Count\nThursday 05 November 2026 01:42:04 PM IST - Count\nThursday 05 November 2026 01:42:05 PM IST - Count\nThursday 05 November 2026 01:42:06 PM IST - Count\nThursday 05 November 2026 01:42:07 PM IST - Count\nThursday 05 November 2026 01:42:08 PM IST - Count\nThursday 05 November 2026 01:42:09 PM IST - Count\nThursday 05 November 2026 01:42:10 PM IST - Count\nThursday 05 November 2026 01:42:11 PM IST - Count\nThursday 05 November 2026 01:42:12 PM IST - Count\nThursday 05 November 2026 01:42:13 PM IST - Count\nThursday 05 November 2026 01:42:14 PM IST - Count\nThursday 05 November 2026 01:42:15 PM IST - Count\nThursday 05 November 2026 01:42:16 PM IST - Count\nThursday 05 November 2026 01:42:17 PM IST - Count\nThursday 05 November 2026 01:42:18 PM IST - Count\nThursday 05 November 2026 01:42:19 PM IST - Count\nThursday 05 November 2026 01:42:20 PM IST - Count\nThursday 05 November 2026 01:42:21 PM IST - Count\nThursday 05 November 2026 01:42:22 PM IST - Count\nThursday 05 November 2026 01:42:23 PM IST - Count\nThursday 05 November 2026 01:42:24 PM IST - Count\nThursday 05 November 2026 01:42:25 PM IST - Count\nThursday 05 November 2026 01:42:26 PM IST - Count\nThursday 05 November 2026 01:42:27 PM IST - Count\nThursday 05 November 2026 01:42:28 PM IST - Count\nThursday 05 November 2026 01:42:29 PM IST - Count\nThursday 05 November 2026 01:42:30 PM IST - Count\nThursday 05 November 2026 01:42:31 PM IST - Count\nThursday 05 November 2026 01:42:32 PM IST - Count\nThursday 05 November 2026 01:42:33 PM IST - Count\nThursday 05 November 2026 01:42:34 PM IST - Count\nThursday 05 November 2026 01:42:35 PM IST - Count\nThursday 05 November 2026 01:42:36 PM IST - Count\nThursday 05 November 2026 01:42:37 PM IST - Count\nThursday 05 November 2026 01:42:38 PM IST - Count\nThursday 05 November 2026 01:42:39 PM IST - Count\nThursday 05 November 2026 01:42:40 PM IST - Count\n",
+            "result": {
+              "error": "Explicit cancellation or session shutdown"
+            }
+          },
+          "status": "completed",
+          "started_s": 96.06719215899648,
+          "finished_s": 96.06804689199635
+        }
+      ],
+      "inference_start_s": 94.9351229189997,
+      "inference_end_s": 96.98240144999727,
+      "inference_isolatable": true,
+      "reasoning_answer": "The background job has been successfully cancelled. It is no longer running.",
+      "finished_s": 98.73644865000097,
+      "round_trip_s": 4.5234276589741,
+      "to_audio_received_s": 4.423383568998773,
+      "inference_with_tools_s": 2.0472785309975734,
+      "voice_latency_s": 2.4761491279765266,
+      "cost_complete": true,
+      "known_cost_usd": 0.0015434,
+      "cost_usd": 0.0015434,
+      "voice_cost_usd": 0.00094175
+    }
+  ]
+}

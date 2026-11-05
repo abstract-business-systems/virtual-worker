@@ -1,0 +1,598 @@
+{
+  "schema_version": 2,
+  "mode": "separate",
+  "engine": "chat_audio",
+  "models": {
+    "voice": "openai-tts:coral",
+    "think": "openai/gpt-4o-mini",
+    "stt": "openai"
+  },
+  "settings": {
+    "task_reasoning": "shared_external_model",
+    "native_voice_processing": "still_bundled_not_free"
+  },
+  "started_utc": "2026-11-05T09:05:19.735838+00:00",
+  "wall_total_s": 67.73282758300047,
+  "measurement_duration_s": 67.68985034100479,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 4,
+  "completed_turns": 4,
+  "input_audio_s": 27.861187500000128,
+  "total_cost_usd": 0.0064066999999999995,
+  "known_cost_usd": 0.0064066999999999995,
+  "voice_cost_usd": 0.0054305,
+  "cost_per_min_usd": 0.005678872062258631,
+  "voice_cost_per_min_usd": 0.004813572468524436,
+  "round_trip": {
+    "mean_s": 4.760509154736263,
+    "samples": 4
+  },
+  "voice_latency": {
+    "mean_s": 3.1426194804868084,
+    "samples": 4
+  },
+  "to_audio_received": {
+    "mean_s": 4.607705394750925,
+    "samples": 4
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "explicit text inference window (includes tool time)",
+  "background_jobs": [
+    {
+      "job_id": "job-1",
+      "command": "for i in $(seq 1 120); do echo $i; sleep 1; done",
+      "status": "cancelled",
+      "timeout_s": 600.0,
+      "started_at": 60475.045392224,
+      "finished_at": 60519.480086416,
+      "output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n",
+      "result": {
+        "error": "Explicit cancellation or session shutdown"
+      }
+    }
+  ],
+  "cost_scope": "instrumented speech and shared reasoning calls; API spend inside bash/Pi is not measured",
+  "errors": [],
+  "fixture_results": [
+    {
+      "id": "background-start",
+      "completed": true,
+      "heuristic_keyword_match": null,
+      "human_quality_review": "pending",
+      "background_state_verified": true
+    },
+    {
+      "id": "background-conversation",
+      "completed": true,
+      "heuristic_keyword_match": true,
+      "human_quality_review": "pending",
+      "background_state_verified": true
+    },
+    {
+      "id": "background-status",
+      "completed": true,
+      "heuristic_keyword_match": null,
+      "human_quality_review": "pending",
+      "background_state_verified": true
+    },
+    {
+      "id": "background-cancel",
+      "completed": true,
+      "heuristic_keyword_match": null,
+      "human_quality_review": "pending",
+      "background_state_verified": true
+    }
+  ],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": "background-start",
+      "speech_end_s": 9.785475721994764,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 10.704275354000856,
+      "first_audio_received_s": 15.25664335899637,
+      "first_playback_s": 15.400293604814074,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 9.949999999999982,
+      "audio_pcm_peak_abs": 7128,
+      "input_text": "Start a background bash job that prints the numbers 1 through 120, with a one-second pause between each number. Return its job ID immediately.",
+      "reply": "The background job has been started with ID job-1. It will print the numbers 1 through 120, pausing for one second between each.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 10.705788285995368,
+          "end_s": 12.100748618999205,
+          "usage": {
+            "type": "tokens",
+            "total_tokens": 138,
+            "input_tokens": 106,
+            "input_token_details": {
+              "text_tokens": 0,
+              "audio_tokens": 106
+            },
+            "output_tokens": 32
+          },
+          "cost_usd": 0.0002925,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 12.100966177000373,
+          "end_s": 13.104090171997086,
+          "usage": {
+            "prompt_tokens": 627,
+            "completion_tokens": 38,
+            "total_tokens": 665,
+            "cost": 0.00011685,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011685,
+              "upstream_inference_prompt_cost": 9.405e-05,
+              "upstream_inference_completions_cost": 2.28e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011685,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 13.104213150996657,
+          "end_s": 14.047574705000443,
+          "usage": {
+            "prompt_tokens": 743,
+            "completion_tokens": 32,
+            "total_tokens": 775,
+            "cost": 0.00013065,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00013065,
+              "upstream_inference_prompt_cost": 0.00011145,
+              "upstream_inference_completions_cost": 1.92e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00013065,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "gpt-4o-mini-tts",
+          "start_s": 14.047608463995857,
+          "end_s": 16.546491740999045,
+          "usage": null,
+          "cost_usd": 0.001791,
+          "pricing": "estimated_15_audio_tokens_per_second_at_12usd_per_million; NOT_bill_verified"
+        }
+      ],
+      "tools": [
+        {
+          "name": "background_start",
+          "arguments": "{\"command\": \"for i in $(seq 1 120); do echo $i; sleep 1; done\", \"timeout_seconds\": 600}",
+          "result": {
+            "job_id": "job-1",
+            "command": "for i in $(seq 1 120); do echo $i; sleep 1; done",
+            "status": "queued",
+            "timeout_s": 600.0,
+            "started_at": null,
+            "finished_at": null,
+            "output": "",
+            "result": null
+          },
+          "status": "completed",
+          "started_s": 13.104138602000603,
+          "finished_s": 13.104199050998432
+        }
+      ],
+      "inference_start_s": 12.100889477995224,
+      "inference_end_s": 14.04760197399446,
+      "inference_isolatable": true,
+      "reasoning_answer": "The background job has been started with ID job-1. It will print the numbers 1 through 120, pausing for one second between each.",
+      "finished_s": 16.54667404999782,
+      "round_trip_s": 5.61481788281931,
+      "to_audio_received_s": 5.4711676370016065,
+      "inference_with_tools_s": 1.9467124959992361,
+      "voice_latency_s": 3.6681053868200735,
+      "cost_complete": true,
+      "known_cost_usd": 0.002331,
+      "cost_usd": 0.002331,
+      "voice_cost_usd": 0.0020835000000000003
+    },
+    {
+      "id": 2,
+      "fixture": "background-conversation",
+      "speech_end_s": 29.563333736001166,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 30.509817837999435,
+      "first_audio_received_s": 33.00840018299641,
+      "first_playback_s": 33.13169724110527,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.4500000000000015,
+      "audio_pcm_peak_abs": 9574,
+      "input_text": "What is 7 plus 5? Answer in one short sentence.",
+      "reply": "7 plus 5 equals 12.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 30.510122135994607,
+          "end_s": 31.405925216997275,
+          "usage": {
+            "type": "tokens",
+            "total_tokens": 66,
+            "input_tokens": 50,
+            "input_token_details": {
+              "text_tokens": 0,
+              "audio_tokens": 50
+            },
+            "output_tokens": 16
+          },
+          "cost_usd": 0.0001425,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 31.406134935998125,
+          "end_s": 32.20121470999584,
+          "usage": {
+            "prompt_tokens": 829,
+            "completion_tokens": 9,
+            "total_tokens": 838,
+            "cost": 0.00012975,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00012975,
+              "upstream_inference_prompt_cost": 0.00012435,
+              "upstream_inference_completions_cost": 5.4e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00012975,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "gpt-4o-mini-tts",
+          "start_s": 32.20125142899633,
+          "end_s": 34.05982730899996,
+          "usage": null,
+          "cost_usd": 0.000621,
+          "pricing": "estimated_15_audio_tokens_per_second_at_12usd_per_million; NOT_bill_verified"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 31.406026787000883,
+      "inference_end_s": 32.201244559997576,
+      "inference_isolatable": true,
+      "reasoning_answer": "7 plus 5 equals 12.",
+      "finished_s": 34.05992125799821,
+      "round_trip_s": 3.568363505104106,
+      "to_audio_received_s": 3.445066446995245,
+      "inference_with_tools_s": 0.7952177729966934,
+      "voice_latency_s": 2.7731457321074124,
+      "cost_complete": true,
+      "known_cost_usd": 0.0008932500000000001,
+      "cost_usd": 0.0008932500000000001,
+      "voice_cost_usd": 0.0007635000000000001
+    },
+    {
+      "id": 3,
+      "fixture": "background-status",
+      "speech_end_s": 41.03505197299755,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 41.941902825994475,
+      "first_audio_received_s": 45.31473744200048,
+      "first_playback_s": 45.44866073672382,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 5.449999999999997,
+      "audio_pcm_peak_abs": 5662,
+      "input_text": "Check the mock brown job status and tell me its latest output.",
+      "reply": "The job is currently running and has output the numbers from 1 to 31 so far.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 41.942157763995056,
+          "end_s": 42.86286147299688,
+          "usage": {
+            "type": "tokens",
+            "total_tokens": 66,
+            "input_tokens": 51,
+            "input_token_details": {
+              "text_tokens": 0,
+              "audio_tokens": 51
+            },
+            "output_tokens": 15
+          },
+          "cost_usd": 0.00013875,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 42.863091971994436,
+          "end_s": 43.65280969499872,
+          "usage": {
+            "prompt_tokens": 858,
+            "completion_tokens": 17,
+            "total_tokens": 875,
+            "cost": 0.0001389,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001389,
+              "upstream_inference_prompt_cost": 0.0001287,
+              "upstream_inference_completions_cost": 1.02e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001389,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 43.652911533994484,
+          "end_s": 44.533539953998115,
+          "usage": {
+            "prompt_tokens": 1022,
+            "completion_tokens": 20,
+            "total_tokens": 1042,
+            "cost": 0.0001653,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001653,
+              "upstream_inference_prompt_cost": 0.0001533,
+              "upstream_inference_completions_cost": 1.2e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001653,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "gpt-4o-mini-tts",
+          "start_s": 44.53357891400083,
+          "end_s": 46.31877846599673,
+          "usage": null,
+          "cost_usd": 0.000981,
+          "pricing": "estimated_15_audio_tokens_per_second_at_12usd_per_million; NOT_bill_verified"
+        }
+      ],
+      "tools": [
+        {
+          "name": "job_status",
+          "arguments": "{\"job_id\": \"job-1\"}",
+          "result": {
+            "job_id": "job-1",
+            "command": "for i in $(seq 1 120); do echo $i; sleep 1; done",
+            "status": "running",
+            "timeout_s": 600.0,
+            "started_at": 60475.045392224,
+            "finished_at": null,
+            "output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n",
+            "result": null
+          },
+          "status": "completed",
+          "started_s": 43.652863563998835,
+          "finished_s": 43.652895423998416
+        }
+      ],
+      "inference_start_s": 42.86299439199502,
+      "inference_end_s": 44.53357247399981,
+      "inference_isolatable": true,
+      "reasoning_answer": "The job is currently running and has output the numbers from 1 to 31 so far.",
+      "finished_s": 46.318920344994694,
+      "round_trip_s": 4.413608763726266,
+      "to_audio_received_s": 4.279685469002928,
+      "inference_with_tools_s": 1.6705780820047949,
+      "voice_latency_s": 2.7430306817214714,
+      "cost_complete": true,
+      "known_cost_usd": 0.0014239500000000002,
+      "cost_usd": 0.0014239500000000002,
+      "voice_cost_usd": 0.00111975
+    },
+    {
+      "id": 4,
+      "fixture": "background-cancel",
+      "speech_end_s": 54.60126795399678,
+      "speech_end_source": "fixture_sample_boundary",
+      "endpoint_s": 55.42727554899466,
+      "first_audio_received_s": 59.836169980000705,
+      "first_playback_s": 60.04651442129215,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 7.499999999999989,
+      "audio_pcm_peak_abs": 9603,
+      "input_text": "Cancel the background job now and confirm it stopped.",
+      "reply": "The background job has been successfully canceled. Its last output included numbers from 1 to 45.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "gpt-4o-mini-transcribe",
+          "start_s": 55.42753739700129,
+          "end_s": 56.748701096999866,
+          "usage": {
+            "type": "tokens",
+            "total_tokens": 55,
+            "input_tokens": 43,
+            "input_token_details": {
+              "text_tokens": 0,
+              "audio_tokens": 43
+            },
+            "output_tokens": 12
+          },
+          "cost_usd": 0.00011375,
+          "pricing": "published_list_rates_2026-11-05; NOT_bill_verified"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 56.74896197599446,
+          "end_s": 57.53830068699608,
+          "usage": {
+            "prompt_tokens": 1059,
+            "completion_tokens": 17,
+            "total_tokens": 1076,
+            "cost": 0.00016905,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00016905,
+              "upstream_inference_prompt_cost": 0.00015885,
+              "upstream_inference_completions_cost": 1.02e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00016905,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-4o-mini",
+          "start_s": 57.539126301999204,
+          "end_s": 58.80783640300069,
+          "usage": {
+            "prompt_tokens": 1266,
+            "completion_tokens": 21,
+            "total_tokens": 1287,
+            "cost": 0.0001257,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1024,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001257,
+              "upstream_inference_prompt_cost": 0.0001131,
+              "upstream_inference_completions_cost": 1.26e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001257,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "gpt-4o-mini-tts",
+          "start_s": 58.807879552994564,
+          "end_s": 60.81832494500122,
+          "usage": null,
+          "cost_usd": 0.00135,
+          "pricing": "estimated_15_audio_tokens_per_second_at_12usd_per_million; NOT_bill_verified"
+        }
+      ],
+      "tools": [
+        {
+          "name": "job_cancel",
+          "arguments": "{\"job_id\": \"job-1\"}",
+          "result": {
+            "job_id": "job-1",
+            "command": "for i in $(seq 1 120); do echo $i; sleep 1; done",
+            "status": "cancelled",
+            "timeout_s": 600.0,
+            "started_at": 60475.045392224,
+            "finished_at": 60519.480086416,
+            "output": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n",
+            "result": {
+              "error": "Explicit cancellation or session shutdown"
+            }
+          },
+          "status": "completed",
+          "started_s": 57.538343226995494,
+          "finished_s": 57.539110712001275
+        }
+      ],
+      "inference_start_s": 56.74882228700153,
+      "inference_end_s": 58.807872632998624,
+      "inference_isolatable": true,
+      "reasoning_answer": "The background job has been successfully canceled. Its last output included numbers from 1 to 45.",
+      "finished_s": 60.8184447349995,
+      "round_trip_s": 5.4452464672953695,
+      "to_audio_received_s": 5.2349020260039225,
+      "inference_with_tools_s": 2.0590503459970932,
+      "voice_latency_s": 3.3861961212982763,
+      "cost_complete": true,
+      "known_cost_usd": 0.0017585,
+      "cost_usd": 0.0017585,
+      "voice_cost_usd": 0.00146375
+    }
+  ]
+}

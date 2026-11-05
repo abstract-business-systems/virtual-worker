@@ -397,12 +397,21 @@ Source: [`recordings/11.vtt`](recordings/11.vtt), added 4 November 2026;
 its recording date. These are requirements for upcoming work, not completed
 features or authorization to start implementations during transcript ingestion.
 
-**Implementation follow-up:** the shared reasoning-model step now has a
-six-task functional pass in each primary mode; see
-[`poc-baseline-status.md`](poc-baseline-status.md) for receipts and remaining
-measurement limits. The user also confirmed Pi works through bash, so retain
-that workflow instead of assuming a separate SDK integration is necessary.
-The specific game-launch acceptance example has not yet been verified.
+**Implementation follow-up (5 November):** shared reasoning is implemented,
+managed background jobs passed the three-mode counting/conversation regression,
+and the automatic full/mini/separate/realtime sweep has run. See
+[`autonomous-wrap-up.md`](autonomous-wrap-up.md) for current results, failed
+candidates and parked items; historical receipts remain in
+[`poc-baseline-status.md`](poc-baseline-status.md). Public list rates/cache were
+checked, but bill and human-quality review remain open. The read-only Friday
+context bridge is not full deployed voice integration.
+
+Pi remains a bash workflow, not a new SDK. The speech-driven test demonstrated
+Friday invoking Pi to create a working game, but it did not reliably background
+the coding work, and follow-up changes were not accepted. Do not substitute a
+standalone/prebuilt game or label the whole example complete. This bounded
+orchestration investigation is parked for targeted follow-up. Full worker voice
+routing, real meeting validation and the authorized Excel Online demo remain.
 
 The agreed engineering sequence is:
 

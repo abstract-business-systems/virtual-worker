@@ -1,0 +1,167 @@
+{
+  "kind": "model_comparison_index",
+  "thinking_model": "openai/gpt-4o-mini",
+  "synthetic_input": true,
+  "human_quality_review": "pending",
+  "pricing_review": "pending",
+  "smoke": false,
+  "minimum_duration_s": 300,
+  "plan": ".fixtures/comparison-20261105T081806706332Z/plan.json",
+  "runs": [
+    {
+      "mode": "realtime",
+      "exit_code": 0,
+      "fixture_checks_passed": false,
+      "reports": [
+        "session-realtime-20261105T081918071894Z.json"
+      ],
+      "log": "results/logs/realtime-20261105T081806843075Z.log",
+      "candidate": "realtime",
+      "voice_model": "gpt-realtime-2.1-mini",
+      "summaries": [
+        {
+          "think_models_observed": [
+            "openai/gpt-4o-mini"
+          ],
+          "shared_thinking_verified": true,
+          "measurement_duration_s": 68.48063517899573,
+          "completed_turns": 0,
+          "turns": 1,
+          "round_trip": {
+            "mean_s": null,
+            "samples": 0
+          },
+          "voice_latency": {
+            "mean_s": null,
+            "samples": 0
+          },
+          "total_cost_usd": null,
+          "known_cost_usd": 0.00195745,
+          "cost_per_min_usd": null,
+          "voice_cost_per_min_usd": null,
+          "provider_transcript_verbatim_fraction": null,
+          "verbatim_scope": "provider transcript vs reasoning text, punctuation/case ignored; not acoustic or semantic quality",
+          "errors": [
+            "No completed response within 60s: answer",
+            "Fixture run stopped after a failed interaction"
+          ]
+        }
+      ],
+      "comparison_eligible": false
+    },
+    {
+      "mode": "audio",
+      "exit_code": 0,
+      "fixture_checks_passed": true,
+      "reports": [
+        "session-audio-20261105T082426978374Z.json"
+      ],
+      "log": "results/logs/audio-20261105T081918197048Z.log",
+      "candidate": "audio-full",
+      "voice_model": "openai/gpt-audio",
+      "summaries": [
+        {
+          "think_models_observed": [
+            "openai/gpt-4o-mini"
+          ],
+          "shared_thinking_verified": true,
+          "measurement_duration_s": 308.19710750399827,
+          "completed_turns": 20,
+          "turns": 20,
+          "round_trip": {
+            "mean_s": 5.854157125414294,
+            "samples": 20
+          },
+          "voice_latency": {
+            "mean_s": null,
+            "samples": 0
+          },
+          "total_cost_usd": 0.18305920000000003,
+          "known_cost_usd": 0.18305920000000003,
+          "cost_per_min_usd": 0.03563807619400682,
+          "voice_cost_per_min_usd": null,
+          "provider_transcript_verbatim_fraction": 0.7,
+          "verbatim_scope": "provider transcript vs reasoning text, punctuation/case ignored; not acoustic or semantic quality",
+          "errors": []
+        }
+      ],
+      "comparison_eligible": true
+    },
+    {
+      "mode": "audio",
+      "exit_code": 0,
+      "fixture_checks_passed": false,
+      "reports": [
+        "session-audio-20261105T082940364632Z.json"
+      ],
+      "log": "results/logs/audio-20261105T082427060173Z.log",
+      "candidate": "audio-mini",
+      "voice_model": "openai/gpt-audio-mini",
+      "summaries": [
+        {
+          "think_models_observed": [
+            "openai/gpt-4o-mini"
+          ],
+          "shared_thinking_verified": true,
+          "measurement_duration_s": 312.6842966090044,
+          "completed_turns": 16,
+          "turns": 16,
+          "round_trip": {
+            "mean_s": 5.519805423180926,
+            "samples": 16
+          },
+          "voice_latency": {
+            "mean_s": null,
+            "samples": 0
+          },
+          "total_cost_usd": 0.025024650000000002,
+          "known_cost_usd": 0.025024650000000002,
+          "cost_per_min_usd": 0.004801900883041538,
+          "voice_cost_per_min_usd": null,
+          "provider_transcript_verbatim_fraction": 0.0625,
+          "verbatim_scope": "provider transcript vs reasoning text, punctuation/case ignored; not acoustic or semantic quality",
+          "errors": []
+        }
+      ],
+      "comparison_eligible": false
+    },
+    {
+      "mode": "separate",
+      "exit_code": 0,
+      "fixture_checks_passed": true,
+      "reports": [
+        "session-separate-20261105T083450081839Z.json"
+      ],
+      "log": "results/logs/separate-20261105T082940422150Z.log",
+      "candidate": "separate",
+      "voice_model": "openai-tts:coral",
+      "summaries": [
+        {
+          "think_models_observed": [
+            "openai/gpt-4o-mini"
+          ],
+          "shared_thinking_verified": true,
+          "measurement_duration_s": 309.10372114300117,
+          "completed_turns": 20,
+          "turns": 20,
+          "round_trip": {
+            "mean_s": 4.560872253014078,
+            "samples": 20
+          },
+          "voice_latency": {
+            "mean_s": 3.100561511714388,
+            "samples": 20
+          },
+          "total_cost_usd": 0.02543575,
+          "known_cost_usd": 0.02543575,
+          "cost_per_min_usd": 0.0049373232853898805,
+          "voice_cost_per_min_usd": 0.004323111980207414,
+          "provider_transcript_verbatim_fraction": 1.0,
+          "verbatim_scope": "provider transcript vs reasoning text, punctuation/case ignored; not acoustic or semantic quality",
+          "errors": []
+        }
+      ],
+      "comparison_eligible": true
+    }
+  ]
+}

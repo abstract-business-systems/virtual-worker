@@ -51,6 +51,15 @@ class TestCancellation(unittest.IsolatedAsyncioTestCase):
                 task.cancel()
                 await asyncio.gather(task, return_exceptions=True)
 
+    async def test_output_callback_failure_also_stops_process(self):
+        with tempfile.TemporaryDirectory() as folder:
+            def broken_callback(text):
+                raise RuntimeError('observer failed')
+            with self.assertRaises(RuntimeError):
+                await run_tool_async('bash', {'command': 'echo $$ > pid; echo ready; sleep 60'},
+                                     folder, on_output=broken_callback)
+            self.assertFalse(process_running(int((Path(folder)/'pid').read_text())))
+
     async def test_tool_timeout_also_stops_children(self):
         with tempfile.TemporaryDirectory() as folder:
             result = await run_tool_async('bash', {'command': COMMAND}, folder, timeout=.1)

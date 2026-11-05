@@ -136,13 +136,25 @@ class TestAccounting(unittest.TestCase):
         n = normalize_usage(raw)
         self.assertEqual(n['in_text'], 500)
         a = TokenAccount(); a.add(raw)
-        expected = (300*10+500*.6+50*10+50*.6)/1e6
+        expected = (300*10+500*.6+100*.30+100*.06)/1e6
         self.assertAlmostEqual(a.totals()['cost'], expected)
+        self.assertAlmostEqual(usage_cost(raw, 'gpt-realtime-2.1-mini')[0], expected)
 
     def test_provider_zero_cost_not_repriced(self):
         a = TokenAccount(); a.add({'prompt_tokens': 10, 'cost': 0.0})
         self.assertEqual(a.totals()['cost'], 0)
         self.assertEqual(usage_cost({'prompt_tokens': 10, 'cost': 0.0}, 'unknown')[0], 0)
+
+    def test_repricing_is_a_sidecar_and_missing_usage_stays_unknown(self):
+        raw = {'schema_version': 2, 'measurement_duration_s': 60, 'total_cost_usd': 9,
+               'interactions': [{'stages': [{'model': 'openai/gpt-4o-mini',
+                   'usage': {'prompt_tokens': 100, 'cost': .01}, 'cost_usd': 9}]}]}
+        self.assertEqual(benchmark.repriced_estimates(raw)['repriced_total_cost_usd'], .01)
+        self.assertEqual(raw['total_cost_usd'], 9)
+        raw['interactions'][0]['stages'].append({'model': 'gpt-4o-mini-transcribe', 'usage': None})
+        result = benchmark.repriced_estimates(raw)
+        self.assertIsNone(result['repriced_total_cost_usd'])
+        self.assertEqual(result['repriced_known_cost_usd'], .01)
 
     def test_unknown_model_not_priced_as_mini(self):
         self.assertIsNone(usage_cost({'prompt_tokens': 100}, 'unknown')[0])

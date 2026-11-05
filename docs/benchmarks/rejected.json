@@ -84,6 +84,14 @@
     "reason": "baseline_index_not_a_session"
   },
   {
+    "src": "experiments/pipecat-poc/results/baseline-20261105T081247614251Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/baseline-20261105T090627553664Z.json",
+    "reason": "baseline_index_not_a_session"
+  },
+  {
     "src": "experiments/pipecat-poc/results/chat-20261030T101822Z.json",
     "reason": "legacy_zero_turn_debug_session"
   },
@@ -176,6 +184,18 @@
     "reason": "legacy_zero_turn_debug_session"
   },
   {
+    "src": "experiments/pipecat-poc/results/comparison-20261105T081806706332Z.json",
+    "reason": "unknown_report_family"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/comparison-20261105T090627614352Z.json",
+    "reason": "unknown_report_family"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/pi-game-demo-20261105T082804745364Z.json",
+    "reason": "unknown_report_family"
+  },
+  {
     "src": "experiments/pipecat-poc/results/run-20261030T084120Z.json",
     "reason": "legacy_probe_not_a_session"
   },
@@ -230,6 +250,18 @@
   {
     "src": "experiments/pipecat-poc/results/sep-pipecat-20261103T130234Z.json",
     "reason": "invalid_report: Extra data: line 38 column 2 (char 595)"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/voice-task-20261105T084413728349Z.json",
+    "reason": "unknown_report_family"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/voice-task-20261105T084854016271Z.json",
+    "reason": "unknown_report_family"
+  },
+  {
+    "src": "experiments/pipecat-poc/results/voice-task-20261105T085245710972Z.json",
+    "reason": "unknown_report_family"
   },
   {
     "src": "experiments/realtime-model-poc/results/run-20261030T080105Z.json",

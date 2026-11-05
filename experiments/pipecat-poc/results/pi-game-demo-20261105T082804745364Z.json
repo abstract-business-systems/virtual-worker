@@ -1,0 +1,47 @@
+{
+  "kind": "pi_game_demo",
+  "pi_model": "openai/gpt-4o-mini",
+  "account_access": false,
+  "pi_api_cost_usd": null,
+  "scope": "real Pi CLI through managed bash plus isolated browser; not spoken/Teams acceptance",
+  "checks": [
+    {
+      "check": "pi-bash-task",
+      "passed": true,
+      "job_id": "job-1"
+    },
+    {
+      "check": "create-launch-click-reset",
+      "passed": true
+    },
+    {
+      "check": "pi-bash-task",
+      "passed": true,
+      "job_id": "job-3"
+    }
+  ],
+  "server_left_running": false,
+  "failure": "AssertionError: ",
+  "job_states": [
+    {
+      "job_id": "job-1",
+      "status": "completed",
+      "timeout_s": 180.0
+    },
+    {
+      "job_id": "job-2",
+      "status": "cancelled",
+      "timeout_s": 600.0
+    },
+    {
+      "job_id": "job-3",
+      "status": "completed",
+      "timeout_s": 180.0
+    },
+    {
+      "job_id": "job-4",
+      "status": "cancelled",
+      "timeout_s": 600.0
+    }
+  ]
+}

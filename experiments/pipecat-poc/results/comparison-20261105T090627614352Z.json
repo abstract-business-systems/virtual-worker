@@ -1,0 +1,50 @@
+{
+  "kind": "model_comparison_index",
+  "thinking_model": "openai/gpt-4o-mini",
+  "synthetic_input": true,
+  "human_quality_review": "pending",
+  "pricing_review": "pending",
+  "smoke": false,
+  "minimum_duration_s": 300,
+  "plan": ".fixtures/comparison-20261105T090627614352Z/plan.json",
+  "runs": [
+    {
+      "mode": "realtime",
+      "exit_code": 0,
+      "fixture_checks_passed": true,
+      "reports": [
+        "session-realtime-20261105T091133604155Z.json"
+      ],
+      "log": "results/logs/realtime-20261105T090627762644Z.log",
+      "candidate": "realtime",
+      "voice_model": "gpt-realtime-2.1-mini",
+      "summaries": [
+        {
+          "think_models_observed": [
+            "openai/gpt-4o-mini"
+          ],
+          "shared_thinking_verified": true,
+          "measurement_duration_s": 303.8391295600013,
+          "completed_turns": 21,
+          "turns": 21,
+          "round_trip": {
+            "mean_s": 4.301662249720147,
+            "samples": 21
+          },
+          "voice_latency": {
+            "mean_s": null,
+            "samples": 0
+          },
+          "total_cost_usd": null,
+          "known_cost_usd": 0.04713748,
+          "cost_per_min_usd": null,
+          "voice_cost_per_min_usd": null,
+          "provider_transcript_verbatim_fraction": 0.9047619047619048,
+          "verbatim_scope": "provider transcript vs reasoning text, punctuation/case ignored; not acoustic or semantic quality",
+          "errors": []
+        }
+      ],
+      "comparison_eligible": true
+    }
+  ]
+}

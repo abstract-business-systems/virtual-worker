@@ -7,6 +7,7 @@ set -uo pipefail
 # graceful first (SIGINT -> clean shutdown, session report still written)
 pkill -INT -f "experiments/pipecat-poc/chat\.py"            2>/dev/null
 pkill -INT -f "experiments/pipecat-poc/chat_audio\.py"      2>/dev/null
+pkill -INT -f "experiments/pipecat-poc/chat_sep\.py"        2>/dev/null
 pkill -INT -f "experiments/realtime-model-poc/chat-realtime\.py" 2>/dev/null
 pkill -INT -f "experiments/audio-model-poc/chat-audio\.py"  2>/dev/null
 sleep 2
@@ -14,6 +15,7 @@ sleep 2
 # then force anything that survived
 pkill -f "experiments/pipecat-poc/chat\.py"            2>/dev/null
 pkill -f "experiments/pipecat-poc/chat_audio\.py"      2>/dev/null
+pkill -f "experiments/pipecat-poc/chat_sep\.py"        2>/dev/null
 pkill -f "experiments/realtime-model-poc/chat-realtime\.py" 2>/dev/null
 pkill -f "experiments/audio-model-poc/chat-audio\.py"  2>/dev/null
 sleep 1

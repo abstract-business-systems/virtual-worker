@@ -55,12 +55,13 @@ def check_report(data):
     fixtures = data.get('fixture_results') or []
     return (bool(fixtures) and not data.get('errors')
             and all((r.get('interruption_verified') is True if r.get('expected_interruption') else
-                     r.get('completed') and r.get('heuristic_keyword_match') is not False)
+                     r.get('completed') and r.get('heuristic_keyword_match') is not False
+                     and r.get('background_state_verified') is not False)
                     for r in fixtures)
             and data.get('round_trip', {}).get('samples') == data.get('completed_turns'))
 
 
-def run_mode(mode, plan, workdir, native, timeout):
+def run_mode(mode, plan, workdir, native, timeout, *, model=None, think_model=None):
     existing = set((HERE/'results').glob('session-*.json'))
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     logs = HERE/'results/logs'
@@ -69,7 +70,11 @@ def run_mode(mode, plan, workdir, native, timeout):
     command = [str(HERE/'run.sh'), mode, '--plan', str(plan), '--folder', str(workdir)]
     if native and mode == 'separate':
         command.append('--pipecat')
+    if model:
+        command.extend(['--model', model])
     env = dict(os.environ, CHAT_NO_TRANSCRIPT='1', PYTHONUNBUFFERED='1')
+    if think_model:
+        env['CHAT_THINK_MODEL'] = think_model
     with logfile.open('w') as stream:
         child = subprocess.Popen(command, cwd=HERE, env=env, stdout=stream,
                                  stderr=subprocess.STDOUT, start_new_session=True)
@@ -98,10 +103,12 @@ def main():
     parser.add_argument('--native-separate', action='store_true')
     parser.add_argument('--interrupt-regression', action='store_true',
                         help='interrupt a real sleeping bash task, then ask a question')
+    parser.add_argument('--background-regression', action='store_true',
+                        help='start a background job, converse, inspect it, explicitly cancel it')
     args = parser.parse_args()
-    if args.pause_regression and args.interrupt_regression:
+    if sum((args.pause_regression, args.interrupt_regression, args.background_regression)) > 1:
         parser.error('Choose only one regression suite')
-    short_run = args.smoke or args.pause_regression or args.interrupt_regression
+    short_run = args.smoke or args.pause_regression or args.interrupt_regression or args.background_regression
     plan, workdir = prepare(HERE/'.fixtures', 0 if short_run else 300)
     if args.pause_regression:
         if args.mode not in ('all', 'realtime'):
@@ -121,6 +128,24 @@ def main():
             {'id': 'interrupt-long-task', 'wav': wav.name, 'question': question,
              'interrupt_on_tool': True}, data['cases'][0]]
         atomic_json(plan, data)
+    if args.background_regression:
+        data = json.loads(plan.read_text())
+        data['allow_interruptions'] = True
+        specs = [
+            ('background-start', 'Start a background bash job that prints the numbers one through one hundred twenty, with a one second pause between each number. Return its job ID immediately.', 'background_start', 'running'),
+            ('background-conversation', CASES[0][1], None, 'running'),
+            ('background-status', 'Check the background job status and tell me its latest output.', 'job_status', 'running'),
+            ('background-cancel', 'Cancel the background job now and confirm it stopped.', 'job_cancel', 'cancelled')]
+        synth = shutil.which('espeak-ng') or shutil.which('espeak')
+        data['cases'] = []
+        for name, question, expected_tool, expected_status in specs:
+            wav = plan.parent/(name+'.wav')
+            subprocess.run([synth, '-s', '155', '-w', str(wav), question], check=True)
+            data['cases'].append({'id': name, 'wav': wav.name, 'question': question,
+                'expected_tool': expected_tool, 'expected_job_status': expected_status,
+                'expect_numeric_progress': name in ('background-start', 'background-status'),
+                'expected_any': ['12', 'twelve'] if name == 'background-conversation' else []})
+        atomic_json(plan, data)
     print(f'Fixture plan: {plan}', flush=True)
     if args.prepare_only:
         return
@@ -135,7 +160,7 @@ def main():
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     atomic_json(HERE/'results'/f'baseline-{stamp}.json', {
         'kind': 'baseline_index', 'smoke': short_run, 'pause_regression': args.pause_regression,
-        'interrupt_regression': args.interrupt_regression,
+        'interrupt_regression': args.interrupt_regression, 'background_regression': args.background_regression,
         'human_quality_review': 'pending', 'runs': results})
     if any(r['exit_code'] != 0 or not r['fixture_checks_passed'] for r in results):
         raise SystemExit('At least one run failed; inspect its log and reports before comparing numbers.')

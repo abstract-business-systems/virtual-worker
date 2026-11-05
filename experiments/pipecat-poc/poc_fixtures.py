@@ -47,6 +47,12 @@ async def feed_plan(plan, session, enqueue, rate, is_playing, stop, *, ready=lam
         for index, case in enumerate(itertools.cycle(cases)):
             if index >= len(cases) and time.perf_counter()-test_start >= plan.get('minimum_duration_s', 0):
                 break
+            if case.get('wait_for_signal'):
+                deadline = time.perf_counter()+150
+                while not Path(case['wait_for_signal']).exists():
+                    if time.perf_counter() >= deadline:
+                        raise RuntimeError('External acceptance check did not signal readiness within 150s')
+                    await asyncio.sleep(.1)
             session.next_input()
             session.fixture_label = case['id']
             session.turn_done.clear()
@@ -115,6 +121,28 @@ async def feed_plan(plan, session, enqueue, rate, is_playing, stop, *, ready=lam
                                             if words else None),
                 'human_quality_review': 'pending',
             })
+            if case.get('expected_job_status'):
+                manager = getattr(session, 'job_manager', None)
+                jobs = manager.status()['jobs'] if manager is not None else []
+                verified = bool(jobs) and jobs[-1]['status'] == case['expected_job_status']
+                if case.get('expected_tool'):
+                    verified = verified and any(t['name'] == case['expected_tool'] for t in row.get('tools', []))
+                for name in case.get('expected_tools', []):
+                    verified = verified and any(t['name'] == name for t in row.get('tools', []))
+                if case.get('expect_pi_delegation'):
+                    from poc_tools import repair_tool_args
+                    import re
+                    verified = verified and any(t['name'] in ('bash', 'background_start')
+                        and (t['name'] == 'background_start' or repair_tool_args(t['arguments']).get('background') is True)
+                        and re.search(r'\bpi\b', repair_tool_args(t['arguments']).get('command', ''))
+                        for t in row.get('tools', []))
+                if case.get('expect_numeric_progress'):
+                    verified = verified and any(line.strip().isdigit()
+                        for line in jobs[-1]['output'].splitlines())
+                session.fixture_results[-1]['background_state_verified'] = verified
+                if not verified:
+                    session.error('Background job state/tool check failed')
+                    break
             # Stop early on a broken baseline instead of repeatedly billing failures.
             if row.get('status') != 'completed':
                 session.error('Fixture run stopped after a failed interaction')

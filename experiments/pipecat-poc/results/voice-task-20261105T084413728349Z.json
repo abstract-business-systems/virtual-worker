@@ -1,0 +1,17 @@
+{
+  "kind": "voice_pi_task_acceptance",
+  "mode": "separate",
+  "harness_invokes_pi": false,
+  "harness_writes_game_code": false,
+  "pi_model_requested": "openai/gpt-4.1-mini",
+  "pi_api_cost_usd": null,
+  "checks": [],
+  "human_quality_review": "pending",
+  "server_left_running": false,
+  "passed": false,
+  "failure": "RuntimeError: Friday exited before task/browser acceptance",
+  "reports": [
+    "session-separate-20261105T084545826068Z.json"
+  ],
+  "log": "results/logs/voice-task-20261105T084413728349Z.log"
+}

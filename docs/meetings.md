@@ -331,6 +331,32 @@ These are new work items, not evidence that the integrations or demo are done.
 
 Newest entries appear first.
 
+### 2026-11-05 — Autonomous background jobs and comparison checkpoint
+
+Engineering follow-up to the user's request to finish independent work without
+unbounded debugging; this is not a new meeting or transcript amendment.
+
+- Implemented session-owned background bash jobs, live progress/status, explicit
+  cancellation, bounded output/deadlines and graceful shutdown. Numeric-counting
+  and concurrent-conversation regressions passed in all three primary modes.
+- Added and executed the automatic four-configuration voice sweep with shared
+  reasoning held fixed. Full audio and separate passed controlled task checks;
+  mini failed several checks. A realtime no-audible-output failure was retained
+  and one bounded recheck was performed separately.
+- Retrieved public pricing evidence, corrected model-specific realtime cache
+  rates, and added sidecar repricing without rewriting raw session receipts.
+- Added an opt-in read-only Friday context bridge and synthetic real-backend ACL
+  integration tests; fixed cross-team active-meeting context exposure. No worker
+  services or private accounts were changed in deployment.
+- The user clarified that **Friday must delegate game creation/changes to Pi**.
+  Stopped/removed the direct-Pi standalone harness. The corrected speech-driven
+  test demonstrated Pi creating a playable game, but background task selection
+  and follow-up were not qualified. A stronger-model check also failed; parked
+  the branch rather than substitute manual game repairs or continue prompt loops.
+- Human quality/accounting review, full worker deployment and authorized Excel
+  Online acceptance remain open. See [the detailed checkpoint](autonomous-wrap-up.md)
+  for receipts, values, limits and joint follow-up.
+
 ### 2026-11-05 — Long-running task cancellation repaired (engineering update)
 
 - User live testing found realtime stopped answering after an indefinite

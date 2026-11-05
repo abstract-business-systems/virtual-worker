@@ -140,7 +140,8 @@ class TestHTTP(unittest.TestCase):
         service = DelegatedRealtimeService(api_key='test', reason_session=SessionReport('realtime', 'test', {}))
         async def exercise():
             with patch.object(OpenAIRealtimeLLMService, '_handle_evt_response_created', new=AsyncMock()), patch.object(service, 'push_frame', new=AsyncMock()) as push:
-                await service._handle_evt_response_created(object())
+                from types import SimpleNamespace
+                await service._handle_evt_response_created(SimpleNamespace(response=SimpleNamespace(id='speech-1')))
                 self.assertIsInstance(push.call_args.args[0], LLMFullResponseStartFrame)
                 service._current_audio_response = object()
                 await service._truncate_current_audio_response()
@@ -214,6 +215,24 @@ class TestHTTP(unittest.TestCase):
                 self.assertIn('too long', row['reasoning_answer'])
                 self.assertTrue(row['errors'])
                 create.assert_awaited_once()
+        asyncio.run(exercise())
+
+    def test_realtime_silent_response_fails_without_waiting_for_fixture_timeout(self):
+        from types import SimpleNamespace
+        from unittest.mock import AsyncMock
+        from chat import DelegatedRealtimeService, OpenAIRealtimeLLMService
+        from poc_report import SessionReport
+        session = SessionReport('realtime', 'test', {})
+        row = session.endpoint()
+        service = DelegatedRealtimeService(api_key='test', reason_session=session)
+        service._requested_row = row
+        service._signal_response_id = 'silent-response'
+        event = SimpleNamespace(response=SimpleNamespace(id='silent-response', status='completed'))
+        async def exercise():
+            with patch.object(OpenAIRealtimeLLMService, '_handle_evt_response_done', new=AsyncMock()):
+                await service._handle_evt_response_done(event)
+            self.assertEqual(row['status'], 'failed')
+            self.assertIn('audible PCM', row['errors'][0])
         asyncio.run(exercise())
 
     def test_realtime_manual_commit_does_not_auto_answer(self):

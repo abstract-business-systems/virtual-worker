@@ -1,0 +1,50 @@
+{
+  "kind": "public_pricing_snapshot",
+  "retrieved_utc": "2026-11-05T09:07:00.568055+00:00",
+  "bill_verified": false,
+  "sources": [
+    {
+      "url": "https://openrouter.ai/api/v1/models",
+      "unit": "USD per token, exactly as public API returned",
+      "models": {
+        "openai/gpt-audio": {
+          "prompt": "0.0000025",
+          "completion": "0.00001",
+          "audio": "0.000032",
+          "audio_output": "0.000064"
+        },
+        "openai/gpt-audio-mini": {
+          "prompt": "0.0000006",
+          "completion": "0.0000024",
+          "audio": "0.0000006",
+          "audio_output": "0.0000024"
+        },
+        "openai/gpt-4.1-mini": {
+          "prompt": "0.0000004",
+          "completion": "0.0000016",
+          "web_search": "0.01",
+          "input_cache_read": "0.0000001"
+        },
+        "openai/gpt-4o-mini": {
+          "prompt": "0.00000015",
+          "completion": "0.0000006",
+          "input_cache_read": "0.000000075"
+        }
+      }
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "short_excerpts": {
+        "gpt-realtime-2.1-mini": "gpt-realtime-2.1-mini Audio $10.00 $20.00 $0.30 Text $0.60 $2.40 $0.06 Image $0.80 - $0.08 All models Image generation models Prices per 1M tokens. Standard Batch Standard For image generation cost estimates, use the calculator in the image generation guide. Model Modality Input ",
+        "gpt-4o-mini-transcribe": "gpt-4o-mini-transcribe Transcription $1.25 $5.00 $0.003 / minute All models Tools Tool Details Pricing Web search Web search (all models) $10.00 / 1k calls + Search content tokens billed at model rates. Image Web search (all models) $10.00 / 1k calls + Search content tokens bille"
+      }
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-4o-mini-tts",
+      "short_excerpts": {
+        "Text tokens Per 1M tokens Input": "Text tokens Per 1M tokens Input $0.60 Quick comparison Input GPT-4o Realtime $ 5.00 GPT-4o Mini TTS $ 0.60 GPT-4o Mini Realtime $ 0.60 Audio tokens Per 1M tokens Output $12.00 Modalities Text Input only Image Not supported Audio Output only Video Not supported Endpoints Live v1/l",
+        "$12.00": "$12.00 Modalities Text Input only Image Not supported Audio Output only Video Not supported Endpoints Live v1/live/sessions Chat Completions v1/chat/completions Responses v1/responses Realtime v1/realtime Realtime translation v1/realtime/translations Realtime transcription v1/rea"
+      }
+    }
+  ]
+}
