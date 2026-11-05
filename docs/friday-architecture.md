@@ -28,7 +28,7 @@ back — then Friday keeps listening.
 ```mermaid
 flowchart TB
     V["1. Endpointing<br/>pipecat Silero VAD (local ONNX)<br/>~0.5-0.8 s of silence commits the turn"]
-    S["2. Speech-to-text<br/>ElevenLabs Scribe v2<br/>via OpenRouter"]
+    S["2. Speech-to-text<br/>ElevenLabs Scribe v2<br/>via OpenRouter<br/>+ domain glossary hint"]
     R["3. Reasoning<br/>openai/gpt-6-luna<br/>via OpenRouter"]
     T["4. Text-to-speech<br/>ElevenLabs v4 Turbo, voice Jessica<br/>via OpenRouter, streamed PCM"]
     P["5. Speaker feed<br/>24 kHz PCM"]
@@ -77,6 +77,18 @@ flowchart TB
     T --> OR
     R -- "every turn" --> REP
 ```
+
+## Glossary (recognition hint)
+
+A list of domain terms is sent as a short text hint next to every audio
+chunk, so the speech-to-text model spells these correctly when it hears them
+(`CHAT_GLOSSARY` / `glossary` in `models.ini`):
+
+pipecat, Paseo, Viswanath, Virtual Worker, xrdp, PipeWire, OpenRouter,
+OpenAI, benchmark dataset, meeting notes, action items, calendar
+
+Measured effect (M8): status/meeting questions answered correctly 5/5 with
+the glossary vs 0/4 without.
 
 ## Alternates measured (same skeleton, different services)
 
