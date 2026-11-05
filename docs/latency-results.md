@@ -6,6 +6,11 @@
 |---|---|---|---:|---|---|---|---:|---:|
 | 1 | Original worker | CLI | 2.01 s | Whisper (local)<br>1.54 s | gpt-4o-mini<br>1.93 s | local<br>2.45 s | 7.77 s | 20.32 s (whole reply, not first word) |
 | 2 | Realtime | CLI + Teams | one connection does all three | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | CLI 1.13 s; Teams 10.87 s | CLI 4.30 s; Teams not separable |
+| 3 | One audio model, full | CLI | 0.7 s | gpt-audio<br>0 s, inside same call | gpt-audio<br>inside same call | gpt-audio<br>2.6 s | 3.28 s | 5.85 s |
+| 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none |
+| 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s |
+| 6 | Three calls, OpenRouter voice | Teams | never measured | gpt-audio<br>never measured | gpt-6-luna<br>never measured | gpt-audio<br>never measured | not measured | none |
+| 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s | elevenlabs/scribe-v2<br>1.67 s | gpt-6-luna<br>2.82 s | elevenlabs/eleven-v4-turbo<br>1.15 s | CLI 3.84 s; Teams not yet timed (est. ~7–8 s incl. travel) | 7.65 s |
 
 Row 2 live source: 5 Nov, 6 turns over 4.9 min in a real Teams meeting, zero
 errors, transcript heard correctly 6/6, bash tools worked live
@@ -15,11 +20,6 @@ $0.0237 ≈ ₹1.99 for the session (~₹0.41 per listening-minute). The 6.6 s g
 vs the CLI bench is almost entirely the transcription call from the abs-worker
 host (7.54 s there vs ~1.5 s from the dev machine) — not the Teams meeting
 itself, whose transport and silence wait together cost well under 1.5 s.
-| 3 | One audio model, full | CLI | 0.7 s | gpt-audio<br>0 s, inside same call | gpt-audio<br>inside same call | gpt-audio<br>2.6 s | 3.28 s | 5.85 s |
-| 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none |
-| 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s |
-| 6 | Three calls, OpenRouter voice | Teams | never measured | gpt-audio<br>never measured | gpt-6-luna<br>never measured | gpt-audio<br>never measured | not measured | none |
-| 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s | elevenlabs/scribe-v2<br>1.67 s | gpt-6-luna<br>2.82 s | elevenlabs/eleven-v4-turbo<br>1.15 s | CLI 3.84 s; Teams not yet timed (est. ~7–8 s incl. travel) | 7.65 s |
 
 Row 7 bench source: 5 Nov, 17 turns over 301 s, all fixture checks passed
 (`session-separate-20261105T152427745844Z.json`). Thinking stage average
