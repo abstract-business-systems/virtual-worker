@@ -1,0 +1,1969 @@
+{
+  "schema_version": 2,
+  "mode": "separate",
+  "engine": "chat_audio",
+  "models": {
+    "voice": "openai-tts:elevenlabs/eleven-v4-turbo",
+    "think": "openai/gpt-6-luna",
+    "stt": "openai:elevenlabs/scribe-v2"
+  },
+  "settings": {
+    "task_reasoning": "shared_external_model",
+    "native_voice_processing": "still_bundled_not_free"
+  },
+  "started_utc": "2026-11-06T06:47:26.642947+00:00",
+  "wall_total_s": 463.2935841330036,
+  "measurement_duration_s": 463.0960063000093,
+  "cost_denominator": "established-session wall minutes, including listening, inference and playback",
+  "turns": 23,
+  "completed_turns": 13,
+  "input_audio_s": 345.90000000001015,
+  "total_cost_usd": null,
+  "known_cost_usd": 0.007672905416665855,
+  "voice_cost_usd": null,
+  "cost_per_min_usd": null,
+  "voice_cost_per_min_usd": null,
+  "round_trip": {
+    "mean_s": 8.10937107348698,
+    "samples": 13
+  },
+  "voice_latency": {
+    "mean_s": 4.348998056098977,
+    "samples": 13
+  },
+  "to_audio_received": {
+    "mean_s": 7.96013845711001,
+    "samples": 13
+  },
+  "quality_verified": false,
+  "pricing_verified": false,
+  "inference_isolation": "explicit text inference window (includes tool time)",
+  "background_jobs": [],
+  "cost_scope": "instrumented speech and shared reasoning calls; API spend inside bash/Pi is not measured",
+  "errors": [
+    "RuntimeError: Tool loop exceeded 4 model requests"
+  ],
+  "fixture_results": [],
+  "interactions": [
+    {
+      "id": 1,
+      "fixture": null,
+      "speech_end_s": 69.51480143220876,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 70.2921592950006,
+      "first_audio_received_s": 74.32322715400369,
+      "first_playback_s": 74.47979391336276,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.0000000000000004,
+      "audio_pcm_peak_abs": 17768,
+      "input_text": "Hello, I'm Friday",
+      "reply": "Hello! I\u2019m here to help.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 70.29240805399604,
+          "end_s": 71.96150321999448,
+          "usage": {
+            "seconds": 2.3025,
+            "cost": 0.00014070833333330776
+          },
+          "cost_usd": 0.00014070833333330776,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 71.96189821799635,
+          "end_s": 73.39675402300782,
+          "usage": {
+            "prompt_tokens": 594,
+            "completion_tokens": 12,
+            "total_tokens": 606,
+            "cost": 6.54e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 6.54e-05,
+              "upstream_inference_prompt_cost": 5.94e-05,
+              "upstream_inference_completions_cost": 6e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 6.54e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 73.39679102200898,
+          "end_s": 74.34938888499164,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 71.96178343798965,
+      "inference_end_s": 73.39678444198216,
+      "inference_isolatable": true,
+      "reasoning_answer": "Hello! I\u2019m here to help.",
+      "finished_s": 74.34949257399421,
+      "round_trip_s": 4.964992481153999,
+      "to_audio_received_s": 4.808425721794933,
+      "inference_with_tools_s": 1.435001003992511,
+      "voice_latency_s": 3.529991477161488,
+      "cost_complete": false,
+      "known_cost_usd": 0.00020610833333330777,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 2,
+      "fixture": null,
+      "speech_end_s": 80.73344825845557,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 81.57982697000261,
+      "first_audio_received_s": 88.85499642399373,
+      "first_playback_s": 89.03526632464109,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 6.399999999999993,
+      "audio_pcm_peak_abs": 17043,
+      "input_text": "How's the weather today?",
+      "reply": "I don\u2019t have live weather data available here. If you share your location and a forecast, I can help interpret it.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 81.58006927798851,
+          "end_s": 82.78802352098865,
+          "usage": {
+            "seconds": 2.177875,
+            "cost": 0.0001330923611110869
+          },
+          "cost_usd": 0.0001330923611110869,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 82.78831015000469,
+          "end_s": 83.88942925998708,
+          "usage": {
+            "prompt_tokens": 618,
+            "completion_tokens": 22,
+            "total_tokens": 640,
+            "cost": 7.28e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 7.28e-05,
+              "upstream_inference_prompt_cost": 6.18e-05,
+              "upstream_inference_completions_cost": 1.1e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 7.28e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 83.90622636000626,
+          "end_s": 87.467524785985,
+          "usage": {
+            "prompt_tokens": 757,
+            "completion_tokens": 115,
+            "total_tokens": 872,
+            "cost": 0.0001332,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001332,
+              "upstream_inference_prompt_cost": 7.57e-05,
+              "upstream_inference_completions_cost": 5.75e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 84,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001332,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 87.4675690360018,
+          "end_s": 89.0271640259889,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"pwd; ls -la\"}",
+          "result": {
+            "returncode": 0,
+            "output": "/home/abs-worker/vw-data/poc-workdir\ntotal 15\ndrwxrwxr-x 2 abs-worker abs-worker    3 Nov  5 16:10 .\ndrwxrwxr-x 7 abs-worker abs-worker   12 Nov  6 12:14 ..\n-rw-rw-r-- 1 abs-worker abs-worker 1018 Nov  5 16:10 snake_game.py"
+          },
+          "status": "completed",
+          "started_s": 83.88956204900751,
+          "finished_s": 83.90616029099328
+        }
+      ],
+      "inference_start_s": 82.78819227000349,
+      "inference_end_s": 87.46756116600591,
+      "inference_isolatable": true,
+      "reasoning_answer": "I don\u2019t have live weather data available here. If you share your location and a forecast, I can help interpret it.",
+      "finished_s": 89.0272840159887,
+      "round_trip_s": 8.301818066185518,
+      "to_audio_received_s": 8.121548165538158,
+      "inference_with_tools_s": 4.679368896002416,
+      "voice_latency_s": 3.6224491701831028,
+      "cost_complete": false,
+      "known_cost_usd": 0.00033909236111108693,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 3,
+      "fixture": null,
+      "speech_end_s": 100.73973974660497,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 101.39585218499997,
+      "first_audio_received_s": 108.90802236899617,
+      "first_playback_s": 109.1067991010213,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.760000000000002,
+      "audio_pcm_peak_abs": 17100,
+      "input_text": "What is today though?",
+      "reply": "Today is Friday, November 6, 2026.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 101.3960064649873,
+          "end_s": 103.05507150199264,
+          "usage": {
+            "seconds": 2.2895,
+            "cost": 0.00013991388888886345
+          },
+          "cost_usd": 0.00013991388888886345,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 103.05534986100974,
+          "end_s": 105.84309891698649,
+          "usage": {
+            "prompt_tokens": 797,
+            "completion_tokens": 50,
+            "total_tokens": 847,
+            "cost": 0.0001047,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001047,
+              "upstream_inference_prompt_cost": 7.97e-05,
+              "upstream_inference_completions_cost": 2.5e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 18,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001047,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 105.84624538000207,
+          "end_s": 107.69209947998752,
+          "usage": {
+            "prompt_tokens": 859,
+            "completion_tokens": 39,
+            "total_tokens": 898,
+            "cost": 0.0001054,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001054,
+              "upstream_inference_prompt_cost": 8.59e-05,
+              "upstream_inference_completions_cost": 1.95e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 21,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001054,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 107.69215725999675,
+          "end_s": 108.98996297898702,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"date '+%A, %B %-d, %Y'\"}",
+          "result": {
+            "returncode": 0,
+            "output": "Friday, November 6, 2026"
+          },
+          "status": "completed",
+          "started_s": 105.84315536599024,
+          "finished_s": 105.84622592999949
+        }
+      ],
+      "inference_start_s": 103.05526364099933,
+      "inference_end_s": 107.69214306000504,
+      "inference_isolatable": true,
+      "reasoning_answer": "Today is Friday, November 6, 2026.",
+      "finished_s": 108.99032921699109,
+      "round_trip_s": 8.367059354416327,
+      "to_audio_received_s": 8.168282622391203,
+      "inference_with_tools_s": 4.636879419005709,
+      "voice_latency_s": 3.730179935410618,
+      "cost_complete": false,
+      "known_cost_usd": 0.00035001388888886343,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 4,
+      "fixture": null,
+      "speech_end_s": 122.07449318558349,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 122.9886625680083,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": "And what is special today? Can I do some internet search if it's possible and tell me?",
+      "reply": "",
+      "status": "failed",
+      "errors": [
+        "RuntimeError: Tool loop exceeded 4 model requests"
+      ],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 122.98980556198512,
+          "end_s": 125.14323841698933,
+          "usage": {
+            "seconds": 7.8086875,
+            "cost": 0.00047719756944435767
+          },
+          "cost_usd": 0.00047719756944435767,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 125.1440805530001,
+          "end_s": 127.88913207998849,
+          "usage": {
+            "prompt_tokens": 900,
+            "completion_tokens": 206,
+            "total_tokens": 1106,
+            "cost": 0.000193,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000193,
+              "upstream_inference_prompt_cost": 9e-05,
+              "upstream_inference_completions_cost": 0.000103
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 71,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.000193,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 127.89378461500746,
+          "end_s": 129.69885120200342,
+          "usage": {
+            "prompt_tokens": 1067,
+            "completion_tokens": 134,
+            "total_tokens": 1201,
+            "cost": 0.0002003,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 1064,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0002003,
+              "upstream_inference_prompt_cost": 0.0001333,
+              "upstream_inference_completions_cost": 6.7e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0002003,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 129.9104424820107,
+          "end_s": 134.38087215999258,
+          "usage": {
+            "prompt_tokens": 3176,
+            "completion_tokens": 312,
+            "total_tokens": 3488,
+            "cost": 0.000430565,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 1064,
+              "cache_write_tokens": 2109,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000430565,
+              "upstream_inference_prompt_cost": 0.000274565,
+              "upstream_inference_completions_cost": 0.000156
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 95,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.000430565,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 135.05237922098604,
+          "end_s": 138.0812928939995,
+          "usage": {
+            "prompt_tokens": 5128,
+            "completion_tokens": 256,
+            "total_tokens": 5384,
+            "cost": 0.00040403,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 3173,
+              "cache_write_tokens": 1952,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00040403,
+              "upstream_inference_prompt_cost": 0.00027603,
+              "upstream_inference_completions_cost": 0.000128
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 78,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00040403,
+          "pricing": "provider_reported_usd"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"python - <<'PY'\\nimport urllib.request, urllib.parse\\nu='https://www.google.com/search?q='+urllib.parse.quote('November 6 2026 special day observances')\\ntry:\\n r=urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=10)\\n print(r.status, r.geturl()); print(r.read(7000).decode('utf-8','ignore')[:7000])\\nexcept Exception as e: print(type(e).__name__,e)\\nPY\"}",
+          "result": {
+            "returncode": 127,
+            "output": "bash: line 1: python: command not found"
+          },
+          "status": "failed",
+          "started_s": 127.88918535999255,
+          "finished_s": 127.89376912498847
+        },
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"python3 - <<'PY'\\nimport urllib.request, urllib.parse\\nu='https://www.google.com/search?q='+urllib.parse.quote('November 6 2026 special day observances')\\ntry:\\n r=urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=10)\\n print(r.status, r.geturl()); print(r.read(7000).decode('utf-8','ignore')[:7000])\\nexcept Exception as e: print(type(e).__name__,e)\\nPY\"}",
+          "result": {
+            "returncode": 0,
+            "output": ",h[M.C]=function(){return N},h.concat=function(U){N=U},W=h),(b^36)>>4)||(W=y=function(){for(var U=93;U!=58;)if(U==63)U=f==2?47:17;else if(U==71)var H=[WT,u,h,(U=63,void 0),R,l,arguments];else if(U==5)R&&l&&R.removeEventListener(l,y,VX),U=58;else if(U==64){var V=Uh(true,H,null,d);U=13}else if(U==47)S(32,H,d),V=JX(39,0,N,N,d),U=13;else if(U==93)U=d.i==d?36:58;else if(U==59){var t=!d.R.length&&!d.U;U=((S(32,H,d),t)&&JX(54,0,N,N,d),13)}else if(U==36)U=d.o?71:5;else if(U==17)U=f==M?59:64;else if(U==13)return V}),W},GY=function(r,b,M,N,h,f,u,d,R,l,y,W){{y=8;while(y!=39)if(y==91)y=l<d.length?44:1;else if(y==79)l++,y=91;else if(y==7)W=Object.prototype.hasOwnProperty.call(M,Eh)&&M[Eh]||(M[Eh]=++Kz),y=33;else if(y==30)y=91;else if(y==8)y=34;else if(y==6)y=Array.isArray(d)?15:25;else if(y==34)y=(b<<1&6)==2?7:33;else if(y==33)y=(b|7)<17&&(b^57)>=3?4:11;else if(y==15)l=M,y=30;else if(y==4)this[this+\"\"]=this,W=Promise.resolve(),y=11;else if(y==25)h=TY(14,75,h),R&&R[q3]?R.V.add(String(d),h,N,o8(u,\"object\",18)?!!u.capture:!!u,f):pz(65,\"object\",false,N,h,d,u,f,R),y=1;else{if(y==1)return W;y==11?y=(b^25)>>4?1:75:y==51?(I8(\"object\",20,\"object\",r,R,u,d,f,h),y=1):y==44?(GY(true,16,0,false,h,f,u,d[l],R),y=79):y==75&&(y=u&&u.once?51:6)}}},rM=52,N3=73,fz=182,hX=161,a8=function(r,b,M,N,h,f,u,d,R,l,y){for(l=74;l!=98;)if(l==54)this.type=N,this.currentTarget=this.target=b,this.defaultPrevented=this.Rx=false,l=31;else if(l==17)l=M<<1&7?31:54;else if(l==74)l=17;else if(l==92){a:{for(R=N;R<h.length;++R)if(d=h[R],!d.EG&&d.listener==b&&d.capture==!!u&&d.handler==f){y=R;break a}y=-1}l=r}else if(l==31)l=M-6<13&&(M|8)>>3>=0?92:r;else if(l==r)return y},bu=106,Cz=function(r,b,M,N,h,f,u,d,R,l,y,W){{y=59;while(y!=12)if(y==26){a:{for(f in N)if(h.call(void 0,N[f],f,N)){W=M;break a}W=b}y=25}else if(y==45)y=(r+8&15)==1?69:51;else if(y==85)y=b.EG?15:91;else if(y==88)W=!!(h=M.Ix,(N|b)- -1+(h&~N)+(~h^N)),y=80;else if(y==17)y=r+3&7?25:26;else if(y==69)f=u=0,y=57;else{if(y==25)return W;y==91?(u=new e1(M,this),f=b.listener,h=b.handler||b.src,b.GG&&S1(83,9,\"on\",0,b),N=f.call(h,u),y=64):y==64?(W=N,y=11):y==46?(f+=f<<3,f=(d=f>>11,(f|0)+(d|0)-2*(f&d)),h=f+(f<<15)>>>0,R=new Number((l=(1<<M)-1,-~(h|l)-(~h&l)+(~h|l))),R[0]=(h>>>M)%N,W=R,y=51):y==11?y=(r^11)>>3==3?88:80:y==59?y=45:y==89?(BT.call(this),b||zY||(zY=new tX),this.iH=void 0,this.Hu=this.H8=false,this.Xp=this.u=this.Pu=this.QZ=this.rT=null,y=17):y==80?y=(r|1)<18&&(r>>1&15)>=4?89:17:y==15?(N=true,y=64):y==33?(f+=b.charCodeAt(u),f+=f<<10,f^=f>>6,y=76):y==51?y=r>>1&14?11:85:y==76?(u++,y=55):y==55?y=u<b.length?33:46:y==57&&(y=55)}}},E=function(r,b,M,N,h,f){if(!(b+4>>4))a:{if(r.G){f=FZ(r,r.A);break a}f=(2*(N=gM(r,8,true),N|0)- -1+~N-(N&-129)&&(N=-2*(~N^128)+(N|-129)+(~N|128),h=gM(r,2,true),N=(M=N<<2,-3*~(M&h)+-2+~(M|h)+2*(M^h))),N)}return(b>>2&3)==1&&(N=vT(M),-2*~N+~(N|128)-(~N^128)+2*(~N|128)&&(N=(N|r)- -1+(~N^r)|vT(M)<<7),f=N),f},AX=function(r,b,M,N,h){for(h=49;h!=94;){if(h==46)return N;h==3?h=(b>>2&11)>=6&&(b-9&8)<7?73:46:h==57?h=b>>1&r?52:91:h==73?(this.i=M,h=46):h==52?h=(b^37)>>4>=3&&((b^23)&4)<1?17:3:h==91?h=52:h==17?(this.QK=M,h=3):h==49&&(h=57)}},p=function(r,b,M,N,h,f){for(h=37;h!=62;)if(h==85)h=(r-4^11)<r&&r-2<<1>=r?39:31;else if(h==30)f=b&&b.parentNode?b.parentNode.removeChild(b):null,h=14;else{if(h==14)return f;h==31?h=r+1<12&&(r<<1&11)>=1?83:28:h==37?h=85:h==39?(K(b,M,N),N[QX]=458551,h=31):h==83?(this.n++,M=b-this.K,this.K+=M/this.n,this.zG+=M*(b-this.K),h=28):h==28&&(h=r<<1&7?14:30)}},f6=function(r,b,M,N,h,f,u,d,R,l,y,W,U,H,V,t){for(V=72;V!=4;)if(V==89)this.listener=b,this.proxy=null,this.src=M,this.type=f,this.capture=!!h,this.handler=N,this.key=++D3,this.EG=this.GG=false,V=3;else if(V==90)t=dM[b](dM.prototype,{pop:M,floor:M,parent:M,splice:M,console:M,propertyIsEnumerable:M,replace:M,length:M,stack:M,prototype:M,document:M,call:M}),V=18;else if(V==26)V=(r|40)==r?89:3;else if(V==72)V=94;else if(V==7)this[this+\"\"]=this,V=24;else if(V==3)V=(r<<1&23)==4?54:33;else if(V==18)V=(r+5^17)>=r&&(r+4^11)<r?14:26;else{if(V=="
+          },
+          "status": "completed",
+          "started_s": 129.69895403200644,
+          "finished_s": 129.91040742298355
+        },
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"python3 - <<'PY'\\nimport urllib.request,urllib.parse\\nfor host,url in [('ddg','https://html.duckduckgo.com/html/?q='+urllib.parse.quote('November 6 2025 observances special day')),('wiki','https://en.wikipedia.org/wiki/November_6')]:\\n try:\\n  req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'})\\n  x=urllib.request.urlopen(req,timeout=10).read().decode('utf8','ignore')\\n  import re\\n  x=re.sub('<script.*?</script>|<style.*?</style>',' ',x,flags=re.S|re.I); x=re.sub('<[^>]+>',' ',x); x=re.sub(r'\\\\s+',' ',x)\\n  print('\\\\n',host, x[:6000])\\n except Exception as e: print(host,repr(e))\\nPY\"}",
+          "result": {
+            "returncode": 0,
+            "output": "na Anar\u00e2\u0161kiel\u00e2 ChiShona Shqip \u0421\u0440\u043f\u0441\u043a\u0438 / srpski Seeltersk Sunda Svenska Kiswahili \u015al\u016fnski \u0ba4\u0bae\u0bbf\u0bb4\u0bcd \u0c24\u0c46\u0c32\u0c41\u0c17\u0c41 \u0422\u043e\u04b7\u0438\u043a\u04e3 \u0e44\u0e17\u0e22 T\u00fcrkmen\u00e7e Tagalog Tol\u0131\u015fi Setswana T\u00fcrk\u00e7e \u0422\u0430\u0442\u0430\u0440\u0447\u0430 / tatar\u00e7a \u0422\u044b\u0432\u0430 \u0434\u044b\u043b \u0423\u0434\u043c\u0443\u0440\u0442 \u0626\u06c7\u064a\u063a\u06c7\u0631\u0686\u06d5 / Uyghurche \u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430 \u0627\u0631\u062f\u0648 O\u02bbzbekcha / \u045e\u0437\u0431\u0435\u043a\u0447\u0430 V\u00e8neto Ti\u1ebfng Vi\u1ec7t West-Vlams Volap\u00fck Walon Winaray \u5434\u8bed \u0425\u0430\u043b\u044c\u043c\u0433 \u10db\u10d0\u10e0\u10d2\u10d0\u10da\u10e3\u10e0\u10d8 \u05d9\u05d9\u05b4\u05d3\u05d9\u05e9 Yor\u00f9b\u00e1 Vahcuengh Ze\u00eauws \u6587\u8a00 \u95a9\u5357\u8a9e / B\u00e2n-l\u00e2m-g\u00ed \u7cb5\u8a9e \u4e2d\u6587 Edit links Article Talk English Read Edit View history Save Tools Tools move to sidebar hide Actions Read Edit View history Save General What links here Related changes Upload file Permanent link Page information Cite this page Get shortened URL Switch to legacy parser Print/export Download as PDF Printable version In other projects Wikimedia Commons Wikinews Wikiquote Wikidata item Appearance move to sidebar hide Checked From Wikipedia, the free encyclopedia Page version status This is an accepted version of this page This is the latest accepted revision , reviewed on 6 November 2026 . &lt;&lt; November >> Su Mo Tu We Th Fr Sa 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 2026 November 6 in recent years 2026 (Friday) 2025 (Thursday) 2024 (Wednesday) 2023 (Monday) 2022 (Sunday) 2021 (Saturday) 2020 (Friday) 2019 (Wednesday) 2018 (Tuesday) 2017 (Monday) {{small|{{nobold|in various calendars}}}}\"}},\"i\":0}}]}'> November 6 this year in various calendars Friday , 6 November 2026 Akan Monofie Armenian 19 Tr\u0113 1476 Aztec Atlcahualo 15, 2 T\u014dchtli Babylonian 24 Tashritu, 2337 SE Balinese pawukon Luang, Pepet, Kajeng, Laba, Paing, Maulu, Sukra of Sinta, Brahma, Gigis, Manuh Bengali 21 Kartik , BS 1433 Chinese Yang Wood Monkey \u30fb Ghost Mansion Fire Horse Year, Month 9 , Day 28 ( Shuangjiang , 1 day until Lidong ) Common Era 6 November 2026 CE Coptic 27 Paopi , AM 1743 Egyptian 24 Phamenoth , 2775 NE Ethiopian 27 \u1e6ceqemt, 2019 Am\u00e4t\u00e4 M\u0259hr\u00e4t French Republican D\u00e9cade II, Quintidi de Brumaire de l'Ann\u00e9e 235 de la R\u00e9publique Gregorian 6 November , AD 2026 Hebrew 26 Cheshvan , AM 5787 Hindu Hasta \u30fb Vaidh\u1e5bti Solar: 20 K\u0101rtika , 1948 SE Lunisolar: Dv\u0101da\u015b\u012b , K\u1e5bishna pak\u1e63a of \u0100\u015bvina , 2083 VE R\u0101udra \u30fb5127 KY \u30fb 1,872,885 Icelandic F\u00f6studagur, 14 Gorm\u00e1nu\u00f0ur 2026 Islamic 25 Jumada al-awwal , AH 1448 (using tabular method ) ISO week date 2026-W45-5 Japanese 27 Nagatsuki , Reiwa 8 ( S\u014dk\u014d , 1 day until Ritt\u014d ) Julian 24 October , AD 2026 ( AM 7535) Julian day 2461351 Korean 27 Gaedal , 4359 DE Maya 13.0.14.1.8 1 Ceh , 2 Lamat Roman ante diem IX Kalendas Novembres , MMDCCLXXIX AUC Solar Hijri 15 Aban , SH 1405 Tibetan 27 tha skar, me pho rta 2153 or 1772 or 1000 [ refresh ] Day of the year November 6 is the 310th day of the year (311th in leap years ) in the Gregorian calendar ; 55 days remain until the end of the year. Events [ edit | edit source ] Pre-1600 [ edit | edit source ] 447 \u2013 A powerful earthquake destroys large portions of the Walls of Constantinople , including 57 towers. [ 1 ] 644 \u2013 Caliph Umar is assassinated in Mecca . [ 2 ] 963 \u2013 Synod of Rome : Emperor Otto I calls a council at St. Peter's Basilica in Rome . Pope John XII is deposed on charges of an armed rebellion against Otto. [ 3 ] 1217 \u2013 The Charter of the Forest is sealed at St Paul's Cathedral, London by King Henry III , acting under the regency of William Marshall, 1st Earl of Pembroke which re-establishes for free men rights of access to the royal forest that had been eroded by William the Conqueror and his heirs. [ 4 ] 1601\u20131900 [ edit | edit source ] 1792 \u2013 Battle of Jemappes in the French Revolutionary Wars . [ 5 ] 1860 \u2013 Abraham Lincoln is elected the 16th president of the United States with only 40% of the popular vote, defeating John C. Breckinridge , John Bell , and Stephen A. Douglas in a four-way race. [ 6 ] 1869 \u2013 In New Brunswick, New Jer"
+          },
+          "status": "completed",
+          "started_s": 134.380934529996,
+          "finished_s": 135.05234751099488
+        },
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"python3 - <<'PY'\\nimport urllib.request,re\\nu='https://en.wikipedia.org/wiki/November_6'\\nr=urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=10).read().decode('utf8','ignore')\\nr=re.sub(r'<script.*?</script>|<style.*?</style>',' ',r,flags=re.S|re.I)\\nt=re.sub(r'<[^>]+>',' ',r);t=re.sub(r'\\\\s+',' ',t)\\nfor key in ['Holidays and observances','Births','Deaths']:\\n i=t.find(key); print('\\\\n---',key,'---\\\\n',t[i:i+1700])\\nPY\"}",
+          "result": {
+            "returncode": 0,
+            "output": "\ufffd\ufffd \u09ae\u09a3\u09bf\u09aa\u09c1\u09b0\u09c0 Brezhoneg Bosanski \u0411\u0443\u0440\u044f\u0430\u0434 Catal\u00e0 \u95a9\u6771\u8a9e / M\u00ecng-d\u0115\u0324ng-ng\u1e73\u0304 \u041d\u043e\u0445\u0447\u0438\u0439\u043d Cebuano \u06a9\u0648\u0631\u062f\u06cc Corsu \u010ce\u0161tina Kasz\u00ebbsczi \u0427\u04d1\u0432\u0430\u0448\u043b\u0430 Cymraeg Dansk Deutsch Zazaki \u078b\u07a8\u0788\u07ac\u0780\u07a8\u0784\u07a6\u0790\u07b0 \u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac Emili\u00e0n e rumagn\u00f2l Esperanto Espa\u00f1ol Eesti Euskara Estreme\u00f1u \u0641\u0627\u0631\u0633\u06cc Suomi V\u00f5ro F\u00f8royskt Fran\u00e7ais Arpetan Nordfriisk Furlan Frysk Gaeilge Gagauz \u8d1b\u8a9e G\u00e0idhlig Galego Ava\u00f1e&#039;\u1ebd Bahasa Hulontalo \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0 Gaelg \u5ba2\u5bb6\u8a9e / Hak-k\u00e2-ng\u00ee \u05e2\u05d1\u05e8\u05d9\u05ea \u0939\u093f\u0928\u094d\u0926\u0940 Fiji Hindi Hrvatski Hornjoserbsce Krey\u00f2l ayisyen Magyar \u0540\u0561\u0575\u0565\u0580\u0565\u0576 \u0531\u0580\u0565\u0582\u0574\u057f\u0561\u0570\u0561\u0575\u0565\u0580\u0567\u0576 Interlingua Bahasa Indonesia Interlingue Igbo Ilokano Ido \u00cdslenska Italiano \u65e5\u672c\u8a9e Jawa \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 Qaraqalpaqsha Taqbaylit \u049a\u0430\u0437\u0430\u049b\u0448\u0430 \u0c95\u0ca8\u0ccd\u0ca8\u0ca1 \ud55c\uad6d\uc5b4 \u041a\u044a\u0430\u0440\u0430\u0447\u0430\u0439-\u043c\u0430\u043b\u043a\u044a\u0430\u0440 \u06a9\u0672\u0634\u064f\u0631 Ripoarisch Kurd\u00ee \u041a\u043e\u043c\u0438 Latina L\u00ebtzebuergesch Limburgs Ligure Lombard \u0ea5\u0eb2\u0ea7 Lietuvi\u0173 Latvie\u0161u \u092e\u0948\u0925\u093f\u0932\u0940 Malagasy \u041e\u043b\u044b\u043a \u043c\u0430\u0440\u0438\u0439 \u041c\u0430\u043a\u0435\u0434\u043e\u043d\u0441\u043a\u0438 \u0d2e\u0d32\u0d2f\u0d3e\u0d33\u0d02 \u041c\u043e\u043d\u0433\u043e\u043b \u092e\u0930\u093e\u0920\u0940 Bahasa Melayu \u1019\u103c\u1014\u103a\u1019\u102c\u1018\u102c\u101e\u102c \u042d\u0440\u0437\u044f\u043d\u044c \u0645\u0627\u0632\u0650\u0631\u0648\u0646\u06cc Napulitano Nedersaksies Plattd\u00fc\u00fctsch \u0928\u0947\u092a\u093e\u0932 \u092d\u093e\u0937\u093e Nederlands Norsk nynorsk Norsk bokm\u00e5l Nouormand Sesotho sa Leboa Occitan Livvinkarjala \u0b13\u0b21\u0b3c\u0b3f\u0b06 \u0a2a\u0a70\u0a1c\u0a3e\u0a2c\u0a40 Pangasinan Kapampangan Papiamentu Polski \u067e\u0646\u062c\u0627\u0628\u06cc \u067e\u069a\u062a\u0648 Portugu\u00eas Runa Simi Rom\u00e2n\u0103 Arm\u00e3neashti \u0420\u0443\u0441\u043a\u0438 \u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u0420\u0443\u0441\u0438\u043d\u044c\u0441\u043a\u044b\u0439 \u0938\u0902\u0938\u094d\u0915\u0943\u0924\u092e\u094d \u0421\u0430\u0445\u0430 \u0442\u044b\u043b\u0430 Sicilianu Scots \u0633\u0646\u068c\u064a Davvis\u00e1megiella Srpskohrvatski / \u0441\u0440\u043f\u0441\u043a\u043e\u0445\u0440\u0432\n\n--- Deaths ---\n Deaths Toggle Deaths subsection 3.1 Pre-1600 3.2 1601\u20131900 3.3 1901\u2013present 4 Holidays and observances 5 References 6 External links Toggle the table of contents November 6 199 languages \u0410\u0525\u0441\u0448\u04d9\u0430 Afrikaans Alemannisch \u0410\u043b\u0442\u0430\u0439 \u0442\u0438\u043b \u12a0\u121b\u122d\u129b Aragon\u00e9s \u0627\u0644\u0639\u0631\u0628\u064a\u0629 \u0627\u0644\u062f\u0627\u0631\u062c\u0629 \u0645\u0635\u0631\u0649 \u0985\u09b8\u09ae\u09c0\u09af\u09bc\u09be Asturianu \u0410\u0432\u0430\u0440 Kotava Az\u0259rbaycanca \u062a\u06c6\u0631\u06a9\u062c\u0647 \u0411\u0430\u0448\u04a1\u043e\u0440\u0442\u0441\u0430 Basa Bali \u017demait\u0117\u0161ka Bikol Central \u0411\u0435\u043b\u0430\u0440\u0443\u0441\u043a\u0430\u044f (\u0442\u0430\u0440\u0430\u0448\u043a\u0435\u0432\u0456\u0446\u0430) \u0411\u0435\u043b\u0430\u0440\u0443\u0441\u043a\u0430\u044f \u0411\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438 \u092d\u094b\u091c\u092a\u0941\u0930\u0940 Banjar \u09ac\u09be\u0982\u09b2\u09be \u0f56\u0f7c\u0f51\u0f0b\u0f61\u0f72\u0f42 \u09ac\u09bf\u09b7\u09cd\u09a3\u09c1\u09aa\u09cd\u09b0\u09bf\u09af\u09bc\u09be \u09ae\u09a3\u09bf\u09aa\u09c1\u09b0\u09c0 Brezhoneg Bosanski \u0411\u0443\u0440\u044f\u0430\u0434 Catal\u00e0 \u95a9\u6771\u8a9e / M\u00ecng-d\u0115\u0324ng-ng\u1e73\u0304 \u041d\u043e\u0445\u0447\u0438\u0439\u043d Cebuano \u06a9\u0648\u0631\u062f\u06cc Corsu \u010ce\u0161tina Kasz\u00ebbsczi \u0427\u04d1\u0432\u0430\u0448\u043b\u0430 Cymraeg Dansk Deutsch Zazaki \u078b\u07a8\u0788\u07ac\u0780\u07a8\u0784\u07a6\u0790\u07b0 \u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac Emili\u00e0n e rumagn\u00f2l Esperanto Espa\u00f1ol Eesti Euskara Estreme\u00f1u \u0641\u0627\u0631\u0633\u06cc Suomi V\u00f5ro F\u00f8royskt Fran\u00e7ais Arpetan Nordfriisk Furlan Frysk Gaeilge Gagauz \u8d1b\u8a9e G\u00e0idhlig Galego Ava\u00f1e&#039;\u1ebd Bahasa Hulontalo \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0 Gaelg \u5ba2\u5bb6\u8a9e / Hak-k\u00e2-ng\u00ee \u05e2\u05d1\u05e8\u05d9\u05ea \u0939\u093f\u0928\u094d\u0926\u0940 Fiji Hindi Hrvatski Hornjoserbsce Krey\u00f2l ayisyen Magyar \u0540\u0561\u0575\u0565\u0580\u0565\u0576 \u0531\u0580\u0565\u0582\u0574\u057f\u0561\u0570\u0561\u0575\u0565\u0580\u0567\u0576 Interlingua Bahasa Indonesia Interlingue Igbo Ilokano Ido \u00cdslenska Italiano \u65e5\u672c\u8a9e Jawa \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 Qaraqalpaqsha Taqbaylit \u049a\u0430\u0437\u0430\u049b\u0448\u0430 \u0c95\u0ca8\u0ccd\u0ca8\u0ca1 \ud55c\uad6d\uc5b4 \u041a\u044a\u0430\u0440\u0430\u0447\u0430\u0439-\u043c\u0430\u043b\u043a\u044a\u0430\u0440 \u06a9\u0672\u0634\u064f\u0631 Ripoarisch Kurd\u00ee \u041a\u043e\u043c\u0438 Latina L\u00ebtzebuergesch Limburgs Ligure Lombard \u0ea5\u0eb2\u0ea7 Lietuvi\u0173 Latvie\u0161u \u092e\u0948\u0925\u093f\u0932\u0940 Malagasy \u041e\u043b\u044b\u043a \u043c\u0430\u0440\u0438\u0439 \u041c\u0430\u043a\u0435\u0434\u043e\u043d\u0441\u043a\u0438 \u0d2e\u0d32\u0d2f\u0d3e\u0d33\u0d02 \u041c\u043e\u043d\u0433\u043e\u043b \u092e\u0930\u093e\u0920\u0940 Bahasa Melayu \u1019\u103c\u1014\u103a\u1019\u102c\u1018\u102c\u101e\u102c \u042d\u0440\u0437\u044f\u043d\u044c \u0645\u0627\u0632\u0650\u0631\u0648\u0646\u06cc Napulitano Nedersaksies Plattd\u00fc\u00fctsch \u0928\u0947\u092a\u093e\u0932 \u092d\u093e\u0937\u093e Nederlands Norsk nynorsk Norsk bokm\u00e5l Nouormand Sesotho sa Leboa Occitan Livvinkarjala \u0b13\u0b21\u0b3c\u0b3f\u0b06 \u0a2a\u0a70\u0a1c\u0a3e\u0a2c\u0a40 Pangasinan Kapampangan Papiamentu Polski \u067e\u0646\u062c\u0627\u0628\u06cc \u067e\u069a\u062a\u0648 Portugu\u00eas Runa Simi Rom\u00e2n\u0103 Arm\u00e3neashti \u0420\u0443\u0441\u043a\u0438 \u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u0420\u0443\u0441\u0438\u043d\u044c\u0441\u043a\u044b\u0439 \u0938\u0902\u0938\u094d\u0915\u0943\u0924\u092e\u094d \u0421\u0430\u0445\u0430 \u0442\u044b\u043b\u0430 Sicilianu Scots \u0633\u0646\u068c\u064a Davvis\u00e1megiella Srpskohrvatski / \u0441\u0440\u043f\u0441\u043a\u043e\u0445\u0440\u0432\u0430\u0442\u0441\u043a\u0438 \u1010\u1086\u1038 \u0dc3\u0dd2\u0d82\u0dc4\u0dbd Simple English Sloven\u010dina Sloven\u0161\u010dina Anar\u00e2\u0161kiel\u00e2 ChiShona Shq"
+          },
+          "status": "completed",
+          "started_s": 138.08133205398917,
+          "finished_s": 138.49681278300704
+        }
+      ],
+      "inference_start_s": 125.14393702399684,
+      "inference_end_s": 138.49688408299698,
+      "inference_isolatable": true,
+      "finished_s": 138.49691326299217,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": 13.352947059000144,
+      "voice_latency_s": null,
+      "cost_complete": true,
+      "known_cost_usd": 0.0017050925694443576,
+      "cost_usd": 0.0017050925694443576,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 5,
+      "fixture": null,
+      "speech_end_s": 151.18910814829374,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 151.9981631010014,
+      "first_audio_received_s": 158.42432983600884,
+      "first_playback_s": 158.50217596949713,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.760000000000002,
+      "audio_pcm_peak_abs": 24362,
+      "input_text": "Freddy, can you hear me?",
+      "reply": "Yes, I can hear you! I\u2019m Friday, and I\u2019m here.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 151.99835802000598,
+          "end_s": 153.4938822989934,
+          "usage": {
+            "seconds": 2.77,
+            "cost": 0.000169277777777747
+          },
+          "cost_usd": 0.000169277777777747,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 153.49445194599684,
+          "end_s": 157.23497833899455,
+          "usage": {
+            "prompt_tokens": 889,
+            "completion_tokens": 45,
+            "total_tokens": 934,
+            "cost": 0.0001114,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.0001114,
+              "upstream_inference_prompt_cost": 8.89e-05,
+              "upstream_inference_completions_cost": 2.25e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 23,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.0001114,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 157.23502439798904,
+          "end_s": 158.52656422299333,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 153.49431564699626,
+      "inference_end_s": 157.2350167580007,
+      "inference_isolatable": true,
+      "reasoning_answer": "Yes, I can hear you! I\u2019m Friday, and I\u2019m here.",
+      "finished_s": 158.52665448200423,
+      "round_trip_s": 7.31306782120339,
+      "to_audio_received_s": 7.2352216877150966,
+      "inference_with_tools_s": 3.740701111004455,
+      "voice_latency_s": 3.572366710198935,
+      "cost_complete": false,
+      "known_cost_usd": 0.000280677777777747,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 6,
+      "fixture": null,
+      "speech_end_s": 169.57491955399746,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 169.57722849200945,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": true,
+      "finished_s": 169.6624895989953,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 7,
+      "fixture": null,
+      "speech_end_s": 171.21585497616718,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 172.09797532099765,
+      "first_audio_received_s": 183.39194359298563,
+      "first_playback_s": 183.47298811964865,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 7.599999999999989,
+      "audio_pcm_peak_abs": 17151,
+      "input_text": "[audio cutting out] projects in the dev folder",
+      "reply": "I caught \u201cprojects in the dev folder,\u201d but I don\u2019t see a `dev` folder in your home directory. Did you mean a different location?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 172.0986492979864,
+          "end_s": 173.9105951229867,
+          "usage": {
+            "seconds": 3.593375,
+            "cost": 0.00021959513888884896
+          },
+          "cost_usd": 0.00021959513888884896,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 173.91109618998598,
+          "end_s": 177.6715090039943,
+          "usage": {
+            "prompt_tokens": 925,
+            "completion_tokens": 99,
+            "total_tokens": 1024,
+            "cost": 0.000142,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 0,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000142,
+              "upstream_inference_prompt_cost": 9.25e-05,
+              "upstream_inference_completions_cost": 4.95e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 64,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.000142,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 177.70543701099814,
+          "end_s": 181.66171407399816,
+          "usage": {
+            "prompt_tokens": 2168,
+            "completion_tokens": 145,
+            "total_tokens": 2313,
+            "cost": 0.000343425,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "cache_write_tokens": 2165,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.000343425,
+              "upstream_inference_prompt_cost": 0.000270925,
+              "upstream_inference_completions_cost": 7.25e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 108,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.000343425,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 181.661764243996,
+          "end_s": 183.48822792898864,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"find /home/abs-worker -maxdepth 3 -type d -print\"}",
+          "result": {
+            "returncode": 0,
+            "output": "a_shader_cache/d4\n/home/abs-worker/.cache/mesa_shader_cache/21\n/home/abs-worker/.cache/mesa_shader_cache/d9\n/home/abs-worker/.cache/mesa_shader_cache/ae\n/home/abs-worker/.cache/mesa_shader_cache/51\n/home/abs-worker/.cache/mesa_shader_cache/87\n/home/abs-worker/.cache/mesa_shader_cache/63\n/home/abs-worker/.cache/mesa_shader_cache/14\n/home/abs-worker/.cache/mesa_shader_cache/35\n/home/abs-worker/.cache/mesa_shader_cache/e0\n/home/abs-worker/.cache/mesa_shader_cache/b7\n/home/abs-worker/.cache/mesa_shader_cache/1d\n/home/abs-worker/.cache/mesa_shader_cache/a5\n/home/abs-worker/.cache/mesa_shader_cache/f2\n/home/abs-worker/.cache/mesa_shader_cache/70\n/home/abs-worker/.cache/mesa_shader_cache/07\n/home/abs-worker/.cache/mesa_shader_cache/5a\n/home/abs-worker/.cache/mesa_shader_cache/cd\n/home/abs-worker/.cache/mesa_shader_cache/dc\n/home/abs-worker/.cache/mesa_shader_cache/09\n/home/abs-worker/.cache/mesa_shader_cache/03\n/home/abs-worker/.cache/mesa_shader_cache/e4\n/home/abs-worker/.cache/mesa_shader_cache/8c\n/home/abs-worker/.cache/mesa_shader_cache/31\n/home/abs-worker/.cache/mesa_shader_cache/22\n/home/abs-worker/.cache/mesa_shader_cache/ff\n/home/abs-worker/.cache/mesa_shader_cache/aa\n/home/abs-worker/.cache/mesa_shader_cache/c7\n/home/abs-worker/.cache/mesa_shader_cache/d0\n/home/abs-worker/.cache/mesa_shader_cache/fa\n/home/abs-worker/.cache/mesa_shader_cache/7c\n/home/abs-worker/.cache/mesa_shader_cache/0d\n/home/abs-worker/.cache/mesa_shader_cache/58\n/home/abs-worker/.cache/mesa_shader_cache/17\n/home/abs-worker/.cache/mesa_shader_cache/60\n/home/abs-worker/.cache/mesa_shader_cache/84\n/home/abs-worker/.cache/mesa_shader_cache/3f\n/home/abs-worker/.cache/mesa_shader_cache/bd\n/home/abs-worker/.cache/mesa_shader_cache/36\n/home/abs-worker/.cache/mesa_shader_cache/79\n/home/abs-worker/.cache/mesa_shader_cache/04\n/home/abs-worker/.cache/mesa_shader_cache/f1\n/home/abs-worker/.cache/mesa_shader_cache/a6\n/home/abs-worker/.cache/ms-playwright\n/home/abs-worker/.cache/ms-playwright/chromium-1124\n/home/abs-worker/.cache/ms-playwright/ffmpeg-1009\n/home/abs-worker/.cache/ms-playwright/.links\n/home/abs-worker/.cache/nvim\n/home/abs-worker/.cache/tracker3\n/home/abs-worker/.cache/tracker3/files\n/home/abs-worker/.cache/xfce4\n/home/abs-worker/.cache/xfce4/appfinder\n/home/abs-worker/.cache/xfce4/notifyd\n/home/abs-worker/.cache/obexd\n/home/abs-worker/.cache/google-chrome\n/home/abs-worker/.cache/google-chrome/Default\n/home/abs-worker/.cache/fontconfig\n/home/abs-worker/.cache/gstreamer-1.0\n/home/abs-worker/.cache/Microsoft\n/home/abs-worker/.cache/Microsoft/DeveloperTools\n/home/abs-worker/.cache/Microsoft/Edge\n/home/abs-worker/.cache/update-manager-core\n/home/abs-worker/.cache/huggingface\n/home/abs-worker/.cache/huggingface/hub\n/home/abs-worker/.cache/huggingface/xet\n/home/abs-worker/.cache/ibus-table\n/home/abs-worker/.cache/ibus\n/home/abs-worker/.cache/ibus/bus\n/home/abs-worker/.cache/nvidia\n/home/abs-worker/.cache/nvidia/GLCache\n/home/abs-worker/.cache/thumbnails\n/home/abs-worker/.cache/thumbnails/large\n/home/abs-worker/Public\n/home/abs-worker/.pi\n/home/abs-worker/.pi/agent\n/home/abs-worker/.pi/agent/skills\n/home/abs-worker/.pi/agent/sessions\n/home/abs-worker/.pi/agent/extensions\n/home/abs-worker/.pi/agent/bin\n/home/abs-worker/.pi/agent/prompts\n/home/abs-worker/vw-data\n/home/abs-worker/vw-data/db\n/home/abs-worker/vw-data/run\n/home/abs-worker/vw-data/config\n/home/abs-worker/vw-data/poc-workdir\n/home/abs-worker/vw-data/logs\n/home/abs-worker/snap\n/home/abs-worker/snap/snapd-desktop-integration\n/home/abs-worker/snap/snapd-desktop-integration/391\n/home/abs-worker/snap/snapd-desktop-integration/common\n/home/abs-worker/snap/snapd-desktop-integration/387\n/home/abs-worker/snap/firmware-updater\n/home/abs-worker/snap/firmware-updater/147\n/home/abs-worker/snap/firmware-updater/167\n/home/abs-worker/snap/firmware-updater/common\n/home/abs-worker/snap/firefox\n/home/abs-worker/snap/firefox/9113\n/home/abs-worker/snap/firefox/8995\n/home/abs-worker/snap/firefox/common\n/home/abs-worker/.ssh"
+          },
+          "status": "completed",
+          "started_s": 177.6715403139824,
+          "finished_s": 177.705394900986
+        }
+      ],
+      "inference_start_s": 173.9109945409873,
+      "inference_end_s": 181.6617547640053,
+      "inference_isolatable": true,
+      "reasoning_answer": "I caught \u201cprojects in the dev folder,\u201d but I don\u2019t see a `dev` folder in your home directory. Did you mean a different location?",
+      "finished_s": 183.48850395699264,
+      "round_trip_s": 12.257133143481468,
+      "to_audio_received_s": 12.176088616818447,
+      "inference_with_tools_s": 7.7507602230180055,
+      "voice_latency_s": 4.506372920463463,
+      "cost_complete": false,
+      "known_cost_usd": 0.000705020138888849,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 8,
+      "fixture": null,
+      "speech_end_s": 195.46818960758822,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 195.68939838398364,
+      "first_audio_received_s": 199.73883673999808,
+      "first_playback_s": 199.91781199197376,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 2.640000000000001,
+      "audio_pcm_peak_abs": 10516,
+      "input_text": "[mumbling]",
+      "reply": "I didn\u2019t catch that\u2014could you say it again?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 195.68958516200655,
+          "end_s": 197.0700616959948,
+          "usage": {
+            "seconds": 1.416875,
+            "cost": 8.658680555553981e-05
+          },
+          "cost_usd": 8.658680555553981e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 197.0703589640034,
+          "end_s": 198.58406293799635,
+          "usage": {
+            "prompt_tokens": 2212,
+            "completion_tokens": 34,
+            "total_tokens": 2246,
+            "cost": 4.445e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2165,
+              "cache_write_tokens": 44,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 4.445e-05,
+              "upstream_inference_prompt_cost": 2.745e-05,
+              "upstream_inference_completions_cost": 1.7e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 16,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 4.445e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 198.58411215798697,
+          "end_s": 199.74705506500322,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 197.07028033499955,
+      "inference_end_s": 198.58410273800837,
+      "inference_isolatable": true,
+      "reasoning_answer": "I didn\u2019t catch that\u2014could you say it again?",
+      "finished_s": 199.74716641398845,
+      "round_trip_s": 4.449622384385549,
+      "to_audio_received_s": 4.270647132409863,
+      "inference_with_tools_s": 1.5138224030088168,
+      "voice_latency_s": 2.935799981376732,
+      "cost_complete": false,
+      "known_cost_usd": 0.00013103680555553982,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 9,
+      "fixture": null,
+      "speech_end_s": 208.37355066011744,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 209.27536107998458,
+      "first_audio_received_s": 216.99267850699835,
+      "first_playback_s": 217.17103761957176,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 9.519999999999982,
+      "audio_pcm_peak_abs": 18598,
+      "input_text": "Dev holder in the home directory",
+      "reply": "I don\u2019t see a `dev` folder in your home directory (`/home/abs-worker`). If you meant another folder, tell me its name or location.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 209.27568435799913,
+          "end_s": 210.9042625319853,
+          "usage": {
+            "seconds": 3.7985,
+            "cost": 0.00023213055555551334
+          },
+          "cost_usd": 0.00023213055555551334,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 210.90472248900915,
+          "end_s": 214.95465165699716,
+          "usage": {
+            "prompt_tokens": 2240,
+            "completion_tokens": 133,
+            "total_tokens": 2373,
+            "cost": 9.239e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2209,
+              "cache_write_tokens": 28,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.239e-05,
+              "upstream_inference_prompt_cost": 2.589e-05,
+              "upstream_inference_completions_cost": 6.65e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 94,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 9.239e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 214.95469396701083,
+          "end_s": 217.1064275339886,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 210.9046027000004,
+      "inference_end_s": 214.95468643700588,
+      "inference_isolatable": true,
+      "reasoning_answer": "I don\u2019t see a `dev` folder in your home directory (`/home/abs-worker`). If you meant another folder, tell me its name or location.",
+      "finished_s": 217.10677640198264,
+      "round_trip_s": 8.797486959454318,
+      "to_audio_received_s": 8.6191278468809,
+      "inference_with_tools_s": 4.05008373700548,
+      "voice_latency_s": 4.747403222448838,
+      "cost_complete": false,
+      "known_cost_usd": 0.00032452055555551334,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 10,
+      "fixture": null,
+      "speech_end_s": 234.39780259402778,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 234.57559182398836,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": "Okay. Can you simply search for, uh",
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 234.575907972001,
+          "end_s": 235.9646899419895,
+          "usage": {
+            "seconds": 5.0036875,
+            "cost": 0.00030578090277772217
+          },
+          "cost_usd": 0.00030578090277772217,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 235.96522681898205,
+          "end_s": 235.967131168989,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unavailable"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 235.9650972399977,
+      "inference_end_s": 235.96714440899086,
+      "inference_isolatable": true,
+      "finished_s": 235.96715212898562,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": 0.002047168993158266,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.00030578090277772217,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 11,
+      "fixture": null,
+      "speech_end_s": 239.51281012843486,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 240.1901167090109,
+      "first_audio_received_s": 253.20599654800026,
+      "first_playback_s": 253.3825664158387,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 14.959999999999964,
+      "audio_pcm_peak_abs": 19639,
+      "input_text": "Make project we did earlier where is it?",
+      "reply": "The project is in `/home/abs-worker/dev/Snake`. It contains the game files `index.html`, `game.js`, `styles.css`, and `README.md`.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 240.19073739499436,
+          "end_s": 242.40406078798696,
+          "usage": {
+            "seconds": 5.801,
+            "cost": 0.0003545055555554911
+          },
+          "cost_usd": 0.0003545055555554911,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 242.40496246298426,
+          "end_s": 246.21859654199216,
+          "usage": {
+            "prompt_tokens": 2292,
+            "completion_tokens": 134,
+            "total_tokens": 2426,
+            "cost": 9.617e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2237,
+              "cache_write_tokens": 52,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.617e-05,
+              "upstream_inference_prompt_cost": 2.917e-05,
+              "upstream_inference_completions_cost": 6.7e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 65,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 9.617e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 246.22554171300726,
+          "end_s": 249.4882148260076,
+          "usage": {
+            "prompt_tokens": 2403,
+            "completion_tokens": 86,
+            "total_tokens": 2489,
+            "cost": 8.0065e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2289,
+              "cache_write_tokens": 111,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 8.0065e-05,
+              "upstream_inference_prompt_cost": 3.7065e-05,
+              "upstream_inference_completions_cost": 4.3e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 46,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 8.0065e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 249.49253933300497,
+          "end_s": 250.77330417899066,
+          "usage": {
+            "prompt_tokens": 2530,
+            "completion_tokens": 39,
+            "total_tokens": 2569,
+            "cost": 5.9675e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2400,
+              "cache_write_tokens": 127,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 5.9675e-05,
+              "upstream_inference_prompt_cost": 4.0175e-05,
+              "upstream_inference_completions_cost": 1.95e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 5.9675e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 250.77335688800667,
+          "end_s": 253.23806371100363,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"find /home/abs-worker/vw-data/poc-workdir -maxdepth 3 -type f -printf '%p\\\\n'; find /home/abs-worker -maxdepth 2 -type d -iname '*dev*' -print\"}",
+          "result": {
+            "returncode": 0,
+            "output": "/home/abs-worker/vw-data/poc-workdir/snake_game.py\n/home/abs-worker/dev"
+          },
+          "status": "completed",
+          "started_s": 246.21863426198252,
+          "finished_s": 246.22551535398816
+        },
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"find /home/abs-worker/dev -maxdepth 3 -printf '%y %p\\\\n'\"}",
+          "result": {
+            "returncode": 0,
+            "output": "d /home/abs-worker/dev\nd /home/abs-worker/dev/Snake\nf /home/abs-worker/dev/Snake/styles.css\nf /home/abs-worker/dev/Snake/index.html\nf /home/abs-worker/dev/Snake/README.md\nf /home/abs-worker/dev/Snake/game.js"
+          },
+          "status": "completed",
+          "started_s": 249.4882491559838,
+          "finished_s": 249.49252483301098
+        }
+      ],
+      "inference_start_s": 242.40478724398417,
+      "inference_end_s": 250.7733508980018,
+      "inference_isolatable": true,
+      "reasoning_answer": "The project is in `/home/abs-worker/dev/Snake`. It contains the game files `index.html`, `game.js`, `styles.css`, and `README.md`.",
+      "finished_s": 253.2384768690099,
+      "round_trip_s": 13.869756287403845,
+      "to_audio_received_s": 13.693186419565393,
+      "inference_with_tools_s": 8.368563654017635,
+      "voice_latency_s": 5.501192633386211,
+      "cost_complete": false,
+      "known_cost_usd": 0.0005904155555554912,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 12,
+      "fixture": null,
+      "speech_end_s": 275.40039662567483,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 275.88924752900493,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": true,
+      "finished_s": 276.50625907999347,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 13,
+      "fixture": null,
+      "speech_end_s": 276.4065764114155,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 277.10129156298353,
+      "first_audio_received_s": 282.4109260599944,
+      "first_playback_s": 282.5358811447586,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.3600000000000017,
+      "audio_pcm_peak_abs": 17298,
+      "input_text": "[clicking]",
+      "reply": "I\u2019m here\u2014what would you like to do with the Snake project?",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 277.10155648199725,
+          "end_s": 278.4665378489881,
+          "usage": {
+            "seconds": 1.3856875,
+            "cost": 8.468090277776239e-05
+          },
+          "cost_usd": 8.468090277776239e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 278.4675294930057,
+          "end_s": 281.23970378399827,
+          "usage": {
+            "prompt_tokens": 2579,
+            "completion_tokens": 43,
+            "total_tokens": 2622,
+            "cost": 5.3195e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2527,
+              "cache_write_tokens": 49,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 5.3195e-05,
+              "upstream_inference_prompt_cost": 3.1695e-05,
+              "upstream_inference_completions_cost": 2.15e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 22,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 5.3195e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 281.23984222399304,
+          "end_s": 282.4253666810109,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 278.4672525450005,
+      "inference_end_s": 281.23983164399397,
+      "inference_isolatable": true,
+      "reasoning_answer": "I\u2019m here\u2014what would you like to do with the Snake project?",
+      "finished_s": 282.42555809000623,
+      "round_trip_s": 6.129304733343133,
+      "to_audio_received_s": 6.004349648578909,
+      "inference_with_tools_s": 2.7725790989934467,
+      "voice_latency_s": 3.3567256343496865,
+      "cost_complete": false,
+      "known_cost_usd": 0.00013787590277776238,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 14,
+      "fixture": null,
+      "speech_end_s": 292.1633504662203,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 292.7996605329972,
+      "first_audio_received_s": 298.5738424609881,
+      "first_playback_s": 298.7074540464775,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 15.039999999999962,
+      "audio_pcm_peak_abs": 18649,
+      "input_text": "The home directory, the dev folder",
+      "reply": "Yes\u2014the `dev` folder is directly in your home directory: `/home/abs-worker/dev`. The project we found is inside it at `/home/abs-worker/dev/Snake`.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 292.7999830019835,
+          "end_s": 294.49888437299524,
+          "usage": {
+            "seconds": 3.5985,
+            "cost": 0.00021990833333329336
+          },
+          "cost_usd": 0.00021990833333329336,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 294.4997271480097,
+          "end_s": 296.20167496899376,
+          "usage": {
+            "prompt_tokens": 2611,
+            "completion_tokens": 63,
+            "total_tokens": 2674,
+            "cost": 6.156e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2576,
+              "cache_write_tokens": 32,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 6.156e-05,
+              "upstream_inference_prompt_cost": 3.006e-05,
+              "upstream_inference_completions_cost": 3.15e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 20,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 6.156e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 296.20177381898975,
+          "end_s": 298.6154352889862,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 294.4994916690048,
+      "inference_end_s": 296.2017622590065,
+      "inference_isolatable": true,
+      "reasoning_answer": "Yes\u2014the `dev` folder is directly in your home directory: `/home/abs-worker/dev`. The project we found is inside it at `/home/abs-worker/dev/Snake`.",
+      "finished_s": 298.6159183069831,
+      "round_trip_s": 6.544103580257172,
+      "to_audio_received_s": 6.410491994767767,
+      "inference_with_tools_s": 1.7022705900017172,
+      "voice_latency_s": 4.841832990255455,
+      "cost_complete": false,
+      "known_cost_usd": 0.00028146833333329336,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 15,
+      "fixture": null,
+      "speech_end_s": 318.86608792000334,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 318.9736641100026,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": true,
+      "finished_s": 318.9950689499965,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 16,
+      "fixture": null,
+      "speech_end_s": 320.4297938398659,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 321.08929851598805,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": "What is it? Can you",
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 321.08982055299566,
+          "end_s": 322.3715532409842,
+          "usage": {
+            "seconds": 3.0816875,
+            "cost": 0.00018832534722218797
+          },
+          "cost_usd": 0.00018832534722218797,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 322.3734669999976,
+          "end_s": 322.88358497200534,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unavailable"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 322.3728554529953,
+      "inference_end_s": 322.88361784198787,
+      "inference_isolatable": true,
+      "finished_s": 322.88364213198656,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": 0.510762388992589,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0.00018832534722218797,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 17,
+      "fixture": null,
+      "speech_end_s": 324.408734873099,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 325.37254758700146,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": true,
+      "finished_s": 326.2916466530005,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 18,
+      "fixture": null,
+      "speech_end_s": 330.17217438601074,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 330.1742601550068,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": true,
+      "finished_s": 330.3039962000039,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 19,
+      "fixture": null,
+      "speech_end_s": 330.9846920476149,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 331.4732520550024,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": true,
+      "finished_s": 332.0944385929906,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 20,
+      "fixture": null,
+      "speech_end_s": 337.8428873168808,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 338.17259065198596,
+      "first_audio_received_s": 347.25677105700015,
+      "first_playback_s": 347.45961086493094,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 26.480000000000103,
+      "audio_pcm_peak_abs": 18195,
+      "input_text": "Index, basically README files. Like can you explain what is there on the README of that project?",
+      "reply": "The README describes \u201cNeon Snake,\u201d a polished Snake game built with plain HTML, CSS, and JavaScript, with no dependencies. To play, open `index.html` in a modern browser; use the arrow keys or WASD to steer, Space or P to pause, and R to restart. Touch devices have an on-screen directional pad, and the best score is saved in the browser\u2019s local storage.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 338.1730527099862,
+          "end_s": 340.79481889898307,
+          "usage": {
+            "seconds": 7.6086875,
+            "cost": 0.00046497534722213767
+          },
+          "cost_usd": 0.00046497534722213767,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 340.79622232099064,
+          "end_s": 342.12508576500113,
+          "usage": {
+            "prompt_tokens": 2678,
+            "completion_tokens": 29,
+            "total_tokens": 2707,
+            "cost": 4.9255e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2608,
+              "cache_write_tokens": 67,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 4.9255e-05,
+              "upstream_inference_prompt_cost": 3.4755e-05,
+              "upstream_inference_completions_cost": 1.45e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 4.9255e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 342.1291230719944,
+          "end_s": 343.79341562400805,
+          "usage": {
+            "prompt_tokens": 2859,
+            "completion_tokens": 87,
+            "total_tokens": 2946,
+            "cost": 9.3175e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2675,
+              "cache_write_tokens": 181,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 9.3175e-05,
+              "upstream_inference_prompt_cost": 4.9675e-05,
+              "upstream_inference_completions_cost": 4.35e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 9.3175e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 343.7935221240041,
+          "end_s": 347.31422970598214,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"cat /home/abs-worker/dev/Snake/README.md\"}",
+          "result": {
+            "returncode": 0,
+            "output": "# Neon Snake\n\nA polished, dependency-free Snake game built with plain HTML, CSS, and JavaScript.\n\n## Run it\n\nOpen `index.html` directly in a modern browser. No build step or server is required.\n\n## Controls\n\n- **Arrow keys** or **WASD**: steer\n- **Space** or **P**: pause/resume\n- **R**: restart\n- On touch devices, use the on-screen directional pad\n\nThe current score and best score are shown above the board. The best score is stored in the browser's local storage on the current device."
+          },
+          "status": "completed",
+          "started_s": 342.12511540498235,
+          "finished_s": 342.12910514199757
+        }
+      ],
+      "inference_start_s": 340.79590756300604,
+      "inference_end_s": 343.79351174400654,
+      "inference_isolatable": true,
+      "reasoning_answer": "The README describes \u201cNeon Snake,\u201d a polished Snake game built with plain HTML, CSS, and JavaScript, with no dependencies. To play, open `index.html` in a modern browser; use the arrow keys or WASD to steer, Space or P to pause, and R to restart. Touch devices have an on-screen directional pad, and the best score is saved in the browser\u2019s local storage.",
+      "finished_s": 347.3149675609893,
+      "round_trip_s": 9.616723548050118,
+      "to_audio_received_s": 9.413883740119331,
+      "inference_with_tools_s": 2.997604181000497,
+      "voice_latency_s": 6.6191193670496205,
+      "cost_complete": false,
+      "known_cost_usd": 0.0006074053472221376,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 21,
+      "fixture": null,
+      "speech_end_s": 380.85935270678715,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 381.4771919880004,
+      "first_audio_received_s": null,
+      "first_playback_s": null,
+      "playback_measurement": null,
+      "output_audio_s": 0.0,
+      "audio_pcm_peak_abs": 0,
+      "input_text": null,
+      "reply": "",
+      "status": "interrupted",
+      "errors": [],
+      "stages": [],
+      "tools": [],
+      "inference_start_s": null,
+      "inference_end_s": null,
+      "inference_isolatable": true,
+      "finished_s": 382.48328794399276,
+      "round_trip_s": null,
+      "to_audio_received_s": null,
+      "inference_with_tools_s": null,
+      "voice_latency_s": null,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 22,
+      "fixture": null,
+      "speech_end_s": 391.38000574100977,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 392.0940753360046,
+      "first_audio_received_s": 400.78656207901076,
+      "first_playback_s": 400.94638847783034,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 18.799999999999997,
+      "audio_pcm_peak_abs": 20296,
+      "input_text": "How many files are there? Is there only just one index file or the CSS and JavaScript is separated? And which framework is it using?",
+      "reply": "There are four files: `index.html`, `styles.css`, `game.js`, and `README.md`. The HTML, CSS, and JavaScript are separate files, and the project uses no framework\u2014it\u2019s plain HTML, CSS, and JavaScript.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 392.0954425680102,
+          "end_s": 394.02339236901025,
+          "usage": {
+            "seconds": 10.592875,
+            "cost": 0.0006473423611109934
+          },
+          "cost_usd": 0.0006473423611109934,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 394.02492065000115,
+          "end_s": 395.9476263379911,
+          "usage": {
+            "prompt_tokens": 2981,
+            "completion_tokens": 136,
+            "total_tokens": 3117,
+            "cost": 0.00011211,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2856,
+              "cache_write_tokens": 122,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011211,
+              "upstream_inference_prompt_cost": 4.411e-05,
+              "upstream_inference_completions_cost": 6.8e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011211,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 395.9626271239831,
+          "end_s": 398.07677799699013,
+          "usage": {
+            "prompt_tokens": 3433,
+            "completion_tokens": 55,
+            "total_tokens": 3488,
+            "cost": 0.00011408,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 2978,
+              "cache_write_tokens": 452,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 0.00011408,
+              "upstream_inference_prompt_cost": 8.658e-05,
+              "upstream_inference_completions_cost": 2.75e-05
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 0.00011408,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 398.07682920698426,
+          "end_s": 401.0267830140074,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [
+        {
+          "name": "bash",
+          "arguments": "{\"command\": \"find /home/abs-worker/dev/Snake -maxdepth 1 -type f -printf '%f\\\\n' | sort; printf '\\\\n--- README ---\\\\n'; sed -n '1,120p' /home/abs-worker/dev/Snake/README.md; printf '\\\\n--- HTML references ---\\\\n'; grep -nE '<(script|link)|src=|href=' /home/abs-worker/dev/Snake/index.html; printf '\\\\n--- JS framework hints ---\\\\n'; head -n 12 /home/abs-worker/dev/Snake/game.js\"}",
+          "result": {
+            "returncode": 0,
+            "output": "game.js\nindex.html\nREADME.md\nstyles.css\n\n--- README ---\n# Neon Snake\n\nA polished, dependency-free Snake game built with plain HTML, CSS, and JavaScript.\n\n## Run it\n\nOpen `index.html` directly in a modern browser. No build step or server is required.\n\n## Controls\n\n- **Arrow keys** or **WASD**: steer\n- **Space** or **P**: pause/resume\n- **R**: restart\n- On touch devices, use the on-screen directional pad\n\nThe current score and best score are shown above the board. The best score is stored in the browser's local storage on the current device.\n\n--- HTML references ---\n9:  <link rel=\"stylesheet\" href=\"styles.css\">\n75:  <script src=\"game.js\"></script>\n\n--- JS framework hints ---\n(() => {\n  'use strict';\n\n  const GRID_SIZE = 20;\n  const STARTING_LENGTH = 4;\n  const STARTING_INTERVAL = 145;\n  const MIN_INTERVAL = 72;\n  const SCORE_PER_FOOD = 10;\n  const STORAGE_KEY = 'neon-snake-best-score';\n\n  const canvas = document.querySelector('#game-board');\n  const context = canvas.getContext('2d');"
+          },
+          "status": "completed",
+          "started_s": 395.9476849169878,
+          "finished_s": 395.96255934398505
+        }
+      ],
+      "inference_start_s": 394.0247784910025,
+      "inference_end_s": 398.07682435700553,
+      "inference_isolatable": true,
+      "reasoning_answer": "There are four files: `index.html`, `styles.css`, `game.js`, and `README.md`. The HTML, CSS, and JavaScript are separate files, and the project uses no framework\u2014it\u2019s plain HTML, CSS, and JavaScript.",
+      "finished_s": 401.02718875199207,
+      "round_trip_s": 9.566382736820572,
+      "to_audio_received_s": 9.406556338000996,
+      "inference_with_tools_s": 4.052045866003027,
+      "voice_latency_s": 5.514336870817544,
+      "cost_complete": false,
+      "known_cost_usd": 0.0008735323611109934,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    },
+    {
+      "id": 23,
+      "fixture": null,
+      "speech_end_s": 431.58473551113326,
+      "speech_end_source": "input_energy_proxy",
+      "endpoint_s": 432.16628371100524,
+      "first_audio_received_s": 436.7387255189824,
+      "first_playback_s": 436.8291083703086,
+      "playback_measurement": "portaudio_dac_estimate_not_acoustic",
+      "output_audio_s": 3.2000000000000015,
+      "audio_pcm_peak_abs": 19029,
+      "input_text": "That's what I wanted to hear. You can stay back there. For now, I don't need any more help",
+      "reply": "Understood. I\u2019ll be here if you need anything later.",
+      "status": "completed",
+      "errors": [],
+      "stages": [
+        {
+          "component": "stt",
+          "model": "elevenlabs/scribe-v2",
+          "start_s": 432.16708004599786,
+          "end_s": 434.4611915179994,
+          "usage": {
+            "seconds": 9.7046875,
+            "cost": 0.0005930642361110033
+          },
+          "cost_usd": 0.0005930642361110033,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "inference",
+          "model": "openai/gpt-6-luna",
+          "start_s": 434.46254181000404,
+          "end_s": 435.6475007539848,
+          "usage": {
+            "prompt_tokens": 3516,
+            "completion_tokens": 17,
+            "total_tokens": 3533,
+            "cost": 5.3475e-05,
+            "is_byok": false,
+            "prompt_tokens_details": {
+              "cached_tokens": 3430,
+              "cache_write_tokens": 83,
+              "audio_tokens": 0,
+              "video_tokens": 0
+            },
+            "cost_details": {
+              "upstream_inference_cost": 5.3475e-05,
+              "upstream_inference_prompt_cost": 4.4975e-05,
+              "upstream_inference_completions_cost": 8.5e-06
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "image_tokens": 0,
+              "audio_tokens": 0
+            }
+          },
+          "cost_usd": 5.3475e-05,
+          "pricing": "provider_reported_usd"
+        },
+        {
+          "component": "tts",
+          "model": "elevenlabs/eleven-v4-turbo",
+          "start_s": 435.6475637340045,
+          "end_s": 436.88326230898383,
+          "usage": null,
+          "cost_usd": null,
+          "pricing": "unknown_tts_rate"
+        }
+      ],
+      "tools": [],
+      "inference_start_s": 434.4623882409942,
+      "inference_end_s": 435.6475572839845,
+      "inference_isolatable": true,
+      "reasoning_answer": "Understood. I\u2019ll be here if you need anything later.",
+      "finished_s": 436.88334004799253,
+      "round_trip_s": 5.244372859175314,
+      "to_audio_received_s": 5.153990007849131,
+      "inference_with_tools_s": 1.1851690429903101,
+      "voice_latency_s": 4.059203816185004,
+      "cost_complete": false,
+      "known_cost_usd": 0.0006465392361110033,
+      "cost_usd": null,
+      "voice_cost_usd": null
+    }
+  ]
+}

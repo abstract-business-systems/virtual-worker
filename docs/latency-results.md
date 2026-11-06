@@ -10,7 +10,7 @@
 | 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none |
 | 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s |
 | 6 | Three calls, OpenRouter voice | Teams | never measured | gpt-audio<br>never measured | gpt-6-luna<br>never measured | gpt-audio<br>never measured | not measured | none |
-| 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s | elevenlabs/scribe-v2<br>1.67 s | gpt-6-luna<br>2.82 s | elevenlabs/eleven-v4-turbo<br>1.15 s | CLI 3.84 s; Teams not yet timed (est. ~7–8 s incl. travel) | 7.65 s |
+| 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s CLI · 0.67 s Teams | elevenlabs/scribe-v2<br>CLI 1.67 s · Teams 1.77 s | gpt-6-luna<br>CLI 2.82 s · Teams 2.44 s | elevenlabs/eleven-v4-turbo<br>CLI 1.15 s · Teams 1.85 s | **CLI 3.84 s · Teams 4.35 s** | CLI 7.65 s · Teams 8.11 s |
 
 Row 2 live source: 5 Nov, 6 turns over 4.9 min in a real Teams meeting, zero
 errors, transcript heard correctly 6/6, bash tools worked live
@@ -34,6 +34,22 @@ includes turns that ran bash tools. The thinking model (2.82 s) is now the
 biggest single chunk of the first-word delay; the ElevenLabs voice is the
 smallest (1.15 s).
 
+Row 7 live source: 6 Nov, 23 turns over 7.7 min in a real Teams meeting
+(`session-separate-20261106T065509936538Z.json`): 13 completed, 7 interrupted
+by overlapping speech, 1 failed (Friday attempted an internet search with no
+web tool and hit the tool-loop limit — a tooling gap, not a latency one).
+First word mean 4.35 s (range 2.9–6.6), round trip 8.11 s, cost $0.0077 for
+the session. Hearing was good: Friday found and explained the Snake project,
+counted its files, and flagged audio cut-outs honestly. **Teams overhead vs
+the CLI bench is only ~+0.5 s on the first word** — the estimate is now a
+measurement.
+
+Mid-session probe (`stt-latency-probe-20261106T064751.json`, run while the
+meeting was live): Scribe 1.71 s, gpt-4o-mini-transcribe 1.12 s, Whisper
+2.04 s — STT stayed fast under meeting load, ruling out host load and
+provider queueing as the cause of realtime's 7.54 s event. The remaining
+suspect is the in-stream transcription inside the realtime session itself.
+
 Voice-stage note: the measured path streams raw PCM straight from OpenRouter's
 ElevenLabs endpoint (confirmed `audio/pcm` 5 Nov) — no ffmpeg in it. ffmpeg
 decode exists only as a fallback for endpoints that reject PCM and adds
@@ -45,10 +61,11 @@ briefly in the first live build before the PCM switch.
 - "none" in the Avg column = that configuration was never run through a full 20-question session.
 - Same model in all three stage columns = one model that listens, thinks, and speaks by itself.
 
-Gap: rows 1, 3–5 were never tested in Teams, row 6 never at the CLI; rows 2
-and 7 now have CLI numbers and live Teams evidence (row 2 fully timed live,
-row 7's live delay still component-estimated). Teams transport is small;
-host-side network calls dominate.
+Gap: rows 1, 3–5 were never tested in Teams, row 6 never at the CLI; **rows 2
+and 7 are now measured both ways**. Verdict across both pairs: Teams adds
+only ~0.5 s to the first word; the latency budget is decided by the model
+pipeline, and row 7 (ElevenLabs + Luna) is the best measured live build at
+4.35 s first word, 8.11 s round trip.
 
 Bench note: the repeat-suppression meant for live meetings misfires on the
 fixture plan (it repeats similar questions on purpose); it was disabled for

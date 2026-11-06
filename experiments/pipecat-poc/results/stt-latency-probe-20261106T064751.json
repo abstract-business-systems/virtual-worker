@@ -1,0 +1,118 @@
+{
+ "stamp": "20261106T064751",
+ "host_note": "abs-worker (same machine as dev session)",
+ "runs": [
+  {
+   "model": "elevenlabs/scribe-v2",
+   "base": "https://openrouter.ai/api/v1",
+   "utterance_s": 6.98,
+   "reps": [
+    {
+     "rep": 1,
+     "s": 2.04,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    },
+    {
+     "rep": 2,
+     "s": 2.02,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    },
+    {
+     "rep": 3,
+     "s": 1.33,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    },
+    {
+     "rep": 4,
+     "s": 1.58,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    },
+    {
+     "rep": 5,
+     "s": 1.56,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    }
+   ],
+   "mean_s": 1.71
+  },
+  {
+   "model": "gpt-4o-mini-transcribe",
+   "base": "https://api.openai.com/v1",
+   "utterance_s": 6.98,
+   "reps": [
+    {
+     "rep": 1,
+     "s": 1.16,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    },
+    {
+     "rep": 2,
+     "s": 0.86,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    },
+    {
+     "rep": 3,
+     "s": 1.54,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    },
+    {
+     "rep": 4,
+     "s": 0.81,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    },
+    {
+     "rep": 5,
+     "s": 1.23,
+     "ok": true,
+     "text_head": "Can you list the files in the current wo"
+    }
+   ],
+   "mean_s": 1.12
+  },
+  {
+   "model": "faster-whisper base int8",
+   "reps": [
+    {
+     "rep": 1,
+     "s": 2.43,
+     "ok": true,
+     "text_head": " Can you list the files in the current w"
+    },
+    {
+     "rep": 2,
+     "s": 2.08,
+     "ok": true,
+     "text_head": " Can you list the files in the current w"
+    },
+    {
+     "rep": 3,
+     "s": 2.02,
+     "ok": true,
+     "text_head": " Can you list the files in the current w"
+    },
+    {
+     "rep": 4,
+     "s": 2.07,
+     "ok": true,
+     "text_head": " Can you list the files in the current w"
+    },
+    {
+     "rep": 5,
+     "s": 1.61,
+     "ok": true,
+     "text_head": " Can you list the files in the current w"
+    }
+   ],
+   "mean_s": 2.04
+  }
+ ]
+}
