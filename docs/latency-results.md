@@ -42,14 +42,14 @@ call-back) — see `next-steps.md` M13 section.
 | Where to fix | The Teams meeting is not the problem (~0.5 s). The model pipeline is: thinking (2.4–2.8 s) and speech-to-text (1.7 s) dominate. One open item: realtime's in-stream transcription spiked to 7.5 s once; root cause not yet pinned |
 | Still open | Automatic model-swap capability (#37); perceived-delay work toward the ~1 s conversational gap (#38) — deferred by agreement |
 
-| # | Configuration | Env | Pause wait | Speech-to-text | Thinking | Voice | First word | Avg over 20 q |
-|---|---|---|---:|---|---|---|---:|---:|
-| 1 | Original worker | CLI | 2.01 s | Whisper (local)<br>1.54 s | gpt-4o-mini<br>1.93 s | local<br>2.45 s | 7.77 s | 20.32 s (whole reply, not first word) |
-| 2 | Realtime | CLI + Teams | one connection does all three | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | CLI 1.13 s; Teams 10.87 s | CLI 4.30 s; Teams not separable |
-| 3 | One audio model, full | CLI | 0.7 s | gpt-audio<br>0 s, inside same call | gpt-audio<br>inside same call | gpt-audio<br>2.6 s | 3.28 s | 5.85 s |
-| 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none |
-| 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s |
-| 6 | Three calls, OpenRouter voice | Teams | 0.74 s | gpt-audio<br>1.50 s | gpt-6-luna<br>1.98 s | gpt-audio<br>2.77 s | **6.62 s** (4.1–10.1) | none |
+| # | Configuration | Env | Pause wait | Speech-to-text | Thinking | Voice | First word | Avg over 20 q | Cost (measured) |
+|---|---|---|---:|---|---|---|---:|---:|---|
+| 1 | Original worker | CLI | 2.01 s | Whisper (local)<br>1.54 s | gpt-4o-mini<br>1.93 s | local<br>2.45 s | 7.77 s | 20.32 s (whole reply, not first word) | never priced (local Whisper and local TTS produce no bill; text part unmeasured) |
+| 2 | Realtime | CLI + Teams | one connection does all three | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | CLI 1.13 s; Teams 10.87 s | CLI 4.30 s; Teams not separable | Teams live $0.0237 ≈ ₹1.99 (4.9 min, ≈₹0.41/min); CLI bench not separately priced |
+| 3 | One audio model, full | CLI | 0.7 s | gpt-audio<br>0 s, inside same call | gpt-audio<br>inside same call | gpt-audio<br>2.6 s | 3.28 s | 5.85 s | bench not priced (run predates cost tracking) |
+| 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none | not priced |
+| 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s | not priced |
+| 6 | Three calls, OpenRouter voice | Teams | 0.74 s | gpt-audio<br>1.50 s | gpt-6-luna<br>1.98 s | gpt-audio<br>2.77 s | **6.62 s** (4.1–10.1) | none | $0.1469 ≈ ₹12.19 (5.7 min, ≈₹2.16/min) |
 
 Row 6 live source: 6 Nov, 10 completed turns (of 22 interactions; 10
 interrupted, 2 failed) over 5.7 listening-minutes in a real Teams meeting.
@@ -60,7 +60,7 @@ one server-start request died in the 4-request tool loop, and
 `quality_verified: false` in the report. First word is computed from
 first-playback minus speech-end (the report's own voice-latency field was
 empty for this run).
-| 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s CLI · 0.67 s Teams | elevenlabs/scribe-v2<br>CLI 1.67 s · Teams 1.77 s | gpt-6-luna<br>CLI 2.82 s · Teams 2.44 s | elevenlabs/eleven-v4-turbo<br>CLI 1.15 s · Teams 1.85 s | **CLI 3.84 s · Teams 4.35 s** | CLI 7.65 s · Teams 8.11 s |
+| 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s CLI · 0.67 s Teams | elevenlabs/scribe-v2<br>CLI 1.67 s · Teams 1.77 s | gpt-6-luna<br>CLI 2.82 s · Teams 2.44 s | elevenlabs/eleven-v4-turbo<br>CLI 1.15 s · Teams 1.85 s | **CLI 3.84 s · Teams 4.35 s** | CLI 7.65 s · Teams 8.11 s | CLI $0.0082 ≈ ₹0.68 (17 turns); Teams $0.0077 ≈ ₹0.64 (7.7 min) |
 
 Row 2 live source: 5 Nov, 6 turns over 4.9 min in a real Teams meeting, zero
 errors, transcript heard correctly 6/6, bash tools worked live
