@@ -11,11 +11,19 @@ Teams echo experiment, the platform-latency budget check, and the
 perceived-delay mechanism (acknowledgement, task watcher, proactive
 call-back) — see `next-steps.md` M13 section.
 
-- **Teams adds only ~0.5 s** (3.84 → 4.35 s first word). The meeting is not the latency problem.
-- **Where the time goes** (Teams): silence wait 0.67 s → speech-to-text 1.77 s → thinking 2.44 s → voice 1.85 s.
-- **Best live build: ElevenLabs + Luna** — 4.35 s first word, 8.11 s full reply, ≈₹0.65 per 7-minute session.
-- **Realtime caveat**: CLI-fast (1.13 s) but one live session hit a 7.5 s in-stream transcription spike; root cause open.
-- **Open items**: automatic model-swap capability (#37); perceived-delay work toward the ~1 s conversational gap (#38).
+- **Teams overhead on plain conversational turns is ~0** (3.86 s live vs
+  3.84 s CLI first word); the earlier "+0.5 s" mean included turns where
+  Friday ran bash tools — tool work, not meeting overhead.
+- **Where the time goes** (plain Teams turns): silence wait 0.66 s →
+  speech-to-text 1.65 s → thinking 2.34 s → first word ~0.9 s into the voice
+  call. **Stage durations are not additive** — the voice column is the full
+  synthesis call; first audio arrives inside it.
+- **Best live build: ElevenLabs + Luna** — 4.35 s first word overall
+  (3.86 s on plain turns), 8.11 s full reply, ≈₹0.65 per 7-minute session.
+- **Realtime caveat**: CLI-fast (1.13 s) but one live session hit a 7.5 s
+  in-stream transcription spike; root cause open.
+- **Open items**: automatic model-swap capability (#37); perceived-delay work
+  toward the ~1 s conversational gap (#38).
 
 ## What was asked (M12) → status
 
