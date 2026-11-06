@@ -67,10 +67,16 @@ i.e., inside G.114's "acceptable" band.
 
 ## 5. Cross-check against our own measurements
 
-- The user's phone→Teams→PC echo experiment measured **0.3–0.5 s** — matching
-  the platform class above, and matching Friday's measured live overhead
-  (**+0.5 s in Teams**, `latency-results.md`). Two independent experiments
-  agree.
+- **Teams echo test, measured 6 Nov** (`echo-test-20261106.mp4`, phone →
+  Teams → laptop → Teams → phone): cross-correlation of the recorded "hello"
+  against the rest of the recording finds the echo at **+0.364 s round trip**
+  (correlation 0.65), repeating at +0.73 s; the same ~0.37 s spacing recurs
+  across every utterance in the recording. This matches the user's heard
+  0.3–0.5 s and corresponds to ~180 ms effective one-way plus buffers —
+  squarely inside the platform class above.
+- Friday's live overhead in Teams (**+0.5 s** on the session mean, which
+  included bash-tool turns; **~0 s on plain turns**) — consistent with the
+  echo measurement. Two independent experiments agree.
 - Friday's first-word delay in Teams (4.35 s) is therefore ~99% pipeline and
   ~1% platform. The M13 working assumption (~600 ms platform budget) is
   supported: Teams' transport fits inside it; our pipeline must fit inside
@@ -82,7 +88,8 @@ i.e., inside G.114's "acceptable" band.
    (ITU-T G.114).
 2. Teams/Meet/Zoom all operate in the 150–250 ms effective one-way class;
    0.3–0.5 s heard echo is normal on all of them.
-3. Friday's budget: the ~1 s conversational-gap target minus the ~0.5 s
-   platform round trip leaves **~0.5 s for the pipeline** (silence wait + STT
+3. **Measured on our own Teams loopback: 0.37 s round trip.**
+4. Friday's budget: the ~1 s conversational-gap target minus the ~0.4 s
+   platform round trip leaves **~0.6 s for the pipeline** (silence wait + STT
    + thinking + voice-start) — currently ~3.7 s. That gap is the
    perceived-delay work (M13 #42), not a platform problem.
