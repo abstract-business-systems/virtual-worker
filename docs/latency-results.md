@@ -4,6 +4,13 @@
 
 ## TL;DR
 
+Reviewed by Viswanath (M13, 6 Nov): stage numbers accepted; **full-reply
+latency does not matter — first word only**; the realtime 7.5 s spike is
+accepted as a one-off. Still owed: the audio approach's Teams number, the
+Teams echo experiment, the platform-latency budget check, and the
+perceived-delay mechanism (acknowledgement, task watcher, proactive
+call-back) — see `next-steps.md` M13 section.
+
 - **Teams adds only ~0.5 s** (3.84 → 4.35 s first word). The meeting is not the latency problem.
 - **Where the time goes** (Teams): silence wait 0.67 s → speech-to-text 1.77 s → thinking 2.44 s → voice 1.85 s.
 - **Best live build: ElevenLabs + Luna** — 4.35 s first word, 8.11 s full reply, ≈₹0.65 per 7-minute session.
