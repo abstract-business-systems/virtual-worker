@@ -44,23 +44,28 @@ call-back) — see `next-steps.md` M13 section.
 
 | # | Configuration | Env | Pause wait | Speech-to-text | Thinking | Voice | First word | Avg over 20 q | Cost (measured) |
 |---|---|---|---:|---|---|---|---:|---:|---|
-| 1 | Original worker | CLI | 2.01 s | Whisper (local)<br>1.54 s | gpt-4o-mini<br>1.93 s | local<br>2.45 s | 7.77 s | 20.32 s (whole reply, not first word) | never priced (local Whisper and local TTS produce no bill; text part unmeasured) |
-| 2 | Realtime | CLI + Teams | one connection does all three | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | CLI 1.13 s; Teams 10.87 s | CLI 4.30 s; Teams not separable | Teams live $0.0237 ≈ ₹1.99 (4.9 min, ≈₹0.41/min); CLI bench not separately priced |
-| 3 | One audio model, full | CLI | 0.7 s | gpt-audio<br>0 s, inside same call | gpt-audio<br>inside same call | gpt-audio<br>2.6 s | 3.28 s | 5.85 s | bench not priced (run predates cost tracking) |
-| 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none | not priced |
-| 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s | not priced |
-| 6 | Three calls, OpenRouter voice | Teams | 0.74 s | gpt-audio<br>1.50 s | gpt-6-luna<br>1.98 s | gpt-audio<br>2.77 s | **6.62 s** (4.1–10.1) | none | $0.1469 ≈ ₹12.19 (5.7 min, ≈₹2.16/min) |
+| 1 | Original worker | CLI | 2.01 s | Whisper (local)<br>1.54 s | gpt-4o-mini<br>1.93 s | local<br>2.45 s | 7.77 s | 20.32 s (whole reply, not first word) | no bill recorded (local Whisper + local TTS unbilled); calculated estimate ≈ ₹0.05/turn or less (gpt-4o-mini text only) |
+| 2 | Realtime | CLI + Teams | one connection does all three | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | gpt-realtime-2.1-mini<br>one connection | CLI 1.13 s; Teams 10.87 s | CLI 4.30 s; Teams not separable | CLI bench $0.0471 ≈ ₹3.91 (21 turns, ≈₹0.19/turn); Teams live $0.0237 ≈ ₹1.99 (6 turns, ≈₹0.33/turn, ≈₹0.41/min) |
+| 3 | One audio model, full | CLI | 0.7 s | gpt-audio<br>0 s, inside same call | gpt-audio<br>inside same call | gpt-audio<br>2.6 s | 3.28 s | 5.85 s | bench $0.1831 ≈ ₹15.20 (20 turns, ≈₹0.77/turn) |
+| 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none | bench $0.0250 ≈ ₹2.08 (16 turns, ≈₹0.13/turn) |
+| 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s | bench $0.0254 ≈ ₹2.11 (20 turns, ≈₹0.11/turn) |
+| 6 | Three calls, OpenRouter voice | Teams | 0.74 s | gpt-audio<br>1.50 s | gpt-6-luna<br>1.98 s | gpt-audio<br>2.77 s | **6.62 s** (4.1–10.1) | none | $0.1469 ≈ ₹12.34 (10 turns, ≈₹1.23/turn, ≈₹2.16/min) |
 
 Row 6 live source: 6 Nov, 10 completed turns (of 22 interactions; 10
 interrupted, 2 failed) over 5.7 listening-minutes in a real Teams meeting.
-Cost $0.1469 ≈ ₹12.19 for the session (≈ ₹2.16 per listening-minute).
+Cost $0.1469 ≈ ₹12.34 for the session (≈ ₹2.16 per listening-minute; ≈ ₹1.23 per completed turn).
 Quality problems recorded honestly: one reply came out in Norwegian, three
 replies spoke the hand-off meta-text aloud ("Here's the spoken version:"),
 one server-start request died in the 4-request tool loop, and
 `quality_verified: false` in the report. First word is computed from
 first-playback minus speech-end (the report's own voice-latency field was
 empty for this run).
-| 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s CLI · 0.67 s Teams | elevenlabs/scribe-v2<br>CLI 1.67 s · Teams 1.77 s | gpt-6-luna<br>CLI 2.82 s · Teams 2.44 s | elevenlabs/eleven-v4-turbo<br>CLI 1.15 s · Teams 1.85 s | **CLI 3.84 s · Teams 4.35 s** | CLI 7.65 s · Teams 8.11 s | CLI $0.0082 ≈ ₹0.68 (17 turns); Teams $0.0077 ≈ ₹0.64 (7.7 min) |
+| 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s CLI · 0.67 s Teams | elevenlabs/scribe-v2<br>CLI 1.67 s · Teams 1.77 s | gpt-6-luna<br>CLI 2.82 s · Teams 2.44 s | elevenlabs/eleven-v4-turbo<br>CLI 1.15 s · Teams 1.85 s | **CLI 3.84 s · Teams 4.35 s** | CLI 7.65 s · Teams 8.11 s | CLI $0.0082 ≈ ₹0.68 (17 turns, ≈₹0.04/turn); Teams $0.0077 ≈ ₹0.65 (13 turns, ≈₹0.05/turn) |
+
+Cost column source: the billed session reports (result JSONs) for each row's
+bench/live run; FX ₹84 per $1; per-turn = bill ÷ completed turns. Where a run
+produced no bill (row 1's local Whisper/TTS), the cell says so and gives a
+calculated text-only estimate instead.
 
 Row 2 live source: 5 Nov, 6 turns over 4.9 min in a real Teams meeting, zero
 errors, transcript heard correctly 6/6, bash tools worked live
