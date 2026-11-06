@@ -448,3 +448,36 @@ plus operating Excel Online in a browser according to spoken instructions
 control. Screen sharing was suggested, not made a required acceptance test.
 Provide a rough timeline for this roadmap (05:46–06:02); the transcript contains
 no agreed duration or delivery date.
+
+## M13 review — numbers accepted, perceived-delay mechanism, and remaining measurements (6 November)
+
+Viswanath reviewed the latency table (`latency-results.md`). Outcomes:
+
+1. **Numbers accepted.** The stage breakdown (silence wait, STT 1.77 s,
+   thinking, voice) is what he wanted; **full-reply latency does not matter —
+   only the first word.** The realtime 7.5 s in-stream transcription spike is
+   accepted as a one-off ("no issues, not a problem"); root-cause work is not
+   blocking.
+2. **Audio approach still owes its Teams number** (gpt-audio full, the
+   quality-qualified set): latency first, then cost. This completes the
+   3-approach × 2-measure matrix.
+3. **Teams transport echo experiment (no code):** without Friday, join the
+   meeting from a phone/speaker without headphones, make a distinct
+   noise/click, record the meeting, and measure when the echo of that noise
+   comes back. That gives the platform's real end-to-end delay.
+4. **Platform-latency research (~30 min):** 95th-percentile round-trip
+   latency for Teams and Google Meet (they differ; Meet reportedly works on
+   low bandwidth), and what delay is perceivable/acceptable for humans —
+   working assumption ~600 ms platform budget. Then check Friday's perceived
+   delay against that budget.
+5. **Perceived-delay mechanism (the main build item)** — when a task starts,
+   Friday acknowledges immediately ("I'm on it"); a backend watcher (the
+   existing job watcher suffices; it need not be per-task) answers status
+   questions instantly ("are you working?" → "yes, still working"); long
+   tasks get an ETA ("back to you in 10–15 minutes"); and when a background
+   task finishes, **Friday proactively comes back to the user with the
+   result** instead of waiting to be pinged (observed gap: after the
+   snake-game task the user had to ping to learn the outcome).
+
+Agreed order: measure audio's Teams latency → then its cost → then check the
+perceived-delay budget against the research.

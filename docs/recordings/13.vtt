@@ -1,0 +1,1453 @@
+WEBVTT
+
+2cb29909-5156-4b91-9913-8d6238606394/6-0
+00:00:10.878 --> 00:00:14.966
+<v Viswanath Chidambaram>Regarding a startup,
+so it says actually teams adds only 0.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/6-1
+00:00:14.966 --> 00:00:19.804
+<v Viswanath Chidambaram>5 seconds. Okay, I don't think actually 0.
+5 seconds is actually okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/5-0
+00:00:16.878 --> 00:00:17.238
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/6-2
+00:00:19.804 --> 00:00:24.642
+<v Viswanath Chidambaram>I think we have to reduce it. Okay,
+so like what we will do is we will</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/6-3
+00:00:24.642 --> 00:00:28.935
+<v Viswanath Chidambaram>actually try to measure the actual
+latency on team side. Okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/6-4
+00:00:28.935 --> 00:00:30.638
+<v Viswanath Chidambaram>the easiest way would be.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/7-0
+00:00:30.758 --> 00:00:31.518
+<v Viswanath Chidambaram>Ji.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/10-0
+00:00:33.038 --> 00:00:37.093
+<v Viswanath Chidambaram>Connecting actually via speaker connected
+into teams, okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/10-1
+00:00:37.093 --> 00:00:42.500
+<v Viswanath Chidambaram>and actually removing your headphone and
+make actually some actually tap noise,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/9-0
+00:00:37.678 --> 00:00:37.998
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/10-2
+00:00:42.500 --> 00:00:44.798
+<v Viswanath Chidambaram>okay, so that we get the feedback.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/11-0
+00:00:47.358 --> 00:00:49.358
+<v Sarooparam Chenaram Darji>Tab clients to get the paper.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/14-0
+00:00:49.358 --> 00:00:54.863
+<v Viswanath Chidambaram>So the idea is lets say you tap something,
+okay, the tap will be recorded, Amir,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/12-0
+00:00:53.518 --> 00:00:53.918
+<v Sarooparam Chenaram Darji>Haan.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/14-1
+00:00:54.863 --> 00:01:00.299
+<v Viswanath Chidambaram>and then actually it goes to teams and
+comes back through speaker that also can</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/13-0
+00:00:56.878 --> 00:00:57.358
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/14-2
+00:01:00.299 --> 00:01:01.998
+<v Viswanath Chidambaram>be recorded teams itself.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/16-0
+00:01:03.518 --> 00:01:07.170
+<v Viswanath Chidambaram>Basically, if you like,
+if you are connected to a device which</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/16-1
+00:01:07.170 --> 00:01:09.952
+<v Viswanath Chidambaram>does not have this noise filtering thing,
+okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/16-2
+00:01:09.952 --> 00:01:13.603
+<v Viswanath Chidambaram>and then lets say you actually do a click,
+lets say like this,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/15-0
+00:01:12.878 --> 00:01:13.318
+<v Sarooparam Chenaram Darji>Hello.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/16-3
+00:01:13.603 --> 00:01:16.849
+<v Viswanath Chidambaram>like if you actually make this kind of
+one sound, okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/16-4
+00:01:16.849 --> 00:01:20.558
+<v Viswanath Chidambaram>you can see actually the echo actually
+feeling like once again.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/17-0
+00:01:22.078 --> 00:01:26.718
+<v Viswanath Chidambaram>That will actually give us, let's say,
+like a real teams latency in our setup.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/18-0
+00:01:29.038 --> 00:01:32.320
+<v Sarooparam Chenaram Darji>Without Friday,
+you are talking about measuring it.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/19-0
+00:01:29.598 --> 00:01:35.838
+<v Viswanath Chidambaram>You basically like, yeah, without really,
+without really, it makes some noise, yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/18-1
+00:01:32.320 --> 00:01:34.718
+<v Sarooparam Chenaram Darji>Basically, I connect through my phone.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/22-0
+00:01:36.078 --> 00:01:41.786
+<v Sarooparam Chenaram Darji>Make some noise on like let us say on PCI
+put things on the speaker,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/20-0
+00:01:40.398 --> 00:01:40.878
+<v Viswanath Chidambaram>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/22-1
+00:01:41.786 --> 00:01:47.494
+<v Sarooparam Chenaram Darji>I connect through my phone,
+I make sound on phone and I hear it back</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/22-2
+00:01:47.494 --> 00:01:48.238
+<v Sarooparam Chenaram Darji>from the.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/21-0
+00:01:47.518 --> 00:01:49.078
+<v Viswanath Chidambaram>You.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/23-0
+00:01:49.918 --> 00:01:50.318
+<v Sarooparam Chenaram Darji>Gay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/26-0
+00:01:51.678 --> 00:01:53.667
+<v Viswanath Chidambaram>So,
+like that will actually give you related,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/24-0
+00:01:52.158 --> 00:01:52.598
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/26-1
+00:01:53.667 --> 00:01:56.433
+<v Viswanath Chidambaram>see that is some give me one minute,
+right? Give me one minute,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/25-0
+00:01:54.638 --> 00:01:57.758
+<v Sarooparam Chenaram Darji>Okay, but do you have to measure it also?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/26-2
+00:01:56.433 --> 00:01:58.638
+<v Viswanath Chidambaram>I will give back, give me one minute,
+I will back.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/190-0
+00:12:49.838 --> 00:12:50.798
+<v Viswanath Chidambaram>Karupa model one.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/191-0
+00:12:53.998 --> 00:12:54.318
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/192-0
+00:12:55.278 --> 00:12:56.478
+<v Viswanath Chidambaram>Your answer still raised?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/196-0
+00:12:57.758 --> 00:13:03.633
+<v Sarooparam Chenaram Darji>No,
+I no hand raising I generally do whenever</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/193-0
+00:12:57.878 --> 00:12:59.038
+<v Viswanath Chidambaram>I don't want to drop your hands.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/196-1
+00:13:03.633 --> 00:13:05.038
+<v Sarooparam Chenaram Darji>I stand up.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/195-0
+00:13:03.838 --> 00:13:05.678
+<v Viswanath Chidambaram>Shall we continue?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/197-0
+00:13:06.558 --> 00:13:06.838
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/198-0
+00:13:08.518 --> 00:13:10.635
+<v Viswanath Chidambaram>So,
+like we have to measure the actual teams</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/198-1
+00:13:10.635 --> 00:13:12.988
+<v Viswanath Chidambaram>thing, okay?
+Maybe like there is something on the</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/198-2
+00:13:12.988 --> 00:13:15.293
+<v Viswanath Chidambaram>internet,
+there may be something on the internet</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/198-3
+00:13:15.293 --> 00:13:17.598
+<v Viswanath Chidambaram>itself.
+We can ask what may be a typical agency.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/199-0
+00:13:19.278 --> 00:13:19.918
+<v Viswanath Chidambaram>End to end.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/202-0
+00:13:21.038 --> 00:13:26.393
+<v Sarooparam Chenaram Darji>But I was asking so measure this tacho
+part means like literally mechanically</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/200-0
+00:13:21.118 --> 00:13:22.358
+<v Viswanath Chidambaram>Can we go ahead and do the experiment?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/201-0
+00:13:23.638 --> 00:13:24.078
+<v Viswanath Chidambaram>200.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/202-1
+00:13:26.393 --> 00:13:30.718
+<v Sarooparam Chenaram Darji>measure it like with the code or
+something or just observe it.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/203-0
+00:13:31.198 --> 00:13:33.343
+<v Viswanath Chidambaram>No,
+you can observe it even you don't like</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/203-1
+00:13:33.343 --> 00:13:37.282
+<v Viswanath Chidambaram>you can conduct an experimental goal.
+The problem is observation will not give</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/203-2
+00:13:37.282 --> 00:13:38.878
+<v Viswanath Chidambaram>you precise numbers, am I right?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/204-0
+00:13:39.358 --> 00:13:39.998
+<v Sarooparam Chenaram Darji>Yeah, that's.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/205-0
+00:13:40.958 --> 00:13:44.280
+<v Viswanath Chidambaram>So actually there should be a recording
+like we can actually get the audio and</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/205-1
+00:13:44.280 --> 00:13:46.718
+<v Viswanath Chidambaram>then actually look at the distance
+between the waveforms.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/206-0
+00:13:50.398 --> 00:13:51.278
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/207-0
+00:13:51.038 --> 00:13:52.038
+<v Viswanath Chidambaram>Tell me what we.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/209-0
+00:13:53.158 --> 00:13:55.990
+<v Viswanath Chidambaram>So like a better rate,
+you don't have to actually do the</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/209-1
+00:13:55.990 --> 00:13:59.518
+<v Viswanath Chidambaram>experiment itself and pretty much
+somebody might have done it already.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/210-0
+00:14:01.278 --> 00:14:03.358
+<v Viswanath Chidambaram>For teams,
+Google Meet and other things separately.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/211-0
+00:14:04.878 --> 00:14:07.038
+<v Viswanath Chidambaram>Can I actually try to actually get the
+numbers from somewhere?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/212-0
+00:14:08.518 --> 00:14:10.238
+<v Viswanath Chidambaram>It will give us actually extra effects.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/213-0
+00:14:10.958 --> 00:14:11.278
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/214-0
+00:14:11.838 --> 00:14:13.670
+<v Viswanath Chidambaram>Okay,
+so like you're measuring is like just</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/214-1
+00:14:13.670 --> 00:14:17.001
+<v Viswanath Chidambaram>actually do some research for some 30
+minutes max, you're not getting anything,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/214-2
+00:14:17.001 --> 00:14:18.958
+<v Viswanath Chidambaram>we'll actually measure it on our teams
+itself.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/215-0
+00:14:19.838 --> 00:14:20.358
+<v Sarooparam Chenaram Darji>OK.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/217-0
+00:14:21.278 --> 00:14:26.041
+<v Viswanath Chidambaram>And actually there could be one other
+actually layer. So like your teams,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/217-1
+00:14:26.041 --> 00:14:31.062
+<v Viswanath Chidambaram>your local teams to like basically you
+connecting to one of the meetings from</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/217-2
+00:14:31.062 --> 00:14:34.474
+<v Viswanath Chidambaram>your local laptop,
+local and from your mobile. Okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/217-3
+00:14:34.474 --> 00:14:38.078
+<v Viswanath Chidambaram>it might be really fast because there is
+no XRDP layer.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/216-0
+00:14:38.878 --> 00:14:39.118
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/218-0
+00:14:40.238 --> 00:14:42.318
+<v Viswanath Chidambaram>630 player might actually add to it.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/219-0
+00:14:43.478 --> 00:14:45.438
+<v Viswanath Chidambaram>OK, this actually only have to worry.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/220-0
+00:14:44.078 --> 00:14:46.798
+<v Sarooparam Chenaram Darji>Yeah, here it's also not acceptable.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/221-0
+00:14:48.398 --> 00:14:49.038
+<v Viswanath Chidambaram>Say it again.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/222-0
+00:14:49.998 --> 00:14:53.918
+<v Sarooparam Chenaram Darji>So the test I did,
+there was no XRDP involved.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/223-0
+00:14:54.718 --> 00:14:57.573
+<v Viswanath Chidambaram>Okay, that's fine.
+I'm just actually being cautious. Okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/223-1
+00:14:57.573 --> 00:15:01.155
+<v Viswanath Chidambaram>just actually there could be a let's say
+difference between teams center,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/223-2
+00:15:01.155 --> 00:15:02.558
+<v Viswanath Chidambaram>actually Google, Google Meet.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/224-0
+00:15:04.478 --> 00:15:06.541
+<v Viswanath Chidambaram>For example,
+actually teams that actually doesn't</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/224-1
+00:15:06.541 --> 00:15:08.398
+<v Viswanath Chidambaram>actually work with a low brand
+interactions.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/225-0
+00:15:09.918 --> 00:15:11.278
+<v Viswanath Chidambaram>Google Meet actually works.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/226-0
+00:15:12.718 --> 00:15:16.109
+<v Viswanath Chidambaram>So there could be actually difference
+across these applications too.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/226-1
+00:15:16.109 --> 00:15:19.943
+<v Viswanath Chidambaram>So do some research and try to identify
+like the number and if it is actually</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/226-2
+00:15:19.943 --> 00:15:22.695
+<v Viswanath Chidambaram>like more for us,
+we'll actually figure out like why or</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/226-3
+00:15:22.695 --> 00:15:23.678
+<v Viswanath Chidambaram>maybe we don't know.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/227-0
+00:15:25.758 --> 00:15:28.638
+<v Sarooparam Chenaram Darji>Yeah, my eyes quite off, don't have to.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/228-0
+00:15:30.718 --> 00:15:31.638
+<v Sarooparam Chenaram Darji>Okay, you are on hold.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/232-0
+00:15:51.638 --> 00:15:52.238
+<v Viswanath Chidambaram>Pardon me.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/234-0
+00:15:53.198 --> 00:15:56.112
+<v Sarooparam Chenaram Darji>Yeah, now you are on.
+You say you don't have 2 after that,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/233-0
+00:15:54.158 --> 00:15:55.038
+<v Viswanath Chidambaram>I got a call back.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/234-1
+00:15:56.112 --> 00:15:57.198
+<v Sarooparam Chenaram Darji>you will not cut down.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/235-0
+00:15:57.678 --> 00:16:01.511
+<v Viswanath Chidambaram>No, we don't have to do it. OK,
+just actually do some research,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/235-1
+00:16:01.511 --> 00:16:05.343
+<v Viswanath Chidambaram>we will actually figure out actually like
+what comes out of it.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/235-2
+00:16:05.343 --> 00:16:09.295
+<v Viswanath Chidambaram>I was up to say we like maybe if our
+setup is actually like slow,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/235-3
+00:16:09.295 --> 00:16:13.368
+<v Viswanath Chidambaram>I was up to say we don't bother much. No,
+but that is not the case.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/235-4
+00:16:13.368 --> 00:16:18.158
+<v Viswanath Chidambaram>We have to actually figure out actually
+to figure out ways to reduce the delay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/236-0
+00:16:18.838 --> 00:16:21.213
+<v Viswanath Chidambaram>Okay, because sexually fragile,
+people start feeling talking to Freddy is</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/236-1
+00:16:21.213 --> 00:16:21.438
+<v Viswanath Chidambaram>slower.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/237-0
+00:16:22.398 --> 00:16:22.558
+<v Sarooparam Chenaram Darji>Haan.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/238-0
+00:16:23.558 --> 00:16:25.278
+<v Viswanath Chidambaram>OK, then I should like what is it?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/239-0
+00:16:27.358 --> 00:16:30.758
+<v Viswanath Chidambaram>Give me a minute.
+Then actually they might not actually use</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/239-1
+00:16:30.758 --> 00:16:33.705
+<v Viswanath Chidambaram>it that much.
+And there is one of the things Friday</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/239-2
+00:16:33.705 --> 00:16:35.518
+<v Viswanath Chidambaram>doesn't have to connect to XRDP.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/240-0
+00:16:36.558 --> 00:16:36.798
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/241-0
+00:16:38.478 --> 00:16:40.695
+<v Viswanath Chidambaram>Okay,
+so we might not have to actually worry</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/241-1
+00:16:40.695 --> 00:16:43.403
+<v Viswanath Chidambaram>about that. Okay,
+first actually we will actually they</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/241-2
+00:16:43.403 --> 00:16:47.147
+<v Viswanath Chidambaram>could do some actually what is it
+exploration like a search and exploration</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/241-3
+00:16:47.147 --> 00:16:51.136
+<v Viswanath Chidambaram>and they try to understand what is the
+usual latency for actually these services</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/243-0
+00:16:51.118 --> 00:16:59.922
+<v Sarooparam Chenaram Darji>For now Friday, just to let you know,
+for now Friday is not connecting through</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/241-4
+00:16:51.136 --> 00:16:52.318
+<v Viswanath Chidambaram>and if there are like a.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/243-1
+00:16:59.922 --> 00:17:05.495
+<v Sarooparam Chenaram Darji>the XRDP.
+It's simply like uses a virtual display</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/243-2
+00:17:05.495 --> 00:17:10.398
+<v Sarooparam Chenaram Darji>to start a browser in it and works with
+it.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/242-0
+00:17:07.118 --> 00:17:08.718
+<v Viswanath Chidambaram>Okay, understood, yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/244-0
+00:17:11.278 --> 00:17:13.687
+<v Viswanath Chidambaram>Yeah, that's what we want.
+So not a problem,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/244-1
+00:17:13.687 --> 00:17:17.007
+<v Viswanath Chidambaram>let it be and the coming back.
+So the teams, the teams thing,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/244-2
+00:17:17.007 --> 00:17:19.416
+<v Viswanath Chidambaram>it is not just teams,
+it could be team Zoom,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/244-3
+00:17:19.416 --> 00:17:22.629
+<v Viswanath Chidambaram>it could be Google Meet.
+So try to understand the voluntary</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/244-4
+00:17:22.629 --> 00:17:25.627
+<v Viswanath Chidambaram>latency, okay.
+The reason I am asking you to understand</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/244-5
+00:17:25.627 --> 00:17:29.910
+<v Viswanath Chidambaram>the number is that so like this number is
+actually lets say like the maximum of</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/244-6
+00:17:29.910 --> 00:17:31.998
+<v Viswanath Chidambaram>this number, okay, or else even the 95.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/245-0
+00:17:32.118 --> 00:17:37.213
+<v Viswanath Chidambaram>Percent of this number is something that
+we have to remove from the perceived</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/245-1
+00:17:37.213 --> 00:17:40.871
+<v Viswanath Chidambaram>deleting. Okay,
+that might be actually you can actually</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/245-2
+00:17:40.871 --> 00:17:45.052
+<v Viswanath Chidambaram>ask this one, what is it?
+You can ask actually like some agent,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/245-3
+00:17:45.052 --> 00:17:50.081
+<v Viswanath Chidambaram>the model that actually like at what
+point in like what kind of delay is not</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/245-4
+00:17:50.081 --> 00:17:53.478
+<v Viswanath Chidambaram>perceivable for the humans or actually is
+actually.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/246-0
+00:17:53.758 --> 00:17:54.958
+<v Viswanath Chidambaram>Acceptable for humans.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/247-0
+00:17:55.518 --> 00:17:55.838
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/249-0
+00:17:56.878 --> 00:17:59.305
+<v Viswanath Chidambaram>Okay,
+so like people should not perceive that</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/249-1
+00:17:59.305 --> 00:18:03.736
+<v Viswanath Chidambaram>it is true for that actually we will give
+it that definitely will be sometime okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/248-0
+00:18:03.038 --> 00:18:03.358
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/249-2
+00:18:03.736 --> 00:18:06.057
+<v Viswanath Chidambaram>some 300 ms, 12 ms or whatever it is.
+Okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/249-3
+00:18:06.057 --> 00:18:08.536
+<v Viswanath Chidambaram>lets assume that it is actually 600 mls.
+Okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/249-4
+00:18:08.536 --> 00:18:11.754
+<v Viswanath Chidambaram>lets say like a teams actually teams or
+Google Meet or Zoom,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/249-5
+00:18:11.754 --> 00:18:13.758
+<v Viswanath Chidambaram>they have a delay of actually 600 mls.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/252-0
+00:18:15.438 --> 00:18:19.632
+<v Viswanath Chidambaram>Then we should try to, lets say,
+like compress everything within 200</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/252-1
+00:18:19.632 --> 00:18:24.192
+<v Viswanath Chidambaram>minutes or at least we have to like
+immediate, give an immediate response,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/252-2
+00:18:24.192 --> 00:18:27.170
+<v Viswanath Chidambaram>same checking okay from the client itself,
+okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/250-0
+00:18:26.078 --> 00:18:26.318
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/252-3
+00:18:27.170 --> 00:18:30.878
+<v Viswanath Chidambaram>so that actually they know actually it is
+actually accepted.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/251-0
+00:18:27.838 --> 00:18:28.158
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/254-0
+00:18:32.278 --> 00:18:36.471
+<v Viswanath Chidambaram>OK, and then we can go back. So basically,
+we have to measure that too,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/253-0
+00:18:34.398 --> 00:18:34.558
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/254-1
+00:18:36.471 --> 00:18:41.071
+<v Viswanath Chidambaram>do some research on that like 2 things:
+one is actually what is the, lets say,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/254-2
+00:18:41.071 --> 00:18:45.438
+<v Viswanath Chidambaram>like 95th percentage latency for Google
+Meet Teams and what is it is Zoom.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/255-0
+00:18:46.718 --> 00:18:49.171
+<v Viswanath Chidambaram>Okay,
+just to check for 9595th percentile route</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/255-1
+00:18:49.171 --> 00:18:51.727
+<v Viswanath Chidambaram>trip latency,
+I am pretty much sure there will be</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/255-2
+00:18:51.727 --> 00:18:52.238
+<v Viswanath Chidambaram>something.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/256-0
+00:18:54.078 --> 00:18:55.982
+<v Viswanath Chidambaram>OK,
+that actually we will actually shave off</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/256-1
+00:18:55.982 --> 00:18:58.563
+<v Viswanath Chidambaram>from our perceived delay,
+like accept to be perceived delay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/256-2
+00:18:58.563 --> 00:19:01.905
+<v Viswanath Chidambaram>and then we will check whether actually
+the rest of the things could be bundle</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/256-3
+00:19:01.905 --> 00:19:02.878
+<v Viswanath Chidambaram>within the time or not.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/257-0
+00:19:04.398 --> 00:19:04.758
+<v Sarooparam Chenaram Darji>Okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/258-0
+00:19:05.118 --> 00:19:07.756
+<v Viswanath Chidambaram>Okay,
+And we were talking about actually like</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/258-1
+00:19:07.756 --> 00:19:11.139
+<v Viswanath Chidambaram>where the timing goes, okay,
+the second point, okay, wait,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/258-2
+00:19:11.139 --> 00:19:14.522
+<v Viswanath Chidambaram>actually forget wait,
+actually we will actually figure out</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/258-3
+00:19:14.522 --> 00:19:17.847
+<v Viswanath Chidambaram>speech to text is actually like 1.77.
+Okay, this is okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/258-4
+00:19:17.847 --> 00:19:22.377
+<v Viswanath Chidambaram>this is actually for the separate model.
+Did you come up with the name for it?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/258-5
+00:19:22.377 --> 00:19:23.638
+<v Viswanath Chidambaram>The separate approach?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/259-0
+00:19:24.318 --> 00:19:26.958
+<v Sarooparam Chenaram Darji>No, it did not come up with the name.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/260-0
+00:19:27.438 --> 00:19:28.238
+<v Viswanath Chidambaram>Yes or no?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/261-0
+00:19:29.038 --> 00:19:29.438
+<v Sarooparam Chenaram Darji>No.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/262-0
+00:19:30.558 --> 00:19:32.661
+<v Viswanath Chidambaram>Okay, fine.
+So as of now you will call to separate.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/262-1
+00:19:32.661 --> 00:19:34.318
+<v Viswanath Chidambaram>So like that measurement is for separate.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/263-0
+00:19:35.158 --> 00:19:35.438
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/264-0
+00:19:37.598 --> 00:19:40.718
+<v Viswanath Chidambaram>Okay, fine. Give me one minute.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/265-0
+00:19:42.718 --> 00:19:48.873
+<v Viswanath Chidambaram>Bill 11 lakhs Luna give me a minute 4.
+35 okay first word full triply full</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/265-1
+00:19:48.873 --> 00:19:50.678
+<v Viswanath Chidambaram>triply doesn't matter.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/266-0
+00:19:53.358 --> 00:19:57.376
+<v Viswanath Chidambaram>Because actually the reply actually can
+vary based on the output size, am I right?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/268-0
+00:19:56.718 --> 00:20:02.150
+<v Sarooparam Chenaram Darji>Yeah, its at that time,
+its not basically staying silent,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/266-1
+00:19:57.376 --> 00:19:59.118
+<v Viswanath Chidambaram>So full reply doesn't matter at all.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/268-1
+00:20:02.150 --> 00:20:08.238
+<v Sarooparam Chenaram Darji>it is speaking, but yeah,
+so one one thing, so if reply is long.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/267-0
+00:20:07.278 --> 00:20:07.758
+<v Viswanath Chidambaram>Mhm.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/269-0
+00:20:09.598 --> 00:20:12.549
+<v Sarooparam Chenaram Darji>Okay,
+so lets say we assigned it some task,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/269-1
+00:20:12.549 --> 00:20:16.639
+<v Sarooparam Chenaram Darji>it started doing that task and then it
+got with the results.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/269-2
+00:20:16.639 --> 00:20:18.718
+<v Sarooparam Chenaram Darji>That result itself are if long.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/272-0
+00:20:20.718 --> 00:20:23.806
+<v Sarooparam Chenaram Darji>Then it takes some time,
+but that's a basically a no,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/270-0
+00:20:21.278 --> 00:20:24.238
+<v Viswanath Chidambaram>That we can actually that we somebody is
+going no issues.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/272-1
+00:20:23.806 --> 00:20:28.438
+<v Sarooparam Chenaram Darji>but that's a known thing that agent is
+working on something and it will get back</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/272-2
+00:20:28.438 --> 00:20:32.041
+<v Sarooparam Chenaram Darji>to us and it is done.
+And it says that in between saying like,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/272-3
+00:20:32.041 --> 00:20:36.158
+<v Sarooparam Chenaram Darji>okay, I will start working on it.
+Once it is done, I will let you know.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/271-0
+00:20:35.758 --> 00:20:36.078
+<v Viswanath Chidambaram>Okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/274-0
+00:20:37.838 --> 00:20:39.514
+<v Viswanath Chidambaram>Hey,
+does it actually come back and answer</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/274-1
+00:20:39.514 --> 00:20:40.878
+<v Viswanath Chidambaram>automatically without us prompting?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/276-0
+00:20:42.718 --> 00:20:47.858
+<v Sarooparam Chenaram Darji>The basic, I think it does not.
+So when I asked that to make the game</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/276-1
+00:20:47.858 --> 00:20:53.144
+<v Sarooparam Chenaram Darji>snake game, it developed the game.
+Then I waited around like it started</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/276-2
+00:20:53.144 --> 00:20:57.476
+<v Sarooparam Chenaram Darji>developing the game,
+it immediately developed the game and</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/276-3
+00:20:57.476 --> 00:20:59.678
+<v Sarooparam Chenaram Darji>then I waited around for some.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/277-0
+00:21:01.598 --> 00:21:04.673
+<v Viswanath Chidambaram>Okay, and then when you ask HD,
+it might have told that it's already</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/278-0
+00:21:01.758 --> 00:21:06.078
+<v Sarooparam Chenaram Darji>1015 seconds, it did not got back to me,
+yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/277-1
+00:21:04.673 --> 00:21:05.118
+<v Viswanath Chidambaram>completed.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/279-0
+00:21:06.398 --> 00:21:09.133
+<v Viswanath Chidambaram>But right now again,
+there actually in the live model might</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/280-0
+00:21:08.078 --> 00:21:11.198
+<v Sarooparam Chenaram Darji>I had to ping it to get the rest, yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/279-1
+00:21:09.133 --> 00:21:10.318
+<v Viswanath Chidambaram>actually come back to you.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/281-0
+00:21:12.638 --> 00:21:14.478
+<v Viswanath Chidambaram>The live model might actually come back
+to you, right?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/282-0
+00:21:14.958 --> 00:21:15.198
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/283-0
+00:21:16.558 --> 00:21:19.125
+<v Viswanath Chidambaram>But anyway,
+actually that is agree in the intern part,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/283-1
+00:21:19.125 --> 00:21:20.478
+<v Viswanath Chidambaram>the reception is fairly easy.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/285-0
+00:21:21.678 --> 00:21:24.237
+<v Viswanath Chidambaram>Okay, whenever actually it starts a task,
+okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/285-1
+00:21:24.237 --> 00:21:28.074
+<v Viswanath Chidambaram>you can always actually ask it to like
+give it as like some 15 minutes,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/285-2
+00:21:28.074 --> 00:21:32.498
+<v Viswanath Chidambaram>15 seconds or 30 seconds threshold, okay,
+to actually let the user know that it is</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/285-3
+00:21:32.498 --> 00:21:36.656
+<v Viswanath Chidambaram>actually working on something. Okay,
+the user might themselves actually might</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/284-0
+00:21:34.878 --> 00:21:35.198
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/285-4
+00:21:36.656 --> 00:21:40.121
+<v Viswanath Chidambaram>get irritated and saying that okay,
+you do things and come back,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/285-5
+00:21:40.121 --> 00:21:43.425
+<v Viswanath Chidambaram>we will do one thing.
+We will actually like we will I usually</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/285-6
+00:21:43.425 --> 00:21:44.438
+<v Viswanath Chidambaram>what can happen is.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/286-0
+00:21:44.878 --> 00:21:46.953
+<v Viswanath Chidambaram>It can first actually like acknowledge
+actually,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/286-1
+00:21:46.953 --> 00:21:49.366
+<v Viswanath Chidambaram>let's say like we actually like call
+Freddy. Hey Freddy,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/286-2
+00:21:49.366 --> 00:21:51.653
+<v Viswanath Chidambaram>like where are you or are you like are
+you available?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/286-3
+00:21:51.653 --> 00:21:54.870
+<v Viswanath Chidambaram>Say like it can actually immediately say
+like yes, I am available for this.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/286-4
+00:21:54.870 --> 00:21:58.173
+<v Viswanath Chidambaram>Like you are thinking and other things,
+actually like doesn't have to be like</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/286-5
+00:21:58.173 --> 00:22:00.078
+<v Viswanath Chidambaram>here,
+but again checking cannot be the case.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/287-0
+00:22:01.678 --> 00:22:05.210
+<v Viswanath Chidambaram>OK, instead of checking,
+you can actually even go for some B first</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/287-1
+00:22:05.210 --> 00:22:08.320
+<v Viswanath Chidambaram>step or else you'll actually go find
+something neutral OK,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/287-2
+00:22:08.320 --> 00:22:10.798
+<v Viswanath Chidambaram>which can actually like work for any
+question.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/288-0
+00:22:12.318 --> 00:22:16.544
+<v Viswanath Chidambaram>Okay, we will play the sound, okay,
+it could be even we can that we will</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/288-1
+00:22:16.544 --> 00:22:19.496
+<v Viswanath Chidambaram>discuss, okay,
+like in the sense actually the once</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/288-2
+00:22:19.496 --> 00:22:24.126
+<v Viswanath Chidambaram>actually query reaches like the back end,
+there should be immediate response so</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/288-3
+00:22:24.126 --> 00:22:28.120
+<v Viswanath Chidambaram>that the user understand actually
+whatever they have spoken has been</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/288-4
+00:22:28.120 --> 00:22:29.278
+<v Viswanath Chidambaram>already listened to.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/289-0
+00:22:31.278 --> 00:22:33.929
+<v Viswanath Chidambaram>OK.
+And we can also say like after actually</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/289-1
+00:22:33.929 --> 00:22:37.482
+<v Viswanath Chidambaram>after actually assessing the problem,
+like eye complexity,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/289-2
+00:22:37.482 --> 00:22:41.157
+<v Viswanath Chidambaram>it can say like sorry,
+after assessing the complexity of the</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/289-3
+00:22:41.157 --> 00:22:45.012
+<v Viswanath Chidambaram>problem, it can say like,
+let me actually look into it and come</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/289-4
+00:22:45.012 --> 00:22:48.626
+<v Viswanath Chidambaram>back to you like in a while or soon or
+something like that.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/289-5
+00:22:48.626 --> 00:22:51.758
+<v Viswanath Chidambaram>And then I can actually come back with an
+estimate.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/290-0
+00:22:52.438 --> 00:22:54.644
+<v Viswanath Chidambaram>Okay,
+say it actually this might actually take</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/290-1
+00:22:54.644 --> 00:22:57.038
+<v Viswanath Chidambaram>some 10 to 15 minutes.
+I believe shall I continue?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/291-0
+00:22:57.678 --> 00:22:57.918
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/292-0
+00:22:58.318 --> 00:23:01.698
+<v Viswanath Chidambaram>They say continue,
+they already acknowledged that the AI can</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/292-1
+00:23:01.698 --> 00:23:04.247
+<v Viswanath Chidambaram>anyway, let's say if they say continue,
+okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/292-2
+00:23:04.247 --> 00:23:08.015
+<v Viswanath Chidambaram>it can simply say like I will actually
+continue it come back. Okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/292-3
+00:23:08.015 --> 00:23:11.118
+<v Viswanath Chidambaram>now actually what should happen is the
+back end should.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/293-0
+00:23:09.598 --> 00:23:16.443
+<v Sarooparam Chenaram Darji>We have to add basically have to have
+some hooks and triggers whenever it is</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/293-1
+00:23:16.443 --> 00:23:17.598
+<v Sarooparam Chenaram Darji>done working.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/294-0
+00:23:16.958 --> 00:23:21.358
+<v Viswanath Chidambaram>Yeah, that's what I was up to say. So,
+like, a WhatsApp should run.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/295-0
+00:23:18.958 --> 00:23:22.438
+<v Sarooparam Chenaram Darji>That is not yet, I think it will be clear,
+yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/298-0
+00:23:23.358 --> 00:23:27.179
+<v Viswanath Chidambaram>Watcher should run in the back end to
+check actually whether it is done or not.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/298-1
+00:23:27.179 --> 00:23:30.713
+<v Viswanath Chidambaram>The watcher can actually also take care
+of giving intermediate responses.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/298-2
+00:23:30.713 --> 00:23:32.957
+<v Viswanath Chidambaram>The watcher is for actually the watcher
+again,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/296-0
+00:23:31.038 --> 00:23:31.358
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/298-3
+00:23:32.957 --> 00:23:36.730
+<v Viswanath Chidambaram>the watcher doesn't need to be lets say
+like what is it a separate watcher for</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/298-4
+00:23:36.730 --> 00:23:39.118
+<v Viswanath Chidambaram>each task.
+Ideally it should be only one watcher.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/297-0
+00:23:39.758 --> 00:23:40.078
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/299-0
+00:23:41.038 --> 00:23:42.872
+<v Viswanath Chidambaram>Okay,
+basically its actually its own awareness</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/299-1
+00:23:42.872 --> 00:23:44.238
+<v Viswanath Chidambaram>or something we could actually get.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/300-0
+00:23:43.038 --> 00:23:47.518
+<v Sarooparam Chenaram Darji>There is some watcher,
+but I am not sure what it is doing as of</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/300-1
+00:23:47.518 --> 00:23:47.798
+<v Sarooparam Chenaram Darji>now.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/301-0
+00:23:48.438 --> 00:23:50.808
+<v Viswanath Chidambaram>Okay, understood.
+So only the watcher should actually</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/301-1
+00:23:50.808 --> 00:23:54.318
+<v Viswanath Chidambaram>understand the current state and then he
+should be able to respond to the user.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/302-0
+00:23:56.558 --> 00:23:59.568
+<v Viswanath Chidambaram>Okay, that is one and okay,
+fine I am coming back.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/302-1
+00:23:59.568 --> 00:24:02.460
+<v Viswanath Chidambaram>This is for reducing the delay, okay.
+But again,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/302-2
+00:24:02.460 --> 00:24:06.002
+<v Viswanath Chidambaram>your 3rd point says best I built 11 level
+plus 2 now, okay,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/302-3
+00:24:06.002 --> 00:24:10.546
+<v Viswanath Chidambaram>this is actually separate thing, okay,
+but the real time might not take this</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/302-4
+00:24:10.546 --> 00:24:13.438
+<v Viswanath Chidambaram>much time.
+Does it actually take this much time?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/303-0
+00:24:14.238 --> 00:24:17.078
+<v Sarooparam Chenaram Darji>Yeah,
+real time it give something and the</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/303-1
+00:24:17.078 --> 00:24:19.038
+<v Sarooparam Chenaram Darji>second line itself next line.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/304-0
+00:24:20.318 --> 00:24:22.465
+<v Viswanath Chidambaram>Yeah,
+it was like I am not able to get the</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/304-1
+00:24:22.465 --> 00:24:26.459
+<v Viswanath Chidambaram>number by CLE fast one point like what is
+153 seconds end to end, first of all,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/306-0
+00:24:25.198 --> 00:24:30.742
+<v Sarooparam Chenaram Darji>So 1.3 seconds, yeah, 1.
+3 seconds within CLI.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/304-2
+00:24:26.459 --> 00:24:27.358
+<v Viswanath Chidambaram>one point seconds.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/306-1
+00:24:30.742 --> 00:24:37.819
+<v Sarooparam Chenaram Darji>When we ran the test,
+it was answering within 1.13 seconds,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/306-2
+00:24:37.819 --> 00:24:43.598
+<v Sarooparam Chenaram Darji>but one live session hit 7.
+5 seconds basically.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/305-0
+00:24:38.958 --> 00:24:39.838
+<v Viswanath Chidambaram>Out of how many?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/308-0
+00:24:44.078 --> 00:24:49.225
+<v Sarooparam Chenaram Darji>That was the only one session, I think,
+out of 3 or something, 2 or 3 sessions,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/307-0
+00:24:49.198 --> 00:24:49.678
+<v Viswanath Chidambaram>Okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/308-1
+00:24:49.225 --> 00:24:53.278
+<v Sarooparam Chenaram Darji>one session hit the 7.
+5 seconds and that it also checked the.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/309-0
+00:24:55.518 --> 00:25:02.884
+<v Sarooparam Chenaram Darji>Check like why that session ran longer
+and it does not have the reason for it,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/309-1
+00:25:02.884 --> 00:25:08.478
+<v Sarooparam Chenaram Darji>but it have assumption that it was due to
+some, what is it?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/310-0
+00:25:11.518 --> 00:25:17.278
+<v Sarooparam Chenaram Darji>Some temporary like issue or something
+not perceived.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/313-0
+00:25:16.558 --> 00:25:21.378
+<v Viswanath Chidambaram>No issues, not a problem. Anyway,
+we will assume it is 1.3 okay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/313-1
+00:25:21.378 --> 00:25:26.642
+<v Viswanath Chidambaram>If actually this actually is just over,
+we will actually use it. So 4.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/311-0
+00:25:25.118 --> 00:25:25.398
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/313-2
+00:25:26.642 --> 00:25:31.091
+<v Viswanath Chidambaram>35 for mixed and 1.
+35 for live mixed in the sense they are</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/313-3
+00:25:31.091 --> 00:25:34.798
+<v Viswanath Chidambaram>separate thing. Okay,
+what about the audio thing?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/312-0
+00:25:33.278 --> 00:25:33.598
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/314-0
+00:25:36.318 --> 00:25:39.198
+<v Sarooparam Chenaram Darji>Audio thing, just a second.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/315-0
+00:25:41.998 --> 00:25:43.678
+<v Sarooparam Chenaram Darji>I will have to check the data once.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/316-0
+00:25:49.118 --> 00:25:51.598
+<v Sarooparam Chenaram Darji>The audio is somewhere around.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/317-0
+00:25:57.118 --> 00:25:57.758
+<v Viswanath Chidambaram>What is?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/318-0
+00:25:58.318 --> 00:26:01.998
+<v Sarooparam Chenaram Darji>And so with teams.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/319-0
+00:26:03.358 --> 00:26:06.895
+<v Sarooparam Chenaram Darji>Yeah, I still have to measure it.
+That is what it was saying that we have</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/320-0
+00:26:06.558 --> 00:26:11.312
+<v Viswanath Chidambaram>Just to reduce the time by OK fine,
+just as you measured once and we need a</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/319-1
+00:26:06.895 --> 00:26:07.038
+<v Sarooparam Chenaram Darji>to.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/320-1
+00:26:11.312 --> 00:26:13.438
+<v Viswanath Chidambaram>cast to you only show me the time.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/321-0
+00:26:14.238 --> 00:26:18.318
+<v Sarooparam Chenaram Darji>Yeah, cost was the I told to on the.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/322-0
+00:26:19.918 --> 00:26:21.518
+<v Sarooparam Chenaram Darji>It was showing the cost number.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/323-0
+00:26:23.038 --> 00:26:23.438
+<v Sarooparam Chenaram Darji>But.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/325-0
+00:26:25.038 --> 00:26:30.078
+<v Sarooparam Chenaram Darji>It was conflicting with the other setup
+like it was like totally focusing on cost.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/324-0
+00:26:29.278 --> 00:26:30.398
+<v Viswanath Chidambaram>You're not audible, guys.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/326-0
+00:26:31.998 --> 00:26:34.878
+<v Sarooparam Chenaram Darji>Can you hear me?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/327-0
+00:26:34.238 --> 00:26:36.958
+<v Viswanath Chidambaram>Your voice has become visible. Yeah,
+now you are.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/328-0
+00:26:37.838 --> 00:26:41.075
+<v Sarooparam Chenaram Darji>Okay,
+so the cost number it did have the cost</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/328-1
+00:26:41.075 --> 00:26:44.593
+<v Sarooparam Chenaram Darji>numbers,
+but the basically I told you to focus on</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/328-2
+00:26:44.593 --> 00:26:48.674
+<v Sarooparam Chenaram Darji>the latency first.
+We will look into the cost side remove</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/328-3
+00:26:48.674 --> 00:26:49.518
+<v Sarooparam Chenaram Darji>that column.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/331-0
+00:26:48.678 --> 00:26:51.474
+<v Viswanath Chidambaram>OK, just once you measure the latency,
+measure the cost too,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/331-1
+00:26:51.474 --> 00:26:53.857
+<v Viswanath Chidambaram>because actually both of it are actually
+important.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/331-2
+00:26:53.857 --> 00:26:55.966
+<v Viswanath Chidambaram>And the other thing is once this is
+measured,</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/329-0
+00:26:54.238 --> 00:26:54.518
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/331-3
+00:26:55.966 --> 00:26:59.678
+<v Viswanath Chidambaram>just actually check for actually what is
+the acceptable time duration and stuff.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/330-0
+00:27:00.238 --> 00:27:00.638
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/332-0
+00:27:01.678 --> 00:27:02.798
+<v Viswanath Chidambaram>For perceived delay.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/333-0
+00:27:03.438 --> 00:27:03.838
+<v Sarooparam Chenaram Darji>Yeah.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/334-0
+00:27:04.958 --> 00:27:06.078
+<v Viswanath Chidambaram>Okay, anything else?</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/335-0
+00:27:07.038 --> 00:27:07.358
+<v Sarooparam Chenaram Darji>No.</v>
+
+2cb29909-5156-4b91-9913-8d6238606394/336-0
+00:27:08.638 --> 00:27:11.358
+<v Viswanath Chidambaram>Okay, see man. Bye. It's still regarding.
+You might want to stop it.</v>

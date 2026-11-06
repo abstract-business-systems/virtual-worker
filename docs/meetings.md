@@ -332,6 +332,34 @@ These are new work items, not evidence that the integrations or demo are done.
 
 Newest entries appear first.
 
+### 2026-11-06 — M13 numbers review and perceived-delay design
+
+- Viswanath reviewed the latency table: stage numbers (silence wait, STT
+  1.77 s, thinking, voice) accepted; **full-reply latency does not matter —
+  only the first word**; the realtime 7.5 s in-stream transcription spike is
+  accepted as a one-off ("no issues, not a problem"), root cause not blocking.
+- **Audio approach still owes its Teams number** — he noted it is still to be
+  measured (latency first, then cost).
+- **Teams transport echo experiment**: measure the platform's own end-to-end
+  delay experimentally, without Friday — join from the phone/speaker without
+  headphones, make a click/noise, record, and measure when the echo comes
+  back — rather than deriving it in code.
+- **Research (~30 min)**: 95th-percentile round-trip latency for Teams and
+  Google Meet (they differ; Meet reportedly works on low bandwidth), and what
+  round-trip delay is perceivable/acceptable for humans (working assumption
+  ~600 ms platform budget). Then check Friday's perceived delay against that
+  budget.
+- **Perceived-delay mechanism** (the main build item): when a task starts,
+  Friday must acknowledge immediately ("I'm on it"); a backend watcher (the
+  existing job watcher is enough — it need not be per-task) answers status
+  questions instantly ("are you working?" → "yes, still working"), long tasks
+  get an ETA ("back to you in 10–15 minutes"), and when a background task
+  finishes **Friday should come back to the user by itself** with the result
+  instead of waiting to be pinged (observed: after the snake-game task, the
+  user had to ping to get the outcome).
+- Wrap-up order agreed: measure audio's Teams latency → then its cost → then
+  check the perceived-delay budget.
+
 ### 2026-11-05 — M12 latency scoping with Viswanath
 
 - Viswanath split the goal into **perceived delay** (the human turn-taking
@@ -607,6 +635,10 @@ are the recording file-added dates.*
 | 36 | Report the two numbers: latency without Friday (CLI/POC) and with Friday in Teams | M12 | Engineering | **Complete** — realtime: CLI 1.13 s vs Teams 10.87 s (first word); ElevenLabs+Luna: CLI 3.84 s vs Teams 4.35 s. Teams overhead ≈ +0.5 s; table in [`latency-results.md`](latency-results.md) ready for Viswanath's review |
 | 37 | Build model-swap capability into the POC so a smarter reasoning model can be swapped in, measuring latency and cost per swap (quality permitting) | M12 | Engineering | Open — relates to #25; fixed-model harness exists, automatic swapping not built |
 | 38 | Target perceived delay inside the natural conversational gap (~1 s); allowed to use acknowledgements/gimmicks to reduce the *felt* wait | M12 | Engineering | Open — the M4/M5 conversation-layer plan; measurement first per Viswanath |
+| 39 | Measure the audio approach (gpt-audio full, its quality-qualified set) with Friday in Teams: latency first, then cost | M13 | Engineering | Open — the last missing cell of the 3-approach × 2-measure matrix |
+| 40 | Measure Teams' own end-to-end transport delay experimentally, without Friday: join from phone/speaker without headphones, make a noise/click, record, and measure the echo return | M13 | Engineering | Open — experimental, not code-derived |
+| 41 | Research (~30 min) the 95th-percentile round-trip latency of Teams and Google Meet and the human-acceptable delay budget (working assumption ~600 ms); check Friday's perceived delay against that budget | M13 | Engineering | Open |
+| 42 | Perceived-delay mechanism: acknowledge a task immediately on start; backend watcher (existing job watcher suffices, not per-task) answers status questions instantly; long tasks get an ETA ("back in 10–15 minutes"); Friday proactively returns with the result when a background task completes instead of waiting to be pinged | M13 | Engineering | Open — the main build item for perceived delay |
 
 ## 6. Document map
 
