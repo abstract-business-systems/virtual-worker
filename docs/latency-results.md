@@ -20,6 +20,11 @@ call-back) — see `next-steps.md` M13 section.
   synthesis call; first audio arrives inside it.
 - **Best live build: ElevenLabs + Luna** — 4.35 s first word overall
   (3.86 s on plain turns), 8.11 s full reply, ≈₹0.65 per 7-minute session.
+- **Audio approach in Teams: 6.62 s first word, ≈₹2.16 per minute** — slower
+  than the ElevenLabs build (4.35 s) and ~6× costlier, with quality problems
+  (a Norwegian reply, spoken meta-text, a tool-loop failure). The separate
+  approach stays the qualified build; the 3-approach × 2-measure matrix is
+  now complete.
 - **Realtime caveat**: CLI-fast (1.13 s) but one live session hit a 7.5 s
   in-stream transcription spike; root cause open.
 - **Open items**: automatic model-swap capability (#37); perceived-delay work
@@ -44,7 +49,17 @@ call-back) — see `next-steps.md` M13 section.
 | 3 | One audio model, full | CLI | 0.7 s | gpt-audio<br>0 s, inside same call | gpt-audio<br>inside same call | gpt-audio<br>2.6 s | 3.28 s | 5.85 s |
 | 4 | One audio model, small | CLI | 0.7 s | gpt-audio-mini<br>0 s, inside same call | gpt-audio-mini<br>inside same call | gpt-audio-mini<br>2.6 s | 3.28 s | none |
 | 5 | Three calls, OpenAI direct | CLI | 0.5 s | gpt-4o-mini-transcribe<br>1.59 s | gpt-4o-mini<br>2.12 s | gpt-4o-mini-tts<br>1.0 s | 4.74 s | 4.56 s |
-| 6 | Three calls, OpenRouter voice | Teams | never measured | gpt-audio<br>never measured | gpt-6-luna<br>never measured | gpt-audio<br>never measured | not measured | none |
+| 6 | Three calls, OpenRouter voice | Teams | 0.74 s | gpt-audio<br>1.50 s | gpt-6-luna<br>1.98 s | gpt-audio<br>2.77 s | **6.62 s** (4.1–10.1) | none |
+
+Row 6 live source: 6 Nov, 10 completed turns (of 22 interactions; 10
+interrupted, 2 failed) over 5.7 listening-minutes in a real Teams meeting.
+Cost $0.1469 ≈ ₹12.19 for the session (≈ ₹2.16 per listening-minute).
+Quality problems recorded honestly: one reply came out in Norwegian, three
+replies spoke the hand-off meta-text aloud ("Here's the spoken version:"),
+one server-start request died in the 4-request tool loop, and
+`quality_verified: false` in the report. First word is computed from
+first-playback minus speech-end (the report's own voice-latency field was
+empty for this run).
 | 7 | Three calls, ElevenLabs (today's Friday) | CLI + Teams | 0.89 s CLI · 0.67 s Teams | elevenlabs/scribe-v2<br>CLI 1.67 s · Teams 1.77 s | gpt-6-luna<br>CLI 2.82 s · Teams 2.44 s | elevenlabs/eleven-v4-turbo<br>CLI 1.15 s · Teams 1.85 s | **CLI 3.84 s · Teams 4.35 s** | CLI 7.65 s · Teams 8.11 s |
 
 Row 2 live source: 5 Nov, 6 turns over 4.9 min in a real Teams meeting, zero
