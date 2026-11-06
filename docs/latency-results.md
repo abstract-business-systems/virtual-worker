@@ -1,6 +1,18 @@
-# Voice latency results (5 Nov 2026)
+# Voice latency results (5–6 Nov 2026)
 
 "First word" = you finish speaking → the agent's first spoken word reaches you.
+
+## What was asked (M12) → status
+
+| Ask | Answer |
+|---|---|
+| Two numbers: without Friday, and with Friday in Teams | Measured for two builds — see the table below |
+| Stage-by-stage measurement, one step at a time | Every configuration broken into silence wait → speech-to-text → thinking → voice |
+| Friday's own overhead | ~+0.5 s in Teams — negligible, as assumed in the meeting |
+| Swappable speech-to-text, speed over intelligence | Scribe, OpenAI transcribe and local Whisper all probed from the same host: 1.1–2.0 s |
+| Model variants with latency and cost, quality permitting | Four configurations compared; one qualified live build recommended (row 7) |
+| Where to fix | The Teams meeting is not the problem (~0.5 s). The model pipeline is: thinking (2.4–2.8 s) and speech-to-text (1.7 s) dominate. One open item: realtime's in-stream transcription spiked to 7.5 s once; root cause not yet pinned |
+| Still open | Automatic model-swap capability (#37); perceived-delay work toward the ~1 s conversational gap (#38) — deferred by agreement |
 
 | # | Configuration | Env | Pause wait | Speech-to-text | Thinking | Voice | First word | Avg over 20 q |
 |---|---|---|---:|---|---|---|---:|---:|
