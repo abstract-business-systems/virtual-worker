@@ -6,30 +6,36 @@
 
 Reviewed by Viswanath (M13, 6 Nov): stage numbers accepted; **full-reply
 latency does not matter — first word only**; the realtime 7.5 s spike is
-accepted as a one-off. Still owed: the audio approach's Teams number, the
-Teams echo experiment, the platform-latency budget check, and the
-perceived-delay mechanism (acknowledgement, task watcher, proactive
-call-back) — see `next-steps.md` M13 section.
+accepted as a one-off.
 
-- **Teams overhead on plain conversational turns is ~0** (3.86 s live vs
-  3.84 s CLI first word); the earlier "+0.5 s" mean included turns where
-  Friday ran bash tools — tool work, not meeting overhead.
+**All three approaches now have both numbers (CLI / Teams first word) and
+costs:**
+
+| Approach | First word CLI → Teams | Cost per listening-minute |
+|---|---|---:|
+| Separate — ElevenLabs + Luna (today's Friday) | 3.84 → **4.35 s** | **≈₹0.09** |
+| Realtime | 1.13 → 10.87 s | ≈₹0.41 |
+| Audio (gpt-audio full) | 3.28 → 6.62 s | ≈₹2.16 |
+
+- **Friday's build is the fastest qualified build in Teams and the cheapest**
+  (≈₹0.65 per 7-minute session; monthly ≈₹800–1,200 per `money-per-minute.md`).
+- **The audio approach failed quality** — a Norwegian reply, spoken hand-off
+  meta-text, a tool-loop failure — besides being slower and ~24× costlier.
+- **The Teams platform is not the problem:** the recorded echo test measured
+  **0.37 s round trip** (ITU-class, normal for Teams/Meet/Zoom), and Friday's
+  overhead on plain conversational turns is ~0 (3.86 s live vs 3.84 s CLI;
+  the earlier "+0.5 s" mean included bash-tool turns).
 - **Where the time goes** (plain Teams turns): silence wait 0.66 s →
   speech-to-text 1.65 s → thinking 2.34 s → first word ~0.9 s into the voice
   call. **Stage durations are not additive** — the voice column is the full
   synthesis call; first audio arrives inside it.
-- **Best live build: ElevenLabs + Luna** — 4.35 s first word overall
-  (3.86 s on plain turns), 8.11 s full reply, ≈₹0.65 per 7-minute session
-  (**≈₹0.09 per listening-minute**).
-- **Audio approach in Teams: 6.62 s first word, ≈₹2.16 per minute** — slower
-  than the ElevenLabs build (4.35 s) and ~6× costlier, with quality problems
-  (a Norwegian reply, spoken meta-text, a tool-loop failure). The separate
-  approach stays the qualified build; the 3-approach × 2-measure matrix is
-  now complete.
-- **Realtime caveat**: CLI-fast (1.13 s) but one live session hit a 7.5 s
-  in-stream transcription spike; root cause open.
-- **Open items**: automatic model-swap capability (#37); perceived-delay work
-  toward the ~1 s conversational gap (#38).
+- **Budget check done** (`platform-latency-research.md`): the ~1 s
+  conversational-gap target minus the ~0.4 s platform round trip leaves
+  ~0.6 s for the pipeline — currently ~3.7 s.
+- **Remaining work**: the perceived-delay mechanism (#42 — instant
+  acknowledgement, watcher answers "are you working?", ETAs, proactive
+  call-back) and automatic model-swap capability (#37); both feed the ~1 s
+  conversational-gap target (#38).
 
 ## What was asked (M12) → status
 
