@@ -42,6 +42,7 @@ When a new recording `N.vtt` is added:
 | M9 | [`9.vtt`](recordings/9.vtt) | 2026-11-03§ | 25m | Viswanath Chidambaram; Sarooparam Chenaram Darji | Cost review against product viability; audio-vs-separate cost comparison (no final drop decision); get audio+separate quality to parity first; benchmark cheaper/better models toward a ~₹800–900/month target | [`next-steps.md`](next-steps.md), [`poc-cost-results.md`](poc-cost-results.md) |
 | M10 | [`10.vtt`](recordings/10.vtt) | 2026-11-03¶ | 26m‖ | Viswanath Chidambaram; Sarooparam Chenaram Darji | Cost and latency decomposition: voice-only cost per minute (excluding inference), round-trip response latency definition, latency/cost thresholds, and an agent-driven model-swap benchmark template | [`next-steps.md`](next-steps.md), [`money-per-minute.md`](money-per-minute.md) |
 | M11 | [`11.vtt`](recordings/11.vtt) | 2026-11-04 (added) | 6m 10s | Viswanath Chidambaram; Sarooparam Chenaram Darji | Shared thinking model across all three approaches; full-vs-mini audio experiment; cost/latency comparison; Pi and Friday integration acceptance criteria and demo timeline | [`next-steps.md`](next-steps.md#m11-roadmap--shared-thinking-model-comparison-and-integration) |
+| M12 | [`12.vtt`](recordings/12.vtt) | 2026-11-05 (added) | 20m 45s | Viswanath Chidambaram; Sarooparam Chenaram Darji | Latency scoping: perceived delay vs technical latency, stage-by-stage measurement, CLI-vs-Teams numbers, model-swap capability, and the numbers table for review | [`latency-results.md`](latency-results.md) |
 
 *The transcripts do not state their recording dates; 2026-10-28 is the M3
 recording file's added date, 2026-10-29 is the M4–M6 file-added date, and
@@ -331,6 +332,29 @@ These are new work items, not evidence that the integrations or demo are done.
 
 Newest entries appear first.
 
+### 2026-11-05 — M12 latency scoping with Viswanath
+
+- Viswanath split the goal into **perceived delay** (the human turn-taking
+  gap — user's voice goes quiet → Friday's first word; a counting exercise
+  established a natural conversational gap of roughly a second as the target)
+  and **technical latency** (audio in → first audio back; the complete answer
+  does not matter for this measure).
+- Latency must be measured **stage by stage, one step at a time**, so the
+  fixing point can be located.
+- Two numbers agreed: latency **without Friday** (the CLI/POC number) and
+  **with Friday in Teams** ("that is the Friday number"); Friday's own
+  overhead (audio-driver path, ~0.3 s) is negligible.
+- Architecture walked through and agreed: realtime does everything live
+  (listening, thinking, tool calls); audio models take individual requests;
+  Scribe only transcribes and never thinks. STT is swappable and need not be
+  super-intelligent — balance speed and quality.
+- Concern raised: audio/realtime models may not be intelligent enough for
+  complex tasks; a smarter separate reasoning model may be needed later —
+  **model-swap capability** must be built in, with latency and cost measured
+  per swap, quality permitting.
+- Next step: Sarooparam produces the numbers table (up to an hour allowed);
+  Viswanath reviews, then they decide where to fix.
+
 ### 2026-11-05 — Autonomous background jobs and comparison checkpoint
 
 Engineering follow-up to the user's request to finish independent work without
@@ -579,13 +603,17 @@ are the recording file-added dates.*
 | 32 | Integrate the POC with Friday, preserving existing behavior with reduced latency | M11, 04:17–04:31 | Engineering | Open — after comparison; same priority as #31 |
 | 33 | Prepare a meeting demo covering coding/change requests and spoken browser operation of Excel Online | M11, 04:39–05:39 | Engineering | Open — after integrations; screen sharing remains a suggestion |
 | 34 | Provide a rough timeline for the M11 roadmap | M11, 05:46–06:02 | Engineering | Open — estimate not supplied in the transcript |
+| 35 | Measure technical latency stage by stage (audio in → first audio back) so the fixing point can be located | M12 | Engineering | In progress — per-stage timings recorded in [`latency-results.md`](latency-results.md) (silence wait, STT, thinking, voice) for CLI and live Teams |
+| 36 | Report the two numbers: latency without Friday (CLI/POC) and with Friday in Teams | M12 | Engineering | In progress — realtime: CLI 1.13 s vs Teams 10.87 s (first word); ElevenLabs build: CLI 3.84 s, Teams timing pending |
+| 37 | Build model-swap capability into the POC so a smarter reasoning model can be swapped in, measuring latency and cost per swap (quality permitting) | M12 | Engineering | Open — relates to #25; fixed-model harness exists, automatic swapping not built |
+| 38 | Target perceived delay inside the natural conversational gap (~1 s); allowed to use acknowledgements/gimmicks to reduce the *felt* wait | M12 | Engineering | Open — the M4/M5 conversation-layer plan; measurement first per Viswanath |
 
 ## 6. Document map
 
 | Document | Purpose |
 |---|---|
 | `meetings.md` | Living index, summaries, journal, and action items |
-| `recordings/1.vtt` … `recordings/11.vtt` | Immutable meeting source transcripts |
+| `recordings/1.vtt` … `recordings/12.vtt` | Immutable meeting source transcripts |
 | `requirements.md` | Product requirements from M1 |
 | `next-steps.md` | Follow-up requirements and priorities from M2 |
 | `latency-findings.md` | Local latency measurements and improvement options |
