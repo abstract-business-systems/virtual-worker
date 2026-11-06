@@ -19,7 +19,8 @@ call-back) — see `next-steps.md` M13 section.
   call. **Stage durations are not additive** — the voice column is the full
   synthesis call; first audio arrives inside it.
 - **Best live build: ElevenLabs + Luna** — 4.35 s first word overall
-  (3.86 s on plain turns), 8.11 s full reply, ≈₹0.65 per 7-minute session.
+  (3.86 s on plain turns), 8.11 s full reply, ≈₹0.65 per 7-minute session
+  (**≈₹0.09 per listening-minute**).
 - **Audio approach in Teams: 6.62 s first word, ≈₹2.16 per minute** — slower
   than the ElevenLabs build (4.35 s) and ~6× costlier, with quality problems
   (a Norwegian reply, spoken meta-text, a tool-loop failure). The separate
