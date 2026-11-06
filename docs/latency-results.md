@@ -20,6 +20,13 @@ $0.0237 ≈ ₹1.99 for the session (~₹0.41 per listening-minute). The 6.6 s g
 vs the CLI bench is almost entirely the transcription call from the abs-worker
 host (7.54 s there vs ~1.5 s from the dev machine) — not the Teams meeting
 itself, whose transport and silence wait together cost well under 1.5 s.
+Probe follow-up (6 Nov, same host, same keys):
+`stt-latency-probe-20261106T064127.json` — Scribe 1.71 s, gpt-4o-mini-
+transcribe 1.41 s, local Whisper 1.45 s. No persistent host or network
+problem; the 7.54 s live stage was transient. Remaining suspects: provider
+queueing at that moment, or the in-stream transcription inside the realtime
+session behaving differently from standalone calls. Discriminator planned:
+re-run the probe during a live session.
 
 Row 7 bench source: 5 Nov, 17 turns over 301 s, all fixture checks passed
 (`session-separate-20261105T152427745844Z.json`). Thinking stage average
