@@ -2,6 +2,14 @@
 
 "First word" = you finish speaking → the agent's first spoken word reaches you.
 
+## TL;DR
+
+- **Teams adds only ~0.5 s** (3.84 → 4.35 s first word). The meeting is not the latency problem.
+- **Where the time goes** (Teams): silence wait 0.67 s → speech-to-text 1.77 s → thinking 2.44 s → voice 1.85 s.
+- **Best live build: ElevenLabs + Luna** — 4.35 s first word, 8.11 s full reply, ≈₹0.65 per 7-minute session.
+- **Realtime caveat**: CLI-fast (1.13 s) but one live session hit a 7.5 s in-stream transcription spike; root cause open.
+- **Open items**: automatic model-swap capability (#37); perceived-delay work toward the ~1 s conversational gap (#38).
+
 ## What was asked (M12) → status
 
 | Ask | Answer |
